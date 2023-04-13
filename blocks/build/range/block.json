@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "hizzle-forms/range",
+  "title": "Range",
+  "description": "A range field input for forms.",
+  "category": "hizzle-forms",
+  "keywords": [
+    "form",
+    "range",
+    "number",
+    "input"
+  ],
+  "icon": "editor-ol",
+  "parent": [
+    "hizzle-forms/form"
+  ],
+  "version": "1.0.0",
+  "textdomain": "hizzle-forms",
+  "example": {
+    "attributes": {
+      "label": "Range",
+      "placeholder": "Select a range",
+      "required": true,
+      "help": "Help text"
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  }
+}

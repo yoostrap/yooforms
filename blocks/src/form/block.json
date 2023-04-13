@@ -1,0 +1,82 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "hizzle-forms/forms",
+    "title": "Form",
+    "description": "Displays a form.",
+    "category": "hizzle-forms",
+    "keywords": [
+        "form",
+        "contact",
+        "input"
+    ],
+    "icon": "forms",
+    "version": "1.0.0",
+    "textdomain": "hizzle-forms",
+    "attributes": {
+        "subject": {
+            "type": "string",
+            "default": "New Response: Contact Form"
+        },
+        "to": {
+            "type": "string"
+        },
+        "action": {
+            "type": "string",
+            "default": "message"
+        },
+        "redirect": {
+            "type": "string",
+            "default": ""
+        },
+        "message": {
+            "type": "string",
+            "default": "Thank you for contacting us. We will be in touch with you shortly."
+        },
+        "title": {
+            "type": "string",
+            "default": "Contact Form"
+        }
+    },
+    "example": {
+		"innerBlocks": [
+			{
+				"name": "hizzle-forms/name",
+				"attributes": { "required": true, "label": "Name" }
+			},
+			{
+				"name": "hizzle-forms/email",
+                "attributes": { "required": true, "label": "Email" }
+			},
+			{
+                "name": "hizzle-forms/textarea",
+                "attributes": { "required": true, "label": "Message" }
+			},
+			{
+                "name": "hizzle-forms/checkbox",
+                "attributes": { "required": true, "label": "I agree to the terms and conditions" }
+            },
+            {
+                "name": "hizzle-forms/submit",
+                "attributes": { "text": "Send Message", "element": "button", "lock": { "remove": true } }
+			}
+		]
+	},
+    "supports": {
+        "anchor": true,
+        "spacing": {
+            "margin": true,
+            "padding": true
+        },
+        "color": {
+            "link": true,
+            "gradients": true
+        },
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ]
+    },
+    "editorScript": "file:./index.js"
+}

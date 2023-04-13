@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "hizzle-forms/week",
+  "title": "Week",
+  "description": "A week field input for forms.",
+  "category": "hizzle-forms",
+  "keywords": [
+    "text",
+    "week",
+    "input"
+  ],
+  "icon": "calendar-alt",
+  "parent": [
+    "hizzle-forms/form"
+  ],
+  "version": "1.0.0",
+  "textdomain": "hizzle-forms",
+  "example": {
+    "attributes": {
+      "label": "Week",
+      "placeholder": "Select a week",
+      "required": true,
+      "help": "Help text"
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "hizzle-forms/text",
+  "title": "Text field",
+  "description": "A text field input for forms.",
+  "category": "hizzle-forms",
+  "keywords": [
+    "form",
+    "contact",
+    "input"
+  ],
+  "icon": "editor-textcolor",
+  "parent": [
+    "hizzle-forms/form"
+  ],
+  "version": "1.0.0",
+  "textdomain": "hizzle-forms",
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "",
+      "source": "html",
+      "selector": "label"
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "",
+      "source": "attribute",
+      "selector": "input",
+      "attribute": "placeholder"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "source": "attribute",
+      "selector": "input",
+      "attribute": "required"
+    },
+    "help": {
+      "type": "string",
+      "default": "",
+      "source": "html",
+      "selector": ".form-text"
+    }
+  },
+  "example": {
+    "attributes": {
+      "label": "Text",
+      "placeholder": "Placeholder text",
+      "required": true,
+      "help": "Help text"
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "hizzle-forms/tel",
+  "title": "Phone Number",
+  "description": "A phone field input for forms.",
+  "category": "hizzle-forms",
+  "keywords": [
+    "text",
+    "phone",
+    "tel",
+    "input"
+  ],
+  "icon": "phone",
+  "parent": [
+    "hizzle-forms/form"
+  ],
+  "version": "1.0.0",
+  "textdomain": "hizzle-forms",
+  "example": {
+    "attributes": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number",
+      "required": true,
+      "help": "Help text"
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  }
+}

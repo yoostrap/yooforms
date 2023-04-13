@@ -1,0 +1,41 @@
+{
+	"name": "hizzle-forms",
+	"version": "1.0.0",
+	"private": true,
+	"description": "WordPress Forms Plugin",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hizzle-co/hizzle-pay.git"
+	},
+	"keywords": [
+		"forms"
+	],
+	"author": "picocodes",
+	"license": "GPL-3.0-or-later",
+	"bugs": {
+		"url": "https://github.com/hizzle-co/hizzle-forms/issues"
+	},
+	"homepage": "https://github.com/hizzle-co/hizzle-forms#readme",
+	"scripts": {
+		"start": "wp-scripts start --webpack-copy-php --webpack-src-dir=blocks/src --output-path=blocks/build",
+		"start:non-block": "wp-scripts start --output-path=build/non-block-examples --config=./non-block-examples.webpack.config.js",
+		"build": "wp-scripts build",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses --production",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style '**/*.css'",
+		"lint:js": "wp-scripts lint-js .",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"test:e2e": "wp-scripts test-e2e",
+		"test:unit": "wp-scripts test-unit-js"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^26.1.0"
+	},
+	"dependencies": {
+		"classnames": "^2.3.2",
+		"email-validator": "^2.0.4"
+	}
+}

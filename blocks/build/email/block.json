@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "hizzle-forms/email",
+  "title": "Email Address",
+  "description": "An email field input for forms.",
+  "category": "hizzle-forms",
+  "keywords": [
+    "text",
+    "email",
+    "input"
+  ],
+  "icon": "email",
+  "parent": [
+    "hizzle-forms/form"
+  ],
+  "version": "1.0.0",
+  "textdomain": "hizzle-forms",
+  "example": {
+    "attributes": {
+      "label": "Email",
+      "placeholder": "Enter your email",
+      "required": true,
+      "help": "Help text"
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  }
+}
