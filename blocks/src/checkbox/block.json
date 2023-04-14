@@ -1,16 +1,16 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "hizzle-forms/text",
-  "title": "Text field",
-  "description": "A text field input for forms.",
+  "name": "hizzle-forms/checkbox",
+  "title": "Checkbox field",
+  "description": "A checkbox field.",
   "category": "hizzle-forms",
   "keywords": [
     "form",
     "contact",
-    "input"
+    "checkbox"
   ],
-  "icon": "editor-textcolor",
+  "icon": "yes",
   "parent": [
     "hizzle-forms/form"
   ],
@@ -19,23 +19,15 @@
   "attributes": {
     "label": {
       "type": "string",
-      "default": "",
-      "source": "html",
-      "selector": "label"
-    },
-    "placeholder": {
-      "type": "string",
-      "default": "",
-      "source": "attribute",
-      "selector": "input",
-      "attribute": "placeholder"
+      "default": ""
     },
     "required": {
       "type": "boolean",
-      "default": false,
-      "source": "attribute",
-      "selector": "input",
-      "attribute": "required"
+      "default": false
+    },
+    "checked": {
+      "type": "boolean",
+      "default": false
     },
     "help": {
       "type": "string",
@@ -46,17 +38,18 @@
   },
   "example": {
     "attributes": {
-      "label": "Text",
-      "placeholder": "Placeholder text",
+      "label": "Checkbox field",
       "required": true,
-      "help": "Help text"
+      "checked": true,
+      "help": "This is a checkbox field."
     }
-  },
+	},
   "supports": {
     "anchor": true,
     "spacing": {
       "margin": true,
       "padding": true
     }
-  }
+  },
+  "editorScript": "file:./index.js"
 }

@@ -483,7 +483,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Allowed child blocks for the form.
-const ALLOWED_BLOCKS = ['hizzle-forms/name', 'hizzle-forms/first-name', 'hizzle-forms/last-name', 'hizzle-forms/email', 'hizzle-forms/text', 'hizzle-forms/email', 'hizzle-forms/number', 'hizzle-forms/url', 'hizzle-forms/tel', 'hizzle-forms/date', 'hizzle-forms/time', 'hizzle-forms/month', 'hizzle-forms/week', 'hizzle-forms/color', 'hizzle-forms/range', 'core/audio', 'core/columns', 'core/group', 'core/heading', 'core/image', 'core/list', 'core/paragraph', 'core/row', 'core/separator', 'core/spacer', 'core/stack', 'core/subhead', 'core/video'];
+const ALLOWED_BLOCKS = ['hizzle-forms/name', 'hizzle-forms/first-name', 'hizzle-forms/last-name', 'hizzle-forms/email', 'hizzle-forms/text', 'hizzle-forms/email', 'hizzle-forms/number', 'hizzle-forms/url', 'hizzle-forms/tel', 'hizzle-forms/date', 'hizzle-forms/time', 'hizzle-forms/month', 'hizzle-forms/week', 'hizzle-forms/color', 'hizzle-forms/range', 'hizzle-forms/textarea', 'hizzle-forms/checkbox', 'hizzle-forms/radio', 'hizzle-forms/select', 'hizzle-forms/multi-checkbox', 'core/audio', 'core/columns', 'core/group', 'core/heading', 'core/image', 'core/list', 'core/paragraph', 'core/row', 'core/separator', 'core/spacer', 'core/stack', 'core/subhead', 'core/video'];
 function HizzleFormEdit(_ref) {
   let {
     attributes,

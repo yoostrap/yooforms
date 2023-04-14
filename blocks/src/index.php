@@ -56,5 +56,10 @@ function hizzle_forms_register_block_types() {
 	register_block_type( plugin_dir_path( __FILE__ ) . 'week' );
 	register_block_type( plugin_dir_path( __FILE__ ) . 'color' );
 	register_block_type( plugin_dir_path( __FILE__ ) . 'range' );
+	register_block_type( plugin_dir_path( __FILE__ ) . 'textarea' );
+	register_block_type( plugin_dir_path( __FILE__ ) . 'select' );
+	register_block_type( plugin_dir_path( __FILE__ ) . 'checkbox' );
+	register_block_type( plugin_dir_path( __FILE__ ) . 'radio' );
+	register_block_type( plugin_dir_path( __FILE__ ) . 'multi-checkbox' );
 }
 add_action( 'init', 'hizzle_forms_register_block_types' );
