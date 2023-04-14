@@ -1,11 +1,5 @@
 import classnames from 'classnames';
-import { isEmpty } from 'lodash';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Internal dependencies
- */
-import HizzleFieldControls from './field-controls';
 
 /**
  * Returns a function to display a field label.

@@ -47,10 +47,9 @@ const variations = compact( [
 			[ 'hizzle-forms/email', { required: true, label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/textarea', { label: __( 'Message', 'hizzle-forms' ) } ],
 			[
-				'hizzle-forms/button',
+				'hizzle-forms/submit',
 				{
 					text: __( 'Contact Us', 'hizzle-forms' ),
-					element: 'button',
 					lock: { remove: true },
 				},
 			],
@@ -113,10 +112,9 @@ const variations = compact( [
 			[ 'hizzle-forms/email', { required: true, label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/consent', {} ],
 			[
-				'hizzle-forms/button',
+				'hizzle-forms/submit',
 				{
 					text: __( 'Subscribe', 'hizzle-forms' ),
-					element: 'button',
 					lock: { remove: true },
 				},
 			],
@@ -161,10 +159,9 @@ const variations = compact( [
 			],
 			[ 'hizzle-forms/textarea', { label: __( 'Other Details', 'hizzle-forms' ) } ],
 			[
-				'hizzle-forms/button',
+				'hizzle-forms/submit',
 				{
 					text: __( 'Send RSVP', 'hizzle-forms' ),
-					element: 'button',
 					lock: { remove: true },
 				},
 			],
@@ -220,10 +217,9 @@ const variations = compact( [
 			],
 			[ 'hizzle-forms/textarea', { label: __( 'Other Details', 'hizzle-forms' ) } ],
 			[
-				'hizzle-forms/button',
+				'hizzle-forms/submit',
 				{
 					text: __( 'Send', 'hizzle-forms' ),
-					element: 'button',
 					lock: { remove: true },
 				},
 			],
@@ -282,10 +278,9 @@ const variations = compact( [
 			],
 			[ 'hizzle-forms/textarea', { label: __( 'Notes', 'hizzle-forms' ) } ],
 			[
-				'hizzle-forms/button',
+				'hizzle-forms/submit',
 				{
 					text: __( 'Book Appointment', 'hizzle-forms' ),
-					element: 'button',
 					lock: { remove: true },
 				},
 			],
@@ -353,10 +348,9 @@ const variations = compact( [
 			],
 			[ 'hizzle-forms/textarea', { label: __( 'How could we improve?', 'hizzle-forms' ) } ],
 			[
-				'hizzle-forms/button',
+				'hizzle-forms/submit',
 				{
 					text: __( 'Send Feedback', 'hizzle-forms' ),
-					element: 'button',
 					lock: { remove: true },
 				},
 			],

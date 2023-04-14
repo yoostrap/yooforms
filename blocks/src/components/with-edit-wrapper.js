@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { isEmpty } from 'lodash';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies

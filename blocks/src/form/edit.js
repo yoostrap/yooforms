@@ -220,7 +220,8 @@ export default compose( [
 		const authorEmail = authorId && getUser( authorId ) && getUser( authorId ).email;
 		const postTitle = getEditedPostAttribute( 'title' );
 
-		const submitButton = innerBlocks.find( block => block.name === 'hizzle-forms/button' );
+		// Prevent the submit button from being removed.
+		const submitButton = innerBlocks.find( block => block.name === 'hizzle-forms/submit' );
 		if ( submitButton && ! submitButton.attributes.lock ) {
 			const lock = { move: false, remove: true };
 			submitButton.attributes.lock = lock;

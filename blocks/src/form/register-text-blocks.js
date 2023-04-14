@@ -27,7 +27,7 @@ const getEdit = (type, autocomplete) => {
 
         return (
             <WithEditWrapper {...props} className={classes}>
-                <input readOnly type={ type } placeholder={ props.attributes.placeholder } autocomplete={ autocomplete } />
+                <input readOnly type={ type } placeholder={ props.attributes.placeholder } autoComplete={ autocomplete } />
             </WithEditWrapper>
         );
     }
@@ -46,7 +46,7 @@ const getSave = (type, autocomplete) => {
 
         return (
             <WithSaveWrapper {...props} className={classes}>
-                <input type={ type } placeholder={ props.attributes.placeholder } autocomplete={ autocomplete } />
+                <input type={ type } placeholder={ props.attributes.placeholder } autoComplete={ autocomplete } />
             </WithSaveWrapper>
         );
     }

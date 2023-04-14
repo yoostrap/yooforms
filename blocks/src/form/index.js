@@ -12,6 +12,9 @@ import save from './save';
 import variations from './variations';
 import './register-text-blocks';
 
+// Register the submit button block.
+import './submit-button';
+
 const { name } = json;
 
 registerBlockType( name, {
