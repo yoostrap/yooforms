@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import classNames from 'classnames';
+
+/**
  * WordPress dependencies.
  */
 import { registerBlockType } from '@wordpress/blocks';
@@ -6,7 +11,46 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
-import { TextFieldEdit, TextFieldSave } from '../components/text-field';
+import WithEditWrapper from '../components/with-edit-wrapper';
+import WithSaveWrapper from '../components/with-save-wrapper';
+
+// Creates an edit component for a text input.
+const getEdit = (type, autocomplete) => {
+
+    return ( props ) => {
+
+        const classes = classNames(
+            'hizzle-forms__field-input',
+            `hizzle-forms__field-input-${ type }`,
+            props.className
+        );
+
+        return (
+            <WithEditWrapper {...props} className={classes}>
+                <input readOnly type={ type } placeholder={ props.attributes.placeholder } autocomplete={ autocomplete } />
+            </WithEditWrapper>
+        );
+    }
+};
+
+// Creates a save component for a text input.
+const getSave = (type, autocomplete) => {
+
+    return ( props ) => {
+
+        const classes = classNames(
+            'hizzle-forms__field-input',
+            `hizzle-forms__field-input-${ type }`,
+            props.className
+        );
+
+        return (
+            <WithSaveWrapper {...props} className={classes}>
+                <input type={ type } placeholder={ props.attributes.placeholder } autocomplete={ autocomplete } />
+            </WithSaveWrapper>
+        );
+    }
+};
 
 /**
  * Default attributes.
@@ -36,7 +80,7 @@ const defaultAttributes = {
 const registerTextBlock = (type) => {
 
     var inputType = type;
-    var autocomplete = false;
+    var autocomplete = 'on';
     const blockName = `hizzle-forms/${type}`;
 
     switch (type) {
@@ -62,8 +106,8 @@ const registerTextBlock = (type) => {
                 attribute: "placeholder"
             },
         },
-        edit: TextFieldEdit(inputType),
-        save: TextFieldSave(inputType, autocomplete),
+        edit: getEdit(inputType, autocomplete),
+        save: getSave(inputType, autocomplete),
     });
 };
 

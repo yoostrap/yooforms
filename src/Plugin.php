@@ -52,29 +52,71 @@ class Plugin {
 	 * Class Constructor.
 	 */
 	public function __construct() {
-		$this->includes();
-		$this->init_hooks();
-	}
-
-	/**
-	 * Include required core files used in admin and on the frontend.
-	 */
-	public function includes() {
-
-		// Blocks.
-		require_once plugin_dir_path( HIZZLE_FORMS_PLUGIN_FILE ) . 'blocks/build/index.php';
-
-	}
-
-	/**
-	 * Hook into actions and filters.
-	 *
-	 * @since 1.0.0
-	 */
-	private function init_hooks() {
-
+		add_filter( 'block_categories_all', array( $this, 'register_block_categories' ) );
+		add_action( 'init', array( $this, 'register_block_types' ) );
 		add_action( 'plugins_loaded', array( $this, 'on_plugins_loaded' ), -1 );
-		add_action( 'init', array( $this, 'init' ), 0 );
+		add_action( 'init', array( $this, 'load_plugin_textdomain' ), 0 );
+	}
+
+	/**
+	 * Registers our custom block categories.
+	 *
+	 * @param array[] $block_categories Block categories.
+	 *
+	 * @return array
+	 */
+	public function register_block_categories( $block_categories ) {
+
+		return array_merge(
+			$block_categories,
+			array(
+				array(
+					'slug'  => 'hizzle-forms',
+					'title' => esc_html__( 'Hizzle Forms', 'hizzle-forms' ),
+				),
+			)
+		);
+
+	}
+
+	/**
+	 * Register block types.
+	 */
+	public function register_block_types() {
+
+		// Gutenberg is not active.
+		if ( ! function_exists( 'register_block_type' ) ) {
+			return;
+		}
+
+		$path   = plugin_dir_path( HIZZLE_FORMS_PLUGIN_FILE ) . 'blocks/build/';
+		$blocks = array(
+			'form',
+			'name',
+			'first-name',
+			'last-name',
+			'email',
+			'text',
+			'url',
+			'tel',
+			'number',
+			'date',
+			'time',
+			'month',
+			'week',
+			'color',
+			'range',
+			'textarea',
+			'select',
+			'checkbox',
+			'radio',
+			'multi-checkbox',
+		);
+
+		// Register the block by passing the location of block.json to register_block_type.
+		foreach ( $blocks as $block ) {
+			register_block_type( $path . $block );
+		}
 
 	}
 
@@ -84,28 +126,7 @@ class Plugin {
 	 * @since 1.0.0
 	 */
 	public function on_plugins_loaded() {
-
-		do_action( 'hizzle_forms_before_load' );
-
-		// TODO: Add REST API manager.
-
 		do_action( 'hizzle_forms_loaded' );
-	}
-
-	/**
-	 * Init after WordPress inits.
-	 */
-	public function init() {
-
-		// Before init action.
-		do_action( 'before_hizzle_forms_init' );
-
-		// Set up localisation.
-		$this->load_plugin_textdomain();
-
-		// Init action.
-		do_action( 'hizzle_forms_init' );
-
 	}
 
 	/**

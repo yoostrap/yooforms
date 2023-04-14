@@ -19,7 +19,7 @@
 	"scripts": {
 		"start": "wp-scripts start --webpack-copy-php --webpack-src-dir=blocks/src --output-path=blocks/build",
 		"start:non-block": "wp-scripts start --output-path=build/non-block-examples --config=./non-block-examples.webpack.config.js",
-		"build": "wp-scripts build",
+		"build": "wp-scripts build --webpack-copy-php --webpack-src-dir=blocks/src --output-path=blocks/build",
 		"check-engines": "wp-scripts check-engines",
 		"check-licenses": "wp-scripts check-licenses --production",
 		"format": "wp-scripts format",
