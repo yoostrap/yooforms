@@ -40,7 +40,7 @@ const Edit = ( props ) => {
 	return (
 		<WithEditWrapper className="hizzle-forms-field__select" {...props}>
 			<select className="hizzle-forms__field-select" value={selected} onChange={ setSelected }>
-				{ placeholder && <option value="" selected={true}>{ placeholder }</option> }
+				{ placeholder && <option value="">{ placeholder }</option> }
 				{ options.map( ( option, index ) => <option value={ option } key={ index }>{ option }</option> ) }
 			</select>
 

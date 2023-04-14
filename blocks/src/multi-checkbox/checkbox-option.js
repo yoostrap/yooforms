@@ -48,7 +48,7 @@ registerBlockType( 'hizzle-forms/checkbox-option', {
 				</BlockControls>
 
 				<label { ...blockProps }>
-					<input type="checkbox" checked={ selected } />
+					<input type="checkbox" checked={ selected } onChange={ (e) => setAttributes( { selected: e.target.checked } ) } />
 					<RichText
 						tagName="span"
 						value={ label }
@@ -65,7 +65,7 @@ registerBlockType( 'hizzle-forms/checkbox-option', {
 
 		return (
 			<label { ...blockProps }>
-				<input type="checkbox" checked={ selected } />
+				<input type="checkbox" defaultChecked={ selected } />
 				<RichText.Content tagName="span" value={ label } />
 			</label>
 		);

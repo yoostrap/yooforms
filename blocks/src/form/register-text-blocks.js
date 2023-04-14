@@ -85,8 +85,8 @@ const registerTextBlock = (type) => {
 
     switch (type) {
         case 'name':
-        case 'first_name':
-        case 'last_name':
+        case 'first-name':
+        case 'last-name':
             inputType = 'text';
             autocomplete = type;
             break;

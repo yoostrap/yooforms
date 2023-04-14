@@ -48,7 +48,7 @@ registerBlockType( 'hizzle-forms/radio-option', {
 				</BlockControls>
 
 				<label { ...blockProps }>
-					<input type="radio" checked={ selected } />
+					<input type="radio" checked={ selected } onChange={ (e) => setAttributes( { selected: e.target.checked } ) } />
 					<RichText
 						tagName="span"
 						value={ label }
@@ -65,7 +65,7 @@ registerBlockType( 'hizzle-forms/radio-option', {
 
 		return (
 			<label { ...blockProps }>
-				<input type="radio" checked={ selected } />
+				<input type="radio" defaultChecked={ selected } />
 				<RichText.Content tagName="span" value={ label } />
 			</label>
 		);

@@ -3,6 +3,7 @@ import {
 	InspectorControls,
 	URLInput,
 	__experimentalBlockVariationPicker as BlockVariationPicker,
+	useBlockProps
 } from '@wordpress/block-editor';
 import { createBlock, registerBlockVariation } from '@wordpress/blocks';
 import {
@@ -62,7 +63,7 @@ export function HizzleFormEdit( {
 	setAttributes,
 	siteTitle,
 	postTitle,
-	postAuthorEmail,
+	currentUserEmail,
 	hasInnerBlocks,
 	replaceInnerBlocks,
 	selectBlock,
@@ -108,15 +109,15 @@ export function HizzleFormEdit( {
 	};
 
 	useEffect( () => {
-		if ( to === undefined && postAuthorEmail ) {
-			setAttributes( { to: postAuthorEmail } );
+		if ( to === undefined && currentUserEmail ) {
+			setAttributes( { to: currentUserEmail } );
 		}
 
 		if ( subject === undefined && siteTitle !== undefined && postTitle !== undefined ) {
 			const emailSubject = '[' + siteTitle + '] ' + postTitle;
 			setAttributes( { subject: emailSubject } );
 		}
-	}, [ to, postAuthorEmail, subject, siteTitle, postTitle, setAttributes ] );
+	}, [ to, currentUserEmail, subject, siteTitle, postTitle, setAttributes ] );
 
 	const renderSubmissionSettings = () => {
 		return (
@@ -160,7 +161,11 @@ export function HizzleFormEdit( {
 		);
 	};
 
-	const renderVariationPicker = () => {
+	// Checks whether to show the variation picker or the form.
+	const showVariationPicker = ! hasInnerBlocks && registerBlockVariation;
+
+	// Displays the variation picker.
+	const VariationPicker = () => {
 		return (
 			<div className={ formClassnames }>
 				<BlockVariationPicker
@@ -179,32 +184,38 @@ export function HizzleFormEdit( {
 		);
 	};
 
-	if ( ! hasInnerBlocks && registerBlockVariation ) {
-		return renderVariationPicker();
-	}
+	// Displays the form.
+	const Form = () => {
+		return (
+			<>
+				<InspectorControls>
+					<PanelBody title={ __( 'Submission Settings', 'hizzle-forms' ) } initialOpen={ false }>
+						{ renderSubmissionSettings() }
+					</PanelBody>
+					<PanelBody title={ __( 'Email Connection', 'hizzle-forms' ) }>
+						<HizzleEmailConnectionSettings
+							emailAddress={ to }
+							emailSubject={ subject }
+							instanceId={ instanceId }
+							postAuthorEmail={ currentUserEmail }
+							setAttributes={ setAttributes }
+						/>
+					</PanelBody>
 
+				</InspectorControls>
+
+				<div className={ formClassnames } style={ style }>
+					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateInsertUpdatesSelection={ false } />
+				</div>
+			</>
+		)
+	};
+
+	// Either displays the variation picker or the form.
 	return (
-		<>
-			<InspectorControls>
-				<PanelBody title={ __( 'Submission Settings', 'hizzle-forms' ) } initialOpen={ false }>
-					{ renderSubmissionSettings() }
-				</PanelBody>
-				<PanelBody title={ __( 'Email Connection', 'hizzle-forms' ) }>
-					<HizzleEmailConnectionSettings
-						emailAddress={ to }
-						emailSubject={ subject }
-						instanceId={ instanceId }
-						postAuthorEmail={ postAuthorEmail }
-						setAttributes={ setAttributes }
-					/>
-				</PanelBody>
-
-			</InspectorControls>
-
-			<div className={ formClassnames } style={ style }>
-				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateInsertUpdatesSelection={ false } />
-			</div>
-		</>
+		<div {...useBlockProps()}>
+			{ showVariationPicker ? <VariationPicker /> : <Form />}
+		</div>
 	);
 }
 
@@ -213,11 +224,10 @@ export default compose( [
 		const { getBlockType, getBlockVariations, getDefaultBlockVariation } = select( 'core/blocks' );
 		const { getBlocks } = select( 'core/block-editor' );
 		const { getEditedPostAttribute } = select( 'core/editor' );
-		const { getSite, getUser } = select( 'core' );
+		const { getSite, getCurrentUser, getUser } = select( 'core' );
 		const innerBlocks = getBlocks( props.clientId );
 
-		const authorId = getEditedPostAttribute( 'author' );
-		const authorEmail = authorId && getUser( authorId ) && getUser( authorId ).email;
+		const currentUserEmail = getCurrentUser() && getCurrentUser().id && getUser( getCurrentUser().id ) && getUser( getCurrentUser().id ).email;
 		const postTitle = getEditedPostAttribute( 'title' );
 
 		// Prevent the submit button from being removed.
@@ -236,7 +246,7 @@ export default compose( [
 			hasInnerBlocks: innerBlocks.length > 0,
 			siteTitle: get( getSite && getSite(), [ 'title' ] ),
 			postTitle: postTitle,
-			postAuthorEmail: authorEmail,
+			currentUserEmail,
 		};
 	} ),
 	withDispatch( dispatch => {

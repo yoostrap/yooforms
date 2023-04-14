@@ -1,19 +1,16 @@
 /**
- * WordPress dependencies.
- */
-import { registerBlockType } from '@wordpress/blocks';
-
-/**
  * Internal dependencies
  */
 import json from './block.json';
 import edit from './edit';
 import save from './save';
+import registerHizzleBlockType from '../utils/register-block';
 
 // Register the checkbox block.
-const { name } = json;
+const { name, icon } = json;
 
-registerBlockType( name, {
+registerHizzleBlockType( name, {
+	icon,
 	edit,
 	save,
 } );

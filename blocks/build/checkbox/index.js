@@ -40,10 +40,13 @@ const Edit = _ref => {
     className: "hizzle-forms-field__checkbox"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: attributes.checked
+    checked: attributes.checked,
+    onChange: e => setAttributes({
+      checked: e.target.checked
+    })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
     tagName: "span",
-    value: label,
+    value: attributes.label,
     onChange: value => setAttributes({
       label: value
     }),
@@ -90,7 +93,7 @@ const Save = _ref => {
     className: "hizzle-forms-field__checkbox"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: attributes.checked
+    defaultChecked: attributes.checked
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
     tagName: "span",
     value: label
@@ -408,6 +411,51 @@ function WithSaveWrapper(_ref3) {
 
 /***/ }),
 
+/***/ "./blocks/src/utils/register-block.js":
+/*!********************************************!*\
+  !*** ./blocks/src/utils/register-block.js ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ registerHizzleBlockType; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies.
+ */
+
+const PRIMARY_COLOR = '#AA00FF';
+
+/**
+ * Registers a block type provided a unique name and an object defining its.
+ *
+ * @param {string} name     Block name.
+ * @param {Object} settings Block settings.
+ */
+function registerHizzleBlockType(name, settings) {
+  // If the name is not prefixed with hizzle-forms, add it.
+  if (name.indexOf('hizzle-forms/') !== 0) {
+    name = 'hizzle-forms/' + name;
+  }
+
+  // If we have a string icon, add color.
+  if (typeof settings.icon === 'string') {
+    settings.icon = {
+      src: settings.icon,
+      foreground: PRIMARY_COLOR
+    };
+  }
+
+  // Register the block.
+  (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, settings);
+}
+
+/***/ }),
+
 /***/ "./node_modules/classnames/index.js":
 /*!******************************************!*\
   !*** ./node_modules/classnames/index.js ***!
@@ -658,16 +706,10 @@ var __webpack_exports__ = {};
   !*** ./blocks/src/checkbox/index.js ***!
   \**************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./blocks/src/checkbox/block.json");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./blocks/src/checkbox/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./blocks/src/checkbox/save.js");
-/**
- * WordPress dependencies.
- */
-
-
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./block.json */ "./blocks/src/checkbox/block.json");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./blocks/src/checkbox/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./save */ "./blocks/src/checkbox/save.js");
+/* harmony import */ var _utils_register_block__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/register-block */ "./blocks/src/utils/register-block.js");
 /**
  * Internal dependencies
  */
@@ -675,13 +717,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 // Register the checkbox block.
 const {
-  name
-} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, {
-  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+  name,
+  icon
+} = _block_json__WEBPACK_IMPORTED_MODULE_0__;
+(0,_utils_register_block__WEBPACK_IMPORTED_MODULE_3__["default"])(name, {
+  icon,
+  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 }();
 /******/ })()

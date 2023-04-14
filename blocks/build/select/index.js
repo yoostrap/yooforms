@@ -379,8 +379,7 @@ const Edit = props => {
     value: selected,
     onChange: setSelected
   }, placeholder && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("option", {
-    value: "",
-    selected: true
+    value: ""
   }, placeholder), options.map((option, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("option", {
     value: option,
     key: index

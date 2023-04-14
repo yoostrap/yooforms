@@ -423,7 +423,7 @@ function HizzleFormEdit(_ref) {
     setAttributes,
     siteTitle,
     postTitle,
-    postAuthorEmail,
+    currentUserEmail,
     hasInnerBlocks,
     replaceInnerBlocks,
     selectBlock,
@@ -463,9 +463,9 @@ function HizzleFormEdit(_ref) {
     selectBlock(clientId);
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (to === undefined && postAuthorEmail) {
+    if (to === undefined && currentUserEmail) {
       setAttributes({
-        to: postAuthorEmail
+        to: currentUserEmail
       });
     }
     if (subject === undefined && siteTitle !== undefined && postTitle !== undefined) {
@@ -474,7 +474,7 @@ function HizzleFormEdit(_ref) {
         subject: emailSubject
       });
     }
-  }, [to, postAuthorEmail, subject, siteTitle, postTitle, setAttributes]);
+  }, [to, currentUserEmail, subject, siteTitle, postTitle, setAttributes]);
   const renderSubmissionSettings = () => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_inspector_hint__WEBPACK_IMPORTED_MODULE_9__["default"], null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Customize the view after form submission:', 'hizzle-forms')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('On Submission', 'hizzle-forms'),
@@ -508,7 +508,12 @@ function HizzleFormEdit(_ref) {
       })
     })));
   };
-  const renderVariationPicker = () => {
+
+  // Checks whether to show the variation picker or the form.
+  const showVariationPicker = !hasInnerBlocks && _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.registerBlockVariation;
+
+  // Displays the variation picker.
+  const VariationPicker = () => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: formClassnames
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.__experimentalBlockVariationPicker, {
@@ -522,27 +527,31 @@ function HizzleFormEdit(_ref) {
       }
     }));
   };
-  if (!hasInnerBlocks && _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.registerBlockVariation) {
-    return renderVariationPicker();
-  }
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Submission Settings', 'hizzle-forms'),
-    initialOpen: false
-  }, renderSubmissionSettings()), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Email Connection', 'hizzle-forms')
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_email_connection_settings__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    emailAddress: to,
-    emailSubject: subject,
-    instanceId: instanceId,
-    postAuthorEmail: postAuthorEmail,
-    setAttributes: setAttributes
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: formClassnames,
-    style: style
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
-    allowedBlocks: ALLOWED_BLOCKS,
-    templateInsertUpdatesSelection: false
-  })));
+
+  // Displays the form.
+  const Form = () => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Submission Settings', 'hizzle-forms'),
+      initialOpen: false
+    }, renderSubmissionSettings()), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Email Connection', 'hizzle-forms')
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_email_connection_settings__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      emailAddress: to,
+      emailSubject: subject,
+      instanceId: instanceId,
+      postAuthorEmail: currentUserEmail,
+      setAttributes: setAttributes
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: formClassnames,
+      style: style
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
+      allowedBlocks: ALLOWED_BLOCKS,
+      templateInsertUpdatesSelection: false
+    })));
+  };
+
+  // Either displays the variation picker or the form.
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(), showVariationPicker ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(VariationPicker, null) : (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Form, null));
 }
 /* harmony default export */ __webpack_exports__["default"] = ((0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.compose)([(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.withSelect)((select, props) => {
   const {
@@ -558,11 +567,11 @@ function HizzleFormEdit(_ref) {
   } = select('core/editor');
   const {
     getSite,
+    getCurrentUser,
     getUser
   } = select('core');
   const innerBlocks = getBlocks(props.clientId);
-  const authorId = getEditedPostAttribute('author');
-  const authorEmail = authorId && getUser(authorId) && getUser(authorId).email;
+  const currentUserEmail = getCurrentUser() && getCurrentUser().id && getUser(getCurrentUser().id) && getUser(getCurrentUser().id).email;
   const postTitle = getEditedPostAttribute('title');
 
   // Prevent the submit button from being removed.
@@ -582,7 +591,7 @@ function HizzleFormEdit(_ref) {
     hasInnerBlocks: innerBlocks.length > 0,
     siteTitle: (0,lodash__WEBPACK_IMPORTED_MODULE_8__.get)(getSite && getSite(), ['title']),
     postTitle: postTitle,
-    postAuthorEmail: authorEmail
+    currentUserEmail
   };
 }), (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.withDispatch)(dispatch => {
   const {
@@ -852,8 +861,8 @@ const registerTextBlock = type => {
   const blockName = `hizzle-forms/${type}`;
   switch (type) {
     case 'name':
-    case 'first_name':
-    case 'last_name':
+    case 'first-name':
+    case 'last-name':
       inputType = 'text';
       autocomplete = type;
       break;
@@ -1113,7 +1122,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.compact)([{
   }], ['hizzle-forms/email', {
     required: true,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Email', 'hizzle-forms')
-  }], ['hizzle-forms/consent', {}], ['hizzle-forms/submit', {
+  }], ['hizzle-forms/checkbox', {}], ['hizzle-forms/submit', {
     text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Subscribe', 'hizzle-forms'),
     lock: {
       remove: true

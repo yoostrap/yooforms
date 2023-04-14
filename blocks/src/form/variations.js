@@ -110,7 +110,7 @@ const variations = compact( [
 		innerBlocks: [
 			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/email', { required: true, label: __( 'Email', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/consent', {} ],
+			[ 'hizzle-forms/checkbox', {} ],
 			[
 				'hizzle-forms/submit',
 				{
