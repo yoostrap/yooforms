@@ -61,9 +61,6 @@ const ALLOWED_BLOCKS = [
 export function HizzleFormEdit( {
 	attributes,
 	setAttributes,
-	siteTitle,
-	postTitle,
-	currentUserEmail,
 	hasInnerBlocks,
 	replaceInnerBlocks,
 	selectBlock,
@@ -76,8 +73,7 @@ export function HizzleFormEdit( {
 	style,
 } ) {
 	const {
-		to,
-		subject,
+		emails,
 		action,
 		redirect,
 		message,
@@ -107,17 +103,6 @@ export function HizzleFormEdit( {
 
 		selectBlock( clientId );
 	};
-
-	useEffect( () => {
-		if ( to === undefined && currentUserEmail ) {
-			setAttributes( { to: currentUserEmail } );
-		}
-
-		if ( subject === undefined && siteTitle !== undefined && postTitle !== undefined ) {
-			const emailSubject = '[' + siteTitle + '] ' + postTitle;
-			setAttributes( { subject: emailSubject } );
-		}
-	}, [ to, currentUserEmail, subject, siteTitle, postTitle, setAttributes ] );
 
 	const renderSubmissionSettings = () => {
 		return (
@@ -175,7 +160,7 @@ export function HizzleFormEdit( {
 						'Start building a form by selecting one of these form templates, or search in the patterns library for more forms:',
 						'hizzle-forms'
 					) }
-					variations={ filter( variations, v => ! v.hiddenFromPicker ) }
+					variations={ variations }
 					onSelect={ ( nextVariation = defaultVariation ) => {
 						setVariation( nextVariation );
 					} }
@@ -192,15 +177,7 @@ export function HizzleFormEdit( {
 					<PanelBody title={ __( 'Submission Settings', 'hizzle-forms' ) } initialOpen={ false }>
 						{ renderSubmissionSettings() }
 					</PanelBody>
-					<PanelBody title={ __( 'Email Connection', 'hizzle-forms' ) }>
-						<HizzleEmailConnectionSettings
-							emailAddress={ to }
-							emailSubject={ subject }
-							instanceId={ instanceId }
-							postAuthorEmail={ currentUserEmail }
-							setAttributes={ setAttributes }
-						/>
-					</PanelBody>
+					<HizzleEmailConnectionSettings emails={emails} setAttributes={ setAttributes } />
 
 				</InspectorControls>
 
@@ -223,12 +200,7 @@ export default compose( [
 	withSelect( ( select, props ) => {
 		const { getBlockType, getBlockVariations, getDefaultBlockVariation } = select( 'core/blocks' );
 		const { getBlocks } = select( 'core/block-editor' );
-		const { getEditedPostAttribute } = select( 'core/editor' );
-		const { getSite, getCurrentUser, getUser } = select( 'core' );
 		const innerBlocks = getBlocks( props.clientId );
-
-		const currentUserEmail = getCurrentUser() && getCurrentUser().id && getUser( getCurrentUser().id ) && getUser( getCurrentUser().id ).email;
-		const postTitle = getEditedPostAttribute( 'title' );
 
 		// Prevent the submit button from being removed.
 		const submitButton = innerBlocks.find( block => block.name === 'hizzle-forms/submit' );
@@ -241,12 +213,8 @@ export default compose( [
 			blockType: getBlockType && getBlockType( props.name ),
 			defaultVariation: getDefaultBlockVariation && getDefaultBlockVariation( props.name, 'block' ),
 			variations: getBlockVariations && getBlockVariations( props.name, 'block' ),
-
 			innerBlocks,
 			hasInnerBlocks: innerBlocks.length > 0,
-			siteTitle: get( getSite && getSite(), [ 'title' ] ),
-			postTitle: postTitle,
-			currentUserEmail,
 		};
 	} ),
 	withDispatch( dispatch => {
