@@ -14,12 +14,22 @@
   "version": "1.0.0",
   "textdomain": "hizzle-forms",
   "attributes": {
-    "subject": {
-      "type": "string",
-      "default": "New Response: Contact Form"
-    },
-    "to": {
-      "type": "string"
+    "emails": {
+      "type": "array",
+      "default": [
+        {
+          "email": "{admin_email}",
+          "subject": "New Response: Contact Form",
+          "message": "You have received a new response to your contact form. <br><br>Here are the details:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}",
+          "active": true
+        },
+        {
+          "email": "{user_email}",
+          "subject": "Thank you for contacting us",
+          "message": "Thank you for contacting us. We will be in touch with you shortly.<br><br>Here are the details of your message:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}",
+          "active": true
+        }
+      ]
     },
     "action": {
       "type": "string",

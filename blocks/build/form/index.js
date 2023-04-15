@@ -63,40 +63,6 @@ const HizzleFieldControls = _ref => {
 
 /***/ }),
 
-/***/ "./blocks/src/components/help-message.js":
-/*!***********************************************!*\
-  !*** ./blocks/src/components/help-message.js ***!
-  \***********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./blocks/src/components/style.scss");
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = (_ref => {
-  let {
-    children = null,
-    isError = false,
-    ...props
-  } = _ref;
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('help-message', {
-    'help-message-is-error': isError
-  });
-  return children && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    className: classes
-  }, props), children);
-});
-
-/***/ }),
-
 /***/ "./blocks/src/components/inspector-hint.js":
 /*!*************************************************!*\
   !*** ./blocks/src/components/inspector-hint.js ***!
@@ -194,62 +160,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * Returns a function to edit a field label.
- *
- * @param {Object} attributes The block's attributes.
- * @param {string} label The label.
- * @param {Function} setAttributes The setAttributes function.
- */
-const FieldLabel = _ref => {
-  let {
-    label,
-    setAttributes
-  } = _ref;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-    className: "hizzle-forms__field-label"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
-    tagName: "label",
-    value: label,
-    className: "hizzle-forms-field-label__input",
-    onChange: value => setAttributes({
-      label: value
-    }),
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add label…', 'hizzle-forms'),
-    allowedFormats: ['core/bold', 'core/italic']
-  }));
-};
-
-/**
- * Returns a function to edit a field help text.
- *
- * @param {Object} attributes The block's attributes.
- * @param {string} attributes.label The label.
- * @param {Function} attributes.setAttributes The setAttributes function.
- */
-const HelpText = _ref2 => {
-  let {
-    help,
-    setAttributes
-  } = _ref2;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-    className: "hizzle-forms__field-help-text"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
-    tagName: "p",
-    value: help,
-    className: "hizzle-forms-field-help-text__input",
-    onChange: value => setAttributes({
-      help: value
-    }),
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add help text…', 'hizzle-forms')
-  }));
-};
-
-/**
  * Returns a function to containing an edit wrapper.
  *
  * @param {Object} attributes The block's attributes. 
  */
-function WithEditWrapper(_ref3) {
+function WithEditWrapper(_ref) {
   let {
     attributes,
     setAttributes,
@@ -257,23 +172,33 @@ function WithEditWrapper(_ref3) {
     disableHelpText,
     children,
     className,
-    customClass,
     isSelected,
     ...props
-  } = _ref3;
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('hizzle-forms-field', className, customClass, {
-    'is-selected': isSelected,
-    'has-placeholder': !(0,lodash__WEBPACK_IMPORTED_MODULE_3__.isEmpty)(attributes.placeholder)
-  });
-  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)({
-    className: classes
-  });
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", blockProps, !disableLabel && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(FieldLabel, {
-    label: attributes.label,
-    setAttributes: setAttributes
-  }), children, !disableHelpText && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(HelpText, {
-    help: attributes.help,
-    setAttributes: setAttributes
+  } = _ref;
+  const showHelpText = !disableHelpText && (isSelected || !(0,lodash__WEBPACK_IMPORTED_MODULE_3__.isEmpty)(attributes.help));
+  const showLabel = !disableLabel && (isSelected || !(0,lodash__WEBPACK_IMPORTED_MODULE_3__.isEmpty)(attributes.label));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)({
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('hizzle-forms-field', className)
+  }), showLabel && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    className: "hizzle-forms__field-label"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
+    tagName: "label",
+    value: attributes.label,
+    className: "hizzle-forms-field-label__input",
+    onChange: value => {
+      setAttributes({
+        label: value
+      });
+    },
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add label…', 'hizzle-forms')
+  })), children, showHelpText && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
+    tagName: "p",
+    value: attributes.help,
+    className: "hizzle-forms__field-help-text",
+    onChange: value => setAttributes({
+      help: value
+    }),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add help text…', 'hizzle-forms')
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_field_controls__WEBPACK_IMPORTED_MODULE_6__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     setAttributes: setAttributes,
     attributes: attributes
@@ -619,155 +544,159 @@ function HizzleFormEdit(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var email_validator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! email-validator */ "./node_modules/email-validator/index.js");
-/* harmony import */ var _components_help_message__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/help-message */ "./blocks/src/components/help-message.js");
-/* harmony import */ var _components_inspector_hint__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/inspector-hint */ "./blocks/src/components/inspector-hint.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
 
 
-
-const JetpackEmailConnectionSettings = _ref => {
+/**
+ * Displays controls for a single email connection.
+ *
+ * @param {Object} props
+ * @param {number} props.index
+ * @param {boolean} props.active
+ * @param {boolean} props.canDelete
+ * @param {string} props.email
+ * @param {string} props.subject
+ * @param {string} props.message
+ * @param {Function} props.setAttributes
+ * @param {Function} props.deleteConnection
+ * @param {Function} props.insertConnection
+ * @returns {JSX.Element}
+ */
+const EmailConnection = _ref => {
   let {
-    emailAddress = '',
-    emailSubject = '',
-    instanceId,
+    index,
+    active,
+    email,
+    subject,
+    message,
     setAttributes,
-    postAuthorEmail
+    canDelete,
+    deleteConnection,
+    insertConnection
   } = _ref;
-  const [emailErrors, setEmailErrors] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const validateEmail = email => {
-    email = email.trim();
-    if (email.length === 0) {
-      return false; // ignore the empty emails
-    }
-
-    if (!email_validator__WEBPACK_IMPORTED_MODULE_3__.validate(email)) {
-      return {
-        email
-      };
-    }
-    return false;
-  };
-  const hasEmailErrors = () => {
-    return emailErrors && emailErrors.length > 0;
-  };
-  const getEmailErrors = () => {
-    if (emailErrors) {
-      if (emailErrors.length === 1) {
-        if (emailErrors[0] && emailErrors[0].email) {
-          return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)( /* translators: placeholder is an email address. */
-          (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('%s is not a valid email address.', 'jetpack-forms'), emailErrors[0].email);
-        }
-        return emailErrors[0];
-      }
-      if (emailErrors.length === 2) {
-        return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)( /* translators: placeholders are email addresses. */
-        (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('%1$s and %2$s are not a valid email address.', 'jetpack-forms'), emailErrors[0].email, emailErrors[1].email);
-      }
-      const inValidEmails = emailErrors.map(error => error.email);
-      return (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)( /* translators: placeholder is a list of email addresses. */
-      (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('%s are not a valid email address.', 'jetpack-forms'), inValidEmails.join(', '));
-    }
-    return null;
-  };
-  const onBlurEmailField = e => {
-    if (e.target.value.length === 0) {
-      setEmailErrors(false);
-      setAttributes({
-        to: postAuthorEmail
-      });
-      return;
-    }
-    const error = e.target.value.split(',').map(validateEmail).filter(Boolean);
-    if (error && error.length) {
-      setEmailErrors(error);
-    }
-  };
-  const onChangeEmailField = email => {
-    setEmailErrors(false);
-    setAttributes({
-      to: email.trim()
-    });
-  };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_inspector_hint__WEBPACK_IMPORTED_MODULE_5__["default"], null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Get incoming form responses sent to your email inbox:', 'jetpack-forms')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    "aria-describedby": `contact-form-${instanceId}-email-${hasEmailErrors() ? 'error' : 'help'}`,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Email address to send to', 'jetpack-forms'),
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('name@example.com', 'jetpack-forms'),
-    onKeyDown: e => {
-      if (event.key === 'Enter') {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    },
-    value: emailAddress,
-    onBlur: onBlurEmailField,
-    onChange: onChangeEmailField,
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('You can enter multiple email addresses separated by commas.', 'jetpack-forms')
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_help_message__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    isError: true,
-    id: `contact-form-${instanceId}-email-error`
-  }, getEmailErrors()), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Email subject line', 'jetpack-forms'),
-    value: emailSubject,
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter a subject', 'jetpack-forms'),
-    onChange: newSubject => setAttributes({
-      subject: newSubject
+  const panelTitle = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email Connection #%d', 'hizzle-forms'), index + 1);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: panelTitle
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Active', 'hizzle-forms'),
+    help: active ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This connection is active.', 'hizzle-forms') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This connection is inactive.', 'hizzle-forms'),
+    checked: active,
+    onChange: active => setAttributes({
+      active
     })
-  }));
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email address to send to', 'hizzle-forms'),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('{admin_email}, {user_email}, example@gmail.com', 'hizzle-forms'),
+    value: email ? email : '',
+    onChange: email => setAttributes({
+      email
+    }),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('You can enter multiple email addresses separated by commas.', 'hizzle-forms')
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email subject line', 'hizzle-forms'),
+    value: subject ? subject : '',
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter a subject', 'hizzle-forms'),
+    onChange: subject => setAttributes({
+      subject
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email message', 'hizzle-forms'),
+    value: message ? message : '',
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter a message', 'hizzle-forms'),
+    onChange: message => setAttributes({
+      message
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "secondary",
+    isSmall: true,
+    onClick: insertConnection
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add Connection', 'hizzle-forms'))), canDelete && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    isDestructive: true,
+    isSmall: true,
+    onClick: deleteConnection
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Delete Connection', 'hizzle-forms')))));
 };
-/* harmony default export */ __webpack_exports__["default"] = (JetpackEmailConnectionSettings);
-
-/***/ }),
-
-/***/ "./blocks/src/form/index.js":
-/*!**********************************!*\
-  !*** ./blocks/src/form/index.js ***!
-  \**********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./blocks/src/form/block.json");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./blocks/src/form/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./blocks/src/form/save.js");
-/* harmony import */ var _variations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./variations */ "./blocks/src/form/variations.js");
-/* harmony import */ var _register_text_blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./register-text-blocks */ "./blocks/src/form/register-text-blocks.js");
-/* harmony import */ var _submit_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./submit-button */ "./blocks/src/form/submit-button.js");
-/**
- * WordPress dependencies.
- */
-
 
 /**
- * Internal dependencies
+ * Displays controls for all email connections.
+ *
+ * @param {Object} props
+ * @param {Array} props.emails
+ * @param {Function} props.setAttributes
+ * @returns {JSX.Element}
  */
+const EmailConnections = _ref2 => {
+  let {
+    emails,
+    setAttributes
+  } = _ref2;
+  // If we have no emails, add a default one.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (!Array.isArray(emails) || emails.length === 0) {
+      setAttributes({
+        emails: [{
+          email: "{admin_email}",
+          subject: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('New form response', 'hizzle-forms'),
+          message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('You have received a new response to your contact form. <br><br>Here are the details:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}', 'hizzle-forms'),
+          active: false
+        }]
+      });
+    }
+  }, [emails]);
 
+  // Abort if we don't have emails.
+  if (!Array.isArray(emails)) {
+    return null;
+  }
 
-
-
-
-
-// Register the submit button block.
-
-const {
-  name
-} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, {
-  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"],
-  variations: _variations__WEBPACK_IMPORTED_MODULE_4__["default"]
-});
+  // Only allow deleting if we have more than one email.
+  const canDelete = emails.length > 1;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, emails.map((email, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(EmailConnection, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    key: index,
+    index: index,
+    canDelete: canDelete,
+    setAttributes: attributes => {
+      const newEmails = [...emails];
+      newEmails[index] = {
+        ...newEmails[index],
+        ...attributes
+      };
+      setAttributes({
+        emails: newEmails
+      });
+    },
+    deleteConnection: () => {
+      const newEmails = [...emails];
+      newEmails.splice(index, 1);
+      setAttributes({
+        emails: newEmails
+      });
+    },
+    insertConnection: () => {
+      const newEmails = [...emails];
+      newEmails.splice(index + 1, 0, {
+        email: "{admin_email}",
+        subject: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('New form response', 'hizzle-forms'),
+        message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('You have received a new response to your contact form. <br><br>Here are the details:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}', 'hizzle-forms'),
+        active: false
+      });
+      setAttributes({
+        emails: newEmails
+      });
+    }
+  }, email))));
+};
+/* harmony default export */ __webpack_exports__["default"] = (EmailConnections);
 
 /***/ }),
 
@@ -853,24 +782,27 @@ _utils_input_types__WEBPACK_IMPORTED_MODULE_6__["default"].forEach(metadata => {
       }
     },
     // The edit component.
-    edit: (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_1__.withInstanceId)(props => {
+    edit: (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_1__.withInstanceId)(_ref2 => {
+      let {
+        attributes,
+        setAttributes,
+        clientId
+      } = _ref2;
       // Reset instance ID once.
       (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-        if (!props.attributes.instanceID) {
-          props.setAttributes({
-            instanceID: props.clientId
+        if (!attributes.instanceID) {
+          setAttributes({
+            instanceID: clientId
           });
         }
       }, []);
-      const instanceID = props.attributes.instanceID || props.clientId;
-      const placeholder = props.attributes.placeholder || '';
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_3__["default"], props, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        attributes: attributes,
+        setAttributes: setAttributes
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
         type: inputType,
-        name: `hizzle-forms-${instanceID}`,
-        id: `hizzle-forms-field-${instanceID}`,
         className: "hizzle-forms__field-input form-control",
-        placeholder: placeholder,
-        autoComplete: autocomplete,
+        placeholder: attributes.placeholder,
         readOnly: true
       }));
     }),
@@ -903,7 +835,7 @@ _utils_input_types__WEBPACK_IMPORTED_MODULE_6__["default"].forEach(metadata => {
       to: transforms
     },
     // Block metadata.
-    parent: ['hizzle-forms/form'],
+    ancestor: ['hizzle-forms/form'],
     version: '1.0.0',
     textdomain: 'hizzle-forms',
     category: 'hizzle-forms',
@@ -971,7 +903,7 @@ __webpack_require__.r(__webpack_exports__);
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Submit Button', 'hizzle-forms'),
   icon: 'button',
   category: 'hizzle-forms',
-  parent: ['hizzle-forms/form'],
+  ancestor: ['hizzle-forms/form'],
   attributes: {
     text: {
       type: 'string',
@@ -1681,59 +1613,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ "./node_modules/email-validator/index.js":
-/*!***********************************************!*\
-  !*** ./node_modules/email-validator/index.js ***!
-  \***********************************************/
-/***/ (function(__unused_webpack_module, exports) {
-
-"use strict";
-
-
-var tester = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
-// Thanks to:
-// http://fightingforalostcause.net/misc/2006/compare-email-regex.php
-// http://thedailywtf.com/Articles/Validating_Email_Addresses.aspx
-// http://stackoverflow.com/questions/201323/what-is-the-best-regular-expression-for-validating-email-addresses/201378#201378
-exports.validate = function(email)
-{
-	if (!email)
-		return false;
-		
-	if(email.length>254)
-		return false;
-
-	var valid = tester.test(email);
-	if(!valid)
-		return false;
-
-	// Further checking of some things regex can't handle
-	var parts = email.split("@");
-	if(parts[0].length>64)
-		return false;
-
-	var domainParts = parts[1].split(".");
-	if(domainParts.some(function(part) { return part.length>63; }))
-		return false;
-
-	return true;
-}
-
-/***/ }),
-
-/***/ "./blocks/src/components/style.scss":
-/*!******************************************!*\
-  !*** ./blocks/src/components/style.scss ***!
-  \******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "lodash":
 /*!*************************!*\
   !*** external "lodash" ***!
@@ -1857,7 +1736,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/forms","title":"Form","description":"Displays a form.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"forms","version":"1.0.0","textdomain":"hizzle-forms","attributes":{"subject":{"type":"string","default":"New Response: Contact Form"},"to":{"type":"string"},"action":{"type":"string","default":"message"},"redirect":{"type":"string","default":""},"message":{"type":"string","default":"Thank you for contacting us. We will be in touch with you shortly."},"title":{"type":"string","default":"Contact Form"}},"example":{"innerBlocks":[{"name":"hizzle-forms/name","attributes":{"required":true,"label":"Name"}},{"name":"hizzle-forms/email","attributes":{"required":true,"label":"Email"}},{"name":"hizzle-forms/textarea","attributes":{"required":true,"label":"Message"}},{"name":"hizzle-forms/checkbox","attributes":{"required":true,"label":"I agree to the terms and conditions"}},{"name":"hizzle-forms/submit","attributes":{"text":"Send Message","element":"button","lock":{"remove":true}}}]},"supports":{"anchor":true,"spacing":{"margin":false,"padding":true},"color":{"link":true,"gradients":true},"html":false,"align":["wide","full"]},"editorScript":"file:./index.js","editorStyle":"file:./frontend.css","style":"file:./frontend.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/forms","title":"Form","description":"Displays a form.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"forms","version":"1.0.0","textdomain":"hizzle-forms","attributes":{"emails":{"type":"array","default":[{"email":"{admin_email}","subject":"New Response: Contact Form","message":"You have received a new response to your contact form. <br><br>Here are the details:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}","active":true},{"email":"{user_email}","subject":"Thank you for contacting us","message":"Thank you for contacting us. We will be in touch with you shortly.<br><br>Here are the details of your message:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}","active":true}]},"action":{"type":"string","default":"message"},"redirect":{"type":"string","default":""},"message":{"type":"string","default":"Thank you for contacting us. We will be in touch with you shortly."},"title":{"type":"string","default":"Contact Form"}},"example":{"innerBlocks":[{"name":"hizzle-forms/name","attributes":{"required":true,"label":"Name"}},{"name":"hizzle-forms/email","attributes":{"required":true,"label":"Email"}},{"name":"hizzle-forms/textarea","attributes":{"required":true,"label":"Message"}},{"name":"hizzle-forms/checkbox","attributes":{"required":true,"label":"I agree to the terms and conditions"}},{"name":"hizzle-forms/submit","attributes":{"text":"Send Message","element":"button","lock":{"remove":true}}}]},"supports":{"anchor":true,"spacing":{"margin":false,"padding":true},"color":{"link":true,"gradients":true},"html":false,"align":["wide","full"]},"editorScript":"file:./index.js","editorStyle":"file:./frontend.css","style":"file:./frontend.css"}');
 
 /***/ })
 
@@ -1887,44 +1766,7 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/chunk loaded */
-/******/ 	!function() {
-/******/ 		var deferred = [];
-/******/ 		__webpack_require__.O = function(result, chunkIds, fn, priority) {
-/******/ 			if(chunkIds) {
-/******/ 				priority = priority || 0;
-/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
-/******/ 				deferred[i] = [chunkIds, fn, priority];
-/******/ 				return;
-/******/ 			}
-/******/ 			var notFulfilled = Infinity;
-/******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var chunkIds = deferred[i][0];
-/******/ 				var fn = deferred[i][1];
-/******/ 				var priority = deferred[i][2];
-/******/ 				var fulfilled = true;
-/******/ 				for (var j = 0; j < chunkIds.length; j++) {
-/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every(function(key) { return __webpack_require__.O[key](chunkIds[j]); })) {
-/******/ 						chunkIds.splice(j--, 1);
-/******/ 					} else {
-/******/ 						fulfilled = false;
-/******/ 						if(priority < notFulfilled) notFulfilled = priority;
-/******/ 					}
-/******/ 				}
-/******/ 				if(fulfilled) {
-/******/ 					deferred.splice(i--, 1)
-/******/ 					var r = fn();
-/******/ 					if (r !== undefined) result = r;
-/******/ 				}
-/******/ 			}
-/******/ 			return result;
-/******/ 		};
-/******/ 	}();
-/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	!function() {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -1965,70 +1807,48 @@ module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json
 /******/ 		};
 /******/ 	}();
 /******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	!function() {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"form/index": 0,
-/******/ 			"form/style-index": 0
-/******/ 		};
-/******/ 		
-/******/ 		// no chunk on demand loading
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		__webpack_require__.O.j = function(chunkId) { return installedChunks[chunkId] === 0; };
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = function(parentChunkLoadingFunction, data) {
-/******/ 			var chunkIds = data[0];
-/******/ 			var moreModules = data[1];
-/******/ 			var runtime = data[2];
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some(function(id) { return installedChunks[id] !== 0; })) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 			return __webpack_require__.O(result);
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkhizzle_forms"] = self["webpackChunkhizzle_forms"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
-/******/ 	}();
-/******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["form/style-index"], function() { return __webpack_require__("./blocks/src/form/index.js"); })
-/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+!function() {
+"use strict";
+/*!**********************************!*\
+  !*** ./blocks/src/form/index.js ***!
+  \**********************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./blocks/src/form/block.json");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./blocks/src/form/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./blocks/src/form/save.js");
+/* harmony import */ var _variations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./variations */ "./blocks/src/form/variations.js");
+/* harmony import */ var _register_text_blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./register-text-blocks */ "./blocks/src/form/register-text-blocks.js");
+/* harmony import */ var _submit_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./submit-button */ "./blocks/src/form/submit-button.js");
+/**
+ * WordPress dependencies.
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+
+
+// Register the submit button block.
+
+const {
+  name
+} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"],
+  variations: _variations__WEBPACK_IMPORTED_MODULE_4__["default"]
+});
+}();
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

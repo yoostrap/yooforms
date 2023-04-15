@@ -55,21 +55,18 @@ inputTypes.forEach( (metadata) => {
         },
 
         // The edit component.
-        edit: withInstanceId( ( props ) => {
+        edit: withInstanceId( ( {attributes, setAttributes, clientId} ) => {
 
             // Reset instance ID once.
             useEffect( () => {
-                if ( ! props.attributes.instanceID ) {
-                    props.setAttributes( { instanceID: props.clientId } );
+                if ( ! attributes.instanceID ) {
+                    setAttributes( { instanceID: clientId } );
                 }
             }, [] );
-    
-            const instanceID = props.attributes.instanceID || props.clientId;
-            const placeholder = props.attributes.placeholder || '';
 
             return (
-                <WithEditWrapper {...props}>
-                    <input type={ inputType } name={`hizzle-forms-${instanceID}`} id={`hizzle-forms-field-${instanceID}`} className="hizzle-forms__field-input form-control" placeholder={ placeholder } autoComplete={ autocomplete } readOnly />
+                <WithEditWrapper attributes={attributes} setAttributes={setAttributes}>
+                    <input type={ inputType } className="hizzle-forms__field-input form-control" placeholder={ attributes.placeholder } readOnly />
                 </WithEditWrapper>
             );
         }),
@@ -103,7 +100,7 @@ inputTypes.forEach( (metadata) => {
         },
 
         // Block metadata.
-        parent: [
+        ancestor: [
             'hizzle-forms/form'
         ],
         version: '1.0.0',

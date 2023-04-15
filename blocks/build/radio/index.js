@@ -132,62 +132,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * Returns a function to edit a field label.
- *
- * @param {Object} attributes The block's attributes.
- * @param {string} label The label.
- * @param {Function} setAttributes The setAttributes function.
- */
-const FieldLabel = _ref => {
-  let {
-    label,
-    setAttributes
-  } = _ref;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-    className: "hizzle-forms__field-label"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
-    tagName: "label",
-    value: label,
-    className: "hizzle-forms-field-label__input",
-    onChange: value => setAttributes({
-      label: value
-    }),
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add label…', 'hizzle-forms'),
-    allowedFormats: ['core/bold', 'core/italic']
-  }));
-};
-
-/**
- * Returns a function to edit a field help text.
- *
- * @param {Object} attributes The block's attributes.
- * @param {string} attributes.label The label.
- * @param {Function} attributes.setAttributes The setAttributes function.
- */
-const HelpText = _ref2 => {
-  let {
-    help,
-    setAttributes
-  } = _ref2;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-    className: "hizzle-forms__field-help-text"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
-    tagName: "p",
-    value: help,
-    className: "hizzle-forms-field-help-text__input",
-    onChange: value => setAttributes({
-      help: value
-    }),
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add help text…', 'hizzle-forms')
-  }));
-};
-
-/**
  * Returns a function to containing an edit wrapper.
  *
  * @param {Object} attributes The block's attributes. 
  */
-function WithEditWrapper(_ref3) {
+function WithEditWrapper(_ref) {
   let {
     attributes,
     setAttributes,
@@ -195,23 +144,33 @@ function WithEditWrapper(_ref3) {
     disableHelpText,
     children,
     className,
-    customClass,
     isSelected,
     ...props
-  } = _ref3;
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('hizzle-forms-field', className, customClass, {
-    'is-selected': isSelected,
-    'has-placeholder': !(0,lodash__WEBPACK_IMPORTED_MODULE_3__.isEmpty)(attributes.placeholder)
-  });
-  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)({
-    className: classes
-  });
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", blockProps, !disableLabel && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(FieldLabel, {
-    label: attributes.label,
-    setAttributes: setAttributes
-  }), children, !disableHelpText && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(HelpText, {
-    help: attributes.help,
-    setAttributes: setAttributes
+  } = _ref;
+  const showHelpText = !disableHelpText && (isSelected || !(0,lodash__WEBPACK_IMPORTED_MODULE_3__.isEmpty)(attributes.help));
+  const showLabel = !disableLabel && (isSelected || !(0,lodash__WEBPACK_IMPORTED_MODULE_3__.isEmpty)(attributes.label));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)({
+    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('hizzle-forms-field', className)
+  }), showLabel && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    className: "hizzle-forms__field-label"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
+    tagName: "label",
+    value: attributes.label,
+    className: "hizzle-forms-field-label__input",
+    onChange: value => {
+      setAttributes({
+        label: value
+      });
+    },
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add label…', 'hizzle-forms')
+  })), children, showHelpText && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
+    tagName: "p",
+    value: attributes.help,
+    className: "hizzle-forms__field-help-text",
+    onChange: value => setAttributes({
+      help: value
+    }),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add help text…', 'hizzle-forms')
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_field_controls__WEBPACK_IMPORTED_MODULE_6__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     setAttributes: setAttributes,
     attributes: attributes
@@ -405,7 +364,7 @@ __webpack_require__.r(__webpack_exports__);
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Radio Option', 'hizzle-forms'),
   icon: 'editor-ul',
   category: 'hizzle-forms',
-  parent: ['hizzle-forms/radio'],
+  ancestor: ['hizzle-forms/radio'],
   attributes: {
     label: {
       type: 'string',

@@ -11,7 +11,7 @@ registerBlockType( 'hizzle-forms/radio-option', {
 	title: __( 'Radio Option', 'hizzle-forms' ),
 	icon: 'editor-ul',
 	category: 'hizzle-forms',
-	parent: [ 'hizzle-forms/radio' ],
+	ancestor: [ 'hizzle-forms/radio' ],
 	attributes: {
 		label: {
 			type: 'string',

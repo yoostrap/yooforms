@@ -11,7 +11,7 @@ registerBlockType( 'hizzle-forms/checkbox-option', {
 	title: __( 'Checkbox Option', 'hizzle-forms' ),
 	icon: 'editor-ul',
 	category: 'hizzle-forms',
-	parent: [ 'hizzle-forms/checkbox' ],
+	ancestor: [ 'hizzle-forms/checkbox' ],
 	attributes: {
 		label: {
 			type: 'string',

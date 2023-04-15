@@ -9,69 +9,44 @@ import { __ } from '@wordpress/i18n';
 import HizzleFieldControls from './field-controls';
 
 /**
- * Returns a function to edit a field label.
- *
- * @param {Object} attributes The block's attributes.
- * @param {string} label The label.
- * @param {Function} setAttributes The setAttributes function.
- */
-const FieldLabel = ( { label, setAttributes } ) => {
-
-	return (
-		<div className="hizzle-forms__field-label">
-			<RichText
-				tagName="label"
-				value={ label }
-				className="hizzle-forms-field-label__input"
-				onChange={ value => setAttributes( { label: value } ) }
-				placeholder={ __( 'Add label…', 'hizzle-forms' ) }
-				allowedFormats={ [ 'core/bold', 'core/italic' ] }
-			/>
-		</div>
-	)
-}
-
-/**
- * Returns a function to edit a field help text.
- *
- * @param {Object} attributes The block's attributes.
- * @param {string} attributes.label The label.
- * @param {Function} attributes.setAttributes The setAttributes function.
- */
-const HelpText = ( { help, setAttributes } ) => {
-
-	return (
-		<div className="hizzle-forms__field-help-text">
-			<RichText
-				tagName="p"
-				value={ help }
-				className="hizzle-forms-field-help-text__input"
-				onChange={ value => setAttributes( { help: value } ) }
-				placeholder={ __( 'Add help text…', 'hizzle-forms' ) }
-			/>
-		</div>
-	)
-}
-
-/**
  * Returns a function to containing an edit wrapper.
  *
  * @param {Object} attributes The block's attributes. 
  */
-export default function WithEditWrapper ( {attributes, setAttributes, disableLabel, disableHelpText, children, className, customClass, isSelected, ...props} ) {
+export default function WithEditWrapper ( {attributes, setAttributes, disableLabel, disableHelpText, children, className, isSelected, ...props} ) {
 
-	const classes = classnames( 'hizzle-forms-field', className, customClass, {
-		'is-selected': isSelected,
-		'has-placeholder': ! isEmpty( attributes.placeholder ),
-	} );
-
-	const blockProps = useBlockProps( { className: classes });
+	const showHelpText = ! disableHelpText && ( isSelected || ! isEmpty( attributes.help ) );
+	const showLabel	   = ! disableLabel && ( isSelected || ! isEmpty( attributes.label ) );
 
 	return (
-		<div { ...blockProps }>
-			{ ! disableLabel && <FieldLabel label={ attributes.label } setAttributes={ setAttributes } /> }
+		<div { ...useBlockProps( { className: classnames( 'hizzle-forms-field', className ) }) }>
+
+			{ showLabel && (
+				<div className="hizzle-forms__field-label">
+					<RichText
+						tagName="label"
+						value={ attributes.label }
+						className="hizzle-forms-field-label__input"
+						onChange={ value => {
+							setAttributes( { label: value } );
+						} }
+						placeholder={ __( 'Add label…', 'hizzle-forms' ) }
+					/>
+				</div>
+			) }
+
 			{ children }
-			{ ! disableHelpText && <HelpText help={ attributes.help } setAttributes={ setAttributes } /> }
+
+			{ showHelpText && (
+				<RichText
+					tagName="p"
+					value={ attributes.help }
+					className="hizzle-forms__field-help-text"
+					onChange={ value => setAttributes( { help: value } ) }
+					placeholder={ __( 'Add help text…', 'hizzle-forms' ) }
+				/>
+			) }
+
 			<HizzleFieldControls setAttributes={ setAttributes } attributes={ attributes } { ...props} />
 		</div>
 

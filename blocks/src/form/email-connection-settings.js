@@ -1,128 +1,153 @@
-import { TextControl } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import { TextControl, TextareaControl, Button, Flex, FlexItem , ToggleControl, PanelBody} from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
-import emailValidator from 'email-validator';
-import HelpMessage from '../components/help-message';
-import InspectorHint from '../components/inspector-hint';
+import { useEffect } from '@wordpress/element';
 
-const JetpackEmailConnectionSettings = ( {
-	emailAddress = '',
-	emailSubject = '',
-	instanceId,
-	setAttributes,
-	postAuthorEmail,
-} ) => {
-	const [ emailErrors, setEmailErrors ] = useState( false );
+/**
+ * Displays controls for a single email connection.
+ *
+ * @param {Object} props
+ * @param {number} props.index
+ * @param {boolean} props.active
+ * @param {boolean} props.canDelete
+ * @param {string} props.email
+ * @param {string} props.subject
+ * @param {string} props.message
+ * @param {Function} props.setAttributes
+ * @param {Function} props.deleteConnection
+ * @param {Function} props.insertConnection
+ * @returns {JSX.Element}
+ */
+const EmailConnection = ( { index, active, email, subject, message, setAttributes, canDelete, deleteConnection, insertConnection } ) => {
 
-	const validateEmail = email => {
-		email = email.trim();
+	const panelTitle = sprintf(
+		__( 'Email Connection #%d', 'hizzle-forms' ),
+		index + 1
+	);
 
-		if ( email.length === 0 ) {
-			return false; // ignore the empty emails
-		}
+	<PanelBody title={ panelTitle }>
 
-		if ( ! emailValidator.validate( email ) ) {
-			return { email };
-		}
+		<ToggleControl
+			label={ __( 'Active', 'hizzle-forms' ) }
+			help={ active ? __( 'This connection is active.', 'hizzle-forms' ) : __( 'This connection is inactive.', 'hizzle-forms' ) }
+			checked={ active }
+			onChange={ active => setAttributes( { active } ) }
+		/>
 
-		return false;
-	};
+		<TextControl
+			label={ __( 'Email address to send to', 'hizzle-forms' ) }
+			placeholder={ __( '{admin_email}, {user_email}, example@gmail.com', 'hizzle-forms' ) }
+			value={ email ? email : '' }
+			onChange={ ( email ) => setAttributes( { email } ) }
+			help={ __( 'You can enter multiple email addresses separated by commas.', 'hizzle-forms' ) }
+		/>
 
-	const hasEmailErrors = () => {
-		return emailErrors && emailErrors.length > 0;
-	};
+		<TextControl
+			label={ __( 'Email subject line', 'hizzle-forms' ) }
+			value={ subject ? subject : '' }
+			placeholder={ __( 'Enter a subject', 'hizzle-forms' ) }
+			onChange={ subject => setAttributes( { subject } ) }
+		/>
 
-	const getEmailErrors = () => {
-		if ( emailErrors ) {
-			if ( emailErrors.length === 1 ) {
-				if ( emailErrors[ 0 ] && emailErrors[ 0 ].email ) {
-					return sprintf(
-						/* translators: placeholder is an email address. */
-						__( '%s is not a valid email address.', 'jetpack-forms' ),
-						emailErrors[ 0 ].email
-					);
+		<TextareaControl
+			label={ __( 'Email message', 'hizzle-forms' ) }
+			value={ message ? message : '' }
+			placeholder={ __( 'Enter a message', 'hizzle-forms' ) }
+			onChange={ message => setAttributes( { message } ) }
+		/>
+
+		<Flex>
+			<FlexItem>
+				<Button
+					variant="secondary"
+					isSmall
+					onClick={ insertConnection }
+				>
+					{ __( 'Add Connection', 'hizzle-forms' ) }
+				</Button>
+			</FlexItem>
+			{ canDelete && (
+				<FlexItem>
+					<Button
+						isDestructive
+						isSmall
+						onClick={ deleteConnection }
+					>
+						{ __( 'Delete Connection', 'hizzle-forms' ) }
+					</Button>
+				</FlexItem>
+			) }
+		</Flex>
+
+	</PanelBody>
+};
+
+/**
+ * Displays controls for all email connections.
+ *
+ * @param {Object} props
+ * @param {Array} props.emails
+ * @param {Function} props.setAttributes
+ * @returns {JSX.Element}
+ */
+const EmailConnections = ( { emails, setAttributes } ) => {
+
+	// If we have no emails, add a default one.
+	useEffect( () => {
+		if ( ! Array.isArray( emails ) || emails.length === 0 ) {
+			setAttributes( { emails: [
+				{
+					email: "{admin_email}",
+					subject: __( 'New form response', 'hizzle-forms' ),
+					message: __( 'You have received a new response to your contact form. <br><br>Here are the details:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}', 'hizzle-forms' ),
+					active: false
 				}
-				return emailErrors[ 0 ];
-			}
-
-			if ( emailErrors.length === 2 ) {
-				return sprintf(
-					/* translators: placeholders are email addresses. */
-					__( '%1$s and %2$s are not a valid email address.', 'jetpack-forms' ),
-					emailErrors[ 0 ].email,
-					emailErrors[ 1 ].email
-				);
-			}
-
-			const inValidEmails = emailErrors.map( error => error.email );
-
-			return sprintf(
-				/* translators: placeholder is a list of email addresses. */
-				__( '%s are not a valid email address.', 'jetpack-forms' ),
-				inValidEmails.join( ', ' )
-			);
+			] } );
 		}
+	}, [ emails ] );
 
+	// Abort if we don't have emails.
+	if ( ! Array.isArray( emails ) ) {
 		return null;
-	};
+	}
 
-	const onBlurEmailField = e => {
-		if ( e.target.value.length === 0 ) {
-			setEmailErrors( false );
-			setAttributes( { to: postAuthorEmail } );
-			return;
-		}
-
-		const error = e.target.value.split( ',' ).map( validateEmail ).filter( Boolean );
-
-		if ( error && error.length ) {
-			setEmailErrors( error );
-		}
-	};
-
-	const onChangeEmailField = email => {
-		setEmailErrors( false );
-		setAttributes( { to: email.trim() } );
-	};
+	// Only allow deleting if we have more than one email.
+	const canDelete = emails.length > 1;
 
 	return (
 		<>
-			<InspectorHint>
-				{ __( 'Get incoming form responses sent to your email inbox:', 'jetpack-forms' ) }
-			</InspectorHint>
-			<TextControl
-				aria-describedby={ `contact-form-${ instanceId }-email-${
-					hasEmailErrors() ? 'error' : 'help'
-				}` }
-				label={ __( 'Email address to send to', 'jetpack-forms' ) }
-				placeholder={ __( 'name@example.com', 'jetpack-forms' ) }
-				onKeyDown={ e => {
-					if ( event.key === 'Enter' ) {
-						e.preventDefault();
-						e.stopPropagation();
-					}
-				} }
-				value={ emailAddress }
-				onBlur={ onBlurEmailField }
-				onChange={ onChangeEmailField }
-				help={ __(
-					'You can enter multiple email addresses separated by commas.',
-					'jetpack-forms'
-				) }
-			/>
-
-			<HelpMessage isError id={ `contact-form-${ instanceId }-email-error` }>
-				{ getEmailErrors() }
-			</HelpMessage>
-
-			<TextControl
-				label={ __( 'Email subject line', 'jetpack-forms' ) }
-				value={ emailSubject }
-				placeholder={ __( 'Enter a subject', 'jetpack-forms' ) }
-				onChange={ newSubject => setAttributes( { subject: newSubject } ) }
-			/>
+			{ emails.map( ( email, index ) => (
+				<EmailConnection
+					key={ index }
+					index={ index }
+					canDelete={ canDelete }
+					setAttributes={ ( attributes ) => {
+						const newEmails = [ ...emails ];
+						newEmails[ index ] = {
+							...newEmails[ index ],
+							...attributes
+						};
+						setAttributes( { emails: newEmails } );
+					} }
+					deleteConnection={ () => {
+						const newEmails = [ ...emails ];
+						newEmails.splice( index, 1 );
+						setAttributes( { emails: newEmails } );
+					} }
+					insertConnection={ () => {
+						const newEmails = [ ...emails ];
+						newEmails.splice( index + 1, 0, {
+							email: "{admin_email}",
+							subject: __( 'New form response', 'hizzle-forms' ),
+							message: __( 'You have received a new response to your contact form. <br><br>Here are the details:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}', 'hizzle-forms' ),
+							active: false
+						} );
+						setAttributes( { emails: newEmails } );
+					} }
+					{ ...email }
+				/>
+			) ) }
 		</>
 	);
 };
 
-export default JetpackEmailConnectionSettings;
+export default EmailConnections;
