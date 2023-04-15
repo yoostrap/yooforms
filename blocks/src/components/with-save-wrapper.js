@@ -6,8 +6,9 @@ import { RichText, useBlockProps } from '@wordpress/block-editor';
  *
  * @param {Object} attributes The block's attributes.
  * @param {string} attributes.label The label.
+ * @param {string} attributes.instanceID The instance ID.
  */
-const FieldLabel = ( { label } ) => {
+const FieldLabel = ( { label, instanceID } ) => {
 
 	// Abort if no label.
 	if ( ! label ) {
@@ -16,7 +17,7 @@ const FieldLabel = ( { label } ) => {
 
 	return (
 		<div className="hizzle-forms__field-label">
-			<RichText.Content tagName="label" value={ label } />
+			<RichText.Content tagName="label" htmlFor={`hizzle-forms-field-${instanceID}`} value={ label } />
 		</div>
 	)
 }
@@ -46,15 +47,15 @@ const HelpText = ( { help } ) => {
  *
  * @param {Object} attributes The block's attributes. 
  */
-export default function WithSaveWrapper ( {attributes, children, className } ) {
+export default function WithSaveWrapper ( {attributes, children, className, customClass } ) {
 
-	const classes = classnames( 'hizzle-forms-field', className );
+	const classes = classnames( 'hizzle-forms-field', className, customClass );
 
 	const blockProps = useBlockProps.save( { className: classes });
 
 	return (
 		<div { ...blockProps }>
-			<FieldLabel label={ attributes.label } />
+			<FieldLabel label={ attributes.label } instanceID={ attributes.instanceID } />
 			{ children }
 			<HelpText help={ attributes.help }/>
 		</div>

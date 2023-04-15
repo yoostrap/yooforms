@@ -3,19 +3,6 @@ import { __ } from '@wordpress/i18n';
 import { compact } from 'lodash';
 import renderMaterialIcon from '../components/render-material-icon';
 
-const defaultBlockStyling = {
-	style: {
-		spacing: {
-			padding: {
-				top: '16px',
-				right: '16px',
-				bottom: '16px',
-				left: '16px',
-			},
-		},
-	},
-};
-
 const PRIMARY_COLOR = '#AA00FF';
 
 const variations = compact( [
@@ -54,9 +41,6 @@ const variations = compact( [
 				},
 			],
 		],
-		attributes: {
-			...defaultBlockStyling,
-		},
 	},
 	{
 		name: 'newsletter-form',
@@ -119,9 +103,6 @@ const variations = compact( [
 				},
 			],
 		],
-		attributes: {
-			...defaultBlockStyling,
-		},
 	},
 	{
 		name: 'rsvp-form',
@@ -167,7 +148,6 @@ const variations = compact( [
 			],
 		],
 		attributes: {
-			...defaultBlockStyling,
 			subject: __( 'A new RSVP from your website', 'hizzle-forms' ),
 		},
 	},
@@ -225,7 +205,6 @@ const variations = compact( [
 			],
 		],
 		attributes: {
-			...defaultBlockStyling,
 			subject: __( 'A new registration from your website', 'hizzle-forms' ),
 		},
 	},
@@ -286,7 +265,6 @@ const variations = compact( [
 			],
 		],
 		attributes: {
-			...defaultBlockStyling,
 			subject: __( 'A new appointment booked from your website', 'hizzle-forms' ),
 		},
 	},
@@ -356,7 +334,6 @@ const variations = compact( [
 			],
 		],
 		attributes: {
-			...defaultBlockStyling,
 			subject: __( 'New feedback received from your website', 'hizzle-forms' ),
 		},
 	},

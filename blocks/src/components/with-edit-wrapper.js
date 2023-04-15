@@ -25,7 +25,6 @@ const FieldLabel = ( { label, setAttributes } ) => {
 				className="hizzle-forms-field-label__input"
 				onChange={ value => setAttributes( { label: value } ) }
 				placeholder={ __( 'Add label…', 'hizzle-forms' ) }
-				withoutInteractiveFormatting
 				allowedFormats={ [ 'core/bold', 'core/italic' ] }
 			/>
 		</div>
@@ -59,9 +58,9 @@ const HelpText = ( { help, setAttributes } ) => {
  *
  * @param {Object} attributes The block's attributes. 
  */
-export default function WithEditWrapper ( {attributes, setAttributes, disableLabel, disableHelpText, children, className, isSelected, ...props} ) {
+export default function WithEditWrapper ( {attributes, setAttributes, disableLabel, disableHelpText, children, className, customClass, isSelected, ...props} ) {
 
-	const classes = classnames( 'hizzle-forms-field', className, {
+	const classes = classnames( 'hizzle-forms-field', className, customClass, {
 		'is-selected': isSelected,
 		'has-placeholder': ! isEmpty( attributes.placeholder ),
 	} );

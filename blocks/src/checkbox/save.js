@@ -10,13 +10,14 @@ import { __ } from '@wordpress/i18n';
  */
 import WithSaveWrapper from '../components/with-save-wrapper';
 
-const Save = ( { attributes } ) => {
+const Save = ( { attributes, clientId } ) => {
 
+	console.log( clientId )
 	return (
 		<WithSaveWrapper attributes={ attributes } disableLabel={true} className="hizzle-forms-field__checkbox">
 			<label>
 				<input type="checkbox" defaultChecked={ attributes.checked } />
-				<RichText.Content tagName="span" value={ label } />
+				<RichText.Content tagName="span" value={ attributes.label } />
 			</label>
 		</WithSaveWrapper>
 	);

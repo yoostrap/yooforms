@@ -65,7 +65,7 @@
     "supports": {
         "anchor": true,
         "spacing": {
-            "margin": true,
+            "margin": false,
             "padding": true
         },
         "color": {
@@ -78,5 +78,7 @@
             "full"
         ]
     },
-    "editorScript": "file:./index.js"
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./frontend.css",
+    "style": "file:./frontend.css"
 }

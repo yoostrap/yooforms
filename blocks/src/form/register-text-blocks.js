@@ -1,128 +1,117 @@
 /**
- * External dependencies
- */
-import classNames from 'classnames';
-
-/**
  * WordPress dependencies.
  */
-import { registerBlockType } from '@wordpress/blocks';
+import { withInstanceId } from '@wordpress/compose';
+import { useEffect } from '@wordpress/element';
+import { createBlock } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
  */
 import WithEditWrapper from '../components/with-edit-wrapper';
 import WithSaveWrapper from '../components/with-save-wrapper';
+import registerHizzleBlockType from '../utils/register-block';
+import inputTypes from '../utils/input-types';
 
-// Creates an edit component for a text input.
-const getEdit = (type, autocomplete) => {
+// Create an array of transforms for all input types.
+const transforms = inputTypes.map( ({type}) => ({
+    type: 'block',
+    blocks: [ `hizzle-forms/${type}` ],
+    transform: attributes => createBlock( `hizzle-forms/${type}`, attributes ),
+}));
 
-    return ( props ) => {
+// Loop through all input types and register a block for each.
+inputTypes.forEach( (metadata) => {
 
-        const classes = classNames(
-            'hizzle-forms__field-input',
-            `hizzle-forms__field-input-${ type }`,
-            props.className
-        );
+    const { type, inputType, autocomplete, icon, ...extra } = metadata;
 
-        return (
-            <WithEditWrapper {...props} className={classes}>
-                <input readOnly type={ type } placeholder={ props.attributes.placeholder } autoComplete={ autocomplete } />
-            </WithEditWrapper>
-        );
-    }
-};
+    registerHizzleBlockType(`hizzle-forms/${type}`, {
 
-// Creates a save component for a text input.
-const getSave = (type, autocomplete) => {
+        // The block icon.
+        icon,
 
-    return ( props ) => {
-
-        const classes = classNames(
-            'hizzle-forms__field-input',
-            `hizzle-forms__field-input-${ type }`,
-            props.className
-        );
-
-        return (
-            <WithSaveWrapper {...props} className={classes}>
-                <input type={ type } placeholder={ props.attributes.placeholder } autoComplete={ autocomplete } />
-            </WithSaveWrapper>
-        );
-    }
-};
-
-/**
- * Default attributes.
- */
-const defaultAttributes = {
-    label: {
-        type: "string",
-        default: "",
-        source: "html",
-        selector: "label",
-    },
-    required: {
-        type: "boolean",
-        default: false,
-    },
-    help: {
-        type: "string",
-        default: "",
-    },
-}
-
-/**
- * Registers a text input block.
- *
- * @param {string} type The type of input.
- */
-const registerTextBlock = (type) => {
-
-    var inputType = type;
-    var autocomplete = 'on';
-    const blockName = `hizzle-forms/${type}`;
-
-    switch (type) {
-        case 'name':
-        case 'first-name':
-        case 'last-name':
-            inputType = 'text';
-            autocomplete = type;
-            break;
-        case 'email':
-            autocomplete = type;
-            break;
-    }
-
-    registerBlockType(blockName, {
+        // Block attributes.
         attributes: {
-            ...defaultAttributes,
-            placeholder: {
+            label: {
+                type: "string",
+                default: ""
+            },
+            required: {
+                type: "boolean",
+                default: false,
+            },
+            help: {
                 type: "string",
                 default: "",
-                source: "attribute",
-                selector: "input",
-                attribute: "placeholder"
             },
+            placeholder: {
+                type: "string",
+                default: ""
+            },
+            instanceID: {
+                type: "string",
+                default: ""
+            }
         },
-        edit: getEdit(inputType, autocomplete),
-        save: getSave(inputType, autocomplete),
-    });
-};
 
-// Register all text input blocks.
-registerTextBlock('name');
-registerTextBlock('first-name');
-registerTextBlock('last-name');
-registerTextBlock('email');
-registerTextBlock('text');
-registerTextBlock('url');
-registerTextBlock('tel');
-registerTextBlock('number');
-registerTextBlock('date');
-registerTextBlock('time');
-registerTextBlock('month');
-registerTextBlock('week');
-registerTextBlock('color');
-registerTextBlock('range');
+        // The edit component.
+        edit: withInstanceId( ( props ) => {
+
+            // Reset instance ID once.
+            useEffect( () => {
+                if ( ! props.attributes.instanceID ) {
+                    props.setAttributes( { instanceID: props.clientId } );
+                }
+            }, [] );
+    
+            const instanceID = props.attributes.instanceID || props.clientId;
+            const placeholder = props.attributes.placeholder || '';
+
+            return (
+                <WithEditWrapper {...props}>
+                    <input type={ inputType } name={`hizzle-forms-${instanceID}`} id={`hizzle-forms-field-${instanceID}`} className="hizzle-forms__field-input form-control" placeholder={ placeholder } autoComplete={ autocomplete } readOnly />
+                </WithEditWrapper>
+            );
+        }),
+
+        // The save component.
+        save ( props ) {
+            const instanceID = props.attributes.instanceID || '';
+            const placeholder = props.attributes.placeholder || '';
+            console.log( props.attributes );
+            return (
+                <WithSaveWrapper {...props}>
+                    <input type={ inputType } name={`hizzle-forms[${instanceID}]`} id={`hizzle-forms-field-${instanceID}`} className="hizzle-forms__field-input form-control" placeholder={ placeholder } autoComplete={ autocomplete } />
+                </WithSaveWrapper>
+            );
+        },
+
+        // Supports.
+        supports: {
+            anchor: true,
+            spacing: {
+                margin: true,
+                padding: true
+            },
+            reusable: false,
+		    html: false,
+        },
+
+        // Transforms.
+        transforms: {
+            to: transforms,
+        },
+
+        // Block metadata.
+        parent: [
+            'hizzle-forms/form'
+        ],
+        version: '1.0.0',
+        textdomain: 'hizzle-forms',
+        category: 'hizzle-forms',
+        keywords: [ 'text', 'input', type, inputType, icon ],
+        "$schema": 'https://schemas.wp.org/trunk/block.json',
+        apiVersion: 2,
+        ...extra
+    });
+} );

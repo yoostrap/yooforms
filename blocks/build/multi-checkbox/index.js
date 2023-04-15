@@ -153,7 +153,6 @@ const FieldLabel = _ref => {
       label: value
     }),
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add label…', 'hizzle-forms'),
-    withoutInteractiveFormatting: true,
     allowedFormats: ['core/bold', 'core/italic']
   }));
 };
@@ -196,10 +195,11 @@ function WithEditWrapper(_ref3) {
     disableHelpText,
     children,
     className,
+    customClass,
     isSelected,
     ...props
   } = _ref3;
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('hizzle-forms-field', className, {
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()('hizzle-forms-field', className, customClass, {
     'is-selected': isSelected,
     'has-placeholder': !(0,lodash__WEBPACK_IMPORTED_MODULE_3__.isEmpty)(attributes.placeholder)
   });
@@ -246,10 +246,12 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @param {Object} attributes The block's attributes.
  * @param {string} attributes.label The label.
+ * @param {string} attributes.instanceID The instance ID.
  */
 const FieldLabel = _ref => {
   let {
-    label
+    label,
+    instanceID
   } = _ref;
   // Abort if no label.
   if (!label) {
@@ -259,6 +261,7 @@ const FieldLabel = _ref => {
     className: "hizzle-forms__field-label"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
     tagName: "label",
+    htmlFor: `hizzle-forms-field-${instanceID}`,
     value: label
   }));
 };
@@ -294,14 +297,16 @@ function WithSaveWrapper(_ref3) {
   let {
     attributes,
     children,
-    className
+    className,
+    customClass
   } = _ref3;
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_1___default()('hizzle-forms-field', className);
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_1___default()('hizzle-forms-field', className, customClass);
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
     className: classes
   });
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldLabel, {
-    label: attributes.label
+    label: attributes.label,
+    instanceID: attributes.instanceID
   }), children, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(HelpText, {
     help: attributes.help
   }));
