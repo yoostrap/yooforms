@@ -23,7 +23,7 @@ const transforms = inputTypes.map( ({type}) => ({
 // Loop through all input types and register a block for each.
 inputTypes.forEach( (metadata) => {
 
-    const { type, inputType, autocomplete, icon, ...extra } = metadata;
+    const { type, inputType, autocomplete, icon, parent, ...extra } = metadata;
 
     registerHizzleBlockType(`hizzle-forms/${type}`, {
 
@@ -100,9 +100,7 @@ inputTypes.forEach( (metadata) => {
         },
 
         // Block metadata.
-        ancestor: [
-            'hizzle-forms/form'
-        ],
+        ancestor: [ 'hizzle-forms/form' ],
         version: '1.0.0',
         textdomain: 'hizzle-forms',
         category: 'hizzle-forms',

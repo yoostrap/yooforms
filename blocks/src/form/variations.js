@@ -29,12 +29,13 @@ const variations = compact( [
 		isDefault: true,
 		title: __( 'Contact Form', 'hizzle-forms' ),
 		description: __( 'Add a contact form to your page.', 'hizzle-forms' ),
+		keywords: [ __( 'contact', 'hizzle-forms' ), __( 'email', 'hizzle-forms' ) ],
 		category: 'hizzle-forms',
 		attributes: defaultAttributes,
 		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/email', { required: true, label: __( 'Email', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/textarea', { label: __( 'Message', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/submit',
@@ -65,7 +66,7 @@ const variations = compact( [
 		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/email', { required: true, label: __( 'Email', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/checkbox', {} ],
 			[
 				'hizzle-forms/submit',
@@ -80,6 +81,7 @@ const variations = compact( [
 		name: 'hizzle-rsvp-form',
 		title: __( 'RSVP Form', 'hizzle-forms' ),
 		description: __( 'Add an RSVP form to your page', 'hizzle-forms' ),
+		keywords: [ __( 'rsvp', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
 		category: 'hizzle-forms',
 		attributes: {
 			...defaultAttributes,
@@ -88,7 +90,7 @@ const variations = compact( [
 		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/email', { required: true, label: __( 'Email', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/radio',
 				{
@@ -114,6 +116,7 @@ const variations = compact( [
 		name: 'hizzle-registration-form',
 		title: __( 'Registration Form', 'hizzle-forms' ),
 		description: __( 'Add a Registration form to your page', 'hizzle-forms' ),
+		keywords: [ __( 'register', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
 		category: 'hizzle-forms',
 		attributes: {
 			...defaultAttributes,
@@ -122,8 +125,8 @@ const variations = compact( [
 		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/email', { required: true, label: __( 'Email', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/tel', { label: __( 'Phone', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/input', { type: 'tel', label: __( 'Phone', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/select',
 				{
@@ -151,6 +154,7 @@ const variations = compact( [
 		name: 'hizzle-appointment-form',
 		title: __( 'Appointment Form', 'hizzle-forms' ),
 		description: __( 'Add an Appointment booking form to your page', 'hizzle-forms' ),
+		keywords: [ __( 'appointment', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
 		category: 'hizzle-forms',
 		attributes: {
 			...defaultAttributes,
@@ -159,9 +163,9 @@ const variations = compact( [
 		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/email', { required: true, label: __( 'Email', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/tel', { required: true, label: __( 'Phone', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/date', { label: __( 'Date', 'hizzle-forms' ), required: true } ],
+			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Phone', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/input', { type: 'tel', label: __( 'Date', 'hizzle-forms' ), required: true } ],
 			[
 				'hizzle-forms/radio',
 				{
@@ -187,6 +191,7 @@ const variations = compact( [
 		name: 'hizzlefeedback-form',
 		title: __( 'Feedback Form', 'hizzle-forms' ),
 		description: __( 'Add a Feedback form to your page', 'hizzle-forms' ),
+		keywords: [ __( 'feedback', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
 		category: 'hizzle-forms',
 		attributes: {
 			...defaultAttributes,
@@ -195,7 +200,7 @@ const variations = compact( [
 		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/email', { required: true, label: __( 'Email', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/radio',
 				{

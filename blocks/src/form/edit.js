@@ -2,22 +2,16 @@ import {
 	InnerBlocks,
 	InspectorControls,
 	URLInput,
-	__experimentalBlockVariationPicker as BlockVariationPicker,
 	useBlockProps
 } from '@wordpress/block-editor';
-import { createBlock, registerBlockVariation } from '@wordpress/blocks';
 import {
 	BaseControl,
 	PanelBody,
 	SelectControl,
 	TextareaControl,
 } from '@wordpress/components';
-import { compose, withInstanceId } from '@wordpress/compose';
-import { withDispatch, withSelect } from '@wordpress/data';
-import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
-import { filter, get, map } from 'lodash';
 import InspectorHint from '../components/inspector-hint';
 import HizzleEmailConnectionSettings from './email-connection-settings';
 
@@ -58,18 +52,11 @@ const ALLOWED_BLOCKS = [
 	'core/video',
 ];
 
-export function HizzleFormEdit( {
+export default function HizzleFormEdit( {
 	attributes,
 	setAttributes,
-	hasInnerBlocks,
-	replaceInnerBlocks,
-	selectBlock,
-	clientId,
 	instanceId,
 	className,
-	blockType,
-	variations,
-	defaultVariation,
 	style,
 } ) {
 	const {
@@ -80,29 +67,7 @@ export function HizzleFormEdit( {
 		title,
 	} = attributes;
 
-	const formClassnames = classnames( className, 'hizzle-forms', {
-		'is-placeholder': ! hasInnerBlocks && registerBlockVariation,
-	} );
-
-	const createBlocksFromInnerBlocksTemplate = innerBlocksTemplate => {
-		const blocks = map( innerBlocksTemplate, ( [ name, attr, innerBlocks = [] ] ) =>
-			createBlock( name, attr, createBlocksFromInnerBlocksTemplate( innerBlocks ) )
-		);
-
-		return blocks;
-	};
-
-	const setVariation = variation => {
-		if ( variation.attributes ) {
-			setAttributes( variation.attributes );
-		}
-
-		if ( variation.innerBlocks ) {
-			replaceInnerBlocks( clientId, createBlocksFromInnerBlocksTemplate( variation.innerBlocks ) );
-		}
-
-		selectBlock( clientId );
-	};
+	const formClassnames = classnames( className, 'hizzle-forms' );
 
 	const renderSubmissionSettings = () => {
 		return (
@@ -146,80 +111,20 @@ export function HizzleFormEdit( {
 		);
 	};
 
-	// Checks whether to show the variation picker or the form.
-	const showVariationPicker = ! hasInnerBlocks && registerBlockVariation;
-
-	// Displays the variation picker.
-	const VariationPicker = () => {
-		return (
-			<div className={ formClassnames }>
-				<BlockVariationPicker
-					icon={ get( blockType, [ 'icon', 'src' ] ) }
-					label={ get( blockType, [ 'title' ] ) }
-					instructions={ __(
-						'Start building a form by selecting one of these form templates, or search in the patterns library for more forms:',
-						'hizzle-forms'
-					) }
-					variations={ variations }
-					onSelect={ ( nextVariation = defaultVariation ) => {
-						setVariation( nextVariation );
-					} }
-				/>
-			</div>
-		);
-	};
-
-	// Displays the form.
-	const Form = () => {
-		return (
-			<>
-				<InspectorControls>
-					<PanelBody title={ __( 'Submission Settings', 'hizzle-forms' ) } initialOpen={ false }>
-						{ renderSubmissionSettings() }
-					</PanelBody>
-					<HizzleEmailConnectionSettings emails={emails} setAttributes={ setAttributes } />
-
-				</InspectorControls>
-
-				<div className={ formClassnames } style={ style }>
-					<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateInsertUpdatesSelection={ false } />
-				</div>
-			</>
-		)
-	};
-
-	// Either displays the variation picker or the form.
+	// Display the form.
 	return (
 		<div {...useBlockProps()}>
-			{ showVariationPicker ? <VariationPicker /> : <Form />}
+			<InspectorControls>
+				<PanelBody title={ __( 'Submission Settings', 'hizzle-forms' ) } initialOpen={ false }>
+					{ renderSubmissionSettings() }
+				</PanelBody>
+				<HizzleEmailConnectionSettings emails={emails} setAttributes={ setAttributes } />
+
+			</InspectorControls>
+
+			<div className={ formClassnames } style={ style }>
+				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateInsertUpdatesSelection={ false } />
+			</div>
 		</div>
 	);
 }
-
-export default compose( [
-	withSelect( ( select, props ) => {
-		const { getBlockType, getBlockVariations, getDefaultBlockVariation } = select( 'core/blocks' );
-		const { getBlocks } = select( 'core/block-editor' );
-		const innerBlocks = getBlocks( props.clientId );
-
-		// Prevent the submit button from being removed.
-		const submitButton = innerBlocks.find( block => block.name === 'hizzle-forms/submit' );
-		if ( submitButton && ! submitButton.attributes.lock ) {
-			const lock = { move: false, remove: true };
-			submitButton.attributes.lock = lock;
-		}
-
-		return {
-			blockType: getBlockType && getBlockType( props.name ),
-			defaultVariation: getDefaultBlockVariation && getDefaultBlockVariation( props.name, 'block' ),
-			variations: getBlockVariations && getBlockVariations( props.name, 'block' ),
-			innerBlocks,
-			hasInnerBlocks: innerBlocks.length > 0,
-		};
-	} ),
-	withDispatch( dispatch => {
-		const { replaceInnerBlocks, selectBlock } = dispatch( 'core/block-editor' );
-		return { replaceInnerBlocks, selectBlock };
-	} ),
-	withInstanceId,
-] )( HizzleFormEdit );

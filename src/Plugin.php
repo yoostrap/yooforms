@@ -68,13 +68,13 @@ class Plugin {
 	public function register_block_categories( $block_categories ) {
 
 		return array_merge(
-			$block_categories,
 			array(
 				array(
 					'slug'  => 'hizzle-forms',
 					'title' => esc_html__( 'Hizzle Forms', 'hizzle-forms' ),
 				),
-			)
+			),
+			$block_categories
 		);
 
 	}
@@ -92,20 +92,7 @@ class Plugin {
 		$path   = plugin_dir_path( HIZZLE_FORMS_PLUGIN_FILE ) . 'blocks/build/';
 		$blocks = array(
 			'form',
-			'name',
-			'first-name',
-			'last-name',
-			'email',
-			'text',
-			'url',
-			'tel',
-			'number',
-			'date',
-			'time',
-			'month',
-			'week',
-			'color',
-			'range',
+			'input',
 			'textarea',
 			'select',
 			'checkbox',
