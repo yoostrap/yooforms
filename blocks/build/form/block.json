@@ -58,9 +58,10 @@
         }
       },
       {
-        "name": "hizzle-forms/email",
+        "name": "hizzle-forms/input",
         "attributes": {
           "required": true,
+          "type": "email",
           "label": "Email"
         }
       },
@@ -93,6 +94,14 @@
   "supports": {
     "anchor": true,
     "spacing": {
+      "blockGap": true,
+      "units": [
+        "px",
+        "em",
+        "rem",
+        "vh",
+        "vw"
+      ],
       "margin": false,
       "padding": true
     },
@@ -107,6 +116,6 @@
     ]
   },
   "editorScript": "file:./index.js",
-  "editorStyle": "file:./frontend.css",
-  "style": "file:./frontend.css"
+  "editorStyle": "frontend",
+  "style": "frontend"
 }

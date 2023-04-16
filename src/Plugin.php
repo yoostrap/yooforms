@@ -97,7 +97,6 @@ class Plugin {
 			'select',
 			'checkbox',
 			'radio',
-			'multi-checkbox',
 		);
 
 		// Register the block by passing the location of block.json to register_block_type.

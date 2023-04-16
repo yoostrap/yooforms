@@ -41,7 +41,7 @@ export default function WithEditWrapper ( {attributes, setAttributes, disableLab
 				<RichText
 					tagName="p"
 					value={ attributes.help }
-					className="hizzle-forms__field-help-text"
+					className="hizzle-forms__help-text"
 					onChange={ value => setAttributes( { help: value } ) }
 					placeholder={ __( 'Add help text…', 'hizzle-forms' ) }
 				/>

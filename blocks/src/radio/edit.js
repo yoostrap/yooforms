@@ -9,25 +9,16 @@ import { InnerBlocks } from '@wordpress/block-editor';
 import WithEditWrapper from '../components/with-edit-wrapper';
 
 const template = [
-	{
-		"name": "hizzle-forms/radio-option",
-		"attributes": { "label": "First Option", "selected": true }
-	},
-	{
-		"name": "hizzle-forms/radio-option",
-		"attributes": { "label": "Second Option" }
-	},
-	{
-		"name": "hizzle-forms/radio-option",
-		"attributes": { "label": "Third Option" }
-	}
-]
+    [ 'hizzle-forms/radio-option', { "label": "First Option", "selected": true } ],
+    [ 'hizzle-forms/radio-option', { "label": "Second Option" } ],
+    [ 'hizzle-forms/radio-option', { "label": "Third Option" } ],
+];
 
 const Edit = ({ attributes, setAttributes }) => {
 
 	return (
-		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} className="hizzle-forms-field__radio">
-			<div className="hizzle-forms__radio-options">
+		<WithEditWrapper attributes={attributes} setAttributes={setAttributes}>
+			<div className="hizzle-forms__radio-options" data-instance-id={ attributes.instanceID }>
 				<InnerBlocks allowedBlocks={['hizzle-forms/radio-option']} template={template} />
 			</div>
 		</WithEditWrapper>

@@ -166,7 +166,7 @@ function WithEditWrapper(_ref) {
   })), children, showHelpText && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
     tagName: "p",
     value: attributes.help,
-    className: "hizzle-forms__field-help-text",
+    className: "hizzle-forms__help-text",
     onChange: value => setAttributes({
       help: value
     }),

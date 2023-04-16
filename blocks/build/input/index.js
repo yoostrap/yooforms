@@ -166,7 +166,7 @@ function WithEditWrapper(_ref) {
   })), children, showHelpText && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
     tagName: "p",
     value: attributes.help,
-    className: "hizzle-forms__field-help-text",
+    className: "hizzle-forms__help-text",
     onChange: value => setAttributes({
       help: value
     }),
@@ -301,7 +301,8 @@ const Edit = _ref => {
   let {
     attributes,
     setAttributes,
-    clientId
+    clientId,
+    isSelected
   } = _ref;
   // Reset instance ID once.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -313,14 +314,20 @@ const Edit = _ref => {
   }, []);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
-    setAttributes: setAttributes
+    setAttributes: setAttributes,
+    isSelected: isSelected
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: attributes.type,
     className: "hizzle-forms__field-input form-control",
     placeholder: attributes.placeholder,
     value: attributes.value ? attributes.value : '',
     pattern: attributes.pattern,
-    "data-instance-id": attributes.instanceID
+    "data-instance-id": attributes.instanceID,
+    onChange: event => {
+      setAttributes({
+        value: event.target.value
+      });
+    }
   }));
 };
 /* harmony default export */ __webpack_exports__["default"] = ((0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_1__.withInstanceId)(Edit));
@@ -583,9 +590,6 @@ variations.forEach(variation => {
       value: ''
     }
   };
-
-  // Scope.
-  variation.scope = ['block', 'inserter', 'transform'];
 
   // Add `isActive` function if not defined.
   if (!variation.isActive) {

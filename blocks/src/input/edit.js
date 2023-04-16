@@ -9,7 +9,7 @@ import { useEffect } from '@wordpress/element';
  */
 import WithEditWrapper from '../components/with-edit-wrapper';
 
-const Edit = ({ attributes, setAttributes, clientId }) => {
+const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 
 	// Reset instance ID once.
 	useEffect( () => {
@@ -19,7 +19,7 @@ const Edit = ({ attributes, setAttributes, clientId }) => {
 	}, [] );
 
 	return (
-		<WithEditWrapper attributes={attributes} setAttributes={setAttributes}>
+		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}>
 			<input
 				type={ attributes.type }
 				className="hizzle-forms__field-input form-control"
@@ -27,6 +27,7 @@ const Edit = ({ attributes, setAttributes, clientId }) => {
 				value={ attributes.value ? attributes.value : '' }
 				pattern={ attributes.pattern }
 				data-instance-id={ attributes.instanceID }
+				onChange={ ( event ) => { setAttributes( { value: event.target.value } ) } }
 			/>
 		</WithEditWrapper>
 	);

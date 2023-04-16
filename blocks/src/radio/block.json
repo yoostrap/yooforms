@@ -8,7 +8,8 @@
   "keywords": [
     "form",
     "contact",
-    "radio"
+    "radio",
+    "multi-checkbox"
   ],
   "icon": "editor-justify",
   "parent": [
@@ -21,22 +22,30 @@
       "type": "string",
       "default": ""
     },
-    "required": {
-      "type": "boolean",
-      "default": false
-    },
     "help": {
       "type": "string",
       "default": "",
       "source": "html",
-      "selector": ".form-text"
+      "selector": ".hizzle-forms__help-text"
+    },
+    "instanceID": {
+      "type": "string",
+      "default": "",
+      "source": "attribute",
+      "selector": ".hizzle-forms__radio-options",
+      "attribute": "data-instance-id"
+    },
+    "isRadio": {
+      "type": "boolean",
+      "default": true
     }
   },
   "example": {
     "attributes": {
       "label": "Radio field",
       "required": true,
-      "help": "This is a radio field."
+      "help": "This is a radio field.",
+      "isRadio": true
     },
 		"innerBlocks": [
 			{

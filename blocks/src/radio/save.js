@@ -10,9 +10,11 @@ import WithSaveWrapper from '../components/with-save-wrapper';
 
 const Save = ( { attributes } ) => {
 
+	const instanceID = attributes.instanceID || '';
+
 	return (
-		<WithSaveWrapper attributes={ attributes } className="hizzle-forms-field__radio">
-			<div className="hizzle-forms__radio-options">
+		<WithSaveWrapper attributes={ attributes }>
+			<div className="hizzle-forms__radio-options" id={`hizzle-forms-field-${instanceID}`} data-instance-id={ instanceID }>
 				<InnerBlocks.Content />
 			</div>
 		</WithSaveWrapper>

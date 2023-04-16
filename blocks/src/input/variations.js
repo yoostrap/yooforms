@@ -189,9 +189,6 @@ variations.forEach( ( variation ) => {
 		}
 	};
 
-	// Scope.
-	variation.scope = [ 'block', 'inserter', 'transform' ];
-
 	// Add `isActive` function if not defined.
 	if ( ! variation.isActive ) {
 		variation.isActive = ( blockAttributes, variationAttributes ) => blockAttributes.type === variationAttributes.type;
