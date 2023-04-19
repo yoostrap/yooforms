@@ -1,6 +1,280 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./blocks/src/address/edit.js":
+/*!************************************!*\
+  !*** ./blocks/src/address/edit.js ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/with-edit-wrapper */ "./blocks/src/components/with-edit-wrapper.js");
+
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+const Edit = _ref => {
+  let {
+    attributes,
+    setAttributes,
+    clientId,
+    isSelected
+  } = _ref;
+  // Reset instance ID once.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (!attributes.instanceID) {
+      setAttributes({
+        instanceID: clientId
+      });
+    }
+  }, []);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    isSelected: isSelected
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    className: "hizzle-forms__field-input form-control",
+    placeholder: attributes.placeholder,
+    value: attributes.value ? attributes.value : '',
+    autoComplete: attributes.autocomplete,
+    "data-instance-id": attributes.instanceID,
+    onChange: event => {
+      setAttributes({
+        value: event.target.value
+      });
+    }
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (Edit);
+
+/***/ }),
+
+/***/ "./blocks/src/address/save.js":
+/*!************************************!*\
+  !*** ./blocks/src/address/save.js ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/with-save-wrapper */ "./blocks/src/components/with-save-wrapper.js");
+
+/**
+ * Internal dependencies
+ */
+
+const Save = _ref => {
+  let {
+    attributes
+  } = _ref;
+  const instanceID = attributes.instanceID || '';
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    attributes: attributes
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    name: `hizzle-forms[${instanceID}]`,
+    id: `hizzle-forms-field-${instanceID}`,
+    className: "hizzle-forms__field-input form-control",
+    placeholder: attributes.placeholder,
+    value: attributes.value ? attributes.value : '',
+    required: attributes.required,
+    autoComplete: attributes.autocomplete,
+    "data-instance-id": instanceID
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (Save);
+
+/***/ }),
+
+/***/ "./blocks/src/address/variations.js":
+/*!******************************************!*\
+  !*** ./blocks/src/address/variations.js ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+const PRIMARY_COLOR = '#AA00FF';
+
+/** @typedef {import('@wordpress/blocks').WPBlockVariation} WPBlockVariation */
+
+/**
+ * The available input variations.
+ *
+ * @type {WPBlockVariation[]}
+ */
+const variations = [{
+  name: 'hizzle-name',
+  isDefault: true,
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Full Name', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the full name.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('full name', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'name'
+  },
+  icon: {
+    src: 'nametag',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-given-name',
+  isDefault: true,
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('First Name', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the first name.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('first name', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'given-name'
+  },
+  icon: {
+    src: 'id',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-family-name',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Last Name', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the last name.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('last name', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'family-name'
+  },
+  icon: {
+    src: 'buddicons-groups',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-line1',
+  isDefault: true,
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Address Line 1', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the first line of the address.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'address-line1'
+  },
+  icon: {
+    src: 'admin-home',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-line2',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Address Line 2', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the second line of the address.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'address-line2'
+  },
+  icon: {
+    src: 'building',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-city',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('City', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the city.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('city', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'address-level2'
+  },
+  icon: {
+    src: 'location',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-state',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('State', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the state.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('state', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'address-level1'
+  },
+  icon: {
+    src: 'location-alt',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-zip',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zip Code', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the zip code.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('zip', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('postal code', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'postal-code'
+  },
+  icon: {
+    src: 'admin-multisite',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-country',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Country', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the country.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('country', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'country'
+  },
+  icon: {
+    src: 'admin-site-alt',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-organization',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Company / Organization', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the company or organization.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('organization', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('company', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
+  category: 'hizzle-forms',
+  attributes: {
+    autocomplete: 'organization'
+  },
+  icon: {
+    src: 'groups',
+    foreground: PRIMARY_COLOR
+  }
+}];
+variations.forEach(variation => {
+  variation.attributes.label = variation.title;
+
+  // Example.
+  variation.example = {
+    attributes: {
+      label: variation.title,
+      placeholder: variation.title,
+      required: true,
+      help: variation.description,
+      autocomplete: variation.attributes.autocomplete
+    }
+  };
+
+  // Add `isActive` function if not defined.
+  if (!variation.isActive) {
+    variation.isActive = (blockAttributes, variationAttributes) => blockAttributes.autocomplete === variationAttributes.autocomplete;
+  }
+});
+/* harmony default export */ __webpack_exports__["default"] = (variations);
+
+/***/ }),
+
 /***/ "./blocks/src/components/field-controls.js":
 /*!*************************************************!*\
   !*** ./blocks/src/components/field-controls.js ***!
@@ -273,211 +547,6 @@ function WithSaveWrapper(_ref3) {
 
 /***/ }),
 
-/***/ "./blocks/src/multi-checkbox/checkbox-option.js":
-/*!******************************************************!*\
-  !*** ./blocks/src/multi-checkbox/checkbox-option.js ***!
-  \******************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
-
-/**
- * WordPress dependencies.
- */
-
-
-
-
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('hizzle-forms/checkbox-option', {
-  apiVersion: 2,
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Checkbox Option', 'hizzle-forms'),
-  icon: 'editor-ul',
-  category: 'hizzle-forms',
-  ancestor: ['hizzle-forms/checkbox'],
-  attributes: {
-    label: {
-      type: 'string',
-      source: 'html',
-      selector: 'label'
-    },
-    selected: {
-      type: 'boolean',
-      default: false
-    }
-  },
-  supports: {
-    anchor: true,
-    spacing: {
-      margin: true,
-      padding: true
-    }
-  },
-  edit: _ref => {
-    let {
-      attributes,
-      setAttributes
-    } = _ref;
-    const {
-      label,
-      selected
-    } = attributes;
-    const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
-      className: 'hizzle-forms__checkbox-option'
-    });
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
-      icon: "yes",
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Checked', 'hizzle-forms'),
-      isActive: selected,
-      onClick: () => setAttributes({
-        selected: !selected
-      })
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-      type: "checkbox",
-      checked: selected,
-      onChange: e => setAttributes({
-        selected: e.target.checked
-      })
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
-      tagName: "span",
-      value: label,
-      onChange: value => setAttributes({
-        label: value
-      }),
-      placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Option label', 'hizzle-forms')
-    })));
-  },
-  save: _ref2 => {
-    let {
-      attributes
-    } = _ref2;
-    const {
-      label,
-      selected
-    } = attributes;
-    const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
-      className: 'hizzle-forms__checkbox-option'
-    });
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-      type: "checkbox",
-      defaultChecked: selected
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
-      tagName: "span",
-      value: label
-    }));
-  }
-});
-
-/***/ }),
-
-/***/ "./blocks/src/multi-checkbox/edit.js":
-/*!*******************************************!*\
-  !*** ./blocks/src/multi-checkbox/edit.js ***!
-  \*******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/with-edit-wrapper */ "./blocks/src/components/with-edit-wrapper.js");
-
-/**
- * WordPress dependencies
- */
-
-
-/**
- * Internal dependencies
- */
-
-const template = [{
-  "name": "hizzle-forms/checkbox-option",
-  "attributes": {
-    "label": "First Option",
-    "selected": true
-  }
-}, {
-  "name": "hizzle-forms/checkbox-option",
-  "attributes": {
-    "label": "Second Option"
-  }
-}, {
-  "name": "hizzle-forms/checkbox-option",
-  "attributes": {
-    "label": "Third Option"
-  }
-}];
-const Edit = _ref => {
-  let {
-    attributes,
-    setAttributes
-  } = _ref;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    attributes: attributes,
-    setAttributes: setAttributes,
-    className: "hizzle-forms-field__multi-checkbox"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "hizzle-forms__checkbox-options"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
-    allowedBlocks: ['hizzle-forms/checkbox-option'],
-    template: template
-  })));
-};
-/* harmony default export */ __webpack_exports__["default"] = (Edit);
-
-/***/ }),
-
-/***/ "./blocks/src/multi-checkbox/save.js":
-/*!*******************************************!*\
-  !*** ./blocks/src/multi-checkbox/save.js ***!
-  \*******************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/with-save-wrapper */ "./blocks/src/components/with-save-wrapper.js");
-
-/**
- * WordPress dependencies
- */
-
-
-/**
- * Internal dependencies
- */
-
-const Save = _ref => {
-  let {
-    attributes
-  } = _ref;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    attributes: attributes,
-    className: "hizzle-forms-field__multi-checkbox"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "hizzle-forms__checkbox-options"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null)));
-};
-/* harmony default export */ __webpack_exports__["default"] = (Save);
-
-/***/ }),
-
 /***/ "./node_modules/classnames/index.js":
 /*!******************************************!*\
   !*** ./node_modules/classnames/index.js ***!
@@ -641,14 +710,14 @@ function _extends() {
 
 /***/ }),
 
-/***/ "./blocks/src/multi-checkbox/block.json":
-/*!**********************************************!*\
-  !*** ./blocks/src/multi-checkbox/block.json ***!
-  \**********************************************/
+/***/ "./blocks/src/address/block.json":
+/*!***************************************!*\
+  !*** ./blocks/src/address/block.json ***!
+  \***************************************/
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/multi-checkbox","title":"Multi-checkbox field","description":"A multi-checkbox field.","category":"hizzle-forms","keywords":["form","contact","checkbox"],"icon":"feedback","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":""},"required":{"type":"boolean","default":false},"help":{"type":"string","default":"","source":"html","selector":".form-text"}},"example":{"attributes":{"label":"Multi-checkbox field","required":true,"help":"This is a multi-checkbox field."},"innerBlocks":[{"name":"hizzle-forms/checkbox-option","attributes":{"label":"First Option","selected":true}},{"name":"hizzle-forms/checkbox-option","attributes":{"label":"Second Option"}},{"name":"hizzle-forms/checkbox-option","attributes":{"label":"Third Option"}}]},"supports":{"anchor":true,"spacing":{"margin":true,"padding":true}},"editorScript":"file:./index.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/address","title":"Address field","description":"An address text input field for forms.","category":"hizzle-forms","keywords":["form","contact","input","address"],"icon":"location-alt","ancestor":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":"","source":"html","selector":"label"},"placeholder":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"placeholder"},"required":{"type":"boolean","default":false,"source":"attribute","selector":"input","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__help-text"},"instanceID":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"data-instance-id"},"autocomplete":{"type":"string","default":"text","source":"attribute","selector":"input","attribute":"autocomplete"},"value":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"value"}},"example":{"attributes":{"label":"Address","placeholder":"Enter your address","required":true,"help":"We\'ll never share your address with anyone else.","autocomplete":"address-line1"}},"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
 
 /***/ })
 
@@ -724,16 +793,16 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 !function() {
 "use strict";
-/*!********************************************!*\
-  !*** ./blocks/src/multi-checkbox/index.js ***!
-  \********************************************/
+/*!*************************************!*\
+  !*** ./blocks/src/address/index.js ***!
+  \*************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./blocks/src/multi-checkbox/block.json");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./blocks/src/multi-checkbox/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./blocks/src/multi-checkbox/save.js");
-/* harmony import */ var _checkbox_option__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./checkbox-option */ "./blocks/src/multi-checkbox/checkbox-option.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./blocks/src/address/block.json");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./blocks/src/address/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./blocks/src/address/save.js");
+/* harmony import */ var _variations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./variations */ "./blocks/src/address/variations.js");
 /**
  * WordPress dependencies.
  */
@@ -746,8 +815,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// Register the checkbox option block.
-
 
 // Register the checkbox block.
 const {
@@ -755,7 +822,8 @@ const {
 } = _block_json__WEBPACK_IMPORTED_MODULE_1__;
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, {
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"],
+  variations: _variations__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 }();
 /******/ })()

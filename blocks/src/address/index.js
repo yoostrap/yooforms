@@ -11,13 +11,11 @@ import edit from './edit';
 import save from './save';
 import variations from './variations';
 
-// Register the submit button block.
-import './submit-button';
-
+// Register the checkbox block.
 const { name } = json;
 
 registerBlockType( name, {
 	edit,
 	save,
-    variations,
+	variations,
 } );

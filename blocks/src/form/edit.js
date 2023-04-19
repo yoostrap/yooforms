@@ -17,9 +17,7 @@ import HizzleEmailConnectionSettings from './email-connection-settings';
 
 // Allowed child blocks for the form.
 const ALLOWED_BLOCKS = [
-	'hizzle-forms/name',
-    'hizzle-forms/first-name',
-    'hizzle-forms/last-name',
+	'hizzle-forms/address',
     'hizzle-forms/input',
 	'hizzle-forms/textarea',
 	'hizzle-forms/checkbox',

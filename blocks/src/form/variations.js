@@ -34,7 +34,7 @@ const variations = compact( [
 		attributes: defaultAttributes,
 		icon: Logo,
 		innerBlocks: [
-			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/textarea', { label: __( 'Message', 'hizzle-forms' ) } ],
 			[
@@ -65,7 +65,7 @@ const variations = compact( [
 		},
 		icon: Logo,
 		innerBlocks: [
-			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/checkbox', {} ],
 			[
@@ -89,7 +89,7 @@ const variations = compact( [
 		},
 		icon: Logo,
 		innerBlocks: [
-			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/radio',
@@ -124,7 +124,7 @@ const variations = compact( [
 		},
 		icon: Logo,
 		innerBlocks: [
-			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/input', { type: 'tel', label: __( 'Phone', 'hizzle-forms' ) } ],
 			[
@@ -162,7 +162,7 @@ const variations = compact( [
 		},
 		icon: Logo,
 		innerBlocks: [
-			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Phone', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/input', { type: 'tel', label: __( 'Date', 'hizzle-forms' ), required: true } ],
@@ -199,7 +199,7 @@ const variations = compact( [
 		},
 		icon: Logo,
 		innerBlocks: [
-			[ 'hizzle-forms/name', { required: true, label: __( 'Name', 'hizzle-forms' ) } ],
+			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/radio',
