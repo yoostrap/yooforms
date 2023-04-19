@@ -22,17 +22,15 @@ export default function WithEditWrapper ( {attributes, setAttributes, disableLab
 		<div { ...useBlockProps( { className: classnames( 'hizzle-forms-field', className ) }) }>
 
 			{ showLabel && (
-				<div className="hizzle-forms__field-label">
-					<RichText
-						tagName="label"
-						value={ attributes.label }
-						className="hizzle-forms-field-label__input"
-						onChange={ value => {
-							setAttributes( { label: value } );
-						} }
-						placeholder={ __( 'Add label…', 'hizzle-forms' ) }
-					/>
-				</div>
+				<RichText
+					tagName="label"
+					value={ attributes.label }
+					className="hizzle-forms__field-label"
+					onChange={ value => {
+						setAttributes( { label: value } );
+					} }
+					placeholder={ __( 'Add label…', 'hizzle-forms' ) }
+				/>
 			) }
 
 			{ children }
@@ -41,7 +39,7 @@ export default function WithEditWrapper ( {attributes, setAttributes, disableLab
 				<RichText
 					tagName="p"
 					value={ attributes.help }
-					className="hizzle-forms__help-text"
+					className="hizzle-forms__field-help-text"
 					onChange={ value => setAttributes( { help: value } ) }
 					placeholder={ __( 'Add help text…', 'hizzle-forms' ) }
 				/>

@@ -151,22 +151,20 @@ function WithEditWrapper(_ref) {
   const showLabel = !disableLabel && (isSelected || !(0,lodash__WEBPACK_IMPORTED_MODULE_3__.isEmpty)(attributes.label));
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)({
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('hizzle-forms-field', className)
-  }), showLabel && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-    className: "hizzle-forms__field-label"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
+  }), showLabel && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
     tagName: "label",
     value: attributes.label,
-    className: "hizzle-forms-field-label__input",
+    className: "hizzle-forms__field-label",
     onChange: value => {
       setAttributes({
         label: value
       });
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Add label…', 'hizzle-forms')
-  })), children, showHelpText && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
+  }), children, showHelpText && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.RichText, {
     tagName: "p",
     value: attributes.help,
-    className: "hizzle-forms__help-text",
+    className: "hizzle-forms__field-help-text",
     onChange: value => setAttributes({
       help: value
     }),
@@ -216,13 +214,12 @@ const FieldLabel = _ref => {
   if (!label) {
     return null;
   }
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "hizzle-forms__field-label"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
     tagName: "label",
+    className: "hizzle-forms__field-label",
     htmlFor: `hizzle-forms-field-${instanceID}`,
     value: label
-  }));
+  });
 };
 
 /**
@@ -239,12 +236,11 @@ const HelpText = _ref2 => {
   if (!help) {
     return null;
   }
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "hizzle-forms__field-help-text"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
     tagName: "p",
+    className: "hizzle-forms__field-help-text",
     value: help
-  }));
+  });
 };
 
 /**
@@ -340,10 +336,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils_use_parent_attributes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/use-parent-attributes */ "./blocks/src/utils/use-parent-attributes.js");
 
 /**
  * WordPress dependencies.
@@ -354,30 +349,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const addParentAtts = component => {
-  return (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.withSelect)((select, _ref) => {
-    let {
-      clientId
-    } = _ref;
-    const {
-      getBlockParentsByBlockName,
-      getBlockAttributes
-    } = select('core/block-editor');
-    console.log(getBlockAttributes(getBlockParentsByBlockName(clientId, 'hizzle-forms/radio')[0]));
-    // Get parent block client ID.
-    const {
-      instanceID,
-      isRadio
-    } = getBlockAttributes(getBlockParentsByBlockName(clientId, 'hizzle-forms/radio')[0]);
-    return {
-      parentInstanceID: instanceID,
-      isRadio: isRadio
-    };
-  })(component);
-};
+/**
+ * Internal dependencies
+ */
+
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('hizzle-forms/radio-option', {
   apiVersion: 2,
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Radio Option', 'hizzle-forms'),
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Radio Option', 'hizzle-forms'),
   icon: 'editor-ul',
   category: 'hizzle-forms',
   ancestor: ['hizzle-forms/radio'],
@@ -406,17 +384,20 @@ const addParentAtts = component => {
       padding: true
     }
   },
-  edit: addParentAtts(_ref2 => {
+  edit: _ref => {
     let {
-      parentInstanceID,
-      isRadio,
+      clientId,
       attributes,
       setAttributes
-    } = _ref2;
+    } = _ref;
     const {
       label,
       selected
     } = attributes;
+    const {
+      isRadio,
+      instanceID
+    } = (0,_utils_use_parent_attributes__WEBPACK_IMPORTED_MODULE_5__.useParentAttributes)(clientId);
     const type = isRadio ? 'radio' : 'checkbox';
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
       className: `hizzle-forms__${type}-option`
@@ -433,15 +414,22 @@ const addParentAtts = component => {
 
     // Ensure parentInstanceID is same as parent.
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-      if (parentInstanceID !== attributes.parentInstanceID) {
+      if (instanceID !== attributes.parentInstanceID) {
         setAttributes({
-          parentInstanceID: parentInstanceID
+          parentInstanceID: instanceID
         });
       }
-    }, [parentInstanceID]);
+    }, [instanceID]);
+
+    // Handle split.
+    const handleSplit = label => createBlock('hizzle-forms/radio-option', {
+      ...attributes,
+      label: '',
+      selected: false
+    });
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
       icon: "yes",
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Selected', 'hizzle-forms'),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Selected', 'hizzle-forms'),
       isActive: selected,
       onClick: () => setAttributes({
         selected: !selected
@@ -456,13 +444,17 @@ const addParentAtts = component => {
       onChange: value => setAttributes({
         label: value
       }),
-      placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Enter option label...', 'hizzle-forms')
+      placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add option…', 'hizzle-forms'),
+      allowedFormats: [],
+      onSplit: handleSplit,
+      preserveWhiteSpace: false,
+      withoutInteractiveFormatting: true
     })));
-  }),
-  save: _ref3 => {
+  },
+  save: _ref2 => {
     let {
       attributes
-    } = _ref3;
+    } = _ref2;
     const {
       label,
       selected
@@ -609,6 +601,30 @@ variations.forEach(variation => {
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (variations);
+
+/***/ }),
+
+/***/ "./blocks/src/utils/use-parent-attributes.js":
+/*!***************************************************!*\
+  !*** ./blocks/src/utils/use-parent-attributes.js ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useParentAttributes": function() { return /* binding */ useParentAttributes; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const useParentAttributes = clientId => (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(select => {
+  const blockEditor = select('core/block-editor');
+  return blockEditor.getBlockAttributes((0,lodash__WEBPACK_IMPORTED_MODULE_1__.first)(blockEditor.getBlockParents(clientId, true)));
+});
 
 /***/ }),
 

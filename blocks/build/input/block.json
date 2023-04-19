@@ -21,7 +21,7 @@
       "type": "string",
       "default": "",
       "source": "html",
-      "selector": "label"
+      "selector": ".hizzle-forms__field-label"
     },
     "placeholder": {
       "type": "string",
@@ -41,7 +41,7 @@
       "type": "string",
       "default": "",
       "source": "html",
-      "selector": ".hizzle-forms__help-text"
+      "selector": ".hizzle-forms__field-help-text"
     },
     "instanceID": {
       "type": "string",

@@ -4,25 +4,13 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, useBlockProps, BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { withSelect } from "@wordpress/data";
 import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 
-const addParentAtts = ( component ) => {
-	return withSelect( ( select, { clientId } ) => {
-
-		const { getBlockParentsByBlockName, getBlockAttributes } = select( 'core/block-editor' );
-
-		console.log(getBlockAttributes( getBlockParentsByBlockName( clientId, 'hizzle-forms/radio' )[0] ));
-		// Get parent block client ID.
-		const { instanceID, isRadio } = getBlockAttributes( getBlockParentsByBlockName( clientId, 'hizzle-forms/radio' )[0] );
-
-		return {
-			parentInstanceID: instanceID,
-			isRadio: isRadio,
-		};
-	})( component );
-};
+/**
+ * Internal dependencies
+ */
+import {useParentAttributes} from '../utils/use-parent-attributes';
 
 registerBlockType( 'hizzle-forms/radio-option', {
 	apiVersion: 2,
@@ -55,8 +43,9 @@ registerBlockType( 'hizzle-forms/radio-option', {
 			padding: true
 		}
 	},
-	edit: addParentAtts( ( { parentInstanceID, isRadio, attributes, setAttributes } ) => {
+	edit: ( { clientId, attributes, setAttributes } ) => {
 		const { label, selected } = attributes;
+		const { isRadio, instanceID } = useParentAttributes( clientId );
 		const type = isRadio ? 'radio' : 'checkbox';
 		const blockProps = useBlockProps( { className: `hizzle-forms__${type}-option` } );
 
@@ -69,10 +58,18 @@ registerBlockType( 'hizzle-forms/radio-option', {
 
 		// Ensure parentInstanceID is same as parent.
 		useEffect( () => {
-			if ( parentInstanceID !== attributes.parentInstanceID ) {
-				setAttributes( { parentInstanceID: parentInstanceID } );
+			if ( instanceID !== attributes.parentInstanceID ) {
+				setAttributes( { parentInstanceID: instanceID } );
 			}
-		}, [ parentInstanceID ] );
+		}, [ instanceID ] );
+
+		// Handle split.
+		const handleSplit = label =>
+			createBlock( 'hizzle-forms/radio-option', {
+				...attributes,
+				label: '',
+				selected: false,
+			} );
 
 		return (
 			<>
@@ -93,12 +90,16 @@ registerBlockType( 'hizzle-forms/radio-option', {
 						tagName="span"
 						value={ label }
 						onChange={ ( value ) => setAttributes( { label: value } ) }
-						placeholder={ __( 'Enter option label...', 'hizzle-forms' ) }
+						placeholder={ __( 'Add option…', 'hizzle-forms' ) }
+						allowedFormats={ [] }
+						onSplit={ handleSplit }
+						preserveWhiteSpace={ false }
+						withoutInteractiveFormatting
 					/>
 				</label>
 			</>
 		);
-	}),
+	},
 	save: ( { attributes } ) => {
 		const { label, selected } = attributes;
 		const type = attributes.isRadio ? 'radio' : 'checkbox';

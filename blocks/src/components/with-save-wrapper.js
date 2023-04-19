@@ -15,11 +15,7 @@ const FieldLabel = ( { label, instanceID } ) => {
 		return null;
 	}
 
-	return (
-		<div className="hizzle-forms__field-label">
-			<RichText.Content tagName="label" htmlFor={`hizzle-forms-field-${instanceID}`} value={ label } />
-		</div>
-	)
+	return <RichText.Content tagName="label" className="hizzle-forms__field-label" htmlFor={`hizzle-forms-field-${instanceID}`} value={ label } />
 }
 
 /**
@@ -35,11 +31,7 @@ const HelpText = ( { help } ) => {
 		return null;
 	}
 
-	return (
-		<div className="hizzle-forms__field-help-text">
-			<RichText.Content tagName="p" value={ help } />
-		</div>
-	)
+	return <RichText.Content tagName="p" className="hizzle-forms__field-help-text" value={ help } />;
 }
 
 /**

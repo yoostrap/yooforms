@@ -24,11 +24,9 @@ const ALLOWED_BLOCKS = [
 	'hizzle-forms/radio',
 	'hizzle-forms/select',
 	'hizzle-forms/multi-checkbox',
-	'core/audio',
 	'core/columns',
 	'core/group',
 	'core/heading',
-	'core/image',
 	'core/list',
 	'core/paragraph',
 	'core/row',
@@ -36,7 +34,6 @@ const ALLOWED_BLOCKS = [
 	'core/spacer',
 	'core/stack',
 	'core/subhead',
-	'core/video',
 ];
 
 export default function HizzleFormEdit( {

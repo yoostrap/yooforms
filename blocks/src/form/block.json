@@ -48,11 +48,16 @@
             "default": "Contact Form"
         }
     },
+    "styles": [
+        { "name": "hizzle-default", "label": "Default", "isDefault": true },
+        { "name": "hizzle-full", "label": "Full" },
+        { "name": "hizzle-wide", "label": "Wide" }
+    ],
     "example": {
 		"innerBlocks": [
 			{
-				"name": "hizzle-forms/name",
-				"attributes": { "required": true, "label": "Name" }
+				"name": "hizzle-forms/address",
+				"attributes": { "required": true, "label": "Name", "autocomplete": "name" }
 			},
 			{
 				"name": "hizzle-forms/input",
@@ -84,13 +89,9 @@
             "link": true,
             "gradients": true
         },
-        "html": false,
-        "align": [
-            "wide",
-            "full"
-        ]
+        "html": false
     },
     "editorScript": "file:./index.js",
-    "editorStyle": "frontend",
-    "style": "frontend"
+    "editorStyle": "hizzle-forms-blocks",
+    "style": "hizzle-forms-blocks"
 }
