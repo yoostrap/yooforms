@@ -100,13 +100,13 @@ class Plugin {
 
 		$path   = plugin_dir_path( HIZZLE_FORMS_PLUGIN_FILE ) . 'blocks/build/';
 		$blocks = array(
-			'form',
 			'address',
 			'input',
 			'textarea',
 			'select',
 			'checkbox',
 			'radio',
+			'form',
 		);
 
 		// Register the block by passing the location of block.json to register_block_type.

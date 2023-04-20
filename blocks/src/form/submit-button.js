@@ -10,7 +10,7 @@ registerBlockType( 'hizzle-forms/submit', {
 	title: __( 'Submit Button', 'hizzle-forms' ),
 	icon: 'button',
 	category: 'hizzle-forms',
-	ancestor: [ 'hizzle-forms/form' ],
+	"parent": [ "hizzle-forms/form" ],
 	attributes: {
 		text: {
 			type: 'string',

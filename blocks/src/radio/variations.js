@@ -50,15 +50,15 @@ variations.forEach( ( variation ) => {
 		innerBlocks: [
 			{
 				name: 'hizzle-forms/radio-option',
-				attributes: { label: 'First Option', selected: true }
+				attributes: { option: 'First Option', selected: true }
 			},
 			{
 				name: 'hizzle-forms/radio-option',
-				attributes: { label: 'Second Option', selected: true }
+				attributes: { option: 'Second Option', selected: true }
 			},
 			{
 				name: 'hizzle-forms/radio-option',
-				attributes: { label: 'Third Option', selected: true }
+				attributes: { option: 'Third Option', selected: true }
 			},
 		]
 	}

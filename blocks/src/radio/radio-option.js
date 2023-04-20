@@ -1,28 +1,29 @@
 /**
  * WordPress dependencies.
  */
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 import { RichText, useBlockProps, BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
+import { noop } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import {useParentAttributes} from '../utils/use-parent-attributes';
+import labelToName from '../utils/label-to-name';
 
 registerBlockType( 'hizzle-forms/radio-option', {
 	apiVersion: 2,
 	title: __( 'Radio Option', 'hizzle-forms' ),
 	icon: 'editor-ul',
 	category: 'hizzle-forms',
-	ancestor: [ 'hizzle-forms/radio' ],
+	parent: [ 'hizzle-forms/radio' ],
 	attributes: {
-		label: {
+		option: {
 			type: 'string',
-			source: 'html',
-			selector: 'label',
+			default: '',
 		},
 		selected: {
 			type: 'boolean',
@@ -32,8 +33,9 @@ registerBlockType( 'hizzle-forms/radio-option', {
 			type: 'boolean',
 			default: true,
 		},
-		parentInstanceID: {
+		name: {
 			type: 'string',
+			default: '',
 		},
 	},
 	supports: {
@@ -44,10 +46,17 @@ registerBlockType( 'hizzle-forms/radio-option', {
 		}
 	},
 	edit: ( { clientId, attributes, setAttributes } ) => {
-		const { label, selected } = attributes;
-		const { isRadio, instanceID } = useParentAttributes( clientId );
+		const { label, isRadio, instanceID } = useParentAttributes( clientId );
 		const type = isRadio ? 'radio' : 'checkbox';
 		const blockProps = useBlockProps( { className: `hizzle-forms__${type}-option` } );
+		const expectedName = labelToName( label, instanceID );
+
+		// Ensure name is same as parent.
+		useEffect( () => {
+			if ( expectedName !== attributes.name ) {
+				setAttributes( { name: expectedName } );
+			}
+		}, [ expectedName ] );
 
 		// Ensure isRadio is same as parent.
 		useEffect( () => {
@@ -56,18 +65,11 @@ registerBlockType( 'hizzle-forms/radio-option', {
 			}
 		}, [ isRadio ] );
 
-		// Ensure parentInstanceID is same as parent.
-		useEffect( () => {
-			if ( instanceID !== attributes.parentInstanceID ) {
-				setAttributes( { parentInstanceID: instanceID } );
-			}
-		}, [ instanceID ] );
-
 		// Handle split.
-		const handleSplit = label =>
+		const handleSplit = option =>
 			createBlock( 'hizzle-forms/radio-option', {
 				...attributes,
-				label: '',
+				option,
 				selected: false,
 			} );
 
@@ -78,42 +80,41 @@ registerBlockType( 'hizzle-forms/radio-option', {
 						<ToolbarButton
 							icon="yes"
 							title={ __( 'Selected', 'hizzle-forms' ) }
-							isActive={ selected }
-							onClick={ () => setAttributes( { selected: ! selected } ) }
+							isActive={ attributes.selected }
+							onClick={ () => setAttributes( { selected: ! attributes.selected } ) }
 						/>
 					</ToolbarGroup>
 				</BlockControls>
 
-				<label { ...blockProps }>
-					<input type={ type } checked={ selected } readOnly />
+				<div { ...blockProps }>
+					<input type={ type } checked={ attributes.selected } readOnly />
 					<RichText
-						tagName="span"
-						value={ label }
-						onChange={ ( value ) => setAttributes( { label: value } ) }
+						tagName="label"
+						value={ attributes.option }
+						onChange={ ( value ) => setAttributes( { option: value } ) }
 						placeholder={ __( 'Add option…', 'hizzle-forms' ) }
-						allowedFormats={ [] }
 						onSplit={ handleSplit }
+						onReplace={noop}
 						preserveWhiteSpace={ false }
-						withoutInteractiveFormatting
 					/>
-				</label>
+				</div>
 			</>
 		);
 	},
 	save: ( { attributes } ) => {
-		const { label, selected } = attributes;
-		const type = attributes.isRadio ? 'radio' : 'checkbox';
-		const name = attributes.isRadio ? `hizzle-forms-${attributes.parentInstanceID}` : `hizzle-forms-${attributes.parentInstanceID}[]`;
+		const { option, selected, isRadio, name } = attributes;
+		const type = isRadio ? 'radio' : 'checkbox';
+		const extension = isRadio ? '' : '[]';
 		const blockProps = useBlockProps.save( { className: `hizzle-forms__${type}-option` } );
 
 		return (
 			<label { ...blockProps }>
 				<input
 					type={ type }
-					name={ name }
-					defaultChecked={ selected }
+					name={ `hizzle-forms[${name}]${extension}` }
+					checked={ selected }
 				/>
-				<RichText.Content tagName="span" value={ label } />
+				<RichText.Content tagName="span" value={ option } />
 			</label>
 		);
 	},

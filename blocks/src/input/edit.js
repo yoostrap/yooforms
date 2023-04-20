@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { withInstanceId } from '@wordpress/compose';
 import { useEffect } from '@wordpress/element';
 
 /**
@@ -32,4 +31,4 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 		</WithEditWrapper>
 	);
 };
-export default withInstanceId( Edit );
+export default Edit;

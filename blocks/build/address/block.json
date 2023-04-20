@@ -12,7 +12,7 @@
     "address"
   ],
   "icon": "location-alt",
-  "ancestor": [
+  "parent": [
     "hizzle-forms/form"
   ],
   "version": "1.0.0",

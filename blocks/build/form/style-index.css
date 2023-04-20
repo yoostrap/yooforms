@@ -27,4 +27,16 @@
   display: block;
 }
 
+.hizzle-forms__field-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.wp-block-hizzle-forms-radio-option {
+  font-weight: 400;
+  display: block;
+  margin-bottom: 1rem;
+}
+
 /*# sourceMappingURL=style-index.css.map*/

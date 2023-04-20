@@ -51,20 +51,20 @@
       {
         "name": "hizzle-forms/radio-option",
         "attributes": {
-          "label": "First Option",
+          "option": "First Option",
           "selected": true
         }
       },
       {
         "name": "hizzle-forms/radio-option",
         "attributes": {
-          "label": "Second Option"
+          "option": "Second Option"
         }
       },
       {
         "name": "hizzle-forms/radio-option",
         "attributes": {
-          "label": "Third Option"
+          "option": "Third Option"
         }
       }
     ]

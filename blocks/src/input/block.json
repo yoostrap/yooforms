@@ -11,9 +11,7 @@
     "input"
   ],
   "icon": "editor-textcolor",
-  "ancestor": [
-    "hizzle-forms/form"
-  ],
+  "parent": [ "hizzle-forms/form" ],
   "version": "1.0.0",
   "textdomain": "hizzle-forms",
   "attributes": {

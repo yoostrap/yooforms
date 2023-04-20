@@ -18,6 +18,8 @@ export default function registerHizzleBlockType( name, settings ) {
         name = 'hizzle-forms/' + name;
     }
 
+    console.log({name, settings})
+
     // If we have a string icon, add color.
     if ( typeof settings.icon === 'string' ) {
         settings.icon = {

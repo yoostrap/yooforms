@@ -12,9 +12,7 @@
     "multi-checkbox"
   ],
   "icon": "editor-justify",
-  "parent": [
-    "hizzle-forms/form"
-  ],
+  "parent": [ "hizzle-forms/form" ],
   "version": "1.0.0",
   "textdomain": "hizzle-forms",
   "attributes": {
@@ -50,15 +48,15 @@
 		"innerBlocks": [
 			{
 				"name": "hizzle-forms/radio-option",
-				"attributes": { "label": "First Option", "selected": true }
+				"attributes": { "option": "First Option", "selected": true }
 			},
       {
         "name": "hizzle-forms/radio-option",
-        "attributes": { "label": "Second Option" }
+        "attributes": { "option": "Second Option" }
       },
       {
         "name": "hizzle-forms/radio-option",
-        "attributes": { "label": "Third Option" }
+        "attributes": { "option": "Third Option" }
       }
 		]
 	},

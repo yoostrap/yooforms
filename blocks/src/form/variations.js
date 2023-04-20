@@ -96,9 +96,10 @@ const variations = compact( [
 				{
 					label: __( 'Attending?', 'hizzle-forms' ),
 					required: true,
+					isRadio: true,
 					innerBlocks: [
-						[ 'hizzle-forms/radio-option', { label: __( 'Yes', 'hizzle-forms' ), selected: true, } ],
-						[ 'hizzle-forms/radio-option', { label: __( 'No', 'hizzle-forms' ) } ],
+						[ 'hizzle-forms/radio-option', { option: __( 'Yes', 'hizzle-forms' ), selected: true, } ],
+						[ 'hizzle-forms/radio-option', { option: __( 'No', 'hizzle-forms' ) } ],
 					],
 				},
 			],
@@ -171,9 +172,10 @@ const variations = compact( [
 				{
 					label: __( 'Time', 'hizzle-forms' ),
 					required: true,
+					isRadio: true,
 					innerBlocks: [
-						[ 'hizzle-forms/radio-option', { label: __( 'Morning', 'hizzle-forms' ), selected: true, } ],
-						[ 'hizzle-forms/radio-option', { label: __( 'Afternoon', 'hizzle-forms' ) } ],
+						[ 'hizzle-forms/radio-option', { option: __( 'Morning', 'hizzle-forms' ), selected: true, } ],
+						[ 'hizzle-forms/radio-option', { option: __( 'Afternoon', 'hizzle-forms' ) } ],
 					],
 				},
 			],
@@ -206,12 +208,13 @@ const variations = compact( [
 				{
 					label: __( 'Please rate our website', 'hizzle-forms' ),
 					required: true,
+					isRadio: true,
 					innerBlocks: [
-						[ 'hizzle-forms/radio-option', { label: __( '1 - Very Bad', 'hizzle-forms' ), selected: true, } ],
-						[ 'hizzle-forms/radio-option', { label: __( '2 - Poor', 'hizzle-forms' ) } ],
-						[ 'hizzle-forms/radio-option', { label: __( '3 - Average', 'hizzle-forms' ) } ],
-						[ 'hizzle-forms/radio-option', { label: __( '4 - Good', 'hizzle-forms' ) } ],
-						[ 'hizzle-forms/radio-option', { label: __( '5 - Excellent', 'hizzle-forms' ) } ],
+						[ 'hizzle-forms/radio-option', { option: __( '1 - Very Bad', 'hizzle-forms' ), selected: true, } ],
+						[ 'hizzle-forms/radio-option', { option: __( '2 - Poor', 'hizzle-forms' ) } ],
+						[ 'hizzle-forms/radio-option', { option: __( '3 - Average', 'hizzle-forms' ) } ],
+						[ 'hizzle-forms/radio-option', { option: __( '4 - Good', 'hizzle-forms' ) } ],
+						[ 'hizzle-forms/radio-option', { option: __( '5 - Excellent', 'hizzle-forms' ) } ],
 					],
 				},
 			],

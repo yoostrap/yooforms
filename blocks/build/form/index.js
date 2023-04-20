@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Allowed child blocks for the form.
-const ALLOWED_BLOCKS = ['hizzle-forms/address', 'hizzle-forms/input', 'hizzle-forms/textarea', 'hizzle-forms/checkbox', 'hizzle-forms/radio', 'hizzle-forms/select', 'hizzle-forms/multi-checkbox', 'core/columns', 'core/group', 'core/heading', 'core/list', 'core/paragraph', 'core/row', 'core/separator', 'core/spacer', 'core/stack', 'core/subhead'];
+const ALLOWED_BLOCKS = ['hizzle-forms/address', 'hizzle-forms/input', 'hizzle-forms/textarea', 'hizzle-forms/checkbox', 'hizzle-forms/radio', 'hizzle-forms/select', 'hizzle-forms/multi-checkbox', 'core/audio', 'core/heading', 'core/image', 'core/list', 'core/paragraph', 'core/separator', 'core/spacer', 'core/subhead', 'core/video'];
 function HizzleFormEdit(_ref) {
   let {
     attributes,
@@ -428,7 +428,7 @@ __webpack_require__.r(__webpack_exports__);
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Submit Button', 'hizzle-forms'),
   icon: 'button',
   category: 'hizzle-forms',
-  ancestor: ['hizzle-forms/form'],
+  "parent": ["hizzle-forms/form"],
   attributes: {
     text: {
       type: 'string',
@@ -592,11 +592,12 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   }], ['hizzle-forms/radio', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Attending?', 'hizzle-forms'),
     required: true,
+    isRadio: true,
     innerBlocks: [['hizzle-forms/radio-option', {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Yes', 'hizzle-forms'),
+      option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Yes', 'hizzle-forms'),
       selected: true
     }], ['hizzle-forms/radio-option', {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('No', 'hizzle-forms')
+      option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('No', 'hizzle-forms')
     }]]
   }], ['hizzle-forms/textarea', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Other Details', 'hizzle-forms')
@@ -669,11 +670,12 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   }], ['hizzle-forms/radio', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Time', 'hizzle-forms'),
     required: true,
+    isRadio: true,
     innerBlocks: [['hizzle-forms/radio-option', {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Morning', 'hizzle-forms'),
+      option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Morning', 'hizzle-forms'),
       selected: true
     }], ['hizzle-forms/radio-option', {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Afternoon', 'hizzle-forms')
+      option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Afternoon', 'hizzle-forms')
     }]]
   }], ['hizzle-forms/textarea', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Notes', 'hizzle-forms')
@@ -705,17 +707,18 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   }], ['hizzle-forms/radio', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Please rate our website', 'hizzle-forms'),
     required: true,
+    isRadio: true,
     innerBlocks: [['hizzle-forms/radio-option', {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('1 - Very Bad', 'hizzle-forms'),
+      option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('1 - Very Bad', 'hizzle-forms'),
       selected: true
     }], ['hizzle-forms/radio-option', {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('2 - Poor', 'hizzle-forms')
+      option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('2 - Poor', 'hizzle-forms')
     }], ['hizzle-forms/radio-option', {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('3 - Average', 'hizzle-forms')
+      option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('3 - Average', 'hizzle-forms')
     }], ['hizzle-forms/radio-option', {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('4 - Good', 'hizzle-forms')
+      option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('4 - Good', 'hizzle-forms')
     }], ['hizzle-forms/radio-option', {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('5 - Excellent', 'hizzle-forms')
+      option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('5 - Excellent', 'hizzle-forms')
     }]]
   }], ['hizzle-forms/textarea', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('How could we improve?', 'hizzle-forms')
