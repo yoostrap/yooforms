@@ -25,7 +25,7 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 	}, [] );
 
 	return (
-		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}>
+		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected} hidePlaceholder>
 			<div className="hizzle-forms__radio-options" data-instance-id={ attributes.instanceID }>
 				<InnerBlocks allowedBlocks={['hizzle-forms/radio-option']} template={template} />
 			</div>

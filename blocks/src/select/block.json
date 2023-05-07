@@ -34,7 +34,7 @@
     },
     "placeholder": {
       "type": "string",
-      "default": ""
+      "default": "Select an option"
     },
     "required": {
       "type": "boolean",

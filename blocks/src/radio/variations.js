@@ -19,7 +19,7 @@ const variations = [
 		category: 'hizzle-forms',
 		attributes: { isRadio: true },
 		icon: {
-            src: 'editor-justify',
+            src: 'marker',
             foreground: PRIMARY_COLOR,
         },
 	},
@@ -31,7 +31,7 @@ const variations = [
 		category: 'hizzle-forms',
 		attributes: { isRadio: false },
 		icon: {
-			src: 'editor-ul',
+			src: 'yes',
 			foreground: PRIMARY_COLOR,
 		},
 	},

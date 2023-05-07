@@ -21,19 +21,29 @@
       "type": "string",
       "default": ""
     },
-    "required": {
-      "type": "boolean",
-      "default": false
-    },
     "checked": {
       "type": "boolean",
       "default": false
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "source": "attribute",
+      "selector": "input",
+      "attribute": "required"
     },
     "help": {
       "type": "string",
       "default": "",
       "source": "html",
-      "selector": ".form-text"
+      "selector": ".hizzle-forms__field-help-text"
+    },
+    "instanceID": {
+      "type": "string",
+      "default": "",
+      "source": "attribute",
+      "selector": "input",
+      "attribute": "data-instance-id"
     }
   },
   "example": {
@@ -49,7 +59,8 @@
     "spacing": {
       "margin": true,
       "padding": true
-    }
+    },
+    "reusable": false
   },
   "editorScript": "file:./index.js"
 }
