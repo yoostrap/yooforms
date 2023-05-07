@@ -21,7 +21,7 @@
       "type": "string",
       "default": "",
       "source": "html",
-      "selector": "label"
+      "selector": ".hizzle-forms__field-label"
     },
     "options": {
       "type": "array",
@@ -35,14 +35,11 @@
     },
     "selected": {
       "type": "string",
-      "default": ""
+      "default": "Option 1"
     },
     "placeholder": {
       "type": "string",
-      "default": "",
-      "source": "attribute",
-      "selector": "select",
-      "attribute": "placeholder"
+      "default": ""
     },
     "required": {
       "type": "boolean",
@@ -55,7 +52,14 @@
       "type": "string",
       "default": "",
       "source": "html",
-      "selector": ".form-text"
+      "selector": ".hizzle-forms__field-help-text"
+    },
+    "instanceID": {
+      "type": "string",
+      "default": "",
+      "source": "attribute",
+      "selector": "select",
+      "attribute": "data-instance-id"
     }
   },
   "example": {
@@ -67,7 +71,8 @@
         "Option 2"
       ],
       "required": true,
-      "help": "This is a help text."
+      "help": "This is a help text.",
+      "selected": "Option 1"
     }
   },
   "supports": {
@@ -75,7 +80,8 @@
     "spacing": {
       "margin": true,
       "padding": true
-    }
+    },
+    "reusable": false
   },
   "editorScript": "file:./index.js"
 }

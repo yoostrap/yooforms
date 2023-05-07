@@ -21,27 +21,38 @@
       "type": "string",
       "default": "",
       "source": "html",
-      "selector": "label"
+      "selector": ".hizzle-forms__field-label"
     },
     "placeholder": {
       "type": "string",
       "default": "",
       "source": "attribute",
-      "selector": "input",
+      "selector": "textarea",
       "attribute": "placeholder"
     },
     "required": {
       "type": "boolean",
       "default": false,
       "source": "attribute",
-      "selector": "input",
+      "selector": "textarea",
       "attribute": "required"
     },
     "help": {
       "type": "string",
       "default": "",
       "source": "html",
-      "selector": ".form-text"
+      "selector": ".hizzle-forms__field-help-text"
+    },
+    "instanceID": {
+      "type": "string",
+      "default": "",
+      "source": "attribute",
+      "selector": "textarea",
+      "attribute": "data-instance-id"
+    },
+    "value": {
+      "type": "string",
+      "default": ""
     }
   },
   "example": {
@@ -57,7 +68,8 @@
     "spacing": {
       "margin": true,
       "padding": true
-    }
+    },
+    "reusable": false
   },
   "editorScript": "file:./index.js"
 }
