@@ -22,7 +22,7 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 			<input
 				type={ attributes.type }
 				className="hizzle-forms__field-input form-control"
-				placeholder={ attributes.placeholder }
+				placeholder={ attributes.placeholder || "" }
 				value={ attributes.value ? attributes.value : '' }
 				pattern={ attributes.pattern }
 				data-instance-id={ attributes.instanceID }

@@ -10,8 +10,11 @@ export default function labelToName( label, fallback = '' ) {
         return fallback;
     }
 
+    // Strip HTML tags.
+    let name = label.replace( /(<([^>]+)>)/ig, '' );
+
     // Replace all non-alphanumeric characters with underscores.
-    let name = label.replace( /[^a-z0-9]/gi, '_' ).toLowerCase();
+    name = label.replace( /[^a-z0-9]/gi, '_' ).toLowerCase();
 
     // Remove consecutive underscores.
     name = name.replace( /_+/g, '_' );

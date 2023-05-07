@@ -52,7 +52,7 @@ const variations = compact( [
 		name: 'hizzle-url-input',
 		title: __( 'URL', 'hizzle-forms' ),
 		description: __( 'Add a single-line URL input field to your form.', 'hizzle-forms' ),
-		keywords:  [ __( 'url', 'hizzle-forms' ), __( 'input', 'hizzle-forms' ) ],
+		keywords:  [ __( 'url', 'hizzle-forms' ), __( 'website', 'hizzle-forms' ), __( 'input', 'hizzle-forms' ) ],
 		category: 'hizzle-forms',
 		attributes: { type: 'url' },
 		icon: {
@@ -87,12 +87,12 @@ const variations = compact( [
 	{
 		name: 'hizzle-range-input',
 		title: __( 'Range', 'hizzle-forms' ),
-		description: __( 'Add a single-line range input field to your form.', 'hizzle-forms' ),
-		keywords:  [ __( 'range', 'hizzle-forms' ), __( 'input', 'hizzle-forms' ) ],
+		description: __( 'Add a range input field to your form.', 'hizzle-forms' ),
+		keywords:  [ __( 'number', 'hizzle-forms' ), __( 'range', 'hizzle-forms' ), __( 'input', 'hizzle-forms' ) ],
 		category: 'hizzle-forms',
 		attributes: { type: 'range', min: 0, max: 100, step: 1 },
 		icon: {
-			src: 'editor-ol-rtl',
+			src: 'arrow-right-alt',
 			foreground: PRIMARY_COLOR,
 		},
 	},
@@ -128,7 +128,7 @@ const variations = compact( [
 		category: 'hizzle-forms',
 		attributes: { type: 'month' },
 		icon: {
-			src: 'calendar-alt',
+			src: 'schedule',
 			foreground: PRIMARY_COLOR,
 		},
 	},
@@ -140,7 +140,7 @@ const variations = compact( [
 		category: 'hizzle-forms',
 		attributes: { type: 'week' },
 		icon: {
-			src: 'calendar-alt',
+			src: 'tide',
 			foreground: PRIMARY_COLOR,
 		},
 	},
@@ -152,7 +152,7 @@ const variations = compact( [
 		category: 'hizzle-forms',
 		attributes: { type: 'color' },
 		icon: {
-			src: 'admin-customizer',
+			src: 'color-picker',
 			foreground: PRIMARY_COLOR,
 		},
 	},
@@ -164,17 +164,6 @@ const variations = compact( [
  *  Block by providing its attributes.
  */
 variations.forEach( ( variation ) => {
-
-	// Add default attributes to the variation.
-	variation.attributes = {
-		label: '',
-		placeholder: '',
-		required: false,
-		help: '',
-		pattern: '',
-		value: '',
-		...variation.attributes,
-	};
 
 	// Example.
 	variation.example = {
