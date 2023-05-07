@@ -50,10 +50,6 @@
       "selector": "input",
       "attribute": "data-instance-id"
     },
-    "pattern": {
-      "type": "string",
-      "default": ""
-    },
     "type": {
       "type": "string",
       "default": "text",

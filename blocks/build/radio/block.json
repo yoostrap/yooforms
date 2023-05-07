@@ -20,13 +20,15 @@
   "attributes": {
     "label": {
       "type": "string",
-      "default": ""
+      "default": "",
+      "source": "html",
+      "selector": ".hizzle-forms__field-label"
     },
     "help": {
       "type": "string",
       "default": "",
       "source": "html",
-      "selector": ".hizzle-forms__help-text"
+      "selector": ".hizzle-forms__field-help-text"
     },
     "instanceID": {
       "type": "string",
@@ -74,7 +76,8 @@
     "spacing": {
       "margin": true,
       "padding": true
-    }
+    },
+    "reusable": false
   },
   "editorScript": "file:./index.js"
 }
