@@ -20,7 +20,6 @@ const Save = ( { attributes } ) => {
 				placeholder={ attributes.placeholder || '' }
 				value={ attributes.value ? attributes.value : '' }
 				required={ attributes.required }
-				pattern={ attributes.pattern }
 				data-instance-id={ instanceID }
 			/>
 		</WithSaveWrapper>

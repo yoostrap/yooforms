@@ -172,7 +172,6 @@ variations.forEach( ( variation ) => {
 			placeholder: __( 'Enter your text', 'hizzle-forms' ),
 			required: true,
 			help: variation.description,
-			pattern: '',
 			type: variation.attributes.type,
 			value: '',
 		}

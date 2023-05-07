@@ -1,23 +1,23 @@
 /**
  * WordPress dependencies.
  */
-import { registerBlockType, createBlock } from '@wordpress/blocks';
+import { createBlock } from '@wordpress/blocks';
 import { RichText, useBlockProps, BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
-import { noop } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import {useParentAttributes} from '../utils/use-parent-attributes';
 import labelToName from '../utils/label-to-name';
+import registerHizzleBlockType from '../utils/register-block';
 
-registerBlockType( 'hizzle-forms/radio-option', {
+registerHizzleBlockType( 'hizzle-forms/radio-option', {
 	apiVersion: 2,
 	title: __( 'Radio Option', 'hizzle-forms' ),
-	icon: 'editor-ul',
+	icon: 'marker',
 	category: 'hizzle-forms',
 	parent: [ 'hizzle-forms/radio' ],
 	attributes: {
@@ -43,9 +43,10 @@ registerBlockType( 'hizzle-forms/radio-option', {
 		spacing: {
 			margin: true,
 			padding: true
-		}
+		},
+		reusable: false,
 	},
-	edit: ( { clientId, attributes, setAttributes } ) => {
+	edit: ( { clientId, onReplace, onRemove, mergeBlocks, attributes, setAttributes } ) => {
 		const { label, isRadio, instanceID } = useParentAttributes( clientId );
 		const type = isRadio ? 'radio' : 'checkbox';
 		const blockProps = useBlockProps( { className: `hizzle-forms__${type}-option` } );
@@ -64,14 +65,6 @@ registerBlockType( 'hizzle-forms/radio-option', {
 				setAttributes( { isRadio: isRadio } );
 			}
 		}, [ isRadio ] );
-
-		// Handle split.
-		const handleSplit = option =>
-			createBlock( 'hizzle-forms/radio-option', {
-				...attributes,
-				option,
-				selected: false,
-			} );
 
 		return (
 			<>
@@ -93,8 +86,28 @@ registerBlockType( 'hizzle-forms/radio-option', {
 						value={ attributes.option }
 						onChange={ ( value ) => setAttributes( { option: value } ) }
 						placeholder={ __( 'Add option…', 'hizzle-forms' ) }
-						onSplit={ handleSplit }
-						onReplace={noop}
+						onSplit={ ( value, isOriginal ) => {
+							let newAttributes;
+		
+							if ( isOriginal || value ) {
+								newAttributes = {
+									...attributes,
+									option: value,
+									selected: false,
+								};
+							}
+
+							const block = createBlock( 'hizzle-forms/radio', newAttributes );
+		
+							if ( isOriginal ) {
+								block.clientId = clientId;
+							}
+		
+							return block;
+						} }
+						onMerge={ mergeBlocks }
+						onReplace={ onReplace }
+						onRemove={ onRemove }
 						preserveWhiteSpace={ false }
 					/>
 				</div>

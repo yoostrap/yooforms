@@ -24,7 +24,6 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 				className="hizzle-forms__field-input form-control"
 				placeholder={ attributes.placeholder || "" }
 				value={ attributes.value ? attributes.value : '' }
-				pattern={ attributes.pattern }
 				data-instance-id={ attributes.instanceID }
 				onChange={ ( event ) => { setAttributes( { value: event.target.value } ) } }
 			/>
