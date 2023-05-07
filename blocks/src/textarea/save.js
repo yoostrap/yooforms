@@ -8,7 +8,7 @@ const Save = ( { attributes } ) => {
 
 	// Generate field name from the label.
 	const instanceID = attributes.instanceID || '';
-	const name       = labelToName( attributes.label );
+	const name       = labelToName( attributes.label, instanceID );
 
 	return (
 		<WithSaveWrapper attributes={ attributes }>
