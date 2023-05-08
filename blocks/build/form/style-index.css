@@ -4,9 +4,16 @@
 .wp-block-hizzle-forms-forms {
   display: block !important;
 }
-.wp-block-hizzle-forms-forms > .hizzle-forms > .block-editor-inner-blocks > .block-editor-block-list__layout {
-  display: flex;
-  flex-wrap: wrap;
+@media (min-width: 600px) {
+  .wp-block-hizzle-forms-forms > .hizzle-forms > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    display: grid;
+    align-items: end;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    -moz-column-gap: 16px;
+         column-gap: 16px;
+    row-gap: 28px;
+  }
 }
 
 /*# sourceMappingURL=style-index.css.map*/

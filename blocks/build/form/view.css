@@ -2,27 +2,19 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/src/form/view.scss ***!
   \**************************************************************************************************************************************************************************************************************************************************/
 .wp-block-hizzle-forms-forms {
-  display: flex;
-  flex-wrap: wrap;
   margin: 1rem auto;
   max-width: 600px;
 }
-.wp-block-hizzle-forms-forms.is-style-hizzle-full {
-  max-width: 100%;
-}
-.wp-block-hizzle-forms-forms.is-style-hizzle-wide {
-  max-width: 800px;
-}
-.wp-block-hizzle-forms-forms.has-background {
-  padding: 1.6rem;
-}
-
-.wp-block-hizzle-forms-forms {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 1rem auto;
-  max-width: 600px;
-  position: relative;
+@media (min-width: 600px) {
+  .wp-block-hizzle-forms-forms {
+    display: grid;
+    align-items: end;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    -moz-column-gap: 16px;
+         column-gap: 16px;
+    row-gap: 28px;
+  }
 }
 .wp-block-hizzle-forms-forms.is-style-hizzle-full {
   max-width: 100%;
@@ -38,20 +30,29 @@
   margin-bottom: 1.6rem;
   width: 100%;
 }
-.hizzle-forms-field.is-style-hizzle-half {
-  width: 50%;
+@media (min-width: 600px) {
+  .hizzle-forms-field {
+    grid-column: span 6;
+    margin-bottom: 0;
+  }
+  .hizzle-forms-field.is-style-hizzle-1-6 {
+    grid-column: span 1;
+  }
+  .hizzle-forms-field.is-style-hizzle-2-6 {
+    grid-column: span 2;
+  }
+  .hizzle-forms-field.is-style-hizzle-3-6 {
+    grid-column: span 3;
+  }
+  .hizzle-forms-field.is-style-hizzle-4-6 {
+    grid-column: span 4;
+  }
+  .hizzle-forms-field.is-style-hizzle-5-6 {
+    grid-column: span 5;
+  }
 }
-.hizzle-forms-field.is-style-hizzle-third {
-  width: 33.333%;
-}
-.hizzle-forms-field.is-style-hizzle-two-third {
-  width: 66.666%;
-}
-.hizzle-forms-field.is-style-hizzle-fourth {
-  width: 25%;
-}
-.hizzle-forms-field.is-style-hizzle-three-fourth {
-  width: 75%;
+.hizzle-forms-field.wp-block-hizzle-forms-submit button {
+  width: 100%;
 }
 
 .hizzle-forms__field-label {

@@ -1,8 +1,16 @@
 .wp-block-hizzle-forms-forms {
-	display: flex;
-	flex-wrap: wrap;
 	margin: 1rem auto;
 	max-width: 600px;
+
+    // Add grid to tablet and above.
+    @media (min-width: 600px) {
+        display: grid;
+        align-items: end;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: 1fr;
+        column-gap: 16px;
+        row-gap: 28px;
+    }
 
 	&.is-style-hizzle-full {
 		max-width: 100%;
@@ -17,4 +25,58 @@
 	}
 }
 
-@import "./form-styles.scss";
+.hizzle-forms-field {
+	margin-bottom: 1.6rem;
+    width: 100%;
+
+    // Add grid to tablet and above.
+    @media (min-width: 600px) {
+        grid-column: span 6;
+        margin-bottom: 0;
+
+        &.is-style-hizzle-1-6 {
+            grid-column: span 1;
+        }
+
+        &.is-style-hizzle-2-6 {
+            grid-column: span 2;
+        }
+
+        &.is-style-hizzle-3-6 {
+            grid-column: span 3;
+        }
+
+        &.is-style-hizzle-4-6 {
+            grid-column: span 4;
+        }
+
+        &.is-style-hizzle-5-6 {
+            grid-column: span 5;
+        }
+    }
+
+    &.wp-block-hizzle-forms-submit button {
+        width: 100%;
+    }
+}
+
+.hizzle-forms__field-label {
+	display: block;
+	margin-bottom: 0.4rem;
+	font-weight: 600;
+}
+
+.hizzle-forms__field-help-text {
+	opacity: 0.8;
+	font-size: 0.8rem;
+	margin-top: 0.4rem;
+	margin-bottom: 0.8rem;
+	display: block;
+}
+
+.wp-block-hizzle-forms-radio-option {
+	font-weight: 400;
+	display: block;
+	margin-bottom: 1rem;
+}
+

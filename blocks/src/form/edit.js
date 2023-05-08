@@ -34,6 +34,7 @@ const ALLOWED_BLOCKS = [
 	'hizzle-forms/radio',
 	'hizzle-forms/select',
 	'hizzle-forms/multi-checkbox',
+	'hizzle-forms/submit',
 	'core/audio',
 	'core/heading',
 	'core/image',

@@ -46,7 +46,7 @@ registerHizzleBlockType( 'hizzle-forms/radio-option', {
 		},
 		reusable: false,
 	},
-	edit: ( { clientId, onReplace, onRemove, mergeBlocks, attributes, setAttributes } ) => {
+	edit: ( { clientId, onReplace, onRemove, mergeBlocks, attributes, setAttributes, context } ) => {
 		const { label, isRadio, instanceID } = useParentAttributes( clientId );
 		const type = isRadio ? 'radio' : 'checkbox';
 		const blockProps = useBlockProps( { className: `hizzle-forms__${type}-option` } );
