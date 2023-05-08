@@ -1,0 +1,20 @@
+.wp-block-hizzle-forms-forms {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 1rem auto;
+	max-width: 600px;
+
+	&.is-style-hizzle-full {
+		max-width: 100%;
+	}
+
+	&.is-style-hizzle-wide {
+		max-width: 800px;
+	}
+
+	&.has-background {
+		padding: 1.6rem;
+	}
+}
+
+@import "./form-styles.scss";

@@ -75,6 +75,33 @@
       "selected": "Option 1"
     }
   },
+  "styles": [
+    {
+      "name": "hizzle-full",
+      "label": "100%",
+      "isDefault": true
+    },
+    {
+      "name": "hizzle-half",
+      "label": "50%"
+    },
+    {
+      "name": "hizzle-third",
+      "label": "33.333%"
+    },
+    {
+      "name": "hizzle-two-third",
+      "label": "66.666%"
+    },
+    {
+      "name": "hizzle-fourth",
+      "label": "25%"
+    },
+    {
+      "name": "hizzle-three-fourth",
+      "label": "75%"
+    }
+  ],
   "supports": {
     "anchor": true,
     "spacing": {
