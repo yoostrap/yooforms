@@ -31,7 +31,7 @@ const variations = [
 		category: 'hizzle-forms',
 		attributes: { isRadio: false },
 		icon: {
-			src: 'yes',
+			src: 'yes-alt',
 			foreground: PRIMARY_COLOR,
 		},
 	},

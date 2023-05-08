@@ -1,6 +1,7 @@
 import { TextControl, TextareaControl, Button, Flex, FlexItem , ToggleControl, PanelBody} from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
+import { RichText } from '@wordpress/block-editor';
 
 /**
  * Displays controls for a single email connection.
@@ -24,61 +25,64 @@ const EmailConnection = ( { index, active, email, subject, message, setAttribute
 		index + 1
 	);
 
-	<PanelBody title={ panelTitle }>
+	return (
+		<PanelBody title={ panelTitle } initialOpen={ false }>
 
-		<ToggleControl
-			label={ __( 'Active', 'hizzle-forms' ) }
-			help={ active ? __( 'This connection is active.', 'hizzle-forms' ) : __( 'This connection is inactive.', 'hizzle-forms' ) }
-			checked={ active }
-			onChange={ active => setAttributes( { active } ) }
-		/>
+			<ToggleControl
+				label={ __( 'Send this email', 'hizzle-forms' ) }
+				help={ active ? __( 'This email will be sent.', 'hizzle-forms' ) : __( 'This email will not be sent.', 'hizzle-forms' ) }
+				checked={ active }
+				onChange={ active => setAttributes( { active } ) }
+			/>
 
-		<TextControl
-			label={ __( 'Email address to send to', 'hizzle-forms' ) }
-			placeholder={ __( '{admin_email}, {user_email}, example@gmail.com', 'hizzle-forms' ) }
-			value={ email ? email : '' }
-			onChange={ ( email ) => setAttributes( { email } ) }
-			help={ __( 'You can enter multiple email addresses separated by commas.', 'hizzle-forms' ) }
-		/>
+			<TextControl
+				label={ __( 'Recipient', 'hizzle-forms' ) }
+				placeholder={ __( '{admin_email}, {user_email}, example@gmail.com', 'hizzle-forms' ) }
+				value={ email ? email : '' }
+				onChange={ ( email ) => setAttributes( { email } ) }
+				help={ __( 'You can enter multiple email addresses separated by commas.', 'hizzle-forms' ) }
+			/>
 
-		<TextControl
-			label={ __( 'Email subject line', 'hizzle-forms' ) }
-			value={ subject ? subject : '' }
-			placeholder={ __( 'Enter a subject', 'hizzle-forms' ) }
-			onChange={ subject => setAttributes( { subject } ) }
-		/>
+			<TextControl
+				label={ __( 'Email subject line', 'hizzle-forms' ) }
+				value={ subject ? subject : '' }
+				placeholder={ __( 'Enter a subject', 'hizzle-forms' ) }
+				onChange={ subject => setAttributes( { subject } ) }
+			/>
 
-		<TextareaControl
-			label={ __( 'Email message', 'hizzle-forms' ) }
-			value={ message ? message : '' }
-			placeholder={ __( 'Enter a message', 'hizzle-forms' ) }
-			onChange={ message => setAttributes( { message } ) }
-		/>
+			<TextareaControl
+				value={ message ? message : '' }
+				onChange={ message => setAttributes( { message } ) }
+				label={ __( 'Email content', 'hizzle-forms' ) }
+				placeholder={ __( 'Enter email content…', 'hizzle-forms' ) }
+				rows={ 10 }
+			/>
 
-		<Flex>
-			<FlexItem>
-				<Button
-					variant="secondary"
-					isSmall
-					onClick={ insertConnection }
-				>
-					{ __( 'Add Connection', 'hizzle-forms' ) }
-				</Button>
-			</FlexItem>
-			{ canDelete && (
+			<Flex>
 				<FlexItem>
 					<Button
-						isDestructive
+						variant="secondary"
 						isSmall
-						onClick={ deleteConnection }
+						onClick={ insertConnection }
 					>
-						{ __( 'Delete Connection', 'hizzle-forms' ) }
+						{ __( 'Add Connection', 'hizzle-forms' ) }
 					</Button>
 				</FlexItem>
-			) }
-		</Flex>
+				{ canDelete && (
+					<FlexItem>
+						<Button
+							isDestructive
+							isSmall
+							onClick={ deleteConnection }
+						>
+							{ __( 'Delete Connection', 'hizzle-forms' ) }
+						</Button>
+					</FlexItem>
+				) }
+			</Flex>
 
-	</PanelBody>
+		</PanelBody>
+	)
 };
 
 /**
@@ -98,7 +102,7 @@ const EmailConnections = ( { emails, setAttributes } ) => {
 				{
 					email: "{admin_email}",
 					subject: __( 'New form response', 'hizzle-forms' ),
-					message: __( 'You have received a new response to your contact form. <br><br>Here are the details:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}', 'hizzle-forms' ),
+					message: __( 'You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}', 'hizzle-forms' ),
 					active: false
 				}
 			] } );
@@ -136,9 +140,9 @@ const EmailConnections = ( { emails, setAttributes } ) => {
 					insertConnection={ () => {
 						const newEmails = [ ...emails ];
 						newEmails.splice( index + 1, 0, {
-							email: "{admin_email}",
-							subject: __( 'New form response', 'hizzle-forms' ),
-							message: __( 'You have received a new response to your contact form. <br><br>Here are the details:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}', 'hizzle-forms' ),
+							email: '',
+							subject: '',
+							message: '',
 							active: false
 						} );
 						setAttributes( { emails: newEmails } );

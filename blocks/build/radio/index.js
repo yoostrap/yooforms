@@ -543,7 +543,7 @@ const variations = [{
     isRadio: false
   },
   icon: {
-    src: 'yes',
+    src: 'yes-alt',
     foreground: PRIMARY_COLOR
   }
 }];

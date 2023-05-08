@@ -2,7 +2,8 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/src/form/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************************/
 .wp-block-hizzle-forms-forms {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   margin: 1rem auto;
   max-width: 600px;
   position: relative;
@@ -16,21 +17,39 @@
 .wp-block-hizzle-forms-forms.has-background {
   padding: 1.6rem;
 }
-.wp-block-hizzle-forms-forms .hizzle-forms-field {
+
+.hizzle-forms-field {
   margin-bottom: 1.6rem;
+  width: 100%;
 }
-.wp-block-hizzle-forms-forms .hizzle-forms__field-help-text {
-  opacity: 0.8;
-  font-size: 0.8rem;
-  margin-top: 0.4rem;
-  margin-bottom: 0.8rem;
-  display: block;
+.hizzle-forms-field.is-style-hizzle-half {
+  width: 50%;
+}
+.hizzle-forms-field.is-style-hizzle-third {
+  width: 33.333%;
+}
+.hizzle-forms-field.is-style-hizzle-two-third {
+  width: 66.666%;
+}
+.hizzle-forms-field.is-style-hizzle-fourth {
+  width: 25%;
+}
+.hizzle-forms-field.is-style-hizzle-three-fourth {
+  width: 75%;
 }
 
 .hizzle-forms__field-label {
   display: block;
   margin-bottom: 0.4rem;
   font-weight: 600;
+}
+
+.hizzle-forms__field-help-text {
+  opacity: 0.8;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.8rem;
+  display: block;
 }
 
 .wp-block-hizzle-forms-radio-option {

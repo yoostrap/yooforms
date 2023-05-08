@@ -23,6 +23,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * Internal dependencies
  */
@@ -35,7 +36,7 @@ const Edit = _ref => {
     isSelected
   } = _ref;
   // Reset instance ID once.
-  useEffect(() => {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (!attributes.instanceID) {
       setAttributes({
         instanceID: clientId

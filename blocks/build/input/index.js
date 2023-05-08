@@ -427,22 +427,6 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
     foreground: PRIMARY_COLOR
   }
 }, {
-  name: 'hizzle-range-input',
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Range', 'hizzle-forms'),
-  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a range input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('number', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('range', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
-  attributes: {
-    type: 'range',
-    min: 0,
-    max: 100,
-    step: 1
-  },
-  icon: {
-    src: 'arrow-right-alt',
-    foreground: PRIMARY_COLOR
-  }
-}, {
   name: 'hizzle-date-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Date', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line date input field to your form.', 'hizzle-forms'),
@@ -522,15 +506,18 @@ variations.forEach(variation => {
       placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter your text', 'hizzle-forms'),
       required: true,
       help: variation.description,
-      type: variation.attributes.type,
-      value: ''
+      value: '',
+      ...variation.attributes
     }
   };
 
   // Add `isActive` function if not defined.
   if (!variation.isActive) {
-    variation.isActive = (blockAttributes, variationAttributes) => blockAttributes.type === variationAttributes.type;
+    variation.isActive = ['type'];
   }
+
+  // Scope.
+  variation.scope = ['inserter', 'block', 'transform'];
 });
 /* harmony default export */ __webpack_exports__["default"] = (variations);
 
@@ -796,7 +783,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/input","title":"Input field","description":"A text input field for forms.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"editor-textcolor","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-label"},"placeholder":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"placeholder"},"required":{"type":"boolean","default":false,"source":"attribute","selector":"input","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"data-instance-id"},"type":{"type":"string","default":"text","source":"attribute","selector":"input","attribute":"type"},"value":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"value"}},"example":{"attributes":{"label":"Label","placeholder":"Placeholder","required":true,"help":"Help text","pattern":"[0-9]+","type":"number","value":"123"}},"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/input","title":"Input field","description":"A text input field for forms.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"editor-textcolor","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-label"},"placeholder":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"placeholder"},"required":{"type":"boolean","default":false,"source":"attribute","selector":"input","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"data-instance-id"},"type":{"type":"string","default":"text","source":"attribute","selector":"input","attribute":"type"},"value":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"value"}},"example":{"attributes":{"label":"Label","placeholder":"Placeholder","required":true,"help":"Help text","pattern":"[0-9]+","type":"number","value":"123"}},"styles":[{"name":"hizzle-default","label":"Default","isDefault":true},{"name":"hizzle-half","label":"Half Width"},{"name":"hizzle-third","label":"Wide"}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
 
 /***/ })
 

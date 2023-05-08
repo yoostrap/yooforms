@@ -1,38 +1,13 @@
 import { __ } from '@wordpress/i18n';
-import { compact } from 'lodash';
 import Logo from '../components/logo';
 
-const defaultAttributes = {
-	emails: [
-		{
-			email: '{admin_email}',
-			subject: __( 'New Response: Contact Form', 'hizzle-forms' ),
-			message: __( 'You have received a new response to your contact form. <br><br>Here are the details:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}', 'hizzle-forms' ),
-			active: true
-		},
-		{
-			email: '{user_email}',
-			subject: __( 'Thank you for contacting us', 'hizzle-forms' ),
-			message: __( 'Thank you for contacting us. We will be in touch with you shortly.<br><br>Here are the details of your message:<br><br>{response_fields}<br><br>Thank you,<br>Your Site<br><br>{user_ip}<br>{user_agent}<br>{user_date}', 'hizzle-forms' ),
-			active: true
-		},
-	],
-	action: 'message',
-	redirect: '',
-	message: __( 'Thank you for contacting us. We will be in touch with you shortly.', 'hizzle-forms' ),
-	title: __( 'Contact Form', 'hizzle-forms' ),
-}
-
-const variations = compact( [
+const variations = [
 	{
 		name: 'hizzle-contact-form',
 		isDefault: true,
 		title: __( 'Contact Form', 'hizzle-forms' ),
 		description: __( 'Add a contact form to your page.', 'hizzle-forms' ),
 		keywords: [ __( 'contact', 'hizzle-forms' ), __( 'email', 'hizzle-forms' ) ],
-		category: 'hizzle-forms',
-		attributes: defaultAttributes,
-		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
@@ -49,7 +24,6 @@ const variations = compact( [
 	{
 		name: 'hizzle-newsletter-form',
 		title: __( 'Newsletter Sign-up', 'hizzle-forms' ),
-		category: 'hizzle-forms',
 		description: __(
 			'A simple way to collect information from folks visiting your site.',
 			'hizzle-forms'
@@ -59,11 +33,6 @@ const variations = compact( [
 			__( 'email', 'hizzle-forms' ),
 			__( 'signup', 'hizzle-forms' ),
 		],
-		attributes: {
-			...defaultAttributes,
-			title: __( 'Newsletter Sign-up', 'hizzle-forms' ),
-		},
-		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
@@ -82,12 +51,6 @@ const variations = compact( [
 		title: __( 'RSVP Form', 'hizzle-forms' ),
 		description: __( 'Add an RSVP form to your page', 'hizzle-forms' ),
 		keywords: [ __( 'rsvp', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
-		category: 'hizzle-forms',
-		attributes: {
-			...defaultAttributes,
-			title: __( 'RSVP Form', 'hizzle-forms' ),
-		},
-		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
@@ -118,12 +81,6 @@ const variations = compact( [
 		title: __( 'Registration Form', 'hizzle-forms' ),
 		description: __( 'Add a Registration form to your page', 'hizzle-forms' ),
 		keywords: [ __( 'register', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
-		category: 'hizzle-forms',
-		attributes: {
-			...defaultAttributes,
-			title: __( 'Registration Form', 'hizzle-forms' ),
-		},
-		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
@@ -156,12 +113,6 @@ const variations = compact( [
 		title: __( 'Appointment Form', 'hizzle-forms' ),
 		description: __( 'Add an Appointment booking form to your page', 'hizzle-forms' ),
 		keywords: [ __( 'appointment', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
-		category: 'hizzle-forms',
-		attributes: {
-			...defaultAttributes,
-			title: __( 'Appointment Form', 'hizzle-forms' ),
-		},
-		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
@@ -190,16 +141,10 @@ const variations = compact( [
 		],
 	},
 	{
-		name: 'hizzlefeedback-form',
+		name: 'hizzle-feedback-form',
 		title: __( 'Feedback Form', 'hizzle-forms' ),
 		description: __( 'Add a Feedback form to your page', 'hizzle-forms' ),
 		keywords: [ __( 'feedback', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
-		category: 'hizzle-forms',
-		attributes: {
-			...defaultAttributes,
-			title: __( 'Feedback Form', 'hizzle-forms' ),
-		},
-		icon: Logo,
 		innerBlocks: [
 			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
@@ -228,6 +173,55 @@ const variations = compact( [
 			],
 		],
 	},
-] );
+]
+
+/**
+ * Add `isActive` function to all `input` variations, if not defined.
+ * `isActive` function is used to find a variation match from a created
+ *  Block by providing its attributes.
+ */
+variations.forEach( ( variation ) => {
+
+	// Attributes.
+	variation.attributes = {
+		emails: [
+			{
+				email: '{admin_email}',
+				subject: __( 'New Response: Contact Form', 'hizzle-forms' ),
+				message: __( 'You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}', 'hizzle-forms' ),
+				active: true
+			},
+			{
+				email: '{user_email}',
+				subject: __( 'Thank you for contacting us', 'hizzle-forms' ),
+				message: __( 'Thank you for contacting us. We will be in touch with you shortly.\n\nHere are the details of your message:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}', 'hizzle-forms' ),
+				active: true
+			},
+		],
+		action: 'message',
+		redirect: '',
+		message: __( 'Thank you for contacting us. We will be in touch with you shortly.', 'hizzle-forms' ),
+		title: variation.title,
+	}
+
+	// Category.
+	variation.category = 'hizzle-forms';
+
+	// Logo.
+	variation.icon = Logo;
+
+	// Example.
+	variation.example = {
+		attributes: variation.attributes,
+		innerBlocks: variation.innerBlocks,
+	};
+
+	// Add `isActive` function if not defined.
+	if ( ! variation.isActive ) {
+		variation.isActive = ( blockAttributes, variationAttributes ) => blockAttributes.title === variationAttributes.title;
+	}
+
+	console.log( variation )
+} );
 
 export default variations;

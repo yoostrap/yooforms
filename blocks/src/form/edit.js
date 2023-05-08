@@ -1,3 +1,6 @@
+/**
+ * WordPress dependencies
+ */
 import {
 	InnerBlocks,
 	InspectorControls,
@@ -9,9 +12,16 @@ import {
 	PanelBody,
 	SelectControl,
 	TextareaControl,
+	TextControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
+import { withSelect, withDispatch } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
+
+/**
+ * Internal dependencies
+ */
 import InspectorHint from '../components/inspector-hint';
 import HizzleEmailConnectionSettings from './email-connection-settings';
 
@@ -35,7 +45,21 @@ const ALLOWED_BLOCKS = [
 	'core/video',
 ];
 
-export default function HizzleFormEdit( {
+// Template.
+const template = [
+	[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
+	[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
+	[ 'hizzle-forms/textarea', { label: __( 'Message', 'hizzle-forms' ) } ],
+	[
+		'hizzle-forms/submit',
+		{
+			text: __( 'Contact Us', 'hizzle-forms' ),
+			lock: { remove: true },
+		},
+	],
+];
+
+function HizzleFormEdit( {
 	attributes,
 	setAttributes,
 	instanceId,
@@ -98,16 +122,46 @@ export default function HizzleFormEdit( {
 	return (
 		<div {...useBlockProps()}>
 			<InspectorControls>
+
+				<PanelBody title={ __( 'Form Settings', 'hizzle-forms' ) }>
+					<TextControl
+						label={ __( 'Form Name', 'hizzle-forms' ) }
+						value={ title }
+						placeholder={ __( 'Contact Form.', 'hizzle-forms' ) }
+						onChange={ title => setAttributes( { title } ) }
+					/>
+				</PanelBody>
+
 				<PanelBody title={ __( 'Submission Settings', 'hizzle-forms' ) } initialOpen={ false }>
 					{ renderSubmissionSettings() }
 				</PanelBody>
+
 				<HizzleEmailConnectionSettings emails={emails} setAttributes={ setAttributes } />
 
 			</InspectorControls>
 
 			<div className={ formClassnames } style={ style }>
-				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } templateInsertUpdatesSelection={ false } />
+				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } template={template} />
 			</div>
 		</div>
 	);
 }
+
+export default compose( [
+	withSelect( ( select, { clientId } ) => {
+		return {
+			isEditing: select( 'hizzle/forms' ).isEditingHizzleForm( clientId ),
+		};
+	} ),
+	withDispatch( ( dispatch, { clientId } ) => ( {
+		setIsEditing: isEditing => {
+			dispatch( 'hizzle/forms' ).setEditingHizzleForm( clientId, isEditing );
+		},
+		saveHizzleForm: () => {
+			dispatch( 'hizzle/forms' ).saveHizzleForm( clientId );
+		},
+		saveHizzleForm: () => {
+			dispatch( 'hizzle/forms' ).deleteHizzleForm( clientId );
+		},
+	} ) ),
+] )( HizzleFormEdit );

@@ -76,6 +76,21 @@
       "value": "123"
     }
   },
+  "styles": [
+    {
+      "name": "hizzle-default",
+      "label": "Default",
+      "isDefault": true
+    },
+    {
+      "name": "hizzle-half",
+      "label": "Half Width"
+    },
+    {
+      "name": "hizzle-third",
+      "label": "Wide"
+    }
+  ],
   "supports": {
     "anchor": true,
     "spacing": {

@@ -85,18 +85,6 @@ const variations = compact( [
 		},
 	},
 	{
-		name: 'hizzle-range-input',
-		title: __( 'Range', 'hizzle-forms' ),
-		description: __( 'Add a range input field to your form.', 'hizzle-forms' ),
-		keywords:  [ __( 'number', 'hizzle-forms' ), __( 'range', 'hizzle-forms' ), __( 'input', 'hizzle-forms' ) ],
-		category: 'hizzle-forms',
-		attributes: { type: 'range', min: 0, max: 100, step: 1 },
-		icon: {
-			src: 'arrow-right-alt',
-			foreground: PRIMARY_COLOR,
-		},
-	},
-	{
 		name: 'hizzle-date-input',
 		title: __( 'Date', 'hizzle-forms' ),
 		description: __( 'Add a single-line date input field to your form.', 'hizzle-forms' ),
@@ -172,16 +160,18 @@ variations.forEach( ( variation ) => {
 			placeholder: __( 'Enter your text', 'hizzle-forms' ),
 			required: true,
 			help: variation.description,
-			type: variation.attributes.type,
 			value: '',
+			...variation.attributes
 		}
 	};
 
 	// Add `isActive` function if not defined.
 	if ( ! variation.isActive ) {
-		variation.isActive = ( blockAttributes, variationAttributes ) => blockAttributes.type === variationAttributes.type;
+		variation.isActive = ['type'];
 	}
 
+	// Scope.
+	variation.scope = [ 'inserter', 'block', 'transform' ];
 } );
 
 export default variations;
