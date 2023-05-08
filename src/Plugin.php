@@ -56,6 +56,7 @@ class Plugin {
 		add_action( 'init', array( $this, 'register_block_types' ) );
 		add_action( 'plugins_loaded', array( $this, 'on_plugins_loaded' ), -1 );
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ), 0 );
+		add_action( 'init', array( $this, 'register_post_type' ) );
 	}
 
 	/**
@@ -113,6 +114,39 @@ class Plugin {
 		foreach ( $blocks as $block ) {
 			register_block_type( $path . $block );
 		}
+
+	}
+
+	/**
+	 * Registers a custom post type for forms.
+	 */
+	public function register_post_type() {
+
+		register_post_type(
+			'hizzle_form',
+			apply_filters(
+				'hizzle_form_post_type_details',
+				array(
+					'labels'              => array(),
+					'label'               => 'Form',
+					'description'         => '',
+					'public'              => false,
+					'show_ui'             => false,
+					'map_meta_cap'        => true,
+					'publicly_queryable'  => false,
+					'exclude_from_search' => true,
+					'hierarchical'        => false,
+					'query_var'           => false,
+					'supports'            => array( 'author', 'custom-fields' ),
+					'has_archive'         => false,
+					'show_in_nav_menus'   => false,
+					'show_in_rest'        => false,
+					'show_in_menu'        => false,
+					'menu_icon'           => '',
+					'can_export'          => false,
+				)
+			)
+		);
 
 	}
 

@@ -20,6 +20,7 @@ const Save = ( { attributes } ) => {
 				name={`hizzle-forms[${name}]`}
 				required={ attributes.required }
 				data-instance-id={ instanceID }
+				rows="8"
 			/>
 		</WithSaveWrapper>
 	);

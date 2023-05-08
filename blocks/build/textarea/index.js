@@ -271,7 +271,8 @@ const Edit = _ref => {
       setAttributes({
         value: event.target.value
       });
-    }
+    },
+    rows: "8"
   }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Edit);
@@ -312,7 +313,8 @@ const Save = _ref => {
     value: attributes.value ? attributes.value : '',
     name: `hizzle-forms[${name}]`,
     required: attributes.required,
-    "data-instance-id": instanceID
+    "data-instance-id": instanceID,
+    rows: "8"
   }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Save);

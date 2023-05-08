@@ -16,8 +16,6 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
-import { withSelect, withDispatch } from '@wordpress/data';
-import { compose } from '@wordpress/compose';
 
 /**
  * Internal dependencies
@@ -60,7 +58,7 @@ const template = [
 	],
 ];
 
-function HizzleFormEdit( {
+export default function HizzleFormEdit( {
 	attributes,
 	setAttributes,
 	instanceId,
@@ -147,22 +145,3 @@ function HizzleFormEdit( {
 		</div>
 	);
 }
-
-export default compose( [
-	withSelect( ( select, { clientId } ) => {
-		return {
-			isEditing: select( 'hizzle/forms' ).isEditingHizzleForm( clientId ),
-		};
-	} ),
-	withDispatch( ( dispatch, { clientId } ) => ( {
-		setIsEditing: isEditing => {
-			dispatch( 'hizzle/forms' ).setEditingHizzleForm( clientId, isEditing );
-		},
-		saveHizzleForm: () => {
-			dispatch( 'hizzle/forms' ).saveHizzleForm( clientId );
-		},
-		saveHizzleForm: () => {
-			dispatch( 'hizzle/forms' ).deleteHizzleForm( clientId );
-		},
-	} ) ),
-] )( HizzleFormEdit );

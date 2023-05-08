@@ -25,6 +25,7 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 				value={ attributes.value ? attributes.value : '' }
 				data-instance-id={ attributes.instanceID }
 				onChange={ ( event ) => { setAttributes( { value: event.target.value } ) } }
+				rows="8"
 			/>
 		</WithEditWrapper>
 	);

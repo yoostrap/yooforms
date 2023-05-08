@@ -1,4 +1,4 @@
-.wp-block-hizzle-forms-forms {
+.wp-block-hizzle-forms-form {
 	margin: 1rem auto;
 	max-width: 600px;
 
@@ -72,6 +72,11 @@
 	margin-top: 0.4rem;
 	margin-bottom: 0.8rem;
 	display: block;
+}
+
+.hizzle-forms__field-input {
+    display: block;
+    width: 100%;
 }
 
 .wp-block-hizzle-forms-radio-option {
