@@ -559,9 +559,11 @@ const Save = _ref => {
   let {
     attributes
   } = _ref;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-    'data-instance-id': attributes.instanceID || ''
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null));
+  const props = {
+    'data-instance-id': attributes.instanceID || '',
+    method: 'POST'
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("form", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(props), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Save);
 

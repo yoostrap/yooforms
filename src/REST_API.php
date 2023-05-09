@@ -48,6 +48,19 @@ class REST_API extends \WP_REST_Controller {
 			)
 		);
 
+		// Send a POST to /hizzle/v1/forms/submit/{form_id} to submit a form.
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/submit/(?P<form_id>[\w\-\.]+)',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'submit_form' ),
+					'permission_callback' => array( $this, 'can_submit_form' ),
+					'args'                => array(),
+				),
+			)
+		);
 	}
 
 	/**
@@ -246,4 +259,34 @@ class REST_API extends \WP_REST_Controller {
 			update_option( 'hizzle_forms_' . $template, $new_forms, false );
 		}
 	}
+
+	/**
+	 * Checks if the current user can submit the given form.
+	 *
+	 * @param \WP_REST_Request $request Full details about the request.
+	 * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function can_submit_form( $request ) {
+
+		// Abort if the form ID is not set.
+		if ( empty( $request['form_id'] ) ) {
+			return new \WP_Error( 'hizzle_rest_form_id_not_set', 'Sorry, the form ID is not set.', array( 'status' => 400 ) );
+		}
+
+		// Fetch the form. Form ID is the form name.
+		$form = get_page_by_path( $request['form_id'], OBJECT, array( 'hizzle_form' ) );
+
+		// Abort if the form doesn't exist.
+		if ( ! $form ) {
+			return new \WP_Error( 'hizzle_rest_form_not_found', 'Sorry, the form could not be found.', array( 'status' => 404 ) );
+		}
+
+		// Check if the form is enabled.
+		if ( 'publish' !== $form->post_status ) {
+			return new \WP_Error( 'hizzle_rest_form_not_enabled', 'Sorry, the form is not enabled.', array( 'status' => 400 ) );
+		}
+	
+		return true;
+	}
+
 }

@@ -45,7 +45,7 @@ registerHizzleBlockType( 'hizzle-forms/radio-option', {
 		},
 		reusable: false,
 	},
-	edit: ( { clientId, onReplace, onRemove, mergeBlocks, attributes, setAttributes, context } ) => {
+	edit: ( { clientId, onReplace, onRemove, mergeBlocks, attributes, setAttributes } ) => {
 		const { name, isRadio } = useParentAttributes( clientId );
 		const type = isRadio ? 'radio' : 'checkbox';
 		const blockProps = useBlockProps( { className: `hizzle-forms__${type}-option` } );
@@ -118,11 +118,16 @@ registerHizzleBlockType( 'hizzle-forms/radio-option', {
 		const extension = isRadio ? '' : '[]';
 		const blockProps = useBlockProps.save( { className: `hizzle-forms__${type}-option` } );
 
+		if ( ! option ) {
+			return null;
+		}
+
 		return (
 			<label { ...blockProps }>
 				<input
 					type={ type }
 					name={ `hizzle-forms[${name}]${extension}` }
+					value={ option.replace( /(<([^>]+)>)/ig, '' ) }
 					checked={ selected }
 				/>
 				<RichText.Content tagName="span" value={ option } />

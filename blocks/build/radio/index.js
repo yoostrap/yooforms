@@ -371,8 +371,7 @@ __webpack_require__.r(__webpack_exports__);
       onRemove,
       mergeBlocks,
       attributes,
-      setAttributes,
-      context
+      setAttributes
     } = _ref;
     const {
       name,
@@ -454,9 +453,13 @@ __webpack_require__.r(__webpack_exports__);
     const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
       className: `hizzle-forms__${type}-option`
     });
+    if (!option) {
+      return null;
+    }
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
       type: type,
       name: `hizzle-forms[${name}]${extension}`,
+      value: option.replace(/(<([^>]+)>)/ig, ''),
       checked: selected
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
       tagName: "span",
