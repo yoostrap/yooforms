@@ -21,7 +21,7 @@
       "type": "string",
       "default": ""
     },
-    "checked": {
+    "value": {
       "type": "boolean",
       "default": false
     },
@@ -52,7 +52,7 @@
     "attributes": {
       "label": "Checkbox field",
       "required": true,
-      "checked": true,
+      "value": true,
       "help": "This is a checkbox field."
     }
 	},

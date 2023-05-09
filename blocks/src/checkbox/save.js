@@ -18,7 +18,7 @@ const Save = ( { attributes } ) => {
 			<label>
 				<input
 					type="checkbox"
-					checked={ attributes.checked }
+					checked={ attributes.value }
 					name={`hizzle-forms[${attributes.name}]`}
 					id={`hizzle-forms-field-${instanceID}`}
 					value={ attributes.label.replace( /(<([^>]+)>)/ig, '' ) }

@@ -157,12 +157,14 @@ class REST_API extends \WP_REST_Controller {
 
 			// Update the form.
 			wp_update_post(
-				array(
-					'ID'           => $form_id,
-					'post_title'   => $all_forms[ $instance_id ]['attributes']['title'],
-					'post_name'    => $all_forms[ $instance_id ]['attributes']['instanceID'],
-					'post_content' => wp_json_encode( $all_forms[ $instance_id ] ),
-					'post_status'  => 'publish',
+				wp_slash(
+					array(
+						'ID'           => $form_id,
+						'post_title'   => $all_forms[ $instance_id ]['attributes']['title'],
+						'post_name'    => $all_forms[ $instance_id ]['attributes']['instanceID'],
+						'post_content' => wp_json_encode( $all_forms[ $instance_id ] ),
+						'post_status'  => 'publish',
+					)
 				)
 			);
 
@@ -178,13 +180,15 @@ class REST_API extends \WP_REST_Controller {
 
 			// Create the form.
 			$result = wp_insert_post(
-				array(
-					'post_title'   => $form['attributes']['title'],
-					'post_name'    => $instance_id,
-					'post_content' => wp_json_encode( $form ),
-					'post_parent'  => $parent_id,
-					'post_type'    => 'hizzle_form',
-					'post_status'  => 'publish',
+				wp_slash(
+					array(
+						'post_title'   => $form['attributes']['title'],
+						'post_name'    => $instance_id,
+						'post_content' => wp_json_encode( $form ),
+						'post_parent'  => $parent_id,
+						'post_type'    => 'hizzle_form',
+						'post_status'  => 'publish',
+					)
 				)
 			);
 
@@ -285,7 +289,7 @@ class REST_API extends \WP_REST_Controller {
 		if ( 'publish' !== $form->post_status ) {
 			return new \WP_Error( 'hizzle_rest_form_not_enabled', 'Sorry, the form is not enabled.', array( 'status' => 400 ) );
 		}
-	
+
 		return true;
 	}
 

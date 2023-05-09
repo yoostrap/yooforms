@@ -36,7 +36,7 @@ const variations = [
 		innerBlocks: [
 			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
-			[ 'hizzle-forms/checkbox', {} ],
+			[ 'hizzle-forms/checkbox', { required: true, label: __( 'Agree to terms and conditions', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/submit',
 				{
@@ -89,6 +89,7 @@ const variations = [
 				'hizzle-forms/select',
 				{
 					label: __( 'How did you hear about us?', 'hizzle-forms' ),
+					value: __( 'Search Engine', 'hizzle-forms' ),
 					options: [
 						__( 'Search Engine', 'hizzle-forms' ),
 						__( 'Social Media', 'hizzle-forms' ),

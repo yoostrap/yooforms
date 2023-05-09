@@ -54,8 +54,8 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}>
 			<select
 				className="hizzle-forms__field-select"
-				value={ attributes.selected ? attributes.selected : '' }
-				onChange={ ( event ) => { setAttributes( { selected: event.target.value } ) } }
+				value={ attributes.value ? attributes.value : '' }
+				onChange={ ( event ) => { setAttributes( { value: event.target.value } ) } }
 			>
 				{ attributes.placeholder && <option value="">{ attributes.placeholder }</option> }
 				{ options.map( ( option, index ) => <option value={ option } key={ index }>{ option }</option> ) }
