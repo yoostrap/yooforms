@@ -19,7 +19,7 @@ class Plugin {
 	/**
 	 * REST API manager.
 	 *
-	 * @var Rest\Manager
+	 * @var REST_API
 	 */
 	public $rest_api;
 
@@ -57,6 +57,7 @@ class Plugin {
 		add_action( 'plugins_loaded', array( $this, 'on_plugins_loaded' ), -1 );
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ), 0 );
 		add_action( 'init', array( $this, 'register_post_type' ) );
+		add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
 	}
 
 	/**
@@ -148,6 +149,13 @@ class Plugin {
 			)
 		);
 
+	}
+
+	/**
+	 * Inits the REST API.
+	 */
+	public function rest_api_init() {
+		$this->rest_api = new REST_API();
 	}
 
 	/**

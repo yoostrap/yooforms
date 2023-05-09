@@ -237,6 +237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/with-edit-wrapper */ "./blocks/src/components/with-edit-wrapper.js");
+/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
 
 /**
  * WordPress dependencies
@@ -248,6 +249,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 
 /**
@@ -288,6 +290,16 @@ const Edit = _ref => {
       });
     }
   }, []);
+  const expectedName = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_4__["default"])(attributes.label, attributes.instanceID);
+
+  // Ensure name is same as parent.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (expectedName !== attributes.name) {
+      setAttributes({
+        name: expectedName
+      });
+    }
+  }, [expectedName]);
   const options = Array.isArray(attributes.options) ? attributes.options : [];
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
@@ -300,8 +312,7 @@ const Edit = _ref => {
       setAttributes({
         selected: event.target.value
       });
-    },
-    "data-instance-id": attributes.instanceID
+    }
   }, attributes.placeholder && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: ""
   }, attributes.placeholder), options.map((option, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
@@ -350,12 +361,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/with-save-wrapper */ "./blocks/src/components/with-save-wrapper.js");
-/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
 
 /**
  * Internal dependencies
  */
-
 
 const Save = _ref => {
   let {
@@ -363,7 +372,6 @@ const Save = _ref => {
   } = _ref;
   // Generate field name from the label.
   const instanceID = attributes.instanceID || '';
-  const name = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_2__["default"])(attributes.label, instanceID);
   const options = Array.isArray(attributes.options) ? attributes.options : [];
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_1__["default"], {
     attributes: attributes
@@ -371,9 +379,8 @@ const Save = _ref => {
     id: `hizzle-forms-field-${instanceID}`,
     className: "hizzle-forms__field-select",
     value: attributes.value ? attributes.value : '',
-    name: `hizzle-forms[${name}]`,
-    required: attributes.required,
-    "data-instance-id": instanceID
+    name: `hizzle-forms[${attributes.name}]`,
+    required: attributes.required
   }, attributes.placeholder && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: ""
   }, attributes.placeholder), options.map((option, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
@@ -645,7 +652,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/select","title":"Select field","description":"A select field input for forms.","category":"hizzle-forms","keywords":["form","contact","textarea"],"icon":"editor-ul","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-label"},"options":{"type":"array","default":["Option 1","Option 2"],"items":{"type":"string"}},"selected":{"type":"string","default":"Option 1"},"placeholder":{"type":"string","default":"Select an option"},"required":{"type":"boolean","default":false,"source":"attribute","selector":"select","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string","default":"","source":"attribute","selector":"select","attribute":"data-instance-id"}},"example":{"attributes":{"label":"Select","placeholder":"Select an option","options":["Option 1","Option 2"],"required":true,"help":"This is a help text.","selected":"Option 1"}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/select","title":"Select field","description":"A select field input for forms.","category":"hizzle-forms","keywords":["form","contact","textarea"],"icon":"editor-ul","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-label"},"options":{"type":"array","default":["Option 1","Option 2"],"items":{"type":"string"}},"selected":{"type":"string","default":"Option 1"},"placeholder":{"type":"string","default":"Select an option"},"required":{"type":"boolean","default":false,"source":"attribute","selector":"select","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string"},"name":{"type":"string","source":"attribute","selector":"select","attribute":"name"}},"example":{"attributes":{"label":"Select","placeholder":"Select an option","options":["Option 1","Option 2"],"required":true,"help":"This is a help text.","selected":"Option 1"}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
 
 /***/ })
 

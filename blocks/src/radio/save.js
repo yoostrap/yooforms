@@ -14,7 +14,7 @@ const Save = ( { attributes } ) => {
 
 	return (
 		<WithSaveWrapper attributes={ attributes }>
-			<div className="hizzle-forms__radio-options" id={`hizzle-forms-field-${instanceID}`} data-instance-id={ instanceID }>
+			<div className="hizzle-forms__radio-options" id={`hizzle-forms-field-${instanceID}`}>
 				<InnerBlocks.Content />
 			</div>
 		</WithSaveWrapper>

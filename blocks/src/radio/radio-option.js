@@ -11,7 +11,6 @@ import { useEffect } from '@wordpress/element';
  * Internal dependencies
  */
 import {useParentAttributes} from '../utils/use-parent-attributes';
-import labelToName from '../utils/label-to-name';
 import registerHizzleBlockType from '../utils/register-block';
 
 registerHizzleBlockType( 'hizzle-forms/radio-option', {
@@ -47,17 +46,16 @@ registerHizzleBlockType( 'hizzle-forms/radio-option', {
 		reusable: false,
 	},
 	edit: ( { clientId, onReplace, onRemove, mergeBlocks, attributes, setAttributes, context } ) => {
-		const { label, isRadio, instanceID } = useParentAttributes( clientId );
+		const { name, isRadio } = useParentAttributes( clientId );
 		const type = isRadio ? 'radio' : 'checkbox';
 		const blockProps = useBlockProps( { className: `hizzle-forms__${type}-option` } );
-		const expectedName = labelToName( label, instanceID );
 
 		// Ensure name is same as parent.
 		useEffect( () => {
-			if ( expectedName !== attributes.name ) {
-				setAttributes( { name: expectedName } );
+			if ( name !== attributes.name ) {
+				setAttributes( { name: name } );
 			}
-		}, [ expectedName ] );
+		}, [ name ] );
 
 		// Ensure isRadio is same as parent.
 		useEffect( () => {

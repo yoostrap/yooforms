@@ -16,6 +16,7 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
+import { useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -58,22 +59,24 @@ const template = [
 	],
 ];
 
-export default function HizzleFormEdit( {
-	attributes,
-	setAttributes,
-	instanceId,
-	className,
-	style,
-} ) {
+export default function HizzleFormEdit( { attributes, setAttributes, className, style, clientId } ) {
 	const {
 		emails,
 		action,
 		redirect,
 		message,
 		title,
+		instanceID,
 	} = attributes;
 
 	const formClassnames = classnames( className, 'hizzle-forms' );
+
+	// Reset instance ID once.
+	useEffect( () => {
+		if ( ! instanceID ) {
+			setAttributes( { instanceID: clientId } );
+		}
+	}, [] );
 
 	const renderSubmissionSettings = () => {
 		return (

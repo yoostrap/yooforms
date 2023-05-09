@@ -3,10 +3,10 @@
  */
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-const Save = () => {
-	const blockProps = useBlockProps.save();
+const Save = ( { attributes } ) => {
+
 	return (
-		<form { ...blockProps }>
+		<form { ...useBlockProps.save( { 'data-instance-id': attributes.instanceID || '' } ) }>
 			<InnerBlocks.Content />
 		</form>
 	);

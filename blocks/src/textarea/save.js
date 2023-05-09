@@ -2,13 +2,11 @@
  * Internal dependencies
  */
 import WithSaveWrapper from '../components/with-save-wrapper';
-import labelToName from '../utils/label-to-name';
 
 const Save = ( { attributes } ) => {
 
 	// Generate field name from the label.
 	const instanceID = attributes.instanceID || '';
-	const name       = labelToName( attributes.label, instanceID );
 
 	return (
 		<WithSaveWrapper attributes={ attributes }>
@@ -17,9 +15,8 @@ const Save = ( { attributes } ) => {
 				className="hizzle-forms__field-input form-control"
 				placeholder={ attributes.placeholder || '' }
 				value={ attributes.value ? attributes.value : '' }
-				name={`hizzle-forms[${name}]`}
+				name={`hizzle-forms[${attributes.name}]`}
 				required={ attributes.required }
-				data-instance-id={ instanceID }
 				rows="8"
 			/>
 		</WithSaveWrapper>

@@ -46,6 +46,9 @@
     "title": {
       "type": "string",
       "default": "Contact Form"
+    },
+    "instanceID": {
+      "type": "string"
     }
   },
   "styles": [

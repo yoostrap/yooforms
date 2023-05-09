@@ -29,11 +29,10 @@
       "selector": ".hizzle-forms__field-help-text"
     },
     "instanceID": {
-      "type": "string",
-      "default": "",
-      "source": "attribute",
-      "selector": ".hizzle-forms__radio-options",
-      "attribute": "data-instance-id"
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
     },
     "isRadio": {
       "type": "boolean",

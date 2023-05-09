@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { compact } from 'lodash';
+
+/**
  * Internal dependencies
  */
 import './style.scss';
@@ -33,8 +38,13 @@ function parseBlock( block ) {
 	const { attributes, innerBlocks, name } = block;
 	const prepared = { name, attributes };
 
+	// Abort if not our block.
+	if ( ! name.startsWith( 'hizzle-forms/' ) ) {
+		return false;
+	}
+
 	if ( Array.isArray( innerBlocks ) && innerBlocks.length ) {
-		prepared.innerBlocks = innerBlocks.map( parseBlock );
+		prepared.innerBlocks = compact( innerBlocks.map( parseBlock ) );
 	} else {
 		prepared.innerBlocks = [];
 	}
@@ -42,39 +52,78 @@ function parseBlock( block ) {
 	return prepared;
 }
 
+/**
+ * Parses the block list and returns an array of forms.
+ *
+ * @param {Array} blocks
+ * @return {Array}
+ */
+function getForms( blocks ) {
+	let forms = [];
+
+	// Loop through all blocks.
+	blocks.forEach( ( block ) => {
+
+		// Add form or parse inner blocks.
+		if ( block.name === 'hizzle-forms/form' ) {
+			forms.push( parseBlock( block ) );
+		} else if( Array.isArray( block.innerBlocks ) && block.innerBlocks.length ) {
+			forms = forms.concat( getForms( block.innerBlocks ) );
+		}
+	} );
+
+	return forms;
+}
+
 subscribe( () => {
 
-	// Fetch post selectors.
-	const { isSavingPost, isAutosavingPost, getCurrentPostId } = select( 'core/editor' );
-
-	// Don't save if this is an autosave.
-	if ( ! isSavingPost() || isAutosavingPost() ) {
+	// Abort if no block editor.
+	if ( ! select( 'core/block-editor' ) ) {
 		return;
 	}
 
-	// Fetch block editor selectors.
-	const { getBlocks } = select( 'core/block-editor' );
+	// Prepare additional data.
+	const data = {};
 
-	// Get the current post ID.
-	const postId = getCurrentPostId();
-	const forms  = [];
+	// Post editor.
+	if ( select( 'core/editor' ) ) {
 
-	// Loop through all blocks.
-	getBlocks().forEach( ( block ) => {
+		// Fetch post selectors.
+		const { isSavingPost, isAutosavingPost, getCurrentPostId } = select( 'core/editor' );
 
-		// Abort if not a form.
-		if ( block.name !== 'hizzle-forms/form' ) {
+		// Don't save if this is an autosave.
+		if ( ! isSavingPost() || isAutosavingPost() ) {
 			return;
 		}
 
-		forms.push( parseBlock( block ) );
-	} );
+		data.post_id = getCurrentPostId();
+
+		// Site editor.
+	} else if ( select( 'core/edit-site' ) ) {
+
+		// Fetch post selectors.
+		const { isSaveViewOpened, getEditedPostId } = select( 'core/editor' );
+
+		if ( ! isSaveViewOpened() ) {
+			return;
+		}
+
+		data.mode     = 'site';
+		data.template = getEditedPostId();
+		// TODO: Add checks for widget editor and site editor.
+	} else {
+		return;
+	}
+
+	// Get all forms.
+	const forms = getForms( select( 'core/block-editor' ).getBlocks() );
 
 	// Sync forms remotely.
 	apiFetch( {
-		path: `/hizzle-forms/v1/forms/${ postId }`,
+		path: '/hizzle/v1/forms/sync',
 		method: 'POST',
 		data: {
+			...data,
 			forms,
 		},
 	} );

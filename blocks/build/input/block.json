@@ -44,11 +44,13 @@
       "selector": ".hizzle-forms__field-help-text"
     },
     "instanceID": {
+      "type": "string"
+    },
+    "name": {
       "type": "string",
-      "default": "",
       "source": "attribute",
       "selector": "input",
-      "attribute": "data-instance-id"
+      "attribute": "name"
     },
     "type": {
       "type": "string",

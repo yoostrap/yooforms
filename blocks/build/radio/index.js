@@ -235,6 +235,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/with-edit-wrapper */ "./blocks/src/components/with-edit-wrapper.js");
+/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
 
 /**
  * WordPress dependencies
@@ -245,6 +246,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 const template = [['hizzle-forms/radio-option', {
   "option": "First Option",
@@ -269,14 +271,23 @@ const Edit = _ref => {
       });
     }
   }, []);
+  const expectedName = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_3__["default"])(attributes.label, attributes.instanceID);
+
+  // Ensure name is same as parent.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (expectedName !== attributes.name) {
+      setAttributes({
+        name: expectedName
+      });
+    }
+  }, [expectedName]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     isSelected: isSelected,
     hidePlaceholder: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "hizzle-forms__radio-options",
-    "data-instance-id": attributes.instanceID
+    className: "hizzle-forms__radio-options"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
     allowedBlocks: ['hizzle-forms/radio-option'],
     template: template
@@ -305,8 +316,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_use_parent_attributes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/use-parent-attributes */ "./blocks/src/utils/use-parent-attributes.js");
-/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
-/* harmony import */ var _utils_register_block__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/register-block */ "./blocks/src/utils/register-block.js");
+/* harmony import */ var _utils_register_block__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/register-block */ "./blocks/src/utils/register-block.js");
 
 /**
  * WordPress dependencies.
@@ -322,8 +332,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-
-(0,_utils_register_block__WEBPACK_IMPORTED_MODULE_7__["default"])('hizzle-forms/radio-option', {
+(0,_utils_register_block__WEBPACK_IMPORTED_MODULE_6__["default"])('hizzle-forms/radio-option', {
   apiVersion: 2,
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Radio Option', 'hizzle-forms'),
   icon: 'marker',
@@ -366,24 +375,22 @@ __webpack_require__.r(__webpack_exports__);
       context
     } = _ref;
     const {
-      label,
-      isRadio,
-      instanceID
+      name,
+      isRadio
     } = (0,_utils_use_parent_attributes__WEBPACK_IMPORTED_MODULE_5__.useParentAttributes)(clientId);
     const type = isRadio ? 'radio' : 'checkbox';
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
       className: `hizzle-forms__${type}-option`
     });
-    const expectedName = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_6__["default"])(label, instanceID);
 
     // Ensure name is same as parent.
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-      if (expectedName !== attributes.name) {
+      if (name !== attributes.name) {
         setAttributes({
-          name: expectedName
+          name: name
         });
       }
-    }, [expectedName]);
+    }, [name]);
 
     // Ensure isRadio is same as parent.
     (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -492,8 +499,7 @@ const Save = _ref => {
     attributes: attributes
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "hizzle-forms__radio-options",
-    id: `hizzle-forms-field-${instanceID}`,
-    "data-instance-id": instanceID
+    id: `hizzle-forms-field-${instanceID}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Save);
@@ -882,7 +888,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/radio","title":"Radio field","description":"A radio field input for forms.","category":"hizzle-forms","keywords":["form","contact","radio","multi-checkbox"],"icon":"editor-justify","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-label"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string","default":"","source":"attribute","selector":".hizzle-forms__radio-options","attribute":"data-instance-id"},"isRadio":{"type":"boolean","default":true}},"example":{"attributes":{"label":"Radio field","required":true,"help":"This is a radio field.","isRadio":true},"innerBlocks":[{"name":"hizzle-forms/radio-option","attributes":{"option":"First Option","selected":true}},{"name":"hizzle-forms/radio-option","attributes":{"option":"Second Option"}},{"name":"hizzle-forms/radio-option","attributes":{"option":"Third Option"}}]},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/radio","title":"Radio field","description":"A radio field input for forms.","category":"hizzle-forms","keywords":["form","contact","radio","multi-checkbox"],"icon":"editor-justify","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-label"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string"},"name":{"type":"string"},"isRadio":{"type":"boolean","default":true}},"example":{"attributes":{"label":"Radio field","required":true,"help":"This is a radio field.","isRadio":true},"innerBlocks":[{"name":"hizzle-forms/radio-option","attributes":{"option":"First Option","selected":true}},{"name":"hizzle-forms/radio-option","attributes":{"option":"Second Option"}},{"name":"hizzle-forms/radio-option","attributes":{"option":"Third Option"}}]},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
 
 /***/ })
 

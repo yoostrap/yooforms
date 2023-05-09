@@ -9,6 +9,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import WithEditWrapper from '../components/with-edit-wrapper';
+import labelToName from '../utils/label-to-name';
 
 /**
  * Edits a single option.
@@ -38,6 +39,15 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 		}
 	}, [] );
 
+	const expectedName = labelToName( attributes.label, attributes.instanceID );
+
+	// Ensure name is same as parent.
+	useEffect( () => {
+		if ( expectedName !== attributes.name ) {
+			setAttributes( { name: expectedName } );
+		}
+	}, [ expectedName ] );
+
 	const options = Array.isArray( attributes.options ) ? attributes.options : [];
 
 	return (
@@ -46,7 +56,6 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 				className="hizzle-forms__field-select"
 				value={ attributes.selected ? attributes.selected : '' }
 				onChange={ ( event ) => { setAttributes( { selected: event.target.value } ) } }
-				data-instance-id={ attributes.instanceID }
 			>
 				{ attributes.placeholder && <option value="">{ attributes.placeholder }</option> }
 				{ options.map( ( option, index ) => <option value={ option } key={ index }>{ option }</option> ) }

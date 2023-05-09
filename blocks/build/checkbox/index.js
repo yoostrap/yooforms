@@ -16,6 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/with-edit-wrapper */ "./blocks/src/components/with-edit-wrapper.js");
+/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
 
 /**
  * WordPress dependencies
@@ -27,6 +28,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 const Edit = _ref => {
   let {
@@ -43,6 +45,16 @@ const Edit = _ref => {
       });
     }
   }, []);
+  const expectedName = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_4__["default"])(attributes.label, attributes.instanceID);
+
+  // Ensure name is same as parent.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (expectedName !== attributes.name) {
+      setAttributes({
+        name: expectedName
+      });
+    }
+  }, [expectedName]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
@@ -61,7 +73,6 @@ const Edit = _ref => {
     onChange: value => setAttributes({
       label: value
     }),
-    "data-instance-id": attributes.instanceID,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Enter checkbox label', 'hizzle-forms')
   }));
 };
@@ -82,7 +93,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/with-save-wrapper */ "./blocks/src/components/with-save-wrapper.js");
-/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
 
 /**
  * WordPress dependencies
@@ -93,24 +103,21 @@ __webpack_require__.r(__webpack_exports__);
  * Internal dependencies
  */
 
-
 const Save = _ref => {
   let {
     attributes
   } = _ref;
   // Generate field name from the label.
   const instanceID = attributes.instanceID || '';
-  const name = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_3__["default"])(attributes.label, instanceID);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
     disableLabel: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
     checked: attributes.checked,
-    name: `hizzle-forms[${name}]`,
+    name: `hizzle-forms[${attributes.name}]`,
     id: `hizzle-forms-field-${instanceID}`,
-    required: attributes.required,
-    "data-instance-id": instanceID
+    required: attributes.required
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
     tagName: "span",
     value: attributes.label
@@ -601,7 +608,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/checkbox","title":"Checkbox field","description":"A checkbox field.","category":"hizzle-forms","keywords":["form","contact","checkbox"],"icon":"yes","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":""},"checked":{"type":"boolean","default":false},"required":{"type":"boolean","default":false,"source":"attribute","selector":"input","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string","default":"","source":"attribute","selector":"input","attribute":"data-instance-id"}},"example":{"attributes":{"label":"Checkbox field","required":true,"checked":true,"help":"This is a checkbox field."}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/checkbox","title":"Checkbox field","description":"A checkbox field.","category":"hizzle-forms","keywords":["form","contact","checkbox"],"icon":"yes","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":""},"checked":{"type":"boolean","default":false},"required":{"type":"boolean","default":false,"source":"attribute","selector":"input","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string"},"name":{"type":"string","source":"attribute","selector":"input","attribute":"name"}},"example":{"attributes":{"label":"Checkbox field","required":true,"checked":true,"help":"This is a checkbox field."}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
 
 /***/ })
 

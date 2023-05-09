@@ -8,7 +8,6 @@
 @media (min-width: 600px) {
   .wp-block-hizzle-forms-form {
     display: grid;
-    align-items: end;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 1fr;
     -moz-column-gap: 16px;
