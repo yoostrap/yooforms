@@ -55,7 +55,7 @@ class REST_API extends \WP_REST_Controller {
 			array(
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
-					'callback'            => array( $this, 'submit_form' ),
+					'callback'            => array( $this, 'process_form_submission' ),
 					'permission_callback' => array( $this, 'can_submit_form' ),
 					'args'                => array(),
 				),
@@ -278,19 +278,27 @@ class REST_API extends \WP_REST_Controller {
 		}
 
 		// Fetch the form. Form ID is the form name.
-		$form = get_page_by_path( $request['form_id'], OBJECT, array( 'hizzle_form' ) );
+		$form = new Form( $request['form_id'] );
 
 		// Abort if the form doesn't exist.
-		if ( ! $form ) {
+		if ( ! $form->exists() ) {
 			return new \WP_Error( 'hizzle_rest_form_not_found', 'Sorry, the form could not be found.', array( 'status' => 404 ) );
 		}
 
-		// Check if the form is enabled.
-		if ( 'publish' !== $form->post_status ) {
-			return new \WP_Error( 'hizzle_rest_form_not_enabled', 'Sorry, the form is not enabled.', array( 'status' => 400 ) );
-		}
+		// Prepare the submission.
+		$plugin = Plugin::instance();
+
+		$plugin->submission->form            = $form;
+		$plugin->submission->submission_page = $request['hizzle_conversion_page'];
+		$plugin->submission->data            = $request['hizzle-forms'];
 
 		return true;
 	}
 
+	/**
+	 * Processes a form submission.
+	 */
+	public function process_form_submission() {
+		return rest_ensure_response( Plugin::instance()->submission->process() );
+	}
 }

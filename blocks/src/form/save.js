@@ -13,6 +13,7 @@ const Save = ( { attributes } ) => {
 	return (
 		<form { ...useBlockProps.save( props ) }>
 			<InnerBlocks.Content />
+			<div className="hizzle-forms__form-error" />
 		</form>
 	);
 };

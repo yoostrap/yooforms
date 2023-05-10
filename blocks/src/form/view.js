@@ -1,10 +1,15 @@
 /**
- * Internal dependencies
+ * WordPress dependencies
  */
-import './view.scss';
 import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
 import domReady from '@wordpress/dom-ready';
+
+/**
+ * Internal dependencies
+ */
+import './view.scss';
+import validateForm from '../validation/frontend';
 
 /**
  * Converts a key to a value or object.
@@ -90,55 +95,81 @@ const formDataToObject = (formData ) => {
 
 domReady(() => {
 
-	// Watch for form submissions.
-	document.addEventListener('submit', (e) => {
+	// Init all forms.
+	const forms = document.querySelectorAll('.wp-block-hizzle-forms-form');
 
-		// Our forms have the .wp-block-hizzle-forms-form class.
-		if (!e.target.classList.contains('wp-block-hizzle-forms-form')) {
-			return;
-		}
+	// Loop through each form.
+	forms.forEach((form) => {
+		const validation = validateForm(form);
 
-		// Prevent the form from submitting.
-		e.preventDefault();
-
-		// Get the form.
-		const form = e.target;
-
-		// Get the form ID from data-instance-id attribute.
-		const formID = form.dataset.instanceId;
-
-		// Get the form fields.
-		const fields = new FormData(form);
-
-		// Add the conversion page to the form fields.
-		fields.append('hizzle_conversion_page', window.location.href);
-
-		console.log(formDataToObject(fields));
-		// Add submitting class to the form.
-		form.classList.add('hizzle-forms-submitting');
-
-		// Post the form.
-		apiFetch({
-			path: '/hizzle/v1/forms/submit/' + formID,
-			method: 'POST',
-			data: formDataToObject(fields),
-		}).then((res) => {
-
-			if ('message' === res.action) {
-				// TODO:
-			}
-
-			if ('redirect' === res.action) {
-				// TODO:
-			}
-
-			return res;
-		}).catch((err) => {
-			console.log(err);
-		}).finally(() => {
-			// Remove submitting class from the form.
-			form.classList.remove('hizzle-forms-submitting');
+		// Reset error message when a field changes.
+		form.querySelectorAll('.wp-block-hizzle-forms-field :input').forEach((field) => {
+			field.addEventListener('change', () => {
+				if ( validation.errors.length > 0 ) {
+					validation.errors = [];
+					validation.toggleError();
+				}
+			});
 		});
 
+		// Watch for submissions.
+		form.addEventListener('submit', (e) => {
+
+			// Prevent the form from submitting.
+			e.preventDefault();
+
+			// Abort if the form is invalid.
+			if ( ! validation.validate() ) {
+				return;
+			}
+
+			// Get the form ID from data-instance-id attribute.
+			const formID = form.dataset.instanceId;
+
+			// Get the form fields.
+			const fields = new FormData(form);
+
+			// Add the conversion page to the form fields.
+			fields.append('hizzle_conversion_page', window.location.href);
+
+			// Add submitting class to the form.
+			form.classList.add('hizzle-forms-submitting');
+
+			// Post the form.
+			apiFetch({
+				path: '/hizzle/v1/forms/submit/' + formID,
+				method: 'POST',
+				data: formDataToObject(fields),
+			})
+
+			// On success, either show a success message or redirect.
+			.then((res) => {
+
+				// Replace the form with the message.
+				if ('message' === res.action) {
+					form.outerHTML = `<div class="wp-block-hizzle-forms__success-message">${res.message}</div>`;
+					form.classList.remove('hizzle-forms-submitting');
+				}
+
+				if ('redirect' === res.action) {
+					window.location.href = res.redirect;
+				}
+
+				return res;
+			})
+
+			// On error, show an error message.
+			.catch((err) => {
+
+				if ( err.code ) {
+					validation.displayError( err.code, err.message );
+				} else {
+					validation.displayError( 'unknown', __( 'An unknown error occurred while submitting the form. Check your network connectivity then try again.', 'hizzle-forms' ) );
+				}
+
+				// Remove submitting class from the form.
+				form.classList.remove('hizzle-forms-submitting');
+			});
+		});
 	});
 });

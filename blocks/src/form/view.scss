@@ -85,3 +85,24 @@
 	margin-bottom: 1rem;
 }
 
+.hizzle-forms__form-error,
+.hizzle-forms__field-error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
+    display: none;
+}
+
+.hizzle-forms__form-error.hizzle-forms__form--has-error {
+    display: block;
+}
+
+.hizzle-forms__field--has-error .hizzle-forms__field-error {
+    display: block;
+}
+
+// Change field border color if error.
+.hizzle-forms__field--has-error .hizzle-forms__field-input,
+.hizzle-forms__field--has-error .hizzle-forms__field-select {
+    border-color: red;
+}

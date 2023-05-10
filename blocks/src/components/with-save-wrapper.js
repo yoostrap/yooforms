@@ -50,6 +50,7 @@ export default function WithSaveWrapper ( {attributes, children, className, cust
 			<FieldLabel label={ attributes.label } instanceID={ attributes.instanceID } />
 			{ children }
 			<HelpText help={ attributes.help }/>
+			<div className="hizzle-forms__field-error" />
 		</div>
 
 	);

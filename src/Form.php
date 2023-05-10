@@ -70,6 +70,12 @@ class Form {
 		} elseif ( is_string( $form_or_instance_id ) ) {
 			$this->init( get_page_by_path( $form_or_instance_id, OBJECT, array( 'hizzle_form' ) ) );
 		}
+
+		$this->action   = empty( $this->action ) ? 'message' : $this->action;
+		$this->redirect = empty( $this->redirect ) ? home_url() : $this->redirect;
+		$this->message  = empty( $this->message ) ? __( 'Thank you for contacting us. We will be in touch with you shortly.', 'hizzle-forms' ) : $this->message;
+
+		do_action( 'hizzle_forms_form_init', $this );
 	}
 
 	/**
@@ -114,8 +120,60 @@ class Form {
 		// Fields.
 		if ( ! empty( $data['innerBlocks'] ) ) {
 			foreach ( $data['innerBlocks'] as $field ) {
-				$this->fields[] = new Field( $field );
+				$field = new Field( $field );
+
+				$this->fields[ $field->name ] = $field;
 			}
 		}
 	}
+
+	/**
+	 * Checks if the form exists.
+	 *
+	 * @return bool
+	 */
+	public function exists() {
+		return ! empty( $this->id );
+	}
+
+	/**
+	 * Retrieves the appropriate form response.
+	 *
+	 * @return array
+	 */
+	public function get_response() {
+		$response = array(
+			'action'   => $this->action,
+			'redirect' => $this->redirect,
+			'message'  => $this->message,
+		);
+
+		return apply_filters( 'hizzle_forms_form_response', $response, $this );
+	}
+
+	/**
+	 * Validates a given form field.
+	 *
+	 * @param string $field_name The field name.
+	 * @param string $value      The field value.
+	 * @param Submission $submission The submission object.
+	 * @return true|\WP_Error
+	 */
+	public function validate_field( $field_name, $value, $submission ) {
+
+		// Abort if the field does not exist.
+		if ( ! isset( $this->fields[ $field_name ] ) ) {
+			return true;
+		}
+
+		return apply_filters(
+			'hizzle_forms_validate_field',
+			$this->fields[ $field_name ]->validate( $value, $submission ),
+			$field_name,
+			$value,
+			$submission,
+			$this
+		);
+	}
+
 }

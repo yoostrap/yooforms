@@ -24,6 +24,13 @@ class Plugin {
 	public $rest_api;
 
 	/**
+	 * The current submission.
+	 *
+	 * @var Submission
+	 */
+	public $submission;
+
+	/**
 	 * Stores the main plugin instance.
 	 *
 	 * @access      private
@@ -58,6 +65,9 @@ class Plugin {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ), 0 );
 		add_action( 'init', array( $this, 'register_post_type' ) );
 		add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
+
+		// Init the submission object.
+		$this->submission = new Submission();
 	}
 
 	/**
