@@ -15,7 +15,8 @@
 
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
-	<exclude-pattern>*/src/libraries/*</exclude-pattern>
+	<exclude-pattern>*/blocks/build/*/index.asset.php</exclude-pattern>
+	<exclude-pattern>*/blocks/build/*/view.asset.php</exclude-pattern>
 	<exclude-pattern>*/tests/*</exclude-pattern>
 
 	<config name="minimum_supported_wp_version" value="4.7" />
