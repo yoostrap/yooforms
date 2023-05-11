@@ -28,7 +28,7 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 	}, [ expectedName ] );
 
 	return (
-		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}>
+		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected} fieldType="text">
 			<textarea
 				className="hizzle-forms__field-input form-control"
 				placeholder={ attributes.placeholder || "" }

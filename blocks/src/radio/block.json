@@ -42,7 +42,7 @@
   "example": {
     "attributes": {
       "label": "Radio field",
-      "required": true,
+      "validation": [{ "name": "required" }],
       "help": "This is a radio field.",
       "isRadio": true
     },

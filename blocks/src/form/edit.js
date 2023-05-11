@@ -46,8 +46,8 @@ const ALLOWED_BLOCKS = [
 
 // Template.
 const template = [
-	[ 'hizzle-forms/input', { required: true, label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
-	[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
+	[ 'hizzle-forms/input', { validation: [{ name: 'required' }], label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
+	[ 'hizzle-forms/input', { validation: [{ name: 'required' }], type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 	[ 'hizzle-forms/textarea', { label: __( 'Message', 'hizzle-forms' ) } ],
 	[
 		'hizzle-forms/submit',

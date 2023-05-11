@@ -28,13 +28,18 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 		}
 	}, [ expectedName ] );
 
-	const fieldType    = ADDRESS_INPUT_TYPES.includes( attributes.type ) ? 'text' : attributes.type;
+	const inputType    = ADDRESS_INPUT_TYPES.includes( attributes.type ) ? 'text' : attributes.type;
 	const autocomplete = ADDRESS_INPUT_TYPES.includes( attributes.type ) ? attributes.type : null;
+	let fieldType      = 'text';
+
+	if ( 'date' === inputType || 'number' === inputType ) {
+		fieldType = inputType;
+	}
 
 	return (
-		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}>
+		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected} fieldType={fieldType}>
 			<input
-				type={ fieldType }
+				type={ inputType }
 				className="hizzle-forms__field-input form-control"
 				placeholder={ attributes.placeholder || "" }
 				value={ attributes.value ? attributes.value : '' }

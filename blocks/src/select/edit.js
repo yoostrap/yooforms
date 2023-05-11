@@ -51,7 +51,7 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 	const options = Array.isArray( attributes.options ) ? attributes.options : [];
 
 	return (
-		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}>
+		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected} fieldType="text">
 			<select
 				className="hizzle-forms__field-select"
 				value={ attributes.value ? attributes.value : '' }

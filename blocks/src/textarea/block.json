@@ -28,12 +28,11 @@
       "selector": "textarea",
       "attribute": "placeholder"
     },
-    "required": {
-      "type": "boolean",
-      "default": false,
+    "validation": {
+      "type": "array",
+      "default": [],
       "source": "attribute",
-      "selector": "textarea",
-      "attribute": "required"
+      "attribute": "data-validation"
     },
     "help": {
       "type": "string",
@@ -45,10 +44,7 @@
       "type": "string"
     },
     "name": {
-      "type": "string",
-      "source": "attribute",
-      "selector": "textarea",
-      "attribute": "name"
+      "type": "string"
     },
     "value": {
       "type": "string",
@@ -59,7 +55,7 @@
     "attributes": {
       "label": "Textarea",
       "placeholder": "Placeholder text",
-      "required": true,
+      "validation": [{ "name": "required" }],
       "help": "Help text"
     }
   },

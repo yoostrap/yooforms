@@ -246,7 +246,7 @@ variations.forEach( ( variation ) => {
 		attributes: {
 			label: variation.title,
 			placeholder: __( 'Enter your text', 'hizzle-forms' ),
-			required: true,
+			validation: [{ name: 'required' }],
 			help: variation.description,
 			value: '',
 			...variation.attributes

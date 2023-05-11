@@ -103,7 +103,7 @@ domReady(() => {
 		const validation = validateForm(form);
 
 		// Reset error message when a field changes.
-		form.querySelectorAll('.wp-block-hizzle-forms-field :input').forEach((field) => {
+		form.querySelectorAll('input, select, textarea').forEach((field) => {
 			field.addEventListener('change', () => {
 				if ( validation.errors.length > 0 ) {
 					validation.errors = [];

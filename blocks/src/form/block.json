@@ -60,19 +60,19 @@
 		"innerBlocks": [
 			{
 				"name": "hizzle-forms/input",
-				"attributes": { "required": true, "label": "Name", "type": "name" }
+				"attributes": { "validation": [{ "name": "required" }], "label": "Name", "type": "name" }
 			},
 			{
 				"name": "hizzle-forms/input",
-                "attributes": { "required": true, "type": "email", "label": "Email" }
+                "attributes": { "validation": [{ "name": "required" }], "type": "email", "label": "Email" }
 			},
 			{
                 "name": "hizzle-forms/textarea",
-                "attributes": { "required": true, "label": "Message" }
+                "attributes": { "validation": [{ "name": "required" }], "label": "Message" }
 			},
 			{
                 "name": "hizzle-forms/checkbox",
-                "attributes": { "required": true, "label": "I agree to the terms and conditions" }
+                "attributes": { "validation": [{ "name": "required" }], "label": "I agree to the terms and conditions" }
             },
             {
                 "name": "hizzle-forms/submit",

@@ -41,12 +41,11 @@
       "type": "string",
       "default": "Select an option"
     },
-    "required": {
-      "type": "boolean",
-      "default": false,
+    "validation": {
+      "type": "array",
+      "default": [],
       "source": "attribute",
-      "selector": "select",
-      "attribute": "required"
+      "attribute": "data-validation"
     },
     "help": {
       "type": "string",
@@ -58,10 +57,7 @@
       "type": "string"
     },
     "name": {
-      "type": "string",
-      "source": "attribute",
-      "selector": "select",
-      "attribute": "name"
+      "type": "string"
     }
   },
   "example": {
@@ -72,7 +68,11 @@
         "Option 1",
         "Option 2"
       ],
-      "required": true,
+      "validation": [
+        {
+          "name": "required"
+        }
+      ],
       "help": "This is a help text.",
       "value": "Option 1"
     }

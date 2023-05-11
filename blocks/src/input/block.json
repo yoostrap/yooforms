@@ -28,12 +28,11 @@
       "selector": "input",
       "attribute": "placeholder"
     },
-    "required": {
-      "type": "boolean",
-      "default": false,
+    "validation": {
+      "type": "array",
+      "default": [],
       "source": "attribute",
-      "selector": "input",
-      "attribute": "required"
+      "attribute": "data-validation"
     },
     "help": {
       "type": "string",
@@ -45,10 +44,7 @@
       "type": "string"
     },
     "name": {
-      "type": "string",
-      "source": "attribute",
-      "selector": "input",
-      "attribute": "name"
+      "type": "string"
     },
     "type": {
       "type": "string",
@@ -69,7 +65,7 @@
     "attributes": {
       "label": "Label",
       "placeholder": "Placeholder",
-      "required": true,
+      "validation": [{ "name": "required" }],
       "help": "Help text",
       "pattern": "[0-9]+",
       "type": "number",

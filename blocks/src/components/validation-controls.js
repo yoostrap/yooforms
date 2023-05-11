@@ -74,7 +74,7 @@ export default function HizzleValidationControls ( { attributes, setAttributes, 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Validation Settings', 'hizzle-forms' ) }>
+				<PanelBody title={ __( 'Validation Rules', 'hizzle-forms' ) }>
 
 					{ rules.map( ( rule, index ) => (
 						<Validation
@@ -200,7 +200,7 @@ const AddValidation = ({usableRules, rules, addRule}) => {
 			</FlexBlock>
 			<FlexItem>
 				<Button
-					variant="primary"
+					variant="secondary"
 					onClick={ () => addRule( toAdd ) }
 					disabled={ ! toAdd }
 				>

@@ -27,16 +27,12 @@ const HizzleFieldControls = _ref => {
     hidePlaceholder,
     setAttributes
   } = _ref;
+  if (hidePlaceholder) {
+    return null;
+  }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Field Settings', 'hizzle-forms')
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Field is required', 'hizzle-forms'),
-    className: "hizzle-forms-field-label__required",
-    checked: attributes.required,
-    onChange: value => setAttributes({
-      required: value
-    })
-  }), !hidePlaceholder && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder text', 'hizzle-forms'),
     value: attributes.placeholder || '',
     onChange: value => setAttributes({
@@ -46,6 +42,259 @@ const HizzleFieldControls = _ref => {
   }))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (HizzleFieldControls);
+
+/***/ }),
+
+/***/ "./blocks/src/components/validation-controls.js":
+/*!******************************************************!*\
+  !*** ./blocks/src/components/validation-controls.js ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ HizzleValidationControls; }
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _validation_rules_admin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../validation/rules/admin */ "./blocks/src/validation/rules/admin.js");
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+/**
+ * Allows user to set the validations for a field.
+ *
+ * @param {Object} props
+ * @param {Object} props.attributes
+ * @param {Function} props.setAttributes
+ * @param {string} props.fieldType
+ */
+function HizzleValidationControls(_ref) {
+  let {
+    attributes,
+    setAttributes,
+    fieldType
+  } = _ref;
+  // Fetch usable rules for this field type.
+  const usableRules = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useMemo)(() => _validation_rules_admin__WEBPACK_IMPORTED_MODULE_5__["default"].filter(rule => rule.fieldTypes.includes(fieldType) || rule.fieldTypes.includes('all')), [fieldType]);
+
+  // Get the current validation rules.
+  const rules = attributes.validation || [];
+
+  // Remove any rules that are no longer usable.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const preparedRules = [];
+    const hasMissingRules = false;
+    rules.forEach(rule => {
+      if (usableRules.some(usableRule => usableRule.name === rule.name)) {
+        preparedRules.push(rule);
+      } else {
+        hasMissingRules = true;
+      }
+    });
+    if (hasMissingRules) {
+      setAttributes({
+        validation: preparedRules
+      });
+    }
+  }, [usableRules]);
+
+  // Abort if there are no usable rules.
+  if (!usableRules.length) {
+    return null;
+  }
+
+  // Removes a rule from the current validation.
+  const removeRule = index => {
+    const newRules = [...rules];
+    newRules.splice(index, 1);
+    setAttributes({
+      validation: newRules
+    });
+  };
+
+  // Updates a rule in the current validation.
+  const updateRule = (index, rule) => {
+    const newRules = [...rules];
+    newRules[index] = rule;
+    setAttributes({
+      validation: newRules
+    });
+  };
+
+  // Adds a rule to the current validation.
+  const addRule = name => {
+    const newRules = [...rules];
+    newRules.push({
+      name
+    });
+    setAttributes({
+      validation: newRules
+    });
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Validation Rules', 'hizzle-forms')
+  }, rules.map((rule, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Validation, {
+    key: index,
+    rule: rule,
+    removeRule: () => removeRule(index),
+    updateRule: rule => updateRule(index, rule)
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(AddValidation, {
+    usableRules: usableRules,
+    rules: rules,
+    addRule: addRule
+  }))));
+}
+;
+
+/**
+ * Displays a single validation.
+ *
+ * @param {Object} props
+ * @param {Object} props.rule The rule
+ * @param {Function} props.removeRule a function to remove the automation rule 
+ * @param {Function} props.updateRule a function to update the automation rule
+ */
+const Validation = _ref2 => {
+  let {
+    rule,
+    removeRule,
+    updateRule
+  } = _ref2;
+  // Retrieves the rule type.
+  const ruleType = _validation_rules_admin__WEBPACK_IMPORTED_MODULE_5__["default"].find(ruleType => ruleType.name === rule.name);
+
+  // Abort if the rule type is not found.
+  if (!ruleType) {
+    return null;
+  }
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    className: "hizzle-forms__automation-rule--type"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h3", null, ruleType.label), ruleType.edit.map((edit, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(EditField, {
+    key: index,
+    edit: edit,
+    rule: rule,
+    updateRule: updateRule
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(EditField, {
+    edit: {
+      name: 'errorMessage',
+      type: 'text',
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Error message', 'hizzle-forms'),
+      help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Optional. The error message to display when this rule fails.', 'hizzle-forms'),
+      placeholder: ruleType.defaultMessage
+    },
+    rule: rule,
+    updateRule: updateRule
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+    isDestructive: true,
+    onClick: removeRule
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Remove Rule', 'hizzle-forms')));
+};
+
+/**
+ * Displays a single edit field.
+ *
+ * @param {Object} props
+ * @param {Object} props.edit The edit field
+ * @param {Object} props.rule The rule
+ * @param {Function} props.updateRule a function to update the automation rule
+ * @return {JSX.Element} The edit field.
+ */
+const EditField = _ref3 => {
+  let {
+    edit,
+    rule,
+    updateRule
+  } = _ref3;
+  const {
+    type,
+    name,
+    ...props
+  } = edit;
+
+  // Updates the field.
+  const updateField = value => {
+    const newRule = {
+      ...rule
+    };
+    newRule[name] = value;
+    updateRule(newRule);
+  };
+
+  // Render the edit field.
+  switch (type) {
+    case 'toggle':
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+        checked: rule[edit.name] ? rule[edit.name] : false,
+        onChange: updateField
+      }));
+    case 'select':
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+        value: rule[edit.name] ? rule[edit.name] : '',
+        onChange: updateField
+      }));
+    default:
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+        value: rule[edit.name] ? rule[edit.name] : '',
+        onChange: updateField
+      }));
+  }
+};
+
+/**
+ * Displays a select and button to add a new validation (if any are available).
+ *
+ * @param {Object} props
+ * @param {Object} props.usableRules The usable rules
+ * @param {Object} props.rules The current rules
+ * @param {Function} props.addRule a function to add a new rule
+ * @return {JSX.Element} The add validation.
+ */
+const AddValidation = _ref4 => {
+  let {
+    usableRules,
+    rules,
+    addRule
+  } = _ref4;
+  const [toAdd, setToAdd] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('');
+  const addableRules = usableRules.filter(rule => !rules.some(currentRule => currentRule.name === rule.name));
+  if (!addableRules.length) {
+    return null;
+  }
+  const options = addableRules.map(rule => ({
+    label: rule.label,
+    value: rule.name
+  }));
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexBlock, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add validation', 'hizzle-forms'),
+    options: options,
+    onChange: setToAdd
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+    variant: "secondary",
+    onClick: () => addRule(toAdd),
+    disabled: !toAdd
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add', 'hizzle-forms'))));
+};
 
 /***/ }),
 
@@ -72,6 +321,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _field_controls__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./field-controls */ "./blocks/src/components/field-controls.js");
+/* harmony import */ var _validation_controls__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./validation-controls */ "./blocks/src/components/validation-controls.js");
 
 
 
@@ -82,6 +332,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 
 /**
@@ -98,6 +349,7 @@ function WithEditWrapper(_ref) {
     children,
     className,
     isSelected,
+    fieldType,
     ...props
   } = _ref;
   const showHelpText = !disableHelpText && (isSelected || !(0,lodash__WEBPACK_IMPORTED_MODULE_3__.isEmpty)(attributes.help));
@@ -125,7 +377,11 @@ function WithEditWrapper(_ref) {
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_field_controls__WEBPACK_IMPORTED_MODULE_6__["default"], (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     setAttributes: setAttributes,
     attributes: attributes
-  }, props)));
+  }, props)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_validation_controls__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    setAttributes: setAttributes,
+    attributes: attributes,
+    fieldType: fieldType
+  }));
 }
 
 /***/ }),
@@ -209,9 +465,13 @@ function WithSaveWrapper(_ref3) {
     customClass
   } = _ref3;
   const classes = classnames__WEBPACK_IMPORTED_MODULE_1___default()('hizzle-forms-field', className, customClass);
-  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
+  const props = {
     className: classes
-  });
+  };
+  if (Array.isArray(attributes.validation) && attributes.validation.length > 0) {
+    props['data-validation'] = JSON.stringify(attributes.validation);
+  }
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save(props);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(FieldLabel, {
     label: attributes.label,
     instanceID: attributes.instanceID
@@ -306,7 +566,8 @@ const Edit = _ref => {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_3__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
-    isSelected: isSelected
+    isSelected: isSelected,
+    fieldType: "text"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     className: "hizzle-forms__field-select",
     value: attributes.value ? attributes.value : '',
@@ -381,8 +642,7 @@ const Save = _ref => {
     id: `hizzle-forms-field-${instanceID}`,
     className: "hizzle-forms__field-select",
     value: attributes.value ? attributes.value : '',
-    name: `hizzle-forms[${attributes.name}]`,
-    required: attributes.required
+    name: `hizzle-forms[${attributes.name}]`
   }, attributes.placeholder && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: ""
   }, attributes.placeholder), options.map((option, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
@@ -481,6 +741,659 @@ function registerHizzleBlockType(name, settings) {
   // Register the block.
   (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, settings);
 }
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/admin.js":
+/*!**********************************************!*\
+  !*** ./blocks/src/validation/rules/admin.js ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _required__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./required */ "./blocks/src/validation/rules/required.js");
+/* harmony import */ var _maxdate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./maxdate */ "./blocks/src/validation/rules/maxdate.js");
+/* harmony import */ var _mindate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mindate */ "./blocks/src/validation/rules/mindate.js");
+/* harmony import */ var _maxnumber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./maxnumber */ "./blocks/src/validation/rules/maxnumber.js");
+/* harmony import */ var _minnumber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./minnumber */ "./blocks/src/validation/rules/minnumber.js");
+/* harmony import */ var _maxitems__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./maxitems */ "./blocks/src/validation/rules/maxitems.js");
+/* harmony import */ var _minitems__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./minitems */ "./blocks/src/validation/rules/minitems.js");
+/* harmony import */ var _maxlength__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./maxlength */ "./blocks/src/validation/rules/maxlength.js");
+/* harmony import */ var _minlength__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./minlength */ "./blocks/src/validation/rules/minlength.js");
+
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ([_required__WEBPACK_IMPORTED_MODULE_0__.admin, _maxdate__WEBPACK_IMPORTED_MODULE_1__.admin, _mindate__WEBPACK_IMPORTED_MODULE_2__.admin, _maxnumber__WEBPACK_IMPORTED_MODULE_3__.admin, _minnumber__WEBPACK_IMPORTED_MODULE_4__.admin, _maxitems__WEBPACK_IMPORTED_MODULE_5__.admin, _minitems__WEBPACK_IMPORTED_MODULE_6__.admin, _maxlength__WEBPACK_IMPORTED_MODULE_7__.admin, _minlength__WEBPACK_IMPORTED_MODULE_8__.admin]);
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/maxdate.js":
+/*!************************************************!*\
+  !*** ./blocks/src/validation/rules/maxdate.js ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
+/* harmony export */   "edit": function() { return /* binding */ edit; },
+/* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
+/* harmony export */   "frontend": function() { return /* binding */ frontend; },
+/* harmony export */   "label": function() { return /* binding */ label; },
+/* harmony export */   "name": function() { return /* binding */ name; },
+/* harmony export */   "validate": function() { return /* binding */ validate; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+
+// Rule name.
+const name = 'maxdate';
+
+// Rule label.
+const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum date', 'hizzle-forms');
+
+// Default error message.
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The oldest date allowed is {threshold}.', 'hizzle-forms');
+
+// Value type.
+const fieldTypes = ['date'];
+
+// Edit details.
+const edit = [{
+  name: 'threshold',
+  type: 'date',
+  label
+}];
+
+// Validation function.
+const validate = function (value, config) {
+  if (/^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test(value) && /^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test(config.threshold) && value > config.threshold) {
+    return false;
+  }
+  return true;
+};
+
+// Admin export.
+const admin = {
+  name,
+  label,
+  defaultMessage,
+  fieldTypes,
+  edit
+};
+
+// Frontend export.
+const frontend = {
+  name,
+  defaultMessage,
+  validate
+};
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/maxitems.js":
+/*!*************************************************!*\
+  !*** ./blocks/src/validation/rules/maxitems.js ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
+/* harmony export */   "edit": function() { return /* binding */ edit; },
+/* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
+/* harmony export */   "frontend": function() { return /* binding */ frontend; },
+/* harmony export */   "label": function() { return /* binding */ label; },
+/* harmony export */   "name": function() { return /* binding */ name; },
+/* harmony export */   "validate": function() { return /* binding */ validate; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+
+// Rule name.
+const name = 'maxitems';
+
+// Rule label.
+const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum items', 'hizzle-forms');
+
+// Default error message.
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You must select at most {threshold} items.', 'hizzle-forms');
+
+// Value type.
+const fieldTypes = ['array'];
+
+// Edit details.
+const edit = [{
+  name: 'threshold',
+  type: 'number',
+  label
+}];
+
+// Validation function.
+const validate = function (value, config) {
+  if (value.length > parseInt(config.threshold)) {
+    return false;
+  }
+  return true;
+};
+
+// Admin export.
+const admin = {
+  name,
+  label,
+  defaultMessage,
+  fieldTypes,
+  edit
+};
+
+// Frontend export.
+const frontend = {
+  name,
+  defaultMessage,
+  validate
+};
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/maxlength.js":
+/*!**************************************************!*\
+  !*** ./blocks/src/validation/rules/maxlength.js ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
+/* harmony export */   "edit": function() { return /* binding */ edit; },
+/* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
+/* harmony export */   "frontend": function() { return /* binding */ frontend; },
+/* harmony export */   "label": function() { return /* binding */ label; },
+/* harmony export */   "name": function() { return /* binding */ name; },
+/* harmony export */   "validate": function() { return /* binding */ validate; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+
+// Rule name.
+const name = 'maxlength';
+
+// Rule label.
+const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum length', 'hizzle-forms');
+
+// Default error message.
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at most {threshold} characters long.', 'hizzle-forms');
+
+// Value type.
+const fieldTypes = ['text', 'textarea'];
+
+// Edit details.
+const edit = [{
+  name: 'threshold',
+  type: 'number',
+  label
+}];
+
+// Validation function.
+const validate = function (value, config) {
+  if (value.length > parseInt(config.threshold)) {
+    return false;
+  }
+  return true;
+};
+
+// Admin export.
+const admin = {
+  name,
+  label,
+  defaultMessage,
+  fieldTypes,
+  edit
+};
+
+// Frontend export.
+const frontend = {
+  name,
+  defaultMessage,
+  validate
+};
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/maxnumber.js":
+/*!**************************************************!*\
+  !*** ./blocks/src/validation/rules/maxnumber.js ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
+/* harmony export */   "edit": function() { return /* binding */ edit; },
+/* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
+/* harmony export */   "frontend": function() { return /* binding */ frontend; },
+/* harmony export */   "label": function() { return /* binding */ label; },
+/* harmony export */   "name": function() { return /* binding */ name; },
+/* harmony export */   "validate": function() { return /* binding */ validate; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+
+// Rule name.
+const name = 'maxnumber';
+
+// Rule label.
+const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum number', 'hizzle-forms');
+
+// Default error message.
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at most {threshold}.', 'hizzle-forms');
+
+// Value type.
+const fieldTypes = ['number'];
+
+// Edit details.
+const edit = [{
+  name: 'threshold',
+  type: 'number',
+  label
+}];
+
+// Validation function.
+const validate = function (value, config) {
+  if (parseFloat(value) > parseFloat(config.threshold)) {
+    return false;
+  }
+  return true;
+};
+
+// Admin export.
+const admin = {
+  name,
+  label,
+  defaultMessage,
+  fieldTypes,
+  edit
+};
+
+// Frontend export.
+const frontend = {
+  name,
+  defaultMessage,
+  validate
+};
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/mindate.js":
+/*!************************************************!*\
+  !*** ./blocks/src/validation/rules/mindate.js ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
+/* harmony export */   "edit": function() { return /* binding */ edit; },
+/* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
+/* harmony export */   "frontend": function() { return /* binding */ frontend; },
+/* harmony export */   "label": function() { return /* binding */ label; },
+/* harmony export */   "name": function() { return /* binding */ name; },
+/* harmony export */   "validate": function() { return /* binding */ validate; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+
+// Rule name.
+const name = 'mindate';
+
+// Rule label.
+const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum date', 'hizzle-forms');
+
+// Default error message.
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The earliest date allowed is {threshold}.', 'hizzle-forms');
+
+// Value type.
+const fieldTypes = ['date'];
+
+// Edit details.
+const edit = [{
+  name: 'threshold',
+  type: 'date',
+  label
+}];
+
+// Validation function.
+const validate = function (value, config) {
+  if (/^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test(value) && /^[0-9]{4,}-[0-9]{2}-[0-9]{2}$/.test(config.threshold) && value < config.threshold) {
+    return false;
+  }
+  return true;
+};
+
+// Admin export.
+const admin = {
+  name,
+  label,
+  defaultMessage,
+  fieldTypes,
+  edit
+};
+
+// Frontend export.
+const frontend = {
+  name,
+  defaultMessage,
+  validate
+};
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/minitems.js":
+/*!*************************************************!*\
+  !*** ./blocks/src/validation/rules/minitems.js ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
+/* harmony export */   "edit": function() { return /* binding */ edit; },
+/* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
+/* harmony export */   "frontend": function() { return /* binding */ frontend; },
+/* harmony export */   "label": function() { return /* binding */ label; },
+/* harmony export */   "name": function() { return /* binding */ name; },
+/* harmony export */   "validate": function() { return /* binding */ validate; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+
+// Rule name.
+const name = 'minitems';
+
+// Rule label.
+const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum items', 'hizzle-forms');
+
+// Default error message.
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You must select at least {threshold} items.', 'hizzle-forms');
+
+// Value type.
+const fieldTypes = ['array'];
+
+// Edit details.
+const edit = [{
+  name: 'threshold',
+  type: 'number',
+  label
+}];
+
+// Validation function.
+const validate = function (value, config) {
+  if (value.length < parseInt(config.threshold)) {
+    return false;
+  }
+  return true;
+};
+
+// Admin export.
+const admin = {
+  name,
+  label,
+  defaultMessage,
+  fieldTypes,
+  edit
+};
+
+// Frontend export.
+const frontend = {
+  name,
+  defaultMessage,
+  validate
+};
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/minlength.js":
+/*!**************************************************!*\
+  !*** ./blocks/src/validation/rules/minlength.js ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
+/* harmony export */   "edit": function() { return /* binding */ edit; },
+/* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
+/* harmony export */   "frontend": function() { return /* binding */ frontend; },
+/* harmony export */   "label": function() { return /* binding */ label; },
+/* harmony export */   "name": function() { return /* binding */ name; },
+/* harmony export */   "validate": function() { return /* binding */ validate; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+
+// Rule name.
+const name = 'minlength';
+
+// Rule label.
+const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum length', 'hizzle-forms');
+
+// Default error message.
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at least {threshold} characters long.', 'hizzle-forms');
+
+// Value type.
+const fieldTypes = ['text', 'textarea'];
+
+// Edit details.
+const edit = [{
+  name: 'threshold',
+  type: 'number',
+  label
+}];
+
+// Validation function.
+const validate = function (value, config) {
+  if (value.length < parseInt(config.threshold)) {
+    return false;
+  }
+  return true;
+};
+
+// Admin export.
+const admin = {
+  name,
+  label,
+  defaultMessage,
+  fieldTypes,
+  edit
+};
+
+// Frontend export.
+const frontend = {
+  name,
+  defaultMessage,
+  validate
+};
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/minnumber.js":
+/*!**************************************************!*\
+  !*** ./blocks/src/validation/rules/minnumber.js ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
+/* harmony export */   "edit": function() { return /* binding */ edit; },
+/* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
+/* harmony export */   "frontend": function() { return /* binding */ frontend; },
+/* harmony export */   "label": function() { return /* binding */ label; },
+/* harmony export */   "name": function() { return /* binding */ name; },
+/* harmony export */   "validate": function() { return /* binding */ validate; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+
+// Rule name.
+const name = 'minnumber';
+
+// Rule label.
+const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum number', 'hizzle-forms');
+
+// Default error message.
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at least {threshold}.', 'hizzle-forms');
+
+// Value type.
+const fieldTypes = ['number'];
+
+// Edit details.
+const edit = [{
+  name: 'threshold',
+  type: 'number',
+  label
+}];
+
+// Validation function.
+const validate = function (value, config) {
+  if (parseFloat(value) < parseFloat(config.threshold)) {
+    return false;
+  }
+  return true;
+};
+
+// Admin export.
+const admin = {
+  name,
+  label,
+  defaultMessage,
+  fieldTypes,
+  edit
+};
+
+// Frontend export.
+const frontend = {
+  name,
+  defaultMessage,
+  validate
+};
+
+/***/ }),
+
+/***/ "./blocks/src/validation/rules/required.js":
+/*!*************************************************!*\
+  !*** ./blocks/src/validation/rules/required.js ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
+/* harmony export */   "edit": function() { return /* binding */ edit; },
+/* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
+/* harmony export */   "frontend": function() { return /* binding */ frontend; },
+/* harmony export */   "label": function() { return /* binding */ label; },
+/* harmony export */   "name": function() { return /* binding */ name; },
+/* harmony export */   "validate": function() { return /* binding */ validate; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+
+// Rule name.
+const name = 'required';
+
+// Rule label.
+const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Required', 'hizzle-forms');
+
+// Default error message.
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('This field is required.', 'hizzle-forms');
+
+// Value type.
+const fieldTypes = ['all'];
+
+// Edit details.
+const edit = [];
+
+// Validation function.
+const validate = function (value, config) {
+  return value.length > 0;
+};
+
+// Admin export.
+const admin = {
+  name,
+  label,
+  defaultMessage,
+  fieldTypes,
+  edit
+};
+
+// Frontend export.
+const frontend = {
+  name,
+  defaultMessage,
+  validate
+};
 
 /***/ }),
 
@@ -654,7 +1567,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/select","title":"Select field","description":"A select field input for forms.","category":"hizzle-forms","keywords":["form","contact","textarea"],"icon":"editor-ul","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-label"},"options":{"type":"array","default":["Option 1","Option 2"],"items":{"type":"string"}},"value":{"type":"string","default":"Option 1"},"placeholder":{"type":"string","default":"Select an option"},"required":{"type":"boolean","default":false,"source":"attribute","selector":"select","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string"},"name":{"type":"string","source":"attribute","selector":"select","attribute":"name"}},"example":{"attributes":{"label":"Select","placeholder":"Select an option","options":["Option 1","Option 2"],"required":true,"help":"This is a help text.","value":"Option 1"}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/select","title":"Select field","description":"A select field input for forms.","category":"hizzle-forms","keywords":["form","contact","textarea"],"icon":"editor-ul","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-label"},"options":{"type":"array","default":["Option 1","Option 2"],"items":{"type":"string"}},"value":{"type":"string","default":"Option 1"},"placeholder":{"type":"string","default":"Select an option"},"validation":{"type":"array","default":[],"source":"attribute","attribute":"data-validation"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string"},"name":{"type":"string"}},"example":{"attributes":{"label":"Select","placeholder":"Select an option","options":["Option 1","Option 2"],"validation":[{"name":"required"}],"help":"This is a help text.","value":"Option 1"}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
 
 /***/ })
 

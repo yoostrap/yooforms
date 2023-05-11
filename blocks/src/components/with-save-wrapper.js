@@ -42,8 +42,13 @@ const HelpText = ( { help } ) => {
 export default function WithSaveWrapper ( {attributes, children, className, customClass } ) {
 
 	const classes = classnames( 'hizzle-forms-field', className, customClass );
+	const props   = { className: classes };
 
-	const blockProps = useBlockProps.save( { className: classes });
+	if ( Array.isArray( attributes.validation ) && attributes.validation.length > 0 ) {
+		props['data-validation'] = JSON.stringify( attributes.validation );
+	}
+
+	const blockProps = useBlockProps.save( props );
 
 	return (
 		<div { ...blockProps }>

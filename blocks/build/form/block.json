@@ -71,7 +71,11 @@
       {
         "name": "hizzle-forms/input",
         "attributes": {
-          "required": true,
+          "validation": [
+            {
+              "name": "required"
+            }
+          ],
           "label": "Name",
           "type": "name"
         }
@@ -79,7 +83,11 @@
       {
         "name": "hizzle-forms/input",
         "attributes": {
-          "required": true,
+          "validation": [
+            {
+              "name": "required"
+            }
+          ],
           "type": "email",
           "label": "Email"
         }
@@ -87,14 +95,22 @@
       {
         "name": "hizzle-forms/textarea",
         "attributes": {
-          "required": true,
+          "validation": [
+            {
+              "name": "required"
+            }
+          ],
           "label": "Message"
         }
       },
       {
         "name": "hizzle-forms/checkbox",
         "attributes": {
-          "required": true,
+          "validation": [
+            {
+              "name": "required"
+            }
+          ],
           "label": "I agree to the terms and conditions"
         }
       },

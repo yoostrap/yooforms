@@ -109,11 +109,15 @@ const ALLOWED_BLOCKS = ['hizzle-forms/input', 'hizzle-forms/textarea', 'hizzle-f
 
 // Template.
 const template = [['hizzle-forms/input', {
-  required: true,
+  validation: [{
+    name: 'required'
+  }],
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Name', 'hizzle-forms'),
   type: 'name'
 }], ['hizzle-forms/input', {
-  required: true,
+  validation: [{
+    name: 'required'
+  }],
   type: 'email',
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email', 'hizzle-forms')
 }], ['hizzle-forms/textarea', {
@@ -779,11 +783,15 @@ const variations = [{
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a contact form to your page.', 'hizzle-forms'),
   keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('contact', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('email', 'hizzle-forms')],
   innerBlocks: [['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Name', 'hizzle-forms'),
     type: 'name'
   }], ['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     type: 'email',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Email', 'hizzle-forms')
   }], ['hizzle-forms/textarea', {
@@ -800,15 +808,21 @@ const variations = [{
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('A simple way to collect information from folks visiting your site.', 'hizzle-forms'),
   keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('subscribe', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('email', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('signup', 'hizzle-forms')],
   innerBlocks: [['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Name', 'hizzle-forms'),
     type: 'name'
   }], ['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     type: 'email',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Email', 'hizzle-forms')
   }], ['hizzle-forms/checkbox', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Agree to terms and conditions', 'hizzle-forms')
   }], ['hizzle-forms/submit', {
     text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Subscribe', 'hizzle-forms'),
@@ -822,16 +836,22 @@ const variations = [{
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add an RSVP form to your page', 'hizzle-forms'),
   keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('rsvp', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('event', 'hizzle-forms')],
   innerBlocks: [['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Name', 'hizzle-forms'),
     type: 'name'
   }], ['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     type: 'email',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Email', 'hizzle-forms')
   }], ['hizzle-forms/radio', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Attending?', 'hizzle-forms'),
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     isRadio: true,
     innerBlocks: [['hizzle-forms/radio-option', {
       option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Yes', 'hizzle-forms'),
@@ -853,11 +873,15 @@ const variations = [{
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a Registration form to your page', 'hizzle-forms'),
   keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('register', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('event', 'hizzle-forms')],
   innerBlocks: [['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Name', 'hizzle-forms'),
     type: 'name'
   }], ['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     type: 'email',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Email', 'hizzle-forms')
   }], ['hizzle-forms/input', {
@@ -881,24 +905,34 @@ const variations = [{
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add an Appointment booking form to your page', 'hizzle-forms'),
   keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('appointment', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('event', 'hizzle-forms')],
   innerBlocks: [['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Name', 'hizzle-forms'),
     type: 'name'
   }], ['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     type: 'tel',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Email', 'hizzle-forms')
   }], ['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     type: 'tel',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Phone', 'hizzle-forms')
   }], ['hizzle-forms/input', {
     type: 'tel',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Date', 'hizzle-forms'),
-    required: true
+    validation: [{
+      name: 'required'
+    }]
   }], ['hizzle-forms/radio', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Time', 'hizzle-forms'),
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     isRadio: true,
     innerBlocks: [['hizzle-forms/radio-option', {
       option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Morning', 'hizzle-forms'),
@@ -920,16 +954,22 @@ const variations = [{
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a Feedback form to your page', 'hizzle-forms'),
   keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('feedback', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('event', 'hizzle-forms')],
   innerBlocks: [['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Name', 'hizzle-forms'),
     type: 'name'
   }], ['hizzle-forms/input', {
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     type: 'tel',
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Email', 'hizzle-forms')
   }], ['hizzle-forms/radio', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Please rate our website', 'hizzle-forms'),
-    required: true,
+    validation: [{
+      name: 'required'
+    }],
     isRadio: true,
     innerBlocks: [['hizzle-forms/radio-option', {
       option: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('1 - Very Bad', 'hizzle-forms'),
@@ -1249,7 +1289,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/form","title":"Form","description":"Displays a form.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"forms","version":"1.0.0","textdomain":"hizzle-forms","attributes":{"emails":{"type":"array","default":[{"email":"{admin_email}","subject":"New Response: Contact Form","message":"You have received a new response to your contact form.\\n\\nHere are the details:\\n\\n{response_fields}\\n\\nThank you,\\nYour Site\\n\\n{user_ip}\\n{user_agent}\\n{user_date}","active":true},{"email":"{user_email}","subject":"Thank you for contacting us","message":"Thank you for contacting us. We will be in touch with you shortly.\\n\\nHere are the details of your message:\\n\\n{response_fields}\\n\\nThank you,\\nYour Site\\n\\n{user_ip}\\n{user_agent}\\n{user_date}","active":true}]},"action":{"type":"string","default":"message"},"redirect":{"type":"string","default":""},"message":{"type":"string","default":"Thank you for contacting us. We will be in touch with you shortly."},"title":{"type":"string","default":"Contact Form"},"instanceID":{"type":"string"}},"styles":[{"name":"hizzle-default","label":"Default","isDefault":true},{"name":"hizzle-full","label":"Full"},{"name":"hizzle-wide","label":"Wide"}],"example":{"innerBlocks":[{"name":"hizzle-forms/input","attributes":{"required":true,"label":"Name","type":"name"}},{"name":"hizzle-forms/input","attributes":{"required":true,"type":"email","label":"Email"}},{"name":"hizzle-forms/textarea","attributes":{"required":true,"label":"Message"}},{"name":"hizzle-forms/checkbox","attributes":{"required":true,"label":"I agree to the terms and conditions"}},{"name":"hizzle-forms/submit","attributes":{"text":"Send Message","element":"button","lock":{"remove":true}}}]},"supports":{"anchor":true,"spacing":{"blockGap":true,"units":["px","em","rem","vh","vw"],"margin":false,"padding":true},"color":{"link":true,"gradients":true},"html":false},"editorScript":"file:./index.js","script":"file:./view.js","editorStyle":"hizzle-forms-blocks","style":"file:./view.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/form","title":"Form","description":"Displays a form.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"forms","version":"1.0.0","textdomain":"hizzle-forms","attributes":{"emails":{"type":"array","default":[{"email":"{admin_email}","subject":"New Response: Contact Form","message":"You have received a new response to your contact form.\\n\\nHere are the details:\\n\\n{response_fields}\\n\\nThank you,\\nYour Site\\n\\n{user_ip}\\n{user_agent}\\n{user_date}","active":true},{"email":"{user_email}","subject":"Thank you for contacting us","message":"Thank you for contacting us. We will be in touch with you shortly.\\n\\nHere are the details of your message:\\n\\n{response_fields}\\n\\nThank you,\\nYour Site\\n\\n{user_ip}\\n{user_agent}\\n{user_date}","active":true}]},"action":{"type":"string","default":"message"},"redirect":{"type":"string","default":""},"message":{"type":"string","default":"Thank you for contacting us. We will be in touch with you shortly."},"title":{"type":"string","default":"Contact Form"},"instanceID":{"type":"string"}},"styles":[{"name":"hizzle-default","label":"Default","isDefault":true},{"name":"hizzle-full","label":"Full"},{"name":"hizzle-wide","label":"Wide"}],"example":{"innerBlocks":[{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"label":"Name","type":"name"}},{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"type":"email","label":"Email"}},{"name":"hizzle-forms/textarea","attributes":{"validation":[{"name":"required"}],"label":"Message"}},{"name":"hizzle-forms/checkbox","attributes":{"validation":[{"name":"required"}],"label":"I agree to the terms and conditions"}},{"name":"hizzle-forms/submit","attributes":{"text":"Send Message","element":"button","lock":{"remove":true}}}]},"supports":{"anchor":true,"spacing":{"blockGap":true,"units":["px","em","rem","vh","vw"],"margin":false,"padding":true},"color":{"link":true,"gradients":true},"html":false},"editorScript":"file:./index.js","script":"file:./view.js","editorStyle":"hizzle-forms-blocks","style":"file:./view.css"}');
 
 /***/ })
 

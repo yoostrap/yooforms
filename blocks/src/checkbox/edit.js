@@ -30,7 +30,7 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 	}, [ expectedName ] );
 
 	return (
-		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected} disableLabel showChecked>
+		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected} fieldType="boolean" disableLabel showChecked>
 			<input type="checkbox" checked={ attributes.value } onChange={ (e) => setAttributes( { value: e.target.checked } ) } />
 			<RichText
 				tagName="label"

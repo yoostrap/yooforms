@@ -22,7 +22,6 @@ const Save = ( { attributes } ) => {
 					name={`hizzle-forms[${attributes.name}]`}
 					id={`hizzle-forms-field-${instanceID}`}
 					value={ attributes.label.replace( /(<([^>]+)>)/ig, '' ) }
-					required={ attributes.required }
 				/>
 				<RichText.Content tagName="span" value={ attributes.label } />
 			</label>

@@ -16,7 +16,6 @@ const Save = ( { attributes } ) => {
 				placeholder={ attributes.placeholder || '' }
 				value={ attributes.value ? attributes.value : '' }
 				name={`hizzle-forms[${attributes.name}]`}
-				required={ attributes.required }
 				rows="8"
 			/>
 		</WithSaveWrapper>

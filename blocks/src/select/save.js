@@ -16,7 +16,6 @@ const Save = ( { attributes } ) => {
 				className="hizzle-forms__field-select"
 				value={ attributes.value ? attributes.value : '' }
 				name={`hizzle-forms[${attributes.name}]`}
-				required={ attributes.required }
 			>
 				{ attributes.placeholder && <option value="">{ attributes.placeholder }</option> }
 				{ options.map( ( option, index ) => <option value={ option } key={ index }>{ option }</option> ) }

@@ -7,13 +7,14 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import HizzleFieldControls from './field-controls';
+import HizzleValidationControls from './validation-controls';
 
 /**
  * Returns a function to containing an edit wrapper.
  *
  * @param {Object} attributes The block's attributes. 
  */
-export default function WithEditWrapper ( {attributes, setAttributes, disableLabel, disableHelpText, children, className, isSelected, ...props} ) {
+export default function WithEditWrapper ( {attributes, setAttributes, disableLabel, disableHelpText, children, className, isSelected, fieldType, ...props} ) {
 
 	const showHelpText = ! disableHelpText && ( isSelected || ! isEmpty( attributes.help ) );
 	const showLabel	   = ! disableLabel && ( isSelected || ! isEmpty( attributes.label ) );
@@ -46,6 +47,7 @@ export default function WithEditWrapper ( {attributes, setAttributes, disableLab
 			) }
 
 			<HizzleFieldControls setAttributes={ setAttributes } attributes={ attributes } { ...props} />
+			<HizzleValidationControls setAttributes={ setAttributes } attributes={ attributes } fieldType={fieldType} />
 		</div>
 
 	);

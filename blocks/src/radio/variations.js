@@ -43,7 +43,7 @@ variations.forEach( ( variation ) => {
 	variation.example = {
 		attributes: {
 			label: __( 'Select an option', 'hizzle-forms' ),
-			required: true,
+			validation: [{ name: 'required' }],
 			help: __( 'This is a help text.', 'hizzle-forms' ),
 			isRadio: variation.attributes.isRadio,
 		},
