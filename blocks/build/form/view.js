@@ -77,6 +77,7 @@ class Field {
    */
   validate() {
     this.errors = [];
+    const value = this.getValue();
 
     // Loop through all rules.
     this.rules.forEach(rule => {
@@ -86,7 +87,7 @@ class Field {
       }
 
       // Validate.
-      if (_rules_frontend__WEBPACK_IMPORTED_MODULE_0__["default"][rule.name].validate(this.getValue(), rule)) {
+      if (_rules_frontend__WEBPACK_IMPORTED_MODULE_0__["default"][rule.name].validate(value, rule)) {
         return;
       }
 
@@ -114,12 +115,12 @@ class Field {
     if (this.field.classList.contains('wp-block-hizzle-forms-radio')) {
       // Loop through all inputs.
       const checkedCheckboxes = [];
-      const isCheckbox = false;
+      let isCheckbox = false;
       this.field.querySelectorAll('input').forEach(input => {
         isCheckbox = 'checkbox' === input.type;
 
         // If type === radio, return if checked.
-        if (isCheckbox && input.checked) {
+        if (!isCheckbox && input.checked) {
           return input.value;
         }
 

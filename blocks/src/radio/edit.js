@@ -34,7 +34,7 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 		}
 	}, [ expectedName ] );
 
-	const fieldType = attributes.isRadio ? 'text' : 'array';
+	const fieldType = attributes.isRadio ? 'other' : 'array';
 
 	return (
 		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected} fieldType={fieldType} hidePlaceholder>

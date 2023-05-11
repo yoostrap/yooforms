@@ -514,7 +514,7 @@ const Edit = _ref => {
       });
     }
   }, [expectedName]);
-  const fieldType = attributes.isRadio ? 'text' : 'array';
+  const fieldType = attributes.isRadio ? 'other' : 'array';
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
