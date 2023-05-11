@@ -485,7 +485,13 @@ function getForms(blocks) {
   });
   return forms;
 }
+const syncingForms = false;
 (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.subscribe)(() => {
+  // Abort if we're already syncing.
+  if (syncingForms) {
+    return;
+  }
+
   // Abort if no block editor.
   if (!(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.select)('core/block-editor')) {
     return;
@@ -528,6 +534,7 @@ function getForms(blocks) {
 
   // Get all forms.
   const forms = getForms((0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.select)('core/block-editor').getBlocks());
+  syncingForms = true;
 
   // Sync forms remotely.
   _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_9___default()({
@@ -537,6 +544,8 @@ function getForms(blocks) {
       ...data,
       forms
     }
+  }).finally(() => {
+    syncingForms = false;
   });
 });
 
@@ -573,7 +582,11 @@ const Save = _ref => {
     novalidate: true
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
     className: "hizzle-forms__form-error"
-  }));
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    className: "hizzle-forms-spinner__wrapper"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
+    className: "hizzle-forms-spinner"
+  })));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Save);
 

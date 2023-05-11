@@ -45,7 +45,7 @@ class Field {
 
 		// Search for :input elements in the field.
 		// This includes input, select and textarea elements.
-		this.field.querySelectorAll( ':input' ).forEach( input => {
+		this.field.querySelectorAll( 'input, select, textarea' ).forEach( input => {
 
 			// On blur, set touched to true and validate.
 			input.addEventListener( 'blur', () => {
@@ -76,16 +76,65 @@ class Field {
 			}
 
 			// Validate.
-			if ( allRules[ rule.name ].validate( this.field.value, rule ) ) {
+			if ( allRules[ rule.name ].validate( this.getValue(), rule ) ) {
 				return;
 			}
 
+			// Prepare the error message.
+			let errorMessage = rule.errorMessage || allRules[ rule.name ].defaultMessage;
+
+			// Replace placeholders.
+			Object.keys( rule ).forEach( key => {
+				errorMessage = errorMessage.replace( `{${ key }}`, rule[ key ] );
+			} );
+
 			// Add error.
-			this.errors.push( rule.errorMessage || allRules[ rule.name ].defaultMessage );
+			this.errors.push( errorMessage );
 		} );
 
 		// Hides or shows the error message.
 		this.toggleError();
+	}
+
+	/**
+	 * Retrieves the current field value.
+	 */
+	getValue() {
+
+		// Radio and multiple checkboxes.
+		if ( this.field.classList.contains( 'wp-block-hizzle-forms-radio' ) ) {
+
+			// Loop through all inputs.
+			const checkedCheckboxes = [];
+			const isCheckbox = false;
+
+			this.field.querySelectorAll( 'input' ).forEach( input => {
+
+				isCheckbox = 'checkbox' === input.type;
+
+				// If type === radio, return if checked.
+				if ( isCheckbox && input.checked ) {
+					return input.value;
+				}
+
+				// If type === checkbox, push to array if checked.
+				if ( isCheckbox && input.checked ) {
+					checkedCheckboxes.push( input.value );
+				}
+			});
+
+			return isCheckbox ? checkedCheckboxes : '';
+		}
+
+		// Checkbox.
+		if ( this.field.classList.contains( 'wp-block-hizzle-forms-checkbox' ) ) {
+			const checkbox = this.field.querySelector( 'input[type="checkbox"]' );
+			return checkbox ? checkbox.checked : false;
+		}
+
+		// Others.
+		const input = this.field.querySelector( 'select, input, textarea' );
+		return input ? input.value : '';
 	}
 
 	/**
@@ -123,17 +172,23 @@ export default function initForm( form ) {
 	// Each field wrapper has the .hizzle-forms-field class.
 	form.querySelectorAll( '.hizzle-forms-field' ).forEach( field => {
 
-		// Skip if field has not data-validation attribute.
-		if ( ! field.dataset.validation || ! Array.isArray( field.dataset.validation ) || ! field.dataset.validation.length ) {
-			return;
+		try{
+
+			const validation = field.dataset.validation ? JSON.parse( field.dataset.validation ) : [];
+
+			// Skip if field has not data-validation attribute.
+			if ( ! Array.isArray( validation ) || ! validation.length ) {
+				return;
+			}
+
+			const instanceID = field.dataset.instanceId;
+
+			if ( instanceID ) {
+				fields[ instanceID ] = new Field( field, validation );
+			}
+		} catch (e) {
+			console.error(e)
 		}
-
-		const instanceID = field.dataset.instanceId;
-
-		if ( instanceID ) {
-			fields[ instanceID ] = new Field( field, field.dataset.validation );
-		}
-
 	});
 
 	return {
@@ -142,6 +197,11 @@ export default function initForm( form ) {
 		 * @var {Array} errors Custom error messages.
 		 */
 		errors: [],
+
+		/**
+		 * @var {Field} fields Tracked form fields.
+		 */
+		fields,
 
 		/**
 		 * Validates the form.

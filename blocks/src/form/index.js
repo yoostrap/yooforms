@@ -75,7 +75,14 @@ function getForms( blocks ) {
 	return forms;
 }
 
+const syncingForms = false;
+
 subscribe( () => {
+
+	// Abort if we're already syncing.
+	if ( syncingForms ) {
+		return;
+	}
 
 	// Abort if no block editor.
 	if ( ! select( 'core/block-editor' ) ) {
@@ -118,6 +125,8 @@ subscribe( () => {
 	// Get all forms.
 	const forms = getForms( select( 'core/block-editor' ).getBlocks() );
 
+	syncingForms = true;
+
 	// Sync forms remotely.
 	apiFetch( {
 		path: '/hizzle/v1/forms/sync',
@@ -126,5 +135,7 @@ subscribe( () => {
 			...data,
 			forms,
 		},
-	} );
+	} ).finally( () => {
+		syncingForms = false;
+	});
 });

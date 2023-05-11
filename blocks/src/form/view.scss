@@ -1,6 +1,7 @@
 .wp-block-hizzle-forms-form {
 	margin: 1rem auto;
 	max-width: 600px;
+    position: relative;
 
     // Add grid to tablet and above.
     @media (min-width: 600px) {
@@ -22,6 +23,11 @@
 	&.has-background {
 		padding: 1.6rem;
 	}
+
+    &.hizzle-forms-submitting {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 }
 
 .hizzle-forms-field {
@@ -87,24 +93,85 @@
 	margin-bottom: 1rem;
 }
 
+
+//////// Error styles ////////
 .hizzle-forms__form-error,
 .hizzle-forms__field-error {
-    color: red;
-    font-size: 0.8rem;
-    margin-top: 0.4rem;
+    color: #B71C1C;
     display: none;
 }
 
-.hizzle-forms__form-error.hizzle-forms__form--has-error {
-    display: block;
+.hizzle-forms__form-error {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 0;
+    background-color: #f7c9c9;
+    border: 1px solid #B71C1C;
+    padding: 1rem;
+    border-radius: 4px;
+
+    &.hizzle-forms__form--has-error {
+        display: block;
+    
+        // Add grid to tablet and above.
+        @media (min-width: 600px) {
+            grid-column: span 6;
+        }
+    }
 }
 
-.hizzle-forms__field--has-error .hizzle-forms__field-error {
-    display: block;
+.hizzle-forms__field-error {
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
 }
 
-// Change field border color if error.
-.hizzle-forms__field--has-error .hizzle-forms__field-input,
-.hizzle-forms__field--has-error .hizzle-forms__field-select {
-    border-color: red;
+.hizzle-forms__field--has-error {
+
+    .hizzle-forms__field-error {
+        display: block;
+    }
+
+    .hizzle-forms__field-input,
+    .hizzle-forms__field-select {
+        border-color: red;
+    }
+}
+
+///// Submitting spinner /////
+.hizzle-forms-spinner__wrapper {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    bottom: -20px;
+    right: -20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    background-color: rgb(8 8 8 / 10%);
+
+    .hizzle-forms-submitting & {
+        display: flex;
+    }
+
+    // Display the spinner.
+    .hizzle-forms-spinner {
+        width: 32px;
+        height: 32px;
+        border: 2px solid #000;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: hizzle-spin 1s linear infinite;
+    }
+}
+
+/* spinner animation */
+@keyframes hizzle-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    
+    100% {
+      transform: rotate(360deg);
+    }
 }

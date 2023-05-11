@@ -120,6 +120,13 @@ domReady(() => {
 
 			// Abort if the form is invalid.
 			if ( ! validation.validate() ) {
+
+				// Scroll to the first error.
+				const firstError = form.querySelector('.hizzle-forms__field--has-error');
+				if ( firstError ) {
+					firstError.scrollIntoView({ behavior: 'smooth' });
+				}
+
 				return;
 			}
 
