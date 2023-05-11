@@ -103,6 +103,11 @@ class Submission {
 
 		do_action( 'hizzle_forms_after_validate_submission', $this );
 
+		// We any new errors added?
+		if ( $this->errors->has_errors() ) {
+			return $this->get_response();
+		}
+
 		// TODO: Send emails etc.
 
 		return $this->get_response();
@@ -157,7 +162,7 @@ class Submission {
 
 		// Abort if we have no submission.
 		if ( ! $this->has_submission() ) {
-			$this->errors = new \WP_Error( 'no_submission', __( 'No data was submitted.', 'hizzle-forms' ) );
+			$this->errors = new \WP_Error( 'no_submission', __( 'No data was submitted.', 'hizzle-forms' ), array( 'status' => 400 ) );
 			return false;
 		}
 
@@ -170,11 +175,11 @@ class Submission {
 		}
 
 		// Validate the form fields.
-		foreach ( $this->data as $field_id => $value ) {
-			$result = $this->form->validate_field( $field_id, $value, $this );
+		foreach ( $this->form->fields as $field ) {
+			$result = $field->validate( $this->data, $this );
 
 			if ( is_wp_error( $result ) ) {
-				$this->errors->add( $field_id, $result->get_error_message() );
+				$this->errors->add( $field->instance_id, $result->get_error_message(), array( 'status' => 400 ) );
 			}
 		}
 

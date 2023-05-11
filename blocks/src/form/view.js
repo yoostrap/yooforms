@@ -112,6 +112,14 @@ domReady(() => {
 			});
 		});
 
+		// Scrolls to the first error.
+		const scrollToFirstError = () => {
+			const firstError = form.querySelector('.hizzle-forms__field--has-error');
+			if ( firstError ) {
+				firstError.scrollIntoView({ behavior: 'smooth' });
+			}
+		};
+
 		// Watch for submissions.
 		form.addEventListener('submit', (e) => {
 
@@ -122,11 +130,7 @@ domReady(() => {
 			if ( ! validation.validate() ) {
 
 				// Scroll to the first error.
-				const firstError = form.querySelector('.hizzle-forms__field--has-error');
-				if ( firstError ) {
-					firstError.scrollIntoView({ behavior: 'smooth' });
-				}
-
+				scrollToFirstError();
 				return;
 			}
 
@@ -170,12 +174,22 @@ domReady(() => {
 
 				if ( err.code ) {
 					validation.displayError( err.code, err.message );
+
+					// Additional errors.
+					if ( err.additional_errors ) {
+						err.additional_errors.forEach((error) => {
+							validation.displayError( error.code, error.message );
+						});
+					}
 				} else {
 					validation.displayError( 'unknown', __( 'An unknown error occurred while submitting the form. Check your network connectivity then try again.', 'hizzle-forms' ) );
 				}
 
 				// Remove submitting class from the form.
 				form.classList.remove('hizzle-forms-submitting');
+
+				// Scroll to the first error.
+				scrollToFirstError();
 			});
 		});
 	});

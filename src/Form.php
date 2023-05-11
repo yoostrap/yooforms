@@ -68,7 +68,17 @@ class Form {
 		} elseif ( is_numeric( $form_or_instance_id ) ) {
 			$this->init( get_post( $form_or_instance_id ) );
 		} elseif ( is_string( $form_or_instance_id ) ) {
-			$this->init( get_page_by_path( $form_or_instance_id, OBJECT, array( 'hizzle_form' ) ) );
+			$this->init(
+				current(
+					get_posts(
+						array(
+							'name'        => $form_or_instance_id,
+							'post_type'   => 'hizzle_form',
+							'numberposts' => 1,
+						)
+					)
+				)
+			);
 		}
 
 		$this->action   = empty( $this->action ) ? 'message' : $this->action;
@@ -122,7 +132,9 @@ class Form {
 			foreach ( $data['innerBlocks'] as $field ) {
 				$field = new Field( $field );
 
-				$this->fields[ $field->name ] = $field;
+				if ( ! empty( $field->instance_id ) ) {
+					$this->fields[ $field->name ] = $field;
+				}
 			}
 		}
 	}

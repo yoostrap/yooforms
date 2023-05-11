@@ -160,6 +160,7 @@ class Field {
 	 * @return true|\WP_Error
 	 */
 	public function validate( $value, $submission ) {
+        return new \WP_Error( 'dummy_error', 'This is a dummy error' );
 
         if ( empty( $this->validations ) ) {
             return true;

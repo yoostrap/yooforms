@@ -175,18 +175,19 @@ function initForm(form) {
   // Loop through all fields.
   // Each field wrapper has the .hizzle-forms-field class.
   form.querySelectorAll('.hizzle-forms-field').forEach(field => {
+    const instanceID = field.dataset.instanceId;
     try {
-      const validation = field.dataset.validation ? JSON.parse(field.dataset.validation) : [];
+      let validation = field.dataset.validation ? JSON.parse(field.dataset.validation) : [];
 
       // Skip if field has not data-validation attribute.
-      if (!Array.isArray(validation) || !validation.length) {
-        return;
+      if (!Array.isArray(validation)) {
+        validation = [];
       }
-      const instanceID = field.dataset.instanceId;
       if (instanceID) {
         fields[instanceID] = new Field(field, validation);
       }
     } catch (e) {
+      fields[instanceID] = new Field(field, []);
       console.error(e);
     }
   });
@@ -1208,6 +1209,16 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default()(() => {
       });
     });
 
+    // Scrolls to the first error.
+    const scrollToFirstError = () => {
+      const firstError = form.querySelector('.hizzle-forms__field--has-error');
+      if (firstError) {
+        firstError.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+    };
+
     // Watch for submissions.
     form.addEventListener('submit', e => {
       // Prevent the form from submitting.
@@ -1216,12 +1227,7 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default()(() => {
       // Abort if the form is invalid.
       if (!validation.validate()) {
         // Scroll to the first error.
-        const firstError = form.querySelector('.hizzle-forms__field--has-error');
-        if (firstError) {
-          firstError.scrollIntoView({
-            behavior: 'smooth'
-          });
-        }
+        scrollToFirstError();
         return;
       }
 
@@ -1261,12 +1267,22 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default()(() => {
       .catch(err => {
         if (err.code) {
           validation.displayError(err.code, err.message);
+
+          // Additional errors.
+          if (err.additional_errors) {
+            err.additional_errors.forEach(error => {
+              validation.displayError(error.code, error.message);
+            });
+          }
         } else {
           validation.displayError('unknown', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('An unknown error occurred while submitting the form. Check your network connectivity then try again.', 'hizzle-forms'));
         }
 
         // Remove submitting class from the form.
         form.classList.remove('hizzle-forms-submitting');
+
+        // Scroll to the first error.
+        scrollToFirstError();
       });
     });
   });

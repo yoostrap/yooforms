@@ -1,16 +1,16 @@
 .wp-block-hizzle-forms-form {
 	margin: 1rem auto;
 	max-width: 600px;
-    position: relative;
+	position: relative;
 
-    // Add grid to tablet and above.
-    @media (min-width: 600px) {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: 1fr;
-        column-gap: 16px;
-        row-gap: 28px;
-    }
+	// Add grid to tablet and above.
+	@media (min-width: 600px) {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		grid-template-rows: 1fr;
+		column-gap: 16px;
+		row-gap: 28px;
+	}
 
 	&.is-style-hizzle-full {
 		max-width: 100%;
@@ -24,45 +24,45 @@
 		padding: 1.6rem;
 	}
 
-    &.hizzle-forms-submitting {
-        opacity: 0.5;
-        pointer-events: none;
-    }
+	&.hizzle-forms-submitting {
+		opacity: 0.5;
+		pointer-events: none;
+	}
 }
 
 .hizzle-forms-field {
 	margin-bottom: 1.6rem;
-    width: 100%;
+	width: 100%;
 
-    // Add grid to tablet and above.
-    @media (min-width: 600px) {
-        grid-column: span 6;
-        margin-bottom: 0;
+	// Add grid to tablet and above.
+	@media (min-width: 600px) {
+		grid-column: span 6;
+		margin-bottom: 0;
 
-        &.is-style-hizzle-1-6 {
-            grid-column: span 1;
-        }
+		&.is-style-hizzle-1-6 {
+			grid-column: span 1;
+		}
 
-        &.is-style-hizzle-2-6 {
-            grid-column: span 2;
-        }
+		&.is-style-hizzle-2-6 {
+			grid-column: span 2;
+		}
 
-        &.is-style-hizzle-3-6 {
-            grid-column: span 3;
-        }
+		&.is-style-hizzle-3-6 {
+			grid-column: span 3;
+		}
 
-        &.is-style-hizzle-4-6 {
-            grid-column: span 4;
-        }
+		&.is-style-hizzle-4-6 {
+			grid-column: span 4;
+		}
 
-        &.is-style-hizzle-5-6 {
-            grid-column: span 5;
-        }
-    }
+		&.is-style-hizzle-5-6 {
+			grid-column: span 5;
+		}
+	}
 
-    &.wp-block-hizzle-forms-submit button {
-        width: 100%;
-    }
+	&.wp-block-hizzle-forms-submit button {
+		width: 100%;
+	}
 }
 
 .hizzle-forms__field-label {
@@ -81,10 +81,10 @@
 
 .hizzle-forms__field-input,
 .hizzle-forms__field-select {
-    display: block;
-    width: 100%;
-    min-height: 32px;
-    box-sizing: border-box;
+	display: block;
+	width: 100%;
+	min-height: 32px;
+	box-sizing: border-box;
 }
 
 .wp-block-hizzle-forms-radio-option {
@@ -97,81 +97,97 @@
 //////// Error styles ////////
 .hizzle-forms__form-error,
 .hizzle-forms__field-error {
-    color: #B71C1C;
-    display: none;
+	color: #B71C1C;
+	display: none;
 }
 
 .hizzle-forms__form-error {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-top: 0;
-    background-color: #f7c9c9;
-    border: 1px solid #B71C1C;
-    padding: 1rem;
-    border-radius: 4px;
+	font-size: 1rem;
+	font-weight: 500;
+	margin-top: 0;
+	background-color: #f7c9c9;
+	border: 1px solid #B71C1C;
+	padding: 1rem;
+	border-radius: 4px;
 
-    &.hizzle-forms__form--has-error {
-        display: block;
-    
-        // Add grid to tablet and above.
-        @media (min-width: 600px) {
-            grid-column: span 6;
-        }
-    }
+	&.hizzle-forms__form--has-error {
+		display: block;
+	
+		// Add grid to tablet and above.
+		@media (min-width: 600px) {
+			grid-column: span 6;
+		}
+	}
 }
 
 .hizzle-forms__field-error {
-    font-size: 0.8rem;
-    margin-top: 0.4rem;
+	font-size: 0.8rem;
+	margin-top: 0.4rem;
 }
 
 .hizzle-forms__field--has-error {
 
-    .hizzle-forms__field-error {
-        display: block;
-    }
+	.hizzle-forms__field-error {
+		display: block;
+	}
 
-    .hizzle-forms__field-input,
-    .hizzle-forms__field-select {
-        border-color: red;
-    }
+	.hizzle-forms__field-input,
+	.hizzle-forms__field-select {
+		border-color: #B71C1C;
+	}
+
+	.hizzle-forms__field-label {
+		color: #B71C1C;
+	}
 }
 
 ///// Submitting spinner /////
 .hizzle-forms-spinner__wrapper {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    bottom: -20px;
-    right: -20px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    background-color: rgb(8 8 8 / 10%);
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	bottom: -20px;
+	right: -20px;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	background-color: rgb(8 8 8 / 10%);
 
-    .hizzle-forms-submitting & {
-        display: flex;
-    }
+	.hizzle-forms-submitting & {
+		display: flex;
+	}
 
-    // Display the spinner.
-    .hizzle-forms-spinner {
-        width: 32px;
-        height: 32px;
-        border: 2px solid #000;
-        border-radius: 50%;
-        border-top-color: transparent;
-        animation: hizzle-spin 1s linear infinite;
-    }
+	// Display the spinner.
+	.hizzle-forms-spinner {
+		width: 32px;
+		height: 32px;
+		border: 2px solid #000;
+		border-radius: 50%;
+		border-top-color: transparent;
+		animation: hizzle-spin 1s linear infinite;
+	}
 }
 
 /* spinner animation */
 @keyframes hizzle-spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    
-    100% {
-      transform: rotate(360deg);
-    }
+	0% {
+	  transform: rotate(0deg);
+	}
+	
+	100% {
+	  transform: rotate(360deg);
+	}
+}
+
+/// Success message ///
+.wp-block-hizzle-forms__success-message {
+	font-size: 1rem;
+	font-weight: 500;
+	margin-top: 0;
+	background-color: #E8F5E9;
+	border: 1px solid #2E7D32;
+	padding: 1rem;
+	border-radius: 4px;
+	color: #2e7d32;
 }

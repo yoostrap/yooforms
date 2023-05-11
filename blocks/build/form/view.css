@@ -121,7 +121,10 @@
 }
 .hizzle-forms__field--has-error .hizzle-forms__field-input,
 .hizzle-forms__field--has-error .hizzle-forms__field-select {
-  border-color: red;
+  border-color: #B71C1C;
+}
+.hizzle-forms__field--has-error .hizzle-forms__field-label {
+  color: #B71C1C;
 }
 
 .hizzle-forms-spinner__wrapper {
@@ -156,6 +159,16 @@
   100% {
     transform: rotate(360deg);
   }
+}
+.wp-block-hizzle-forms__success-message {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0;
+  background-color: #E8F5E9;
+  border: 1px solid #2E7D32;
+  padding: 1rem;
+  border-radius: 4px;
+  color: #2e7d32;
 }
 
 /*# sourceMappingURL=view.css.map*/

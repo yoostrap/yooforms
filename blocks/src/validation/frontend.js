@@ -172,21 +172,22 @@ export default function initForm( form ) {
 	// Each field wrapper has the .hizzle-forms-field class.
 	form.querySelectorAll( '.hizzle-forms-field' ).forEach( field => {
 
+		const instanceID = field.dataset.instanceId;
+
 		try{
 
-			const validation = field.dataset.validation ? JSON.parse( field.dataset.validation ) : [];
+			let validation = field.dataset.validation ? JSON.parse( field.dataset.validation ) : [];
 
 			// Skip if field has not data-validation attribute.
-			if ( ! Array.isArray( validation ) || ! validation.length ) {
-				return;
+			if ( ! Array.isArray( validation ) ) {
+				validation = [];
 			}
-
-			const instanceID = field.dataset.instanceId;
 
 			if ( instanceID ) {
 				fields[ instanceID ] = new Field( field, validation );
 			}
 		} catch (e) {
+			fields[ instanceID ] = new Field( field, [] );
 			console.error(e)
 		}
 	});
