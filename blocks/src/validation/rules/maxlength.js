@@ -9,11 +9,14 @@ export const name = 'maxlength';
 // Rule label.
 export const label = __( 'Maximum length', 'hizzle-forms' );
 
+// Checkbox label.
+export const checkboxLabel = __( 'Set a maximum length?', 'hizzle-forms' );
+
 // Default error message.
 export const defaultMessage = __( 'The value must be at most {threshold} characters long.', 'hizzle-forms' );
 
 // Value type.
-export const fieldTypes = [ 'text', 'textarea' ];
+export const fieldTypes = [ 'text' ];
 
 // Edit details.
 export const edit = [{
@@ -32,7 +35,7 @@ export const validate = function ( value, config ) {
 };
 
 // Admin export.
-export const admin = { name, label, defaultMessage, fieldTypes, edit };
+export const admin = { name, label, checkboxLabel, defaultMessage, fieldTypes, edit };
 
 // Frontend export.
 export const frontend = { name, defaultMessage, validate };

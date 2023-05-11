@@ -9,6 +9,9 @@ export const name = 'minnumber';
 // Rule label.
 export const label = __( 'Minimum number', 'hizzle-forms' );
 
+// Checkbox label.
+export const checkboxLabel = __( 'Set a minimum number?', 'hizzle-forms' );
+
 // Default error message.
 export const defaultMessage = __( 'The value must be at least {threshold}.', 'hizzle-forms' );
 
@@ -32,7 +35,7 @@ export const validate = function ( value, config ) {
 };
 
 // Admin export.
-export const admin = { name, label, defaultMessage, fieldTypes, edit };
+export const admin = { name, label, checkboxLabel, defaultMessage, fieldTypes, edit };
 
 // Frontend export.
 export const frontend = { name, defaultMessage, validate };

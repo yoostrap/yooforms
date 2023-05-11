@@ -11,7 +11,7 @@ const Save = ( { attributes } ) => {
 	}
 
 	return (
-		<form { ...useBlockProps.save( props ) }>
+		<form { ...useBlockProps.save( props ) } novalidate>
 			<InnerBlocks.Content />
 			<div className="hizzle-forms__form-error" />
 		</form>

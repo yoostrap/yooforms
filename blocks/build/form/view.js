@@ -254,6 +254,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -274,6 +275,9 @@ const name = 'maxdate';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum date', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a maximum date?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The oldest date allowed is {threshold}.', 'hizzle-forms');
@@ -300,6 +304,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -323,6 +328,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -343,6 +349,9 @@ const name = 'maxitems';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum items', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a maximum number of selectable items?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You must select at most {threshold} items.', 'hizzle-forms');
@@ -369,6 +378,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -392,6 +402,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -413,11 +424,14 @@ const name = 'maxlength';
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum length', 'hizzle-forms');
 
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a maximum length?', 'hizzle-forms');
+
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at most {threshold} characters long.', 'hizzle-forms');
 
 // Value type.
-const fieldTypes = ['text', 'textarea'];
+const fieldTypes = ['text'];
 
 // Edit details.
 const edit = [{
@@ -438,6 +452,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -461,6 +476,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -481,6 +497,9 @@ const name = 'maxnumber';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum number', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a maximum number?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at most {threshold}.', 'hizzle-forms');
@@ -507,6 +526,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -530,6 +550,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -550,6 +571,9 @@ const name = 'mindate';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum date', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a minimum date?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The earliest date allowed is {threshold}.', 'hizzle-forms');
@@ -576,6 +600,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -599,6 +624,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -619,6 +645,9 @@ const name = 'minitems';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum items', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a minimum number of selectable items?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You must select at least {threshold} items.', 'hizzle-forms');
@@ -645,6 +674,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -668,6 +698,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -689,11 +720,14 @@ const name = 'minlength';
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum length', 'hizzle-forms');
 
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a minimum length?', 'hizzle-forms');
+
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at least {threshold} characters long.', 'hizzle-forms');
 
 // Value type.
-const fieldTypes = ['text', 'textarea'];
+const fieldTypes = ['text'];
 
 // Edit details.
 const edit = [{
@@ -714,6 +748,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -737,6 +772,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -757,6 +793,9 @@ const name = 'minnumber';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum number', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a minimum number?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at least {threshold}.', 'hizzle-forms');
@@ -783,6 +822,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -806,6 +846,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -827,6 +868,9 @@ const name = 'required';
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Required', 'hizzle-forms');
 
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Is this field required?', 'hizzle-forms');
+
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('This field is required.', 'hizzle-forms');
 
@@ -845,6 +889,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit

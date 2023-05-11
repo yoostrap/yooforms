@@ -42,7 +42,7 @@ const HelpText = ( { help } ) => {
 export default function WithSaveWrapper ( {attributes, children, className, customClass } ) {
 
 	const classes = classnames( 'hizzle-forms-field', className, customClass );
-	const props   = { className: classes };
+	const props   = { className: classes, 'data-instance-id': attributes.instanceID };
 
 	if ( Array.isArray( attributes.validation ) && attributes.validation.length > 0 ) {
 		props['data-validation'] = JSON.stringify( attributes.validation );

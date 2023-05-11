@@ -36,6 +36,9 @@
     "name": {
       "type": "string"
     },
+    "validation": {
+      "type": "array"
+    },
     "isRadio": {
       "type": "boolean",
       "default": true

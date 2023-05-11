@@ -9,6 +9,9 @@ export const name = 'maxitems';
 // Rule label.
 export const label = __( 'Maximum items', 'hizzle-forms' );
 
+// Checkbox label.
+export const checkboxLabel = __( 'Set a maximum number of selectable items?', 'hizzle-forms' );
+
 // Default error message.
 export const defaultMessage = __( 'You must select at most {threshold} items.', 'hizzle-forms' );
 
@@ -32,7 +35,7 @@ export const validate = function ( value, config ) {
 };
 
 // Admin export.
-export const admin = { name, label, defaultMessage, fieldTypes, edit };
+export const admin = { name, label, checkboxLabel, defaultMessage, fieldTypes, edit };
 
 // Frontend export.
 export const frontend = { name, defaultMessage, validate };

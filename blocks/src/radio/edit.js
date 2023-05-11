@@ -34,8 +34,10 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 		}
 	}, [ expectedName ] );
 
+	const fieldType = attributes.isRadio ? 'text' : 'array';
+
 	return (
-		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected} fieldType="text" hidePlaceholder>
+		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected} fieldType={fieldType} hidePlaceholder>
 			<div className="hizzle-forms__radio-options">
 				<InnerBlocks allowedBlocks={['hizzle-forms/radio-option']} template={template} />
 			</div>

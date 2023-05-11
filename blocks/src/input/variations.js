@@ -264,8 +264,6 @@ variations.forEach( ( variation ) => {
 	// Set category.
 	variation.category = 'hizzle-forms';
 
-	// Scope.
-	variation.scope = [ 'inserter', 'block', 'transform' ];
 } );
 
 export default variations;

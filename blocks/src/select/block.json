@@ -37,10 +37,7 @@
       "default": "Select an option"
     },
     "validation": {
-      "type": "array",
-      "default": [],
-      "source": "attribute",
-      "attribute": "data-validation"
+      "type": "array"
     },
     "help": {
       "type": "string",

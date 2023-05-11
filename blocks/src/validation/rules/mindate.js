@@ -9,6 +9,9 @@ export const name = 'mindate';
 // Rule label.
 export const label = __( 'Minimum date', 'hizzle-forms' );
 
+// Checkbox label.
+export const checkboxLabel = __( 'Set a minimum date?', 'hizzle-forms' );
+
 // Default error message.
 export const defaultMessage = __( 'The earliest date allowed is {threshold}.', 'hizzle-forms' );
 
@@ -36,7 +39,7 @@ export const validate = function ( value, config ) {
 };
 
 // Admin export.
-export const admin = { name, label, defaultMessage, fieldTypes, edit };
+export const admin = { name, label, checkboxLabel, defaultMessage, fieldTypes, edit };
 
 // Frontend export.
 export const frontend = { name, defaultMessage, validate };

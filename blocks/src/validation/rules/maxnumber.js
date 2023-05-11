@@ -9,6 +9,9 @@ export const name = 'maxnumber';
 // Rule label.
 export const label = __( 'Maximum number', 'hizzle-forms' );
 
+// Checkbox label.
+export const checkboxLabel = __( 'Set a maximum number?', 'hizzle-forms' );
+
 // Default error message.
 export const defaultMessage = __( 'The value must be at most {threshold}.', 'hizzle-forms' );
 
@@ -32,7 +35,7 @@ export const validate = function ( value, config ) {
 };
 
 // Admin export.
-export const admin = { name, label, defaultMessage, fieldTypes, edit };
+export const admin = { name, label, checkboxLabel, defaultMessage, fieldTypes, edit };
 
 // Frontend export.
 export const frontend = { name, defaultMessage, validate };

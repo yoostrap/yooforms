@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl, ToggleControl, Flex, FlexBlock, FlexItem, SelectControl, Button } from '@wordpress/components';
+import { PanelBody, TextControl, ToggleControl, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useEffect, useMemo, useState } from '@wordpress/element';
 
@@ -50,92 +50,115 @@ export default function HizzleValidationControls ( { attributes, setAttributes, 
 		return null;
 	}
 
-	// Removes a rule from the current validation.
-	const removeRule = index => {
-		const newRules = [ ...rules ];
-		newRules.splice( index, 1 );
-		setAttributes( { validation: newRules } );
-	};
-
-	// Updates a rule in the current validation.
-	const updateRule = ( index, rule ) => {
-		const newRules = [ ...rules ];
-		newRules[ index ] = rule;
-		setAttributes( { validation: newRules } );
-	};
-
-	// Adds a rule to the current validation.
-	const addRule = name => {
-		const newRules = [ ...rules ];
-		newRules.push( { name } );
-		setAttributes( { validation: newRules } );
+	// Sets rules.
+	const setRules = rules => {
+		setAttributes( { validation: rules } );
 	};
 
 	return (
 		<>
-			<InspectorControls>
-				<PanelBody title={ __( 'Validation Rules', 'hizzle-forms' ) }>
-
-					{ rules.map( ( rule, index ) => (
-						<Validation
-							key={ index }
-							rule={ rule }
-							removeRule={ () => removeRule( index ) }
-							updateRule={ rule => updateRule( index, rule )}
-						/>
-					) ) }
-
-					<AddValidation
-						usableRules={ usableRules }
-						rules={ rules }
-						addRule={ addRule }
-					/>
-				</PanelBody>
-			</InspectorControls>
+			{usableRules.map( ( rule ) => (
+				<UsableRule
+					key={ rule.name }
+					{...rule}
+					setRules={ setRules }
+					addedRules={ rules }
+				/>
+			) )}
 		</>
 	);
 };
 
 /**
- * Displays a single validation.
+ * Displays a single usable rule.
  *
  * @param {Object} props
- * @param {Object} props.rule The rule
- * @param {Function} props.removeRule a function to remove the automation rule 
- * @param {Function} props.updateRule a function to update the automation rule
+ * @param {Object} props.label The rule label
+ * @param {Object} props.checkboxLabel The rule checkbox label
+ * @param {Object} props.name The rule name
+ * @param {Object} props.defaultMessage The rule default message
+ * @param {Object} props.edit The rule edit fields
+ * @param {Function} props.setRules a function to set the rules
+ * @param {Array} props.addedRules The added rules
+ * @return {JSX.Element} The add validation.
  */
-const Validation = ({rule, removeRule, updateRule}) => {
+const UsableRule = ({label, checkboxLabel, name, defaultMessage, edit, setRules, addedRules}) => {
 
-	// Retrieves the rule type.
-	const ruleType = allRules.find( ruleType => ruleType.name === rule.name );
+	// Checks if the rule is added.
+	const isAdded = addedRules.some( rule => rule.name === name );
 
-	// Abort if the rule type is not found.
-	if ( ! ruleType ) {
-		return null;
-	}
+	// The rule.
+	const [rule, setRule] = useState(isAdded ? addedRules.find( rule => rule.name === name ) : {name});
+
+	// Toggles the rule.
+	const toggleRule = ( isActive ) => {
+
+		const newRules = [...addedRules];
+
+		// Remvoe if not active.
+		if ( ! isActive ) {
+			const index = newRules.findIndex( rule => rule.name === name );
+			newRules.splice( index, 1 );
+		} else if ( ! isAdded ) {
+			newRules.push(rule);
+		}
+
+		setRules(newRules);
+	};
+
+	// Updates a rule.
+	const updateRule = ( key, value ) => {
+		const newRule = {...rule};
+		newRule[key] = value;
+		setRule(newRule);
+
+		// If is added, update the rule.
+		if ( isAdded ) {
+			const newRules = [...addedRules];
+			const index = newRules.findIndex( rule => rule.name === name );
+			newRules[index] = newRule;
+			setRules(newRules);
+		}
+	};
 
 	return (
-		<div className="hizzle-forms__automation-rule--type">
-			<h3>{ruleType.label}</h3>
+		<InspectorControls>
+			<PanelBody title={label} initialOpen={false}>
 
-			{ ruleType.edit.map( ( edit, index ) => <EditField key={ index } edit={ edit } rule={ rule } updateRule={ updateRule } /> )}
+				<ToggleControl
+					label={checkboxLabel}
+					checked={isAdded}
+					onChange={toggleRule}
+				/>
 
-			<EditField
-				edit={{
-					name: 'errorMessage',
-					type: 'text',
-					label: __( 'Error message', 'hizzle-forms' ),
-					help: __( 'Optional. The error message to display when this rule fails.', 'hizzle-forms' ),
-					placeholder: ruleType.defaultMessage,
-				}}
-				rule={ rule }
-				updateRule={ updateRule }
-			/>
+				{ isAdded && (
+					<>
+						{ edit.map( ( edit, index ) => (
+							<EditField
+								key={ index }
+								edit={ edit }
+								rule={ rule }
+								onChange={ ( value ) => updateRule( edit.name, value ) }
+							/>
+						))}
 
-			<Button isDestructive onClick={ removeRule }>{ __( 'Remove Rule', 'hizzle-forms' ) }</Button>
-		</div>
-	)
+						<EditField
+							edit={{
+								name: 'errorMessage',
+								type: 'text',
+								label: __( 'Error message', 'hizzle-forms' ),
+								help: __( 'Optional. The error message to display when this rule fails.', 'hizzle-forms' ),
+								placeholder: defaultMessage,
+							}}
+							rule={ rule }
+							onChange={ ( value ) => updateRule( 'errorMessage', value ) }
+						/>
+					</>
+				)}
 
+			</PanelBody>
+		</InspectorControls>
+	);
 }
 
 /**
@@ -144,69 +167,20 @@ const Validation = ({rule, removeRule, updateRule}) => {
  * @param {Object} props
  * @param {Object} props.edit The edit field
  * @param {Object} props.rule The rule
- * @param {Function} props.updateRule a function to update the automation rule
+ * @param {Function} props.onChange The onChange handler
  * @return {JSX.Element} The edit field.
  */
-const EditField = ({edit, rule, updateRule}) => {
+const EditField = ({edit, rule, onChange}) => {
 
 	const { type, name, ...props } = edit;
-
-	// Updates the field.
-	const updateField = value => {
-		const newRule = {...rule};
-		newRule[name] = value;
-		updateRule(newRule);
-	}
 
 	// Render the edit field.
 	switch (type) {
 		case 'toggle':
-			return <ToggleControl {...props} checked={rule[edit.name] ? rule[edit.name] : false} onChange={updateField} />;
+			return <ToggleControl {...props} checked={rule[name] ? rule[name] : false} onChange={onChange} />;
 		case 'select':
-			return <SelectControl {...props} value={rule[edit.name] ? rule[edit.name] : ''} onChange={updateField} />;
+			return <SelectControl {...props} value={rule[name] ? rule[name] : ''} onChange={onChange} />;
 		default:
-			return <TextControl {...props} value={rule[edit.name] ? rule[edit.name] : ''} onChange={updateField} />;
+			return <TextControl {...props} value={rule[name] ? rule[name] : ''} onChange={onChange} />;
 	}
-}
-
-/**
- * Displays a select and button to add a new validation (if any are available).
- *
- * @param {Object} props
- * @param {Object} props.usableRules The usable rules
- * @param {Object} props.rules The current rules
- * @param {Function} props.addRule a function to add a new rule
- * @return {JSX.Element} The add validation.
- */
-const AddValidation = ({usableRules, rules, addRule}) => {
-
-	const [toAdd, setToAdd] = useState( '' );
-	const addableRules = usableRules.filter( rule => ! rules.some( currentRule => currentRule.name === rule.name ) );
-
-	if ( ! addableRules.length ) {
-		return null;
-	}
-
-	const options = addableRules.map( rule => ({ label: rule.label, value: rule.name }) );
-
-	return (
-		<Flex>
-			<FlexBlock>
-				<SelectControl
-					label={ __( 'Add validation', 'hizzle-forms' ) }
-					options={ options }
-					onChange={ setToAdd }
-				/>
-			</FlexBlock>
-			<FlexItem>
-				<Button
-					variant="secondary"
-					onClick={ () => addRule( toAdd ) }
-					disabled={ ! toAdd }
-				>
-					{ __( 'Add', 'hizzle-forms' ) }
-				</Button>
-			</FlexItem>
-		</Flex>
-	);
 }

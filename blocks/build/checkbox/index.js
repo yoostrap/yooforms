@@ -251,91 +251,105 @@ function HizzleValidationControls(_ref) {
     return null;
   }
 
-  // Removes a rule from the current validation.
-  const removeRule = index => {
-    const newRules = [...rules];
-    newRules.splice(index, 1);
+  // Sets rules.
+  const setRules = rules => {
     setAttributes({
-      validation: newRules
+      validation: rules
     });
   };
-
-  // Updates a rule in the current validation.
-  const updateRule = (index, rule) => {
-    const newRules = [...rules];
-    newRules[index] = rule;
-    setAttributes({
-      validation: newRules
-    });
-  };
-
-  // Adds a rule to the current validation.
-  const addRule = name => {
-    const newRules = [...rules];
-    newRules.push({
-      name
-    });
-    setAttributes({
-      validation: newRules
-    });
-  };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Validation Rules', 'hizzle-forms')
-  }, rules.map((rule, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(Validation, {
-    key: index,
-    rule: rule,
-    removeRule: () => removeRule(index),
-    updateRule: rule => updateRule(index, rule)
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(AddValidation, {
-    usableRules: usableRules,
-    rules: rules,
-    addRule: addRule
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, usableRules.map(rule => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(UsableRule, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    key: rule.name
+  }, rule, {
+    setRules: setRules,
+    addedRules: rules
   }))));
 }
 ;
 
 /**
- * Displays a single validation.
+ * Displays a single usable rule.
  *
  * @param {Object} props
- * @param {Object} props.rule The rule
- * @param {Function} props.removeRule a function to remove the automation rule 
- * @param {Function} props.updateRule a function to update the automation rule
+ * @param {Object} props.label The rule label
+ * @param {Object} props.checkboxLabel The rule checkbox label
+ * @param {Object} props.name The rule name
+ * @param {Object} props.defaultMessage The rule default message
+ * @param {Object} props.edit The rule edit fields
+ * @param {Function} props.setRules a function to set the rules
+ * @param {Array} props.addedRules The added rules
+ * @return {JSX.Element} The add validation.
  */
-const Validation = _ref2 => {
+const UsableRule = _ref2 => {
   let {
-    rule,
-    removeRule,
-    updateRule
+    label,
+    checkboxLabel,
+    name,
+    defaultMessage,
+    edit,
+    setRules,
+    addedRules
   } = _ref2;
-  // Retrieves the rule type.
-  const ruleType = _validation_rules_admin__WEBPACK_IMPORTED_MODULE_5__["default"].find(ruleType => ruleType.name === rule.name);
+  // Checks if the rule is added.
+  const isAdded = addedRules.some(rule => rule.name === name);
 
-  // Abort if the rule type is not found.
-  if (!ruleType) {
-    return null;
-  }
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", {
-    className: "hizzle-forms__automation-rule--type"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("h3", null, ruleType.label), ruleType.edit.map((edit, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(EditField, {
+  // The rule.
+  const [rule, setRule] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(isAdded ? addedRules.find(rule => rule.name === name) : {
+    name
+  });
+
+  // Toggles the rule.
+  const toggleRule = isActive => {
+    const newRules = [...addedRules];
+
+    // Remvoe if not active.
+    if (!isActive) {
+      const index = newRules.findIndex(rule => rule.name === name);
+      newRules.splice(index, 1);
+    } else if (!isAdded) {
+      newRules.push(rule);
+    }
+    setRules(newRules);
+  };
+
+  // Updates a rule.
+  const updateRule = (key, value) => {
+    const newRule = {
+      ...rule
+    };
+    newRule[key] = value;
+    setRule(newRule);
+
+    // If is added, update the rule.
+    if (isAdded) {
+      const newRules = [...addedRules];
+      const index = newRules.findIndex(rule => rule.name === name);
+      newRules[index] = newRule;
+      setRules(newRules);
+    }
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: label,
+    initialOpen: false
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: checkboxLabel,
+    checked: isAdded,
+    onChange: toggleRule
+  }), isAdded && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, edit.map((edit, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(EditField, {
     key: index,
     edit: edit,
     rule: rule,
-    updateRule: updateRule
+    onChange: value => updateRule(edit.name, value)
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(EditField, {
     edit: {
       name: 'errorMessage',
       type: 'text',
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Error message', 'hizzle-forms'),
       help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Optional. The error message to display when this rule fails.', 'hizzle-forms'),
-      placeholder: ruleType.defaultMessage
+      placeholder: defaultMessage
     },
     rule: rule,
-    updateRule: updateRule
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    isDestructive: true,
-    onClick: removeRule
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Remove Rule', 'hizzle-forms')));
+    onChange: value => updateRule('errorMessage', value)
+  }))));
 };
 
 /**
@@ -344,14 +358,14 @@ const Validation = _ref2 => {
  * @param {Object} props
  * @param {Object} props.edit The edit field
  * @param {Object} props.rule The rule
- * @param {Function} props.updateRule a function to update the automation rule
+ * @param {Function} props.onChange The onChange handler
  * @return {JSX.Element} The edit field.
  */
 const EditField = _ref3 => {
   let {
     edit,
     rule,
-    updateRule
+    onChange
   } = _ref3;
   const {
     type,
@@ -359,68 +373,24 @@ const EditField = _ref3 => {
     ...props
   } = edit;
 
-  // Updates the field.
-  const updateField = value => {
-    const newRule = {
-      ...rule
-    };
-    newRule[name] = value;
-    updateRule(newRule);
-  };
-
   // Render the edit field.
   switch (type) {
     case 'toggle':
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
-        checked: rule[edit.name] ? rule[edit.name] : false,
-        onChange: updateField
+        checked: rule[name] ? rule[name] : false,
+        onChange: onChange
       }));
     case 'select':
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
-        value: rule[edit.name] ? rule[edit.name] : '',
-        onChange: updateField
+        value: rule[name] ? rule[name] : '',
+        onChange: onChange
       }));
     default:
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
-        value: rule[edit.name] ? rule[edit.name] : '',
-        onChange: updateField
+        value: rule[name] ? rule[name] : '',
+        onChange: onChange
       }));
   }
-};
-
-/**
- * Displays a select and button to add a new validation (if any are available).
- *
- * @param {Object} props
- * @param {Object} props.usableRules The usable rules
- * @param {Object} props.rules The current rules
- * @param {Function} props.addRule a function to add a new rule
- * @return {JSX.Element} The add validation.
- */
-const AddValidation = _ref4 => {
-  let {
-    usableRules,
-    rules,
-    addRule
-  } = _ref4;
-  const [toAdd, setToAdd] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('');
-  const addableRules = usableRules.filter(rule => !rules.some(currentRule => currentRule.name === rule.name));
-  if (!addableRules.length) {
-    return null;
-  }
-  const options = addableRules.map(rule => ({
-    label: rule.label,
-    value: rule.name
-  }));
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexBlock, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add validation', 'hizzle-forms'),
-    options: options,
-    onChange: setToAdd
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    variant: "secondary",
-    onClick: () => addRule(toAdd),
-    disabled: !toAdd
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Add', 'hizzle-forms'))));
 };
 
 /***/ }),
@@ -593,7 +563,8 @@ function WithSaveWrapper(_ref3) {
   } = _ref3;
   const classes = classnames__WEBPACK_IMPORTED_MODULE_1___default()('hizzle-forms-field', className, customClass);
   const props = {
-    className: classes
+    className: classes,
+    'data-instance-id': attributes.instanceID
   };
   if (Array.isArray(attributes.validation) && attributes.validation.length > 0) {
     props['data-validation'] = JSON.stringify(attributes.validation);
@@ -741,6 +712,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -761,6 +733,9 @@ const name = 'maxdate';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum date', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a maximum date?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The oldest date allowed is {threshold}.', 'hizzle-forms');
@@ -787,6 +762,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -811,6 +787,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -831,6 +808,9 @@ const name = 'maxitems';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum items', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a maximum number of selectable items?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You must select at most {threshold} items.', 'hizzle-forms');
@@ -857,6 +837,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -881,6 +862,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -902,11 +884,14 @@ const name = 'maxlength';
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum length', 'hizzle-forms');
 
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a maximum length?', 'hizzle-forms');
+
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at most {threshold} characters long.', 'hizzle-forms');
 
 // Value type.
-const fieldTypes = ['text', 'textarea'];
+const fieldTypes = ['text'];
 
 // Edit details.
 const edit = [{
@@ -927,6 +912,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -951,6 +937,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -971,6 +958,9 @@ const name = 'maxnumber';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum number', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a maximum number?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at most {threshold}.', 'hizzle-forms');
@@ -997,6 +987,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -1021,6 +1012,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -1041,6 +1033,9 @@ const name = 'mindate';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum date', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a minimum date?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The earliest date allowed is {threshold}.', 'hizzle-forms');
@@ -1067,6 +1062,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -1091,6 +1087,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -1111,6 +1108,9 @@ const name = 'minitems';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum items', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a minimum number of selectable items?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You must select at least {threshold} items.', 'hizzle-forms');
@@ -1137,6 +1137,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -1161,6 +1162,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -1182,11 +1184,14 @@ const name = 'minlength';
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum length', 'hizzle-forms');
 
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a minimum length?', 'hizzle-forms');
+
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at least {threshold} characters long.', 'hizzle-forms');
 
 // Value type.
-const fieldTypes = ['text', 'textarea'];
+const fieldTypes = ['text'];
 
 // Edit details.
 const edit = [{
@@ -1207,6 +1212,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -1231,6 +1237,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -1251,6 +1258,9 @@ const name = 'minnumber';
 
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Minimum number', 'hizzle-forms');
+
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a minimum number?', 'hizzle-forms');
 
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The value must be at least {threshold}.', 'hizzle-forms');
@@ -1277,6 +1287,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -1301,6 +1312,7 @@ const frontend = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "admin": function() { return /* binding */ admin; },
+/* harmony export */   "checkboxLabel": function() { return /* binding */ checkboxLabel; },
 /* harmony export */   "defaultMessage": function() { return /* binding */ defaultMessage; },
 /* harmony export */   "edit": function() { return /* binding */ edit; },
 /* harmony export */   "fieldTypes": function() { return /* binding */ fieldTypes; },
@@ -1322,6 +1334,9 @@ const name = 'required';
 // Rule label.
 const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Required', 'hizzle-forms');
 
+// Checkbox label.
+const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Is this field required?', 'hizzle-forms');
+
 // Default error message.
 const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('This field is required.', 'hizzle-forms');
 
@@ -1340,6 +1355,7 @@ const validate = function (value, config) {
 const admin = {
   name,
   label,
+  checkboxLabel,
   defaultMessage,
   fieldTypes,
   edit
@@ -1524,7 +1540,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/checkbox","title":"Checkbox field","description":"A checkbox field.","category":"hizzle-forms","keywords":["form","contact","checkbox"],"icon":"yes","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":""},"value":{"type":"boolean","default":false},"validation":{"type":"array","default":[],"source":"attribute","attribute":"data-validation"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string"},"name":{"type":"string"}},"example":{"attributes":{"label":"Checkbox field","validation":[{"name":"required"}],"value":true,"help":"This is a checkbox field."}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/checkbox","title":"Checkbox field","description":"A checkbox field.","category":"hizzle-forms","keywords":["form","contact","checkbox"],"icon":"yes","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":""},"value":{"type":"boolean","default":false},"validation":{"type":"array"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string"},"name":{"type":"string"}},"example":{"attributes":{"label":"Checkbox field","validation":[{"name":"required"}],"value":true,"help":"This is a checkbox field."}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
 
 /***/ })
 
