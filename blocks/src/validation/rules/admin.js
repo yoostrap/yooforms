@@ -10,12 +10,12 @@ import { admin as minLength } from './minlength';
 
 export default [
     required,
-    maxDate,
     minDate,
-    maxNumber,
+    maxDate,
     minNumber,
-    maxItems,
+    maxNumber,
     minItems,
-    maxLength,
+    maxItems,
     minLength,
+    maxLength,
 ];

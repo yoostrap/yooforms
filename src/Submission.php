@@ -176,7 +176,12 @@ class Submission {
 
 		// Validate the form fields.
 		foreach ( $this->form->fields as $field ) {
-			$result = $field->validate( $this->data, $this );
+
+			// Prepare the value.
+			$field->prepare_value( $this->data );
+
+			// Validate the value.
+			$result = $field->validate();
 
 			if ( is_wp_error( $result ) ) {
 				$this->errors->add( $field->instance_id, $result->get_error_message(), array( 'status' => 400 ) );

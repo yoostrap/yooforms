@@ -973,7 +973,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ([_required__WEBPACK_IMPORTED_MODULE_0__.admin, _maxdate__WEBPACK_IMPORTED_MODULE_1__.admin, _mindate__WEBPACK_IMPORTED_MODULE_2__.admin, _maxnumber__WEBPACK_IMPORTED_MODULE_3__.admin, _minnumber__WEBPACK_IMPORTED_MODULE_4__.admin, _maxitems__WEBPACK_IMPORTED_MODULE_5__.admin, _minitems__WEBPACK_IMPORTED_MODULE_6__.admin, _maxlength__WEBPACK_IMPORTED_MODULE_7__.admin, _minlength__WEBPACK_IMPORTED_MODULE_8__.admin]);
+/* harmony default export */ __webpack_exports__["default"] = ([_required__WEBPACK_IMPORTED_MODULE_0__.admin, _mindate__WEBPACK_IMPORTED_MODULE_2__.admin, _maxdate__WEBPACK_IMPORTED_MODULE_1__.admin, _minnumber__WEBPACK_IMPORTED_MODULE_4__.admin, _maxnumber__WEBPACK_IMPORTED_MODULE_3__.admin, _minitems__WEBPACK_IMPORTED_MODULE_6__.admin, _maxitems__WEBPACK_IMPORTED_MODULE_5__.admin, _minlength__WEBPACK_IMPORTED_MODULE_8__.admin, _maxlength__WEBPACK_IMPORTED_MODULE_7__.admin]);
 
 /***/ }),
 
@@ -1013,7 +1013,7 @@ const label = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Maximum date'
 const checkboxLabel = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set a maximum date?', 'hizzle-forms');
 
 // Default error message.
-const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The oldest date allowed is {threshold}.', 'hizzle-forms');
+const defaultMessage = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The latest date allowed is {threshold}.', 'hizzle-forms');
 
 // Value type.
 const fieldTypes = ['date'];

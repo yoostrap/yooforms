@@ -13,7 +13,7 @@ export const label = __( 'Maximum date', 'hizzle-forms' );
 export const checkboxLabel = __( 'Set a maximum date?', 'hizzle-forms' );
 
 // Default error message.
-export const defaultMessage = __( 'The oldest date allowed is {threshold}.', 'hizzle-forms' );
+export const defaultMessage = __( 'The latest date allowed is {threshold}.', 'hizzle-forms' );
 
 // Value type.
 export const fieldTypes = [ 'date' ];
