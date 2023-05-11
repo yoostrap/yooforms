@@ -33,7 +33,7 @@
         "type": "string"
       }
     },
-    "selected": {
+    "value": {
       "type": "string",
       "default": "Option 1"
     },
@@ -74,7 +74,7 @@
       ],
       "required": true,
       "help": "This is a help text.",
-      "selected": "Option 1"
+      "value": "Option 1"
     }
   },
   "styles": [

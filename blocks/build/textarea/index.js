@@ -217,6 +217,8 @@ function WithSaveWrapper(_ref3) {
     instanceID: attributes.instanceID
   }), children, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(HelpText, {
     help: attributes.help
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "hizzle-forms__field-error"
   }));
 }
 

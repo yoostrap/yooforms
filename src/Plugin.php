@@ -112,7 +112,6 @@ class Plugin {
 
 		$path   = plugin_dir_path( HIZZLE_FORMS_PLUGIN_FILE ) . 'blocks/build/';
 		$blocks = array(
-			'address',
 			'input',
 			'textarea',
 			'select',

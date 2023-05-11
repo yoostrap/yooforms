@@ -63,9 +63,9 @@ const Edit = _ref => {
     showChecked: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: attributes.checked,
+    checked: attributes.value,
     onChange: e => setAttributes({
-      checked: e.target.checked
+      value: e.target.checked
     })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
     tagName: "label",
@@ -114,7 +114,7 @@ const Save = _ref => {
     disableLabel: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: attributes.checked,
+    checked: attributes.value,
     name: `hizzle-forms[${attributes.name}]`,
     id: `hizzle-forms-field-${instanceID}`,
     value: attributes.label.replace(/(<([^>]+)>)/ig, ''),
@@ -344,6 +344,8 @@ function WithSaveWrapper(_ref3) {
     instanceID: attributes.instanceID
   }), children, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(HelpText, {
     help: attributes.help
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "hizzle-forms__field-error"
   }));
 }
 
@@ -609,7 +611,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/checkbox","title":"Checkbox field","description":"A checkbox field.","category":"hizzle-forms","keywords":["form","contact","checkbox"],"icon":"yes","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":""},"checked":{"type":"boolean","default":false},"required":{"type":"boolean","default":false,"source":"attribute","selector":"input","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string"},"name":{"type":"string","source":"attribute","selector":"input","attribute":"name"}},"example":{"attributes":{"label":"Checkbox field","required":true,"checked":true,"help":"This is a checkbox field."}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/checkbox","title":"Checkbox field","description":"A checkbox field.","category":"hizzle-forms","keywords":["form","contact","checkbox"],"icon":"yes","parent":["hizzle-forms/form"],"version":"1.0.0","textdomain":"hizzle-forms","attributes":{"label":{"type":"string","default":""},"value":{"type":"boolean","default":false},"required":{"type":"boolean","default":false,"source":"attribute","selector":"input","attribute":"required"},"help":{"type":"string","default":"","source":"html","selector":".hizzle-forms__field-help-text"},"instanceID":{"type":"string"},"name":{"type":"string","source":"attribute","selector":"input","attribute":"name"}},"example":{"attributes":{"label":"Checkbox field","required":true,"value":true,"help":"This is a checkbox field."}},"styles":[{"name":"hizzle-1-6","label":"1/6"},{"name":"hizzle-2-6","label":"2-6"},{"name":"hizzle-3-6","label":"3-6"},{"name":"hizzle-4-6","label":"4-6"},{"name":"hizzle-5-6","label":"5/6"},{"name":"hizzle-full","label":"Full Width","isDefault":true}],"supports":{"anchor":true,"spacing":{"margin":true,"padding":true},"reusable":false},"editorScript":"file:./index.js"}');
 
 /***/ })
 

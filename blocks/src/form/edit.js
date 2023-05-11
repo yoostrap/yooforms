@@ -26,7 +26,6 @@ import HizzleEmailConnectionSettings from './email-connection-settings';
 
 // Allowed child blocks for the form.
 const ALLOWED_BLOCKS = [
-	'hizzle-forms/address',
     'hizzle-forms/input',
 	'hizzle-forms/textarea',
 	'hizzle-forms/checkbox',
@@ -47,7 +46,7 @@ const ALLOWED_BLOCKS = [
 
 // Template.
 const template = [
-	[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
+	[ 'hizzle-forms/input', { required: true, label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
 	[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 	[ 'hizzle-forms/textarea', { label: __( 'Message', 'hizzle-forms' ) } ],
 	[

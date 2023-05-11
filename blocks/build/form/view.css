@@ -68,15 +68,39 @@
   display: block;
 }
 
-.hizzle-forms__field-input {
+.hizzle-forms__field-input,
+.hizzle-forms__field-select {
   display: block;
   width: 100%;
+  min-height: 32px;
+  box-sizing: border-box;
 }
 
 .wp-block-hizzle-forms-radio-option {
   font-weight: 400;
   display: block;
   margin-bottom: 1rem;
+}
+
+.hizzle-forms__form-error,
+.hizzle-forms__field-error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+  display: none;
+}
+
+.hizzle-forms__form-error.hizzle-forms__form--has-error {
+  display: block;
+}
+
+.hizzle-forms__field--has-error .hizzle-forms__field-error {
+  display: block;
+}
+
+.hizzle-forms__field--has-error .hizzle-forms__field-input,
+.hizzle-forms__field--has-error .hizzle-forms__field-select {
+  border-color: red;
 }
 
 /*# sourceMappingURL=view.css.map*/

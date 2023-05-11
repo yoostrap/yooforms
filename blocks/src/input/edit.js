@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { useEffect } from '@wordpress/element';
+import { ADDRESS_INPUT_TYPES } from './constants';
 
 /**
  * Internal dependencies
@@ -27,14 +28,18 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 		}
 	}, [ expectedName ] );
 
+	const fieldType    = ADDRESS_INPUT_TYPES.includes( attributes.type ) ? 'text' : attributes.type;
+	const autocomplete = ADDRESS_INPUT_TYPES.includes( attributes.type ) ? attributes.type : null;
+
 	return (
 		<WithEditWrapper attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}>
 			<input
-				type={ attributes.type }
+				type={ fieldType }
 				className="hizzle-forms__field-input form-control"
 				placeholder={ attributes.placeholder || "" }
 				value={ attributes.value ? attributes.value : '' }
 				onChange={ ( event ) => { setAttributes( { value: event.target.value } ) } }
+				autoComplete={ autocomplete }
 			/>
 		</WithEditWrapper>
 	);

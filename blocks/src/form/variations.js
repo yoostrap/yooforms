@@ -9,7 +9,7 @@ const variations = [
 		description: __( 'Add a contact form to your page.', 'hizzle-forms' ),
 		keywords: [ __( 'contact', 'hizzle-forms' ), __( 'email', 'hizzle-forms' ) ],
 		innerBlocks: [
-			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
+			[ 'hizzle-forms/input', { required: true, label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/textarea', { label: __( 'Message', 'hizzle-forms' ) } ],
 			[
@@ -34,7 +34,7 @@ const variations = [
 			__( 'signup', 'hizzle-forms' ),
 		],
 		innerBlocks: [
-			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
+			[ 'hizzle-forms/input', { required: true, label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/checkbox', { required: true, label: __( 'Agree to terms and conditions', 'hizzle-forms' ) } ],
 			[
@@ -52,7 +52,7 @@ const variations = [
 		description: __( 'Add an RSVP form to your page', 'hizzle-forms' ),
 		keywords: [ __( 'rsvp', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
 		innerBlocks: [
-			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
+			[ 'hizzle-forms/input', { required: true, label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/radio',
@@ -82,7 +82,7 @@ const variations = [
 		description: __( 'Add a Registration form to your page', 'hizzle-forms' ),
 		keywords: [ __( 'register', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
 		innerBlocks: [
-			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
+			[ 'hizzle-forms/input', { required: true, label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/input', { type: 'tel', label: __( 'Phone', 'hizzle-forms' ) } ],
 			[
@@ -115,7 +115,7 @@ const variations = [
 		description: __( 'Add an Appointment booking form to your page', 'hizzle-forms' ),
 		keywords: [ __( 'appointment', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
 		innerBlocks: [
-			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
+			[ 'hizzle-forms/input', { required: true, label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Phone', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/input', { type: 'tel', label: __( 'Date', 'hizzle-forms' ), required: true } ],
@@ -147,7 +147,7 @@ const variations = [
 		description: __( 'Add a Feedback form to your page', 'hizzle-forms' ),
 		keywords: [ __( 'feedback', 'hizzle-forms' ), __( 'event', 'hizzle-forms' ) ],
 		innerBlocks: [
-			[ 'hizzle-forms/address', { required: true, label: __( 'Name', 'hizzle-forms' ), autocomplete: 'name' } ],
+			[ 'hizzle-forms/input', { required: true, label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
 			[ 'hizzle-forms/input', { required: true, type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/radio',
@@ -222,7 +222,6 @@ variations.forEach( ( variation ) => {
 		variation.isActive = ( blockAttributes, variationAttributes ) => blockAttributes.title === variationAttributes.title;
 	}
 
-	console.log( variation )
 } );
 
 export default variations;

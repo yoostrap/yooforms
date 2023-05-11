@@ -69,11 +69,11 @@
   "example": {
     "innerBlocks": [
       {
-        "name": "hizzle-forms/address",
+        "name": "hizzle-forms/input",
         "attributes": {
           "required": true,
           "label": "Name",
-          "autocomplete": "name"
+          "type": "name"
         }
       },
       {

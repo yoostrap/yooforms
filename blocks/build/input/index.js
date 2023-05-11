@@ -217,8 +217,28 @@ function WithSaveWrapper(_ref3) {
     instanceID: attributes.instanceID
   }), children, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(HelpText, {
     help: attributes.help
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "hizzle-forms__field-error"
   }));
 }
+
+/***/ }),
+
+/***/ "./blocks/src/input/constants.js":
+/*!***************************************!*\
+  !*** ./blocks/src/input/constants.js ***!
+  \***************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ADDRESS_INPUT_TYPES": function() { return /* binding */ ADDRESS_INPUT_TYPES; }
+/* harmony export */ });
+/**
+ * Exports an array of address input types.
+ */
+const ADDRESS_INPUT_TYPES = ['name', 'given-name', 'family-name', 'address-line1', 'address-line2', 'address-level2', 'address-level1', 'postal-code', 'organization'];
 
 /***/ }),
 
@@ -232,12 +252,14 @@ function WithSaveWrapper(_ref3) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/with-edit-wrapper */ "./blocks/src/components/with-edit-wrapper.js");
-/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants */ "./blocks/src/input/constants.js");
+/* harmony import */ var _components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/with-edit-wrapper */ "./blocks/src/components/with-edit-wrapper.js");
+/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
 
 /**
  * WordPress dependencies
  */
+
 
 
 /**
@@ -260,7 +282,7 @@ const Edit = _ref => {
       });
     }
   }, []);
-  const expectedName = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_2__["default"])(attributes.label, attributes.instanceID);
+  const expectedName = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_3__["default"])(attributes.label, attributes.instanceID);
 
   // Ensure name is same as parent.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -270,12 +292,14 @@ const Edit = _ref => {
       });
     }
   }, [expectedName]);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  const fieldType = _constants__WEBPACK_IMPORTED_MODULE_1__.ADDRESS_INPUT_TYPES.includes(attributes.type) ? 'text' : attributes.type;
+  const autocomplete = _constants__WEBPACK_IMPORTED_MODULE_1__.ADDRESS_INPUT_TYPES.includes(attributes.type) ? attributes.type : null;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     isSelected: isSelected
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: attributes.type,
+    type: fieldType,
     className: "hizzle-forms__field-input form-control",
     placeholder: attributes.placeholder || "",
     value: attributes.value ? attributes.value : '',
@@ -283,7 +307,8 @@ const Edit = _ref => {
       setAttributes({
         value: event.target.value
       });
-    }
+    },
+    autoComplete: autocomplete
   }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Edit);
@@ -301,27 +326,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/with-save-wrapper */ "./blocks/src/components/with-save-wrapper.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./blocks/src/input/constants.js");
 
 /**
  * Internal dependencies
  */
 
+
 const Save = _ref => {
   let {
     attributes
   } = _ref;
-  // Generate field name from the label.
+  // Prepare attributes.
   const instanceID = attributes.instanceID || '';
+  const fieldType = _constants__WEBPACK_IMPORTED_MODULE_2__.ADDRESS_INPUT_TYPES.includes(attributes.type) ? 'text' : attributes.type;
+  const autocomplete = _constants__WEBPACK_IMPORTED_MODULE_2__.ADDRESS_INPUT_TYPES.includes(attributes.type) ? attributes.type : null;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_save_wrapper__WEBPACK_IMPORTED_MODULE_1__["default"], {
     attributes: attributes
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: attributes.type,
+    type: fieldType,
     name: `hizzle-forms[${attributes.name}]`,
     id: `hizzle-forms-field-${instanceID}`,
     className: "hizzle-forms__field-input form-control",
     placeholder: attributes.placeholder || '',
     value: attributes.value ? attributes.value : '',
-    required: attributes.required
+    autoComplete: autocomplete
   }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Save);
@@ -356,8 +385,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   isDefault: true,
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Text', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line text input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('text', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('text', 'hizzle-forms')],
   attributes: {
     type: 'text'
   },
@@ -366,11 +394,118 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
     foreground: PRIMARY_COLOR
   }
 }, {
+  name: 'hizzle-name',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Full Name', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the full name.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('full name', 'hizzle-forms')],
+  attributes: {
+    type: 'name'
+  },
+  icon: {
+    src: 'nametag',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-given-name',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('First Name', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the first name.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('first name', 'hizzle-forms')],
+  attributes: {
+    type: 'given-name'
+  },
+  icon: {
+    src: 'id',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-family-name',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Last Name', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the last name.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('last name', 'hizzle-forms')],
+  attributes: {
+    type: 'family-name'
+  },
+  icon: {
+    src: 'buddicons-groups',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-line1',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Address Line 1', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the first line of the address.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms')],
+  attributes: {
+    type: 'address-line1'
+  },
+  icon: {
+    src: 'admin-home',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-line2',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Address Line 2', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the second line of the address.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms')],
+  attributes: {
+    type: 'address-line2'
+  },
+  icon: {
+    src: 'building',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-city',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('City', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the city.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('city', 'hizzle-forms')],
+  attributes: {
+    type: 'address-level2'
+  },
+  icon: {
+    src: 'location',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-state',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('State', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the state.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('state', 'hizzle-forms')],
+  attributes: {
+    type: 'address-level1'
+  },
+  icon: {
+    src: 'location-alt',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-address-zip',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zip Code', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the zip code.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('address', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('zip', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('postal code', 'hizzle-forms')],
+  attributes: {
+    type: 'postal-code'
+  },
+  icon: {
+    src: 'admin-multisite',
+    foreground: PRIMARY_COLOR
+  }
+}, {
+  name: 'hizzle-organization',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Company / Organization', 'hizzle-forms'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collect the company or organization.', 'hizzle-forms'),
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('organization', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('company', 'hizzle-forms')],
+  attributes: {
+    type: 'organization'
+  },
+  icon: {
+    src: 'groups',
+    foreground: PRIMARY_COLOR
+  }
+}, {
   name: 'hizzle-password-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Password', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line password input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('password', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('password', 'hizzle-forms')],
   attributes: {
     type: 'password'
   },
@@ -382,8 +517,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   name: 'hizzle-email-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Email', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line email input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('email', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('email', 'hizzle-forms')],
   attributes: {
     type: 'email'
   },
@@ -395,8 +529,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   name: 'hizzle-url-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('URL', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line URL input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('url', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('website', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('url', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('website', 'hizzle-forms')],
   attributes: {
     type: 'url'
   },
@@ -408,8 +541,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   name: 'hizzle-tel-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Telephone', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line telephone input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('telephone', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('telephone', 'hizzle-forms')],
   attributes: {
     type: 'tel'
   },
@@ -421,8 +553,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   name: 'hizzle-number-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Number', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line number input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('number', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('number', 'hizzle-forms')],
   attributes: {
     type: 'number',
     min: 0,
@@ -437,8 +568,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   name: 'hizzle-date-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Date', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line date input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('date', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('date', 'hizzle-forms')],
   attributes: {
     type: 'date'
   },
@@ -450,8 +580,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   name: 'hizzle-time-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Time', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line time input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('time', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('time', 'hizzle-forms')],
   attributes: {
     type: 'time'
   },
@@ -463,8 +592,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   name: 'hizzle-month-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Month', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line month input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('month', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('month', 'hizzle-forms')],
   attributes: {
     type: 'month'
   },
@@ -476,8 +604,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   name: 'hizzle-week-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Week', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line week input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('week', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('week', 'hizzle-forms')],
   attributes: {
     type: 'week'
   },
@@ -489,8 +616,7 @@ const variations = (0,lodash__WEBPACK_IMPORTED_MODULE_1__.compact)([{
   name: 'hizzle-color-input',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Color', 'hizzle-forms'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add a single-line color input field to your form.', 'hizzle-forms'),
-  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('color', 'hizzle-forms'), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms')],
-  category: 'hizzle-forms',
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('color', 'hizzle-forms')],
   attributes: {
     type: 'color'
   },
@@ -522,6 +648,12 @@ variations.forEach(variation => {
   if (!variation.isActive) {
     variation.isActive = ['type'];
   }
+
+  // Add input to keywords.
+  variation.keywords.push((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('input', 'hizzle-forms'));
+
+  // Set category.
+  variation.category = 'hizzle-forms';
 
   // Scope.
   variation.scope = ['inserter', 'block', 'transform'];

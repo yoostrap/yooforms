@@ -2,22 +2,25 @@
  * Internal dependencies
  */
 import WithSaveWrapper from '../components/with-save-wrapper';
+import { ADDRESS_INPUT_TYPES } from './constants';
 
 const Save = ( { attributes } ) => {
 
-	// Generate field name from the label.
-	const instanceID = attributes.instanceID || '';
+	// Prepare attributes.
+	const instanceID   = attributes.instanceID || '';
+	const fieldType    = ADDRESS_INPUT_TYPES.includes( attributes.type ) ? 'text' : attributes.type;
+	const autocomplete = ADDRESS_INPUT_TYPES.includes( attributes.type ) ? attributes.type : null;
 
 	return (
 		<WithSaveWrapper attributes={ attributes }>
 			<input
-				type={ attributes.type }
+				type={ fieldType }
 				name={`hizzle-forms[${attributes.name}]`}
 				id={`hizzle-forms-field-${instanceID}`}
 				className="hizzle-forms__field-input form-control"
 				placeholder={ attributes.placeholder || '' }
 				value={ attributes.value ? attributes.value : '' }
-				required={ attributes.required }
+				autoComplete={ autocomplete }
 			/>
 		</WithSaveWrapper>
 	);

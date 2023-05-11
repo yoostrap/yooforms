@@ -77,6 +77,8 @@
 .hizzle-forms__field-select {
     display: block;
     width: 100%;
+    min-height: 32px;
+    box-sizing: border-box;
 }
 
 .wp-block-hizzle-forms-radio-option {
