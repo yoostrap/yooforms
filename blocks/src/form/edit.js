@@ -53,7 +53,6 @@ const template = [
 		'hizzle-forms/submit',
 		{
 			text: __( 'Contact Us', 'hizzle-forms' ),
-			lock: { remove: true },
 		},
 	],
 ];

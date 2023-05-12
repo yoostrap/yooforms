@@ -65,7 +65,7 @@ variations.forEach( ( variation ) => {
 
 	// Add `isActive` function if not defined.
 	if ( ! variation.isActive ) {
-		variation.isActive = ( blockAttributes, variationAttributes ) => blockAttributes.isRadio === variationAttributes.isRadio;
+		variation.isActive = ['isRadio'];
 	}
 
 } );

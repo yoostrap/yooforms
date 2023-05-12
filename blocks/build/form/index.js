@@ -123,10 +123,7 @@ const template = [['hizzle-forms/input', {
 }], ['hizzle-forms/textarea', {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Message', 'hizzle-forms')
 }], ['hizzle-forms/submit', {
-  text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Contact Us', 'hizzle-forms'),
-  lock: {
-    remove: true
-  }
+  text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Contact Us', 'hizzle-forms')
 }]];
 function HizzleFormEdit(_ref) {
   let {
@@ -449,7 +446,7 @@ const {
 (0,_utils_register_block__WEBPACK_IMPORTED_MODULE_7__["default"])(name, {
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"],
-  //variations,
+  variations: _variations__WEBPACK_IMPORTED_MODULE_5__["default"],
   icon: _components_logo__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 
@@ -831,10 +828,7 @@ const variations = [{
   }], ['hizzle-forms/textarea', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Message', 'hizzle-forms')
   }], ['hizzle-forms/submit', {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Contact Us', 'hizzle-forms'),
-    lock: {
-      remove: true
-    }
+    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Contact Us', 'hizzle-forms')
   }]]
 }, {
   name: 'hizzle-newsletter-form',
@@ -859,10 +853,7 @@ const variations = [{
     }],
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Agree to terms and conditions', 'hizzle-forms')
   }], ['hizzle-forms/submit', {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Subscribe', 'hizzle-forms'),
-    lock: {
-      remove: true
-    }
+    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Subscribe', 'hizzle-forms')
   }]]
 }, {
   name: 'hizzle-rsvp-form',
@@ -896,10 +887,7 @@ const variations = [{
   }], ['hizzle-forms/textarea', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Other Details', 'hizzle-forms')
   }], ['hizzle-forms/submit', {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Send RSVP', 'hizzle-forms'),
-    lock: {
-      remove: true
-    }
+    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Send RSVP', 'hizzle-forms')
   }]]
 }, {
   name: 'hizzle-registration-form',
@@ -928,10 +916,7 @@ const variations = [{
   }], ['hizzle-forms/textarea', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Other Details', 'hizzle-forms')
   }], ['hizzle-forms/submit', {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Send', 'hizzle-forms'),
-    lock: {
-      remove: true
-    }
+    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Send', 'hizzle-forms')
   }]]
 }, {
   name: 'hizzle-appointment-form',
@@ -977,10 +962,7 @@ const variations = [{
   }], ['hizzle-forms/textarea', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Notes', 'hizzle-forms')
   }], ['hizzle-forms/submit', {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Book Appointment', 'hizzle-forms'),
-    lock: {
-      remove: true
-    }
+    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Book Appointment', 'hizzle-forms')
   }]]
 }, {
   name: 'hizzle-feedback-form',
@@ -1020,12 +1002,24 @@ const variations = [{
   }], ['hizzle-forms/textarea', {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('How could we improve?', 'hizzle-forms')
   }], ['hizzle-forms/submit', {
-    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Send Feedback', 'hizzle-forms'),
-    lock: {
-      remove: true
-    }
+    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Send Feedback', 'hizzle-forms')
   }]]
 }];
+
+// Converts innerBlocks to example.
+const convertInnerBlocksToExample = innerBlocks => {
+  return innerBlocks.map(block => {
+    let [name, attributes] = block;
+    attributes = attributes ? {
+      ...attributes
+    } : {};
+    return {
+      name,
+      attributes,
+      innerBlocks: attributes.innerBlocks ? convertInnerBlocksToExample(attributes.innerBlocks) : []
+    };
+  });
+};
 
 /**
  * Add `isActive` function to all `input` variations, if not defined.
@@ -1064,13 +1058,15 @@ variations.forEach(variation => {
 
   // Example.
   variation.example = {
-    attributes: variation.attributes,
-    innerBlocks: variation.innerBlocks
+    attributes: {
+      ...variation.attributes
+    },
+    innerBlocks: convertInnerBlocksToExample(variation.innerBlocks)
   };
 
   // Add `isActive` function if not defined.
   if (!variation.isActive) {
-    variation.isActive = (blockAttributes, variationAttributes) => blockAttributes.title === variationAttributes.title;
+    variation.isActive = ['title'];
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (variations);
@@ -1327,7 +1323,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/form","title":"Form","description":"Displays a form.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"forms","version":"1.0.0","textdomain":"hizzle-forms","attributes":{"emails":{"type":"array","default":[{"email":"{admin_email}","subject":"New Response: Contact Form","message":"You have received a new response to your contact form.\\n\\nHere are the details:\\n\\n{response_fields}\\n\\nThank you,\\n{site_title}\\n\\n<hr>\\nURL: {current_url} \\nIP Address: {user_ip}\\nUser Agent: {user_agent}\\nTime: {current_date} at {current_time}","sender_name":"{site_title}","reply_to":"{email}","active":true},{"email":"{email}","subject":"Thank you for contacting us","message":"Thank you for contacting us. We will be in touch with you shortly.\\n\\nHere are the details of your message:\\n\\n{response_fields}\\n\\nThank you,\\n{site_title}\\n\\n<hr>\\nURL: {current_url} \\nIP Address: {user_ip}\\nUser Agent: {user_agent}\\nTime: {current_date} at {current_time}","sender_name":"{site_title}","reply_to":"{admin_email}","active":true}]},"action":{"type":"string","default":"message"},"redirect":{"type":"string","default":""},"message":{"type":"string","default":"Thank you for contacting us. We will be in touch with you shortly."},"title":{"type":"string","default":"Contact Form"},"instanceID":{"type":"string"}},"styles":[{"name":"hizzle-default","label":"Default","isDefault":true},{"name":"hizzle-full","label":"Full"},{"name":"hizzle-wide","label":"Wide"}],"example":{"innerBlocks":[{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"label":"Name","type":"name"}},{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"type":"email","label":"Email"}},{"name":"hizzle-forms/textarea","attributes":{"validation":[{"name":"required"}],"label":"Message"}},{"name":"hizzle-forms/checkbox","attributes":{"validation":[{"name":"required"}],"label":"I agree to the terms and conditions"}},{"name":"hizzle-forms/submit","attributes":{"text":"Send Message","element":"button","lock":{"remove":true}}}]},"supports":{"anchor":true,"spacing":{"blockGap":true,"units":["px","em","rem","vh","vw"],"margin":false,"padding":true},"color":{"link":true,"gradients":true},"html":false},"editorScript":"file:./index.js","script":"file:./view.js","editorStyle":"hizzle-forms-blocks","style":"file:./view.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/form","title":"Contact Form","description":"Displays a form.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"forms","version":"1.0.0","textdomain":"hizzle-forms","attributes":{"emails":{"type":"array","default":[{"email":"{admin_email}","subject":"New Response: Contact Form","message":"You have received a new response to your contact form.\\n\\nHere are the details:\\n\\n{response_fields}\\n\\nThank you,\\n{site_title}\\n\\n<hr>\\nURL: {current_url} \\nIP Address: {user_ip}\\nUser Agent: {user_agent}\\nTime: {current_date} at {current_time}","sender_name":"{site_title}","reply_to":"{email}","active":true},{"email":"{email}","subject":"Thank you for contacting us","message":"Thank you for contacting us. We will be in touch with you shortly.\\n\\nHere are the details of your message:\\n\\n{response_fields}\\n\\nThank you,\\n{site_title}\\n\\n<hr>\\nURL: {current_url} \\nIP Address: {user_ip}\\nUser Agent: {user_agent}\\nTime: {current_date} at {current_time}","sender_name":"{site_title}","reply_to":"{admin_email}","active":true}]},"action":{"type":"string","default":"message"},"redirect":{"type":"string","default":""},"message":{"type":"string","default":"Thank you for contacting us. We will be in touch with you shortly."},"title":{"type":"string","default":"Contact Form"},"instanceID":{"type":"string"}},"styles":[{"name":"hizzle-default","label":"Default","isDefault":true},{"name":"hizzle-full","label":"Full"},{"name":"hizzle-wide","label":"Wide"}],"example":{"innerBlocks":[{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"label":"Name","type":"name"}},{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"type":"email","label":"Email"}},{"name":"hizzle-forms/textarea","attributes":{"validation":[{"name":"required"}],"label":"Message"}},{"name":"hizzle-forms/checkbox","attributes":{"validation":[{"name":"required"}],"label":"I agree to the terms and conditions"}},{"name":"hizzle-forms/submit","attributes":{"text":"Send Message","element":"button"}}]},"supports":{"anchor":true,"spacing":{"blockGap":true,"units":["px","em","rem","vh","vw"],"margin":false,"padding":true},"color":{"link":true,"gradients":true},"html":false},"editorScript":"file:./index.js","script":"file:./view.js","editorStyle":"hizzle-forms-blocks","style":"file:./view.css"}');
 
 /***/ })
 

@@ -47,10 +47,7 @@
     },
     "type": {
       "type": "string",
-      "default": "text",
-      "source": "attribute",
-      "selector": "input",
-      "attribute": "type"
+      "default": "text"
     },
     "value": {
       "type": "string",

@@ -24,7 +24,7 @@ const { name } = json;
 registerHizzleBlockType( name, {
 	edit,
 	save,
-	//variations,
+	variations,
 	icon: Logo,
 } );
 

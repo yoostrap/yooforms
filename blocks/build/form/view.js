@@ -119,17 +119,15 @@ class Field {
       this.field.querySelectorAll('input').forEach(input => {
         isCheckbox = 'checkbox' === input.type;
 
-        // If type === radio, return if checked.
-        if (!isCheckbox && input.checked) {
-          return input.value;
-        }
-
-        // If type === checkbox, push to array if checked.
-        if (isCheckbox && input.checked) {
+        // Push to array if checked.
+        if (input.checked) {
           checkedCheckboxes.push(input.value);
         }
       });
-      return isCheckbox ? checkedCheckboxes : '';
+      if (isCheckbox) {
+        return checkedCheckboxes;
+      }
+      return checkedCheckboxes[0] || '';
     }
 
     // Checkbox.

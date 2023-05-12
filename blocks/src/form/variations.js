@@ -16,7 +16,6 @@ const variations = [
 				'hizzle-forms/submit',
 				{
 					text: __( 'Contact Us', 'hizzle-forms' ),
-					lock: { remove: true },
 				},
 			],
 		],
@@ -41,7 +40,6 @@ const variations = [
 				'hizzle-forms/submit',
 				{
 					text: __( 'Subscribe', 'hizzle-forms' ),
-					lock: { remove: true },
 				},
 			],
 		],
@@ -71,7 +69,6 @@ const variations = [
 				'hizzle-forms/submit',
 				{
 					text: __( 'Send RSVP', 'hizzle-forms' ),
-					lock: { remove: true },
 				},
 			],
 		],
@@ -104,7 +101,6 @@ const variations = [
 				'hizzle-forms/submit',
 				{
 					text: __( 'Send', 'hizzle-forms' ),
-					lock: { remove: true },
 				},
 			],
 		],
@@ -136,7 +132,6 @@ const variations = [
 				'hizzle-forms/submit',
 				{
 					text: __( 'Book Appointment', 'hizzle-forms' ),
-					lock: { remove: true },
 				},
 			],
 		],
@@ -169,12 +164,24 @@ const variations = [
 				'hizzle-forms/submit',
 				{
 					text: __( 'Send Feedback', 'hizzle-forms' ),
-					lock: { remove: true },
 				},
 			],
 		],
 	},
 ]
+
+// Converts innerBlocks to example.
+const convertInnerBlocksToExample = ( innerBlocks ) => {
+	return innerBlocks.map( ( block ) => {
+		let [ name, attributes ] = block;
+		attributes = attributes ? {...attributes} : {};
+		return {
+			name,
+			attributes,
+			innerBlocks: attributes.innerBlocks ? convertInnerBlocksToExample( attributes.innerBlocks ) : [],
+		};
+	} );
+};
 
 /**
  * Add `isActive` function to all `input` variations, if not defined.
@@ -217,13 +224,13 @@ variations.forEach( ( variation ) => {
 
 	// Example.
 	variation.example = {
-		attributes: variation.attributes,
-		innerBlocks: variation.innerBlocks,
+		attributes: { ...variation.attributes },
+		innerBlocks: convertInnerBlocksToExample( variation.innerBlocks ),
 	};
 
 	// Add `isActive` function if not defined.
 	if ( ! variation.isActive ) {
-		variation.isActive = ( blockAttributes, variationAttributes ) => blockAttributes.title === variationAttributes.title;
+		variation.isActive = ['title'];
 	}
 
 } );
