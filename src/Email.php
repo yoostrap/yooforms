@@ -47,6 +47,11 @@ class Email {
     public $message;
 
     /**
+     * @var string $last_error Last error message.
+     */
+    public $last_error;
+
+    /**
      * Class Constructor.
      *
      * @param array $args The email arguments.
@@ -80,6 +85,8 @@ class Email {
             return;
         }
 
+        $this->last_error = '';
+
         do_action( 'hizzle_forms_before_send_email', $this, $submission );
 
         // Prepare args.
@@ -92,22 +99,29 @@ class Email {
             return;
         }
 
-        // Prepare the sending function.
-		$sending_function = apply_filters( 'hizzle_forms_email_sending_function', 'wp_mail', $this, $submission );
-
         $this->before_sending();
 
 		// Send the actual email.
-		$result = call_user_func(
-			$sending_function,
-			wp_parse_list( $recipient ),
-			html_entity_decode( $email_subject, ENT_QUOTES, get_bloginfo( 'charset' ) ),
-			$this->wrap_message( $email_message, $submission ),
-			$this->prepare_headers(),
+        $result = wp_mail(
+            wp_parse_list( $recipient ),
+            html_entity_decode( $email_subject, ENT_QUOTES, get_bloginfo( 'charset' ) ),
+            $this->wrap_message( $email_message, $submission ),
+            $this->prepare_headers(),
 			apply_filters( 'hizzle_forms_email_attachments', array(), $this, $submission )
-		);
+        );
 
         $this->after_sending();
+
+        if ( false === $result ) {
+            $submission->errors->add(
+                'email',
+                sprintf(
+                    // translators: %s is the error message.
+                    esc_html__( 'Email failed to send. Error: %s', 'hizzle-forms' ),
+                    '<strong>' . esc_html( $this->get_last_error() ) . '</strong>'
+                )
+            );
+        }
 
         do_action( 'hizzle_forms_after_send_email', $this, $submission, $result );
     }
@@ -120,6 +134,7 @@ class Email {
 	public function before_sending() {
 		add_filter( 'wp_mail_from_name', array( $this, 'get_from_name' ) );
 		add_filter( 'wp_mail_content_type', array( $this, 'get_content_type' ), 1000 );
+        add_action( 'wp_mail_failed', array( $this, 'handle_failed_email' ) );
 	}
 
     /**
@@ -130,6 +145,7 @@ class Email {
     public function after_sending() {
         remove_filter( 'wp_mail_from_name', array( $this, 'get_from_name' ) );
         remove_filter( 'wp_mail_content_type', array( $this, 'get_content_type' ), 1000 );
+        remove_action( 'wp_mail_failed', array( $this, 'handle_failed_email' ) );
     }
 
     /**
@@ -181,6 +197,35 @@ class Email {
      */
     public function get_content_type() {
         return 'text/html';
+    }
+
+    /**
+     * Handles a failed email.
+     *
+     * @param \WP_Error $error The error object.
+     */
+    public function handle_failed_email( $error ) {
+        $this->last_error = $error->get_error_message();
+    }
+
+    /**
+     * Retrieves the last error.
+     *
+     * @return string
+     */
+    public function get_last_error() {
+        global $phpmailer;
+
+        if ( ! empty( $this->last_error ) ) {
+            return $this->last_error;
+        }
+
+        /** @var \PHPMailer\PHPMailer\PHPMailer $phpmailer */
+		if ( $phpmailer && ! empty( $phpmailer->ErrorInfo ) ) {
+			return $phpmailer->ErrorInfo;
+		}
+
+        return __( 'Unknown error', 'hizzle-forms' );
     }
 
     /**

@@ -73,6 +73,16 @@ class Plugin {
 		add_action( 'init', array( $this, 'register_post_type' ) );
 		add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
 
+		// Filter email message.
+		add_filter( 'hizzle_forms_email_message', 'do_blocks', 9 );
+		add_filter( 'hizzle_forms_email_message', 'wptexturize' );
+		add_filter( 'hizzle_forms_email_message', 'convert_smilies', 20 );
+		add_filter( 'hizzle_forms_email_message', 'wpautop' );
+		add_filter( 'hizzle_forms_email_message', 'shortcode_unautop' );
+		add_filter( 'hizzle_forms_email_message', 'prepend_attachment' );
+		add_filter( 'hizzle_forms_email_message', 'wp_replace_insecure_home_url' );
+		add_filter( 'hizzle_forms_email_message', 'do_shortcode', 11 );
+
 		// Init the submission object.
 		$this->submission = new Submission();
 		$this->merge_tags = new Merge_Tags();

@@ -43,7 +43,7 @@ class Merge_Tags {
 		add_filter( 'hizzle_forms_email_reply_to', array( $this, 'replace_in_email_recipient' ) );
 		add_filter( 'hizzle_forms_email_from_name', array( $this, 'replace_in_email_from_name' ) );
 		add_filter( 'hizzle_forms_email_subject', array( $this, 'replace_in_form_response' ) );
-		add_filter( 'hizzle_forms_email_message', array( $this, 'replace_in_email_body' ) );
+		add_filter( 'hizzle_forms_email_message', array( $this, 'replace_in_email_body' ), 5 );
 
 	}
 
