@@ -25,13 +25,24 @@ const HizzleFieldControls = _ref => {
   let {
     attributes,
     hidePlaceholder,
+    hasOptions,
     setAttributes
   } = _ref;
   const hasNameAttribute = attributes.name && attributes.name.length > 0;
-  if (hidePlaceholder && !hasNameAttribute) {
+  if (!hasOptions && hidePlaceholder && !hasNameAttribute) {
     return null;
   }
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, !hidePlaceholder && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+
+  // Sets field options.
+  const setFieldOptions = optionsString => {
+    setAttributes({
+      options: optionsString.split('\n')
+    });
+  };
+
+  // Combine options into a string.
+  const optionsString = attributes.options ? attributes.options.join('\n') : '';
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('General', 'hizzle-forms')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Merge Tag', 'hizzle-forms'),
@@ -39,7 +50,12 @@ const HizzleFieldControls = _ref => {
     onClick: event => event.target.select(),
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Use this merge tag to display this field\'s value in your emails, response message and redirect URL.', 'hizzle-forms'),
     readOnly: true
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+  }), hasOptions && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Options', 'hizzle-forms'),
+    value: optionsString,
+    onChange: setFieldOptions,
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter each option on a new line. For example, "Option 1" and "Option 2" will be displayed as a dropdown with two options.', 'hizzle-forms')
+  }), !hidePlaceholder && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder text', 'hizzle-forms'),
     value: attributes.placeholder || '',
     onChange: value => setAttributes({
@@ -472,17 +488,14 @@ function WithSaveWrapper(_ref3) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/with-edit-wrapper */ "./blocks/src/components/with-edit-wrapper.js");
-/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/with-edit-wrapper */ "./blocks/src/components/with-edit-wrapper.js");
+/* harmony import */ var _utils_label_to_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/label-to-name */ "./blocks/src/utils/label-to-name.js");
 
 /**
  * WordPress dependencies
  */
-
 
 
 
@@ -491,30 +504,6 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-
-/**
- * Edits a single option.
- * @param {*} props 
- * @returns 
- */
-const EditOption = props => {
-  const {
-    option,
-    editOption,
-    deleteOption
-  } = props;
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, {
-    className: "hizzle-forms__field-edit-select-option",
-    gap: 1,
-    wrap: true
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexBlock, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    value: option,
-    onChange: e => editOption(e.target.value)
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    isDestructive: true,
-    onClick: deleteOption
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Remove Option', 'hizzle-forms'))));
-};
 const Edit = _ref => {
   let {
     attributes,
@@ -530,7 +519,7 @@ const Edit = _ref => {
       });
     }
   }, []);
-  const expectedName = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_4__["default"])(attributes.label, attributes.instanceID);
+  const expectedName = (0,_utils_label_to_name__WEBPACK_IMPORTED_MODULE_3__["default"])(attributes.label, attributes.instanceID);
 
   // Ensure name is same as parent.
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -541,11 +530,12 @@ const Edit = _ref => {
     }
   }, [expectedName]);
   const options = Array.isArray(attributes.options) ? attributes.options : [];
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_with_edit_wrapper__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     isSelected: isSelected,
-    fieldType: "text"
+    fieldType: "text",
+    hasOptions: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     className: "hizzle-forms__field-select",
     value: attributes.value ? attributes.value : '',
@@ -559,33 +549,7 @@ const Edit = _ref => {
   }, attributes.placeholder), options.map((option, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: option,
     key: index
-  }, option))), isSelected && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, {
-    className: "hizzle-forms__field-edit-select-options",
-    direction: "column",
-    gap: 2
-  }, options.map((option, index) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(EditOption, {
-    key: index,
-    option: option,
-    editOption: value => {
-      const newOptions = [...options];
-      newOptions[index] = value;
-      props.setAttributes({
-        options: newOptions
-      });
-    },
-    deleteOption: () => {
-      const newOptions = [...options];
-      newOptions.splice(index, 1);
-      props.setAttributes({
-        options: newOptions
-      });
-    }
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    variant: "primary",
-    onClick: () => props.setAttributes({
-      options: [...options, '']
-    })
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add Option', 'hizzle-forms')))));
+  }, option))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (Edit);
 
@@ -1682,9 +1646,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const {
-  name
+  name,
+  icon
 } = _block_json__WEBPACK_IMPORTED_MODULE_0__;
 (0,_utils_register_block__WEBPACK_IMPORTED_MODULE_3__["default"])(name, {
+  icon,
   edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_2__["default"]
 });

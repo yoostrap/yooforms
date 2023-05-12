@@ -8,9 +8,10 @@ import variations from './variations';
 import registerHizzleBlockType from '../utils/register-block';
 
 // Register the checkbox block.
-const { name } = json;
+const { name, icon } = json;
 
 registerHizzleBlockType( name, {
+	icon,
 	edit,
 	save,
 	variations,

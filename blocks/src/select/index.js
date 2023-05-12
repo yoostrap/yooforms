@@ -6,9 +6,10 @@ import edit from './edit';
 import save from './save';
 import registerHizzleBlockType from '../utils/register-block';
 
-const { name } = json;
+const { name, icon } = json;
 
 registerHizzleBlockType( name, {
+	icon,
 	edit,
 	save,
 } );

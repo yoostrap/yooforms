@@ -25,13 +25,24 @@ const HizzleFieldControls = _ref => {
   let {
     attributes,
     hidePlaceholder,
+    hasOptions,
     setAttributes
   } = _ref;
   const hasNameAttribute = attributes.name && attributes.name.length > 0;
-  if (hidePlaceholder && !hasNameAttribute) {
+  if (!hasOptions && hidePlaceholder && !hasNameAttribute) {
     return null;
   }
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, !hidePlaceholder && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+
+  // Sets field options.
+  const setFieldOptions = optionsString => {
+    setAttributes({
+      options: optionsString.split('\n')
+    });
+  };
+
+  // Combine options into a string.
+  const optionsString = attributes.options ? attributes.options.join('\n') : '';
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('General', 'hizzle-forms')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Merge Tag', 'hizzle-forms'),
@@ -39,7 +50,12 @@ const HizzleFieldControls = _ref => {
     onClick: event => event.target.select(),
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Use this merge tag to display this field\'s value in your emails, response message and redirect URL.', 'hizzle-forms'),
     readOnly: true
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+  }), hasOptions && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Options', 'hizzle-forms'),
+    value: optionsString,
+    onChange: setFieldOptions,
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter each option on a new line. For example, "Option 1" and "Option 2" will be displayed as a dropdown with two options.', 'hizzle-forms')
+  }), !hidePlaceholder && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Placeholder text', 'hizzle-forms'),
     value: attributes.placeholder || '',
     onChange: value => setAttributes({
@@ -1964,9 +1980,11 @@ __webpack_require__.r(__webpack_exports__);
 
 // Register the checkbox block.
 const {
-  name
+  name,
+  icon
 } = _block_json__WEBPACK_IMPORTED_MODULE_0__;
 (0,_utils_register_block__WEBPACK_IMPORTED_MODULE_4__["default"])(name, {
+  icon,
   edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_2__["default"],
   variations: _variations__WEBPACK_IMPORTED_MODULE_3__["default"]

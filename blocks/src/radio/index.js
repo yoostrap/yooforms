@@ -11,9 +11,10 @@ import registerHizzleBlockType from '../utils/register-block';
 import './radio-option';
 
 // Register the radio block.
-const { name } = json;
+const { name, icon } = json;
 
 registerHizzleBlockType( name, {
+	icon,
 	edit,
 	save,
 	variations,
