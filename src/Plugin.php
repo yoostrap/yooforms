@@ -31,6 +31,13 @@ class Plugin {
 	public $submission;
 
 	/**
+	 * The merge tags manager.
+	 *
+	 * @var Merge_Tags
+	 */
+	public $merge_tags;
+
+	/**
 	 * Stores the main plugin instance.
 	 *
 	 * @access      private
@@ -68,6 +75,7 @@ class Plugin {
 
 		// Init the submission object.
 		$this->submission = new Submission();
+		$this->merge_tags = new Merge_Tags();
 	}
 
 	/**

@@ -108,7 +108,8 @@ class Submission {
 			return $this->get_response();
 		}
 
-		// TODO: Send emails etc.
+		// Send emails.
+		$this->form->send_emails( $this );
 
 		return $this->get_response();
 	}

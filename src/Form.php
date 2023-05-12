@@ -156,8 +156,8 @@ class Form {
 	public function get_response() {
 		$response = array(
 			'action'   => $this->action,
-			'redirect' => $this->redirect,
-			'message'  => $this->message,
+			'redirect' => apply_filters( 'hizzle_forms_form_redirect_url', $this->redirect, $this ),
+			'message'  => apply_filters( 'hizzle_forms_form_response_message', $this->message, $this ),
 		);
 
 		return apply_filters( 'hizzle_forms_form_response', $response, $this );
@@ -188,4 +188,20 @@ class Form {
 		);
 	}
 
+	/**
+	 * Sends the form's emails.
+	 *
+	 * @param Submission $submission The submission
+	 */
+	public function send_emails( $submission ) {
+
+		do_action( 'hizzle_forms_form_before_send_emails', $this, $submission );
+
+		// Send the emails.
+		foreach ( $this->emails as $email ) {
+			$email->send( $submission );
+		}
+
+		do_action( 'hizzle_forms_form_after_send_emails', $this, $submission );
+	}
 }

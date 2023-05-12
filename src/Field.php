@@ -198,6 +198,40 @@ class Field {
 	}
 
 	/**
+	 * Formats the field value.
+	 */
+	public function get_formatted_value() {
+
+		// Checkbox.
+		if ( 'hizzle-forms/checkbox' === $this->field_type ) {
+			return $this->value ? esc_html__( 'Yes', 'hizzle-forms' ) : esc_html__( 'No', 'hizzle-forms' );
+		}
+
+		// Date.
+		if ( 'hizzle-forms/input' === $this->field_type && ! empty( $this->extra['type'] ) && 'date' === $this->extra['type'] ) {
+			return date_i18n( get_option( 'date_format' ), strtotime( $this->value ) );
+		}
+
+		// Time.
+		if ( 'hizzle-forms/input' === $this->field_type && ! empty( $this->extra['type'] ) && 'time' === $this->extra['type'] ) {
+			return date_i18n( get_option( 'time_format' ), strtotime( $this->value ) );
+		}
+
+		// Number.
+		if ( 'hizzle-forms/input' === $this->field_type && ! empty( $this->extra['type'] ) && 'number' === $this->extra['type'] ) {
+			return number_format_i18n( $this->value );
+		}
+
+		// Arrays.
+		if ( is_array( $this->value ) ) {
+			return esc_html( implode( ', ', $this->value ) );
+		}
+
+		// Default.
+		return esc_html( $this->value );
+	}
+
+	/**
 	 * Validates a given form field.
 	 *
 	 * @return true|\WP_Error
