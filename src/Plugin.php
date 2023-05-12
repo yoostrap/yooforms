@@ -74,7 +74,7 @@ class Plugin {
 		add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
 
 		// Filter email message.
-		add_filter( 'hizzle_forms_email_message', 'do_blocks', 9 );
+		add_filter( 'hizzle_forms_email_message', 'make_clickable', 9 );
 		add_filter( 'hizzle_forms_email_message', 'wptexturize' );
 		add_filter( 'hizzle_forms_email_message', 'convert_smilies', 20 );
 		add_filter( 'hizzle_forms_email_message', 'wpautop' );

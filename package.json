@@ -18,16 +18,9 @@
 	"homepage": "https://github.com/hizzle-co/hizzle-forms#readme",
 	"scripts": {
 		"start": "wp-scripts start --webpack-copy-php --webpack-copy-css --webpack-src-dir=blocks/src --output-path=blocks/build",
-		"start:non-block": "wp-scripts start --output-path=build/non-block-examples --config=./non-block-examples.webpack.config.js",
 		"build": "wp-scripts build --webpack-copy-php --webpack-copy-css --webpack-src-dir=blocks/src --output-path=blocks/build",
 		"check-engines": "wp-scripts check-engines",
-		"check-licenses": "wp-scripts check-licenses --production",
-		"format": "wp-scripts format",
-		"lint:css": "wp-scripts lint-style '**/*.css'",
-		"lint:js": "wp-scripts lint-js .",
-		"lint:pkg-json": "wp-scripts lint-pkg-json",
-		"packages-update": "wp-scripts packages-update",
-		"plugin-zip": "wp-scripts plugin-zip",
+		"check-licenses": "wp-scripts check-licenses --production --webpack-src-dir=blocks/src",
 		"test:e2e": "wp-scripts test-e2e",
 		"test:unit": "wp-scripts test-unit-js"
 	},

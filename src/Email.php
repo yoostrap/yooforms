@@ -57,10 +57,12 @@ class Email {
      * @param array $args The email arguments.
      */
     public function __construct( $args ) {
-        $this->active  = isset( $args['active'] ) ? (bool) $args['active'] : true;
-        $this->email   = isset( $args['email'] ) ? $args['email'] : '';
-        $this->subject = isset( $args['subject'] ) ? $args['subject'] : '';
-        $this->message = isset( $args['message'] ) ? $args['message'] : '';
+        $this->active      = isset( $args['active'] ) ? (bool) $args['active'] : true;
+        $this->email       = isset( $args['email'] ) ? $args['email'] : '';
+        $this->subject     = isset( $args['subject'] ) ? $args['subject'] : '';
+        $this->message     = isset( $args['message'] ) ? $args['message'] : '';
+        $this->sender_name = isset( $args['sender_name'] ) ? $args['sender_name'] : '';
+        $this->reply_to    = isset( $args['reply_to'] ) ? $args['reply_to'] : '';
     }
 
     /**

@@ -190,12 +190,16 @@ variations.forEach( ( variation ) => {
 				email: '{admin_email}',
 				subject: __( 'New Response: Contact Form', 'hizzle-forms' ),
 				message: __( 'You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \n{user_ip}\nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}', 'hizzle-forms' ),
+				sender_name: '{site_title}',
+				reply_to: '{email}',
 				active: true
 			},
 			{
 				email: '{email}',
 				subject: __( 'Thank you for contacting us', 'hizzle-forms' ),
 				message: __( 'Thank you for contacting us. We will be in touch with you shortly.\n\nHere are the details of your message:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}', 'hizzle-forms' ),
+				sender_name: '{site_title}',
+				reply_to: '{admin_email}',
 				active: true
 			},
 		],

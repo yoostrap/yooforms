@@ -937,7 +937,7 @@ const fieldTypes = ['all'];
 const edit = [];
 
 // Validation function.
-const validate = function (value, config) {
+const validate = function (value) {
   return value.length > 0;
 };
 

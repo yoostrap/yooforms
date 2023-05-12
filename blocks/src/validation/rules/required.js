@@ -22,7 +22,7 @@ export const fieldTypes = [ 'all' ];
 export const edit = []
 
 // Validation function.
-export const validate = function ( value, config ) {
+export const validate = function ( value ) {
 	return value.length > 0;
 };
 

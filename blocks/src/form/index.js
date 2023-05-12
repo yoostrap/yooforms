@@ -75,7 +75,7 @@ function getForms( blocks ) {
 	return forms;
 }
 
-const syncingForms = false;
+let syncingForms = false;
 
 subscribe( () => {
 

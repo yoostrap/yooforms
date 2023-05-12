@@ -230,9 +230,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
-
 
 
 
@@ -249,6 +246,8 @@ __webpack_require__.r(__webpack_exports__);
  * @param {string} props.email
  * @param {string} props.subject
  * @param {string} props.message
+ * @param {string} props.sender_name
+ * @param {string} props.reply_to
  * @param {Function} props.setAttributes
  * @param {Function} props.deleteConnection
  * @param {Function} props.insertConnection
@@ -261,6 +260,8 @@ const EmailConnection = _ref => {
     email,
     subject,
     message,
+    sender_name,
+    reply_to,
     setAttributes,
     canDelete,
     deleteConnection,
@@ -277,9 +278,23 @@ const EmailConnection = _ref => {
     onChange: active => setAttributes({
       active
     })
+  }), active && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Sender name', 'hizzle-forms'),
+    value: sender_name ? sender_name : '',
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter a sender name', 'hizzle-forms'),
+    onChange: sender_name => setAttributes({
+      sender_name
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Reply-to', 'hizzle-forms'),
+    value: reply_to ? reply_to : '',
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter a reply-to email address', 'hizzle-forms'),
+    onChange: reply_to => setAttributes({
+      reply_to
+    })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Recipient', 'hizzle-forms'),
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('{admin_email}, {user_email}, example@gmail.com', 'hizzle-forms'),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('{admin_email}, {email}, example@gmail.com', 'hizzle-forms'),
     value: email ? email : '',
     onChange: email => setAttributes({
       email
@@ -300,7 +315,7 @@ const EmailConnection = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Email content', 'hizzle-forms'),
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter email content…', 'hizzle-forms'),
     rows: 10
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Flex, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     isSmall: true,
     onClick: insertConnection
@@ -331,7 +346,9 @@ const EmailConnections = _ref2 => {
         emails: [{
           email: "{admin_email}",
           subject: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('New form response', 'hizzle-forms'),
-          message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}', 'hizzle-forms'),
+          message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}', 'hizzle-forms'),
+          sender_name: '{site_title}',
+          reply_to: '{email}',
           active: false
         }]
       });
@@ -485,7 +502,7 @@ function getForms(blocks) {
   });
   return forms;
 }
-const syncingForms = false;
+let syncingForms = false;
 (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.subscribe)(() => {
   // Abort if we're already syncing.
   if (syncingForms) {
@@ -1021,12 +1038,16 @@ variations.forEach(variation => {
     emails: [{
       email: '{admin_email}',
       subject: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('New Response: Contact Form', 'hizzle-forms'),
-      message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}', 'hizzle-forms'),
+      message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \n{user_ip}\nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}', 'hizzle-forms'),
+      sender_name: '{site_title}',
+      reply_to: '{email}',
       active: true
     }, {
-      email: '{user_email}',
+      email: '{email}',
       subject: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Thank you for contacting us', 'hizzle-forms'),
-      message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Thank you for contacting us. We will be in touch with you shortly.\n\nHere are the details of your message:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}', 'hizzle-forms'),
+      message: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Thank you for contacting us. We will be in touch with you shortly.\n\nHere are the details of your message:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}', 'hizzle-forms'),
+      sender_name: '{site_title}',
+      reply_to: '{admin_email}',
       active: true
     }],
     action: 'message',
@@ -1306,7 +1327,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/form","title":"Form","description":"Displays a form.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"forms","version":"1.0.0","textdomain":"hizzle-forms","attributes":{"emails":{"type":"array","default":[{"email":"{admin_email}","subject":"New Response: Contact Form","message":"You have received a new response to your contact form.\\n\\nHere are the details:\\n\\n{response_fields}\\n\\nThank you,\\nYour Site\\n\\n{user_ip}\\n{user_agent}\\n{user_date}","active":true},{"email":"{user_email}","subject":"Thank you for contacting us","message":"Thank you for contacting us. We will be in touch with you shortly.\\n\\nHere are the details of your message:\\n\\n{response_fields}\\n\\nThank you,\\nYour Site\\n\\n{user_ip}\\n{user_agent}\\n{user_date}","active":true}]},"action":{"type":"string","default":"message"},"redirect":{"type":"string","default":""},"message":{"type":"string","default":"Thank you for contacting us. We will be in touch with you shortly."},"title":{"type":"string","default":"Contact Form"},"instanceID":{"type":"string"}},"styles":[{"name":"hizzle-default","label":"Default","isDefault":true},{"name":"hizzle-full","label":"Full"},{"name":"hizzle-wide","label":"Wide"}],"example":{"innerBlocks":[{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"label":"Name","type":"name"}},{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"type":"email","label":"Email"}},{"name":"hizzle-forms/textarea","attributes":{"validation":[{"name":"required"}],"label":"Message"}},{"name":"hizzle-forms/checkbox","attributes":{"validation":[{"name":"required"}],"label":"I agree to the terms and conditions"}},{"name":"hizzle-forms/submit","attributes":{"text":"Send Message","element":"button","lock":{"remove":true}}}]},"supports":{"anchor":true,"spacing":{"blockGap":true,"units":["px","em","rem","vh","vw"],"margin":false,"padding":true},"color":{"link":true,"gradients":true},"html":false},"editorScript":"file:./index.js","script":"file:./view.js","editorStyle":"hizzle-forms-blocks","style":"file:./view.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"hizzle-forms/form","title":"Form","description":"Displays a form.","category":"hizzle-forms","keywords":["form","contact","input"],"icon":"forms","version":"1.0.0","textdomain":"hizzle-forms","attributes":{"emails":{"type":"array","default":[{"email":"{admin_email}","subject":"New Response: Contact Form","message":"You have received a new response to your contact form.\\n\\nHere are the details:\\n\\n{response_fields}\\n\\nThank you,\\n{site_title}\\n\\n<hr>\\nURL: {current_url} \\nIP Address: {user_ip}\\nUser Agent: {user_agent}\\nTime: {current_date} at {current_time}","sender_name":"{site_title}","reply_to":"{email}","active":true},{"email":"{email}","subject":"Thank you for contacting us","message":"Thank you for contacting us. We will be in touch with you shortly.\\n\\nHere are the details of your message:\\n\\n{response_fields}\\n\\nThank you,\\n{site_title}\\n\\n<hr>\\nURL: {current_url} \\nIP Address: {user_ip}\\nUser Agent: {user_agent}\\nTime: {current_date} at {current_time}","sender_name":"{site_title}","reply_to":"{admin_email}","active":true}]},"action":{"type":"string","default":"message"},"redirect":{"type":"string","default":""},"message":{"type":"string","default":"Thank you for contacting us. We will be in touch with you shortly."},"title":{"type":"string","default":"Contact Form"},"instanceID":{"type":"string"}},"styles":[{"name":"hizzle-default","label":"Default","isDefault":true},{"name":"hizzle-full","label":"Full"},{"name":"hizzle-wide","label":"Wide"}],"example":{"innerBlocks":[{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"label":"Name","type":"name"}},{"name":"hizzle-forms/input","attributes":{"validation":[{"name":"required"}],"type":"email","label":"Email"}},{"name":"hizzle-forms/textarea","attributes":{"validation":[{"name":"required"}],"label":"Message"}},{"name":"hizzle-forms/checkbox","attributes":{"validation":[{"name":"required"}],"label":"I agree to the terms and conditions"}},{"name":"hizzle-forms/submit","attributes":{"text":"Send Message","element":"button","lock":{"remove":true}}}]},"supports":{"anchor":true,"spacing":{"blockGap":true,"units":["px","em","rem","vh","vw"],"margin":false,"padding":true},"color":{"link":true,"gradients":true},"html":false},"editorScript":"file:./index.js","script":"file:./view.js","editorStyle":"hizzle-forms-blocks","style":"file:./view.css"}');
 
 /***/ })
 

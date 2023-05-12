@@ -12,12 +12,14 @@ import { useEffect } from '@wordpress/element';
  * @param {string} props.email
  * @param {string} props.subject
  * @param {string} props.message
+ * @param {string} props.sender_name
+ * @param {string} props.reply_to
  * @param {Function} props.setAttributes
  * @param {Function} props.deleteConnection
  * @param {Function} props.insertConnection
  * @returns {JSX.Element}
  */
-const EmailConnection = ( { index, active, email, subject, message, setAttributes, canDelete, deleteConnection, insertConnection } ) => {
+const EmailConnection = ( { index, active, email, subject, message, sender_name, reply_to, setAttributes, canDelete, deleteConnection, insertConnection } ) => {
 
 	const panelTitle = sprintf(
 		__( 'Email Connection #%d', 'hizzle-forms' ),
@@ -34,29 +36,46 @@ const EmailConnection = ( { index, active, email, subject, message, setAttribute
 				onChange={ active => setAttributes( { active } ) }
 			/>
 
-			<TextControl
-				label={ __( 'Recipient', 'hizzle-forms' ) }
-				placeholder={ __( '{admin_email}, {email}, example@gmail.com', 'hizzle-forms' ) }
-				value={ email ? email : '' }
-				onChange={ ( email ) => setAttributes( { email } ) }
-				help={ __( 'You can enter multiple email addresses separated by commas.', 'hizzle-forms' ) }
-			/>
+			{active && (
+				<>
+					<TextControl
+						label={ __( 'Sender name', 'hizzle-forms' ) }
+						value={ sender_name ? sender_name : '' }
+						placeholder={ __( 'Enter a sender name', 'hizzle-forms' ) }
+						onChange={ sender_name => setAttributes( { sender_name } ) }
+					/>
 
-			<TextControl
-				label={ __( 'Email subject line', 'hizzle-forms' ) }
-				value={ subject ? subject : '' }
-				placeholder={ __( 'Enter a subject', 'hizzle-forms' ) }
-				onChange={ subject => setAttributes( { subject } ) }
-			/>
+					<TextControl
+						label={ __( 'Reply-to', 'hizzle-forms' ) }
+						value={ reply_to ? reply_to : '' }
+						placeholder={ __( 'Enter a reply-to email address', 'hizzle-forms' ) }
+						onChange={ reply_to => setAttributes( { reply_to } ) }
+					/>
 
-			<TextareaControl
-				value={ message ? message : '' }
-				onChange={ message => setAttributes( { message } ) }
-				label={ __( 'Email content', 'hizzle-forms' ) }
-				placeholder={ __( 'Enter email content…', 'hizzle-forms' ) }
-				rows={ 10 }
-			/>
+					<TextControl
+						label={ __( 'Recipient', 'hizzle-forms' ) }
+						placeholder={ __( '{admin_email}, {email}, example@gmail.com', 'hizzle-forms' ) }
+						value={ email ? email : '' }
+						onChange={ ( email ) => setAttributes( { email } ) }
+						help={ __( 'You can enter multiple email addresses separated by commas.', 'hizzle-forms' ) }
+					/>
 
+					<TextControl
+						label={ __( 'Email subject line', 'hizzle-forms' ) }
+						value={ subject ? subject : '' }
+						placeholder={ __( 'Enter a subject', 'hizzle-forms' ) }
+						onChange={ subject => setAttributes( { subject } ) }
+					/>
+
+					<TextareaControl
+						value={ message ? message : '' }
+						onChange={ message => setAttributes( { message } ) }
+						label={ __( 'Email content', 'hizzle-forms' ) }
+						placeholder={ __( 'Enter email content…', 'hizzle-forms' ) }
+						rows={ 10 }
+					/>
+				</>
+			)}
 			<Flex>
 				<FlexItem>
 					<Button
@@ -102,6 +121,8 @@ const EmailConnections = ( { emails, setAttributes } ) => {
 					email: "{admin_email}",
 					subject: __( 'New form response', 'hizzle-forms' ),
 					message: __( 'You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}', 'hizzle-forms' ),
+					sender_name: '{site_title}',
+					reply_to: '{email}',
 					active: false
 				}
 			] } );
