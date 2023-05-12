@@ -1,7 +1,6 @@
 import { TextControl, TextareaControl, Button, Flex, FlexItem , ToggleControl, PanelBody} from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
-import { RichText } from '@wordpress/block-editor';
 
 /**
  * Displays controls for a single email connection.
@@ -37,7 +36,7 @@ const EmailConnection = ( { index, active, email, subject, message, setAttribute
 
 			<TextControl
 				label={ __( 'Recipient', 'hizzle-forms' ) }
-				placeholder={ __( '{admin_email}, {user_email}, example@gmail.com', 'hizzle-forms' ) }
+				placeholder={ __( '{admin_email}, {email}, example@gmail.com', 'hizzle-forms' ) }
 				value={ email ? email : '' }
 				onChange={ ( email ) => setAttributes( { email } ) }
 				help={ __( 'You can enter multiple email addresses separated by commas.', 'hizzle-forms' ) }
@@ -102,7 +101,7 @@ const EmailConnections = ( { emails, setAttributes } ) => {
 				{
 					email: "{admin_email}",
 					subject: __( 'New form response', 'hizzle-forms' ),
-					message: __( 'You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}', 'hizzle-forms' ),
+					message: __( 'You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}', 'hizzle-forms' ),
 					active: false
 				}
 			] } );

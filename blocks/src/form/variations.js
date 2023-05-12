@@ -189,13 +189,13 @@ variations.forEach( ( variation ) => {
 			{
 				email: '{admin_email}',
 				subject: __( 'New Response: Contact Form', 'hizzle-forms' ),
-				message: __( 'You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}', 'hizzle-forms' ),
+				message: __( 'You have received a new response to your contact form. \n\nHere are the details:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \n{user_ip}\nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}', 'hizzle-forms' ),
 				active: true
 			},
 			{
-				email: '{user_email}',
+				email: '{email}',
 				subject: __( 'Thank you for contacting us', 'hizzle-forms' ),
-				message: __( 'Thank you for contacting us. We will be in touch with you shortly.\n\nHere are the details of your message:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}', 'hizzle-forms' ),
+				message: __( 'Thank you for contacting us. We will be in touch with you shortly.\n\nHere are the details of your message:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}', 'hizzle-forms' ),
 				active: true
 			},
 		],

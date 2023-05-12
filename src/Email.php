@@ -132,6 +132,7 @@ class Email {
 	 * @since 1.0.0
 	 */
 	public function before_sending() {
+        add_filter( 'wp_mail_from', array( $this, 'get_from_email' ) );
 		add_filter( 'wp_mail_from_name', array( $this, 'get_from_name' ) );
 		add_filter( 'wp_mail_content_type', array( $this, 'get_content_type' ), 1000 );
         add_action( 'wp_mail_failed', array( $this, 'handle_failed_email' ) );
@@ -143,6 +144,7 @@ class Email {
      * @since 1.0.0
      */
     public function after_sending() {
+        remove_filter( 'wp_mail_from', array( $this, 'get_from_email' ) );
         remove_filter( 'wp_mail_from_name', array( $this, 'get_from_name' ) );
         remove_filter( 'wp_mail_content_type', array( $this, 'get_content_type' ), 1000 );
         remove_action( 'wp_mail_failed', array( $this, 'handle_failed_email' ) );
@@ -165,6 +167,23 @@ class Email {
 		$headers = implode( "\r\n", $headers );
 		return apply_filters( 'hizzle_forms_email_headers', $headers, $this );
     }
+
+    /**
+	 * Get the "from" email address address.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @return string The "from" email address address.
+	 */
+	public function get_from_email( $email = '' ) {
+
+        // Do not filter valid email addresses.
+        if ( is_email( $email ) ) {
+            return $email;
+        }
+
+		return get_option( 'admin_email' );
+	}
 
     /**
 	 * Get the email reply-to.

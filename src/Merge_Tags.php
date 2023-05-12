@@ -89,7 +89,7 @@ class Merge_Tags {
 				'description' => __( 'The current time.', 'hizzle-forms' ),
 				'replacement' => date_i18n( get_option( 'time_format' ) ),
 			),
-			'ip_address'      => array(
+			'user_ip'         => array(
 				'description' => __( 'The visitor\'s IP address.', 'hizzle-forms' ),
 				'replacement' => $submission->ip_address,
 			),
@@ -141,7 +141,7 @@ class Merge_Tags {
 			);
 
 			if ( '' !== $value ) {
-				$all_values[ $field->name ] = $value;
+				$all_values[ $field->label ] = $value;
 			}
 		}
 
@@ -168,7 +168,11 @@ class Merge_Tags {
 		$output = '';
 
 		foreach ( $values as $name => $value ) {
-			$output .= sprintf( '<strong>%s</strong>: %s<br />', $name, $value );
+			$output .= sprintf(
+				'<h4 style="font-size: 16px;">%s</h4><div style="font-size: 14px;">%s</div>',
+				$name,
+				nl2br( $value )
+			);
 		}
 
 		return $output;

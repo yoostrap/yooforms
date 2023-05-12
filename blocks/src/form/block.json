@@ -20,13 +20,13 @@
                 {
                     "email": "{admin_email}",
                     "subject": "New Response: Contact Form",
-                    "message": "You have received a new response to your contact form.\n\nHere are the details:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}",
+                    "message": "You have received a new response to your contact form.\n\nHere are the details:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}",
                     "active": true
                 },
                 {
-                    "email": "{user_email}",
+                    "email": "{email}",
                     "subject": "Thank you for contacting us",
-                    "message": "Thank you for contacting us. We will be in touch with you shortly.\n\nHere are the details of your message:\n\n{response_fields}\n\nThank you,\nYour Site\n\n{user_ip}\n{user_agent}\n{user_date}",
+                    "message": "Thank you for contacting us. We will be in touch with you shortly.\n\nHere are the details of your message:\n\n{response_fields}\n\nThank you,\n{site_title}\n\n<hr>\nURL: {current_url} \nIP Address: {user_ip}\nUser Agent: {user_agent}\nTime: {current_date} at {current_time}",
                     "active": true
                 }
             ]
