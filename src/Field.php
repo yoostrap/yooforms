@@ -232,6 +232,25 @@ class Field {
 	}
 
 	/**
+	 * Checks if this is a given input type.
+	 *
+	 * @param string|string[] $type The input type.
+	 * @return bool
+	 */
+	public function is_input_type( $type ) {
+
+		// Abort if not input type.
+		if ( 'hizzle-forms/input' !== $this->field_type ) {
+			return false;
+		}
+
+		// Check type.
+		$input_type = empty( $this->extra['type'] ) ? 'text' : $this->extra['type'];
+
+		return in_array( $input_type, wp_parse_list( $type ), true );
+	}
+
+	/**
 	 * Validates a given form field.
 	 *
 	 * @return true|\WP_Error

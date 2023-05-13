@@ -290,6 +290,8 @@ class REST_API extends \WP_REST_Controller {
 
 		$plugin->submission->form            = $form;
 		$plugin->submission->submission_page = $request['hizzle_conversion_page'];
+		$plugin->submission->referrer		 = $request['hizzle_referrer'];
+		$plugin->submission->time_to_submit  = intval( $request['hizzle_time_to_submit'] );
 		$plugin->submission->data            = $request['hizzle-forms'];
 
 		return true;

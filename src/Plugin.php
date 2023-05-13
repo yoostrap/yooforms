@@ -38,6 +38,13 @@ class Plugin {
 	public $merge_tags;
 
 	/**
+	 * Spam protection manager.
+	 *
+	 * @var SpamCheck
+	 */
+	public $spam_check;
+
+	/**
 	 * Stores the main plugin instance.
 	 *
 	 * @access      private
@@ -86,6 +93,7 @@ class Plugin {
 		// Init the submission object.
 		$this->submission = new Submission();
 		$this->merge_tags = new Merge_Tags();
+		$this->spam_check = new SpamCheck();
 	}
 
 	/**

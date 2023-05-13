@@ -52,6 +52,16 @@ class Submission {
 	public $submission_page = '';
 
 	/**
+	 * @var string $referrer The submission referrer.
+	 */
+	public $referrer = '';
+
+	/**
+	 * @var int $time_to_submit The time it took to submit the form.
+	 */
+	public $time_to_submit = 0;
+
+	/**
 	 * @var bool $has_processed Whether the submission has been processed.
 	 */
 	public $has_processed = false;

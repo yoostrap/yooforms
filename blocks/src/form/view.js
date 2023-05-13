@@ -93,6 +93,8 @@ const formDataToObject = (formData ) => {
 	return data;
 };
 
+const HizzleFormsLoaded = (new Date()).getTime();
+
 domReady(() => {
 
 	// Init all forms.
@@ -142,6 +144,12 @@ domReady(() => {
 
 			// Add the conversion page to the form fields.
 			fields.append('hizzle_conversion_page', window.location.href);
+
+			// Add referrer to the form fields.
+			fields.append('hizzle_referrer', document.referrer);
+
+			// Append number of seconds from loading to submission.
+			fields.append('hizzle_time_to_submit', ((new Date()).getTime() - HizzleFormsLoaded) / 1000);
 
 			// Add submitting class to the form.
 			form.classList.add('hizzle-forms-submitting');
