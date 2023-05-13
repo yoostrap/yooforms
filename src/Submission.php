@@ -27,6 +27,11 @@ class Submission {
 	public $errors;
 
 	/**
+	 * @var array $raw The raw request data.
+	 */
+	public $raw = array();
+
+	/**
 	 * @var array $data The submitted data.
 	 */
 	public $data = array();

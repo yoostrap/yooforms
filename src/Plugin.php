@@ -40,7 +40,7 @@ class Plugin {
 	/**
 	 * Spam protection manager.
 	 *
-	 * @var SpamCheck
+	 * @var Spam_Checker
 	 */
 	public $spam_check;
 
@@ -93,7 +93,7 @@ class Plugin {
 		// Init the submission object.
 		$this->submission = new Submission();
 		$this->merge_tags = new Merge_Tags();
-		$this->spam_check = new SpamCheck();
+		$this->spam_check = new Spam_Checker();
 	}
 
 	/**

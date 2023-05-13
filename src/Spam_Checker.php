@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * Fights against SPAM submissions.
  *
  */
-class SpamCheck {
+class Spam_Checker {
 
 	/**
 	 * Class Constructor.
@@ -33,12 +33,13 @@ class SpamCheck {
 	public function check_submission( $submission ) {
 
 		// Abort if the user is logged in.
-		if ( ! apply_filters( 'hizzle_forms_should_check_spam', get_current_user_id() > 0, $submission ) ) {
+		if ( apply_filters( 'hizzle_forms_should_skip_spam_check', get_current_user_id() > 0, $submission ) ) {
 			return;
 		}
 
 		try {
 			$this->check_honeypot( $submission );
+			$this->check_time_to_submit( $submission );
 			$this->check_akismet( $submission );
 		} catch ( \Exception $e ) {
 			$submission->errors->add( 'spam', $e->getMessage() );
@@ -51,7 +52,7 @@ class SpamCheck {
 	 * @param Submission $submission The submission object.
 	 */
 	public function check_honeypot( $submission ) {
-		if ( empty( $submission->data['hizzle_message'] ) ) {
+		if ( empty( $submission->raw['hizzle_message'] ) ) {
 			return;
 		}
 
@@ -121,7 +122,7 @@ class SpamCheck {
 			// Name.
 			if ( $field->is_input_type( 'name', 'given-name', 'family-name' ) && ! $used_full_name ) {
 
-				$comment['comment_author'] = $comment['comment_author'] ? $comment['comment_author'] : '';
+				$comment['comment_author'] = isset( $comment['comment_author'] ) ? $comment['comment_author'] : '';
 
 				if ( $field->is_input_type( 'name' ) ) {
 					$comment['comment_author'] = $value;
@@ -132,7 +133,7 @@ class SpamCheck {
 					$comment['comment_author'] = trim( $comment['comment_author'] . ' ' . $value );
 				}
 
-				return;
+				continue;
 			}
 
 			// Email.
@@ -153,7 +154,7 @@ class SpamCheck {
 
 		// Posted data.
 		if ( method_exists( 'Akismet', 'prepare_custom_form_values' ) ) {
-			$comment = \Akismet::prepare_custom_form_values( $comment );
+			$comment = \Akismet::prepare_custom_form_values( $comment, $submission->raw );
 		}
 
 		// Server data.
@@ -178,8 +179,9 @@ class SpamCheck {
 		}
 
 		$comment  = apply_filters( 'hizzle_forms_akismet_fields', $comment, $submission );
-		$response = \Akismet::http_post( \Akismet::build_query( $comment ), 'comment-check' );
 
+		$response = \Akismet::http_post( \Akismet::build_query( $comment ), 'comment-check' );
+noptin_error_log( $response );
 		if ( 'true' === $response[1] || true === $response[1] ) {
 			throw new \Exception( 'Could not verify submission: Suspected SPAM.' );
 		}

@@ -1,0 +1,978 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Hizzle Forms\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-13 08:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.3; wp-6.2\n"
+"X-Domain: hizzle-forms"
+
+#: blocks/src/form/variations.js:154
+msgid "1 - Very Bad"
+msgstr ""
+
+#: blocks/src/form/variations.js:155
+msgid "2 - Poor"
+msgstr ""
+
+#: blocks/src/form/variations.js:156
+msgid "3 - Average"
+msgstr ""
+
+#: blocks/src/form/variations.js:157
+msgid "4 - Good"
+msgstr ""
+
+#: blocks/src/form/variations.js:158
+msgid "5 - Excellent"
+msgstr ""
+
+#: blocks/src/form/submit-button.js:26
+msgid "A button to submit the form."
+msgstr ""
+
+#. Description of the plugin
+msgid "A lightweight forms plugin."
+msgstr ""
+
+#: blocks/src/form/variations.js:26
+msgid "A simple way to collect information from folks visiting your site."
+msgstr ""
+
+#: blocks/src/radio/variations.js:29
+msgid "Add a checkbox select field to your form."
+msgstr ""
+
+#: blocks/src/form/variations.js:9
+msgid "Add a contact form to your page."
+msgstr ""
+
+#: blocks/src/form/variations.js:142
+msgid "Add a Feedback form to your page"
+msgstr ""
+
+#: blocks/src/radio/variations.js:17
+msgid "Add a radio select field to your form."
+msgstr ""
+
+#: blocks/src/form/variations.js:79
+msgid "Add a Registration form to your page"
+msgstr ""
+
+#: blocks/src/input/variations.js:227
+msgid "Add a single-line color input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:183
+msgid "Add a single-line date input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:139
+msgid "Add a single-line email input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:205
+msgid "Add a single-line month input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:172
+msgid "Add a single-line number input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:128
+msgid "Add a single-line password input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:161
+msgid "Add a single-line telephone input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:18
+msgid "Add a single-line text input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:194
+msgid "Add a single-line time input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:150
+msgid "Add a single-line URL input field to your form."
+msgstr ""
+
+#: blocks/src/input/variations.js:216
+msgid "Add a single-line week input field to your form."
+msgstr ""
+
+#: blocks/src/form/variations.js:111
+msgid "Add an Appointment booking form to your page"
+msgstr ""
+
+#: blocks/src/form/variations.js:50
+msgid "Add an RSVP form to your page"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:86
+msgid "Add Connection"
+msgstr ""
+
+#: blocks/src/components/with-edit-wrapper.js:45
+msgid "Add help text…"
+msgstr ""
+
+#: blocks/src/components/with-edit-wrapper.js:33
+msgid "Add label…"
+msgstr ""
+
+#: blocks/src/radio/radio-option.js:86
+msgid "Add option…"
+msgstr ""
+
+#: blocks/src/input/variations.js:63 blocks/src/input/variations.js:74
+#: blocks/src/input/variations.js:85 blocks/src/input/variations.js:96
+#: blocks/src/input/variations.js:107
+msgid "address"
+msgstr ""
+
+#: blocks/src/input/variations.js:61
+msgid "Address Line 1"
+msgstr ""
+
+#: blocks/src/input/variations.js:72
+msgid "Address Line 2"
+msgstr ""
+
+#: blocks/src/form/variations.js:126
+msgid "Afternoon"
+msgstr ""
+
+#: blocks/src/form/variations.js:38
+msgid "Agree to terms and conditions"
+msgstr ""
+
+#: blocks/src/form/view.js:193
+msgid ""
+"An unknown error occurred while submitting the form. Check your network "
+"connectivity then try again."
+msgstr ""
+
+#: blocks/src/form/variations.js:112
+msgid "appointment"
+msgstr ""
+
+#: blocks/src/form/variations.js:110
+msgid "Appointment Form"
+msgstr ""
+
+#: blocks/src/form/variations.js:58
+msgid "Attending?"
+msgstr ""
+
+#: blocks/src/form/variations.js:134
+msgid "Book Appointment"
+msgstr ""
+
+#: blocks/src/radio/variations.js:30
+msgid "checkbox"
+msgstr ""
+
+#: blocks/src/input/variations.js:83
+msgid "City"
+msgstr ""
+
+#: blocks/src/input/variations.js:85
+msgid "city"
+msgstr ""
+
+#: blocks/src/input/variations.js:84
+msgid "Collect the city."
+msgstr ""
+
+#: blocks/src/input/variations.js:117
+msgid "Collect the company or organization."
+msgstr ""
+
+#: blocks/src/input/variations.js:62
+msgid "Collect the first line of the address."
+msgstr ""
+
+#: blocks/src/input/variations.js:40
+msgid "Collect the first name."
+msgstr ""
+
+#: blocks/src/input/variations.js:29
+msgid "Collect the full name."
+msgstr ""
+
+#: blocks/src/input/variations.js:51
+msgid "Collect the last name."
+msgstr ""
+
+#: blocks/src/input/variations.js:73
+msgid "Collect the second line of the address."
+msgstr ""
+
+#: blocks/src/input/variations.js:95
+msgid "Collect the state."
+msgstr ""
+
+#: blocks/src/input/variations.js:106
+msgid "Collect the zip code."
+msgstr ""
+
+#: blocks/src/input/variations.js:226
+msgid "Color"
+msgstr ""
+
+#: blocks/src/input/variations.js:228
+msgid "color"
+msgstr ""
+
+#: blocks/src/input/variations.js:118
+msgid "company"
+msgstr ""
+
+#: blocks/src/input/variations.js:116
+msgid "Company / Organization"
+msgstr ""
+
+#: blocks/src/form/variations.js:10
+msgid "contact"
+msgstr ""
+
+#: blocks/src/form/variations.js:8
+msgid "Contact Form"
+msgstr ""
+
+#: blocks/src/form/edit.js:130
+msgid "Contact Form."
+msgstr ""
+
+#: blocks/src/form/edit.js:55 blocks/src/form/variations.js:18
+msgid "Contact Us"
+msgstr ""
+
+#: blocks/src/form/edit.js:83
+msgid "Customize the view after form submission:"
+msgstr ""
+
+#: src/Merge_Tags.php:60
+msgid "Data from a cookie."
+msgstr ""
+
+#: blocks/src/form/variations.js:117 blocks/src/input/variations.js:182
+msgid "Date"
+msgstr ""
+
+#: blocks/src/input/variations.js:184
+msgid "date"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:96
+msgid "Delete Connection"
+msgstr ""
+
+#: blocks/src/form/edit.js:50 blocks/src/form/variations.js:13
+#: blocks/src/form/variations.js:37 blocks/src/form/variations.js:54
+#: blocks/src/form/variations.js:83 blocks/src/form/variations.js:115
+#: blocks/src/form/variations.js:146 blocks/src/input/variations.js:138
+msgid "Email"
+msgstr ""
+
+#: blocks/src/form/variations.js:10 blocks/src/form/variations.js:32
+#: blocks/src/input/variations.js:140
+msgid "email"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:25
+#, javascript-format
+msgid "Email Connection #%d"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:73
+msgid "Email content"
+msgstr ""
+
+#. %s is the error message.
+#: src/Email.php:122
+#, php-format
+msgid "Email failed to send. Error: %s"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:64
+msgid "Email subject line"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:51
+msgid "Enter a reply-to email address"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:44
+msgid "Enter a sender name"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:66
+msgid "Enter a subject"
+msgstr ""
+
+#: blocks/src/checkbox/edit.js:39
+msgid "Enter checkbox label"
+msgstr ""
+
+#: blocks/src/components/field-controls.js:46
+msgid ""
+"Enter each option on a new line. For example, \"Option 1\" and \"Option 2\" "
+"will be displayed as a dropdown with two options."
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:74
+msgid "Enter email content…"
+msgstr ""
+
+#: blocks/src/input/variations.js:248
+msgid "Enter your text"
+msgstr ""
+
+#: blocks/src/components/validation-controls.js:149
+msgid "Error message"
+msgstr ""
+
+#: blocks/src/form/variations.js:51 blocks/src/form/variations.js:80
+#: blocks/src/form/variations.js:112 blocks/src/form/variations.js:143
+msgid "event"
+msgstr ""
+
+#: blocks/src/form/variations.js:143
+msgid "feedback"
+msgstr ""
+
+#: blocks/src/form/variations.js:141
+msgid "Feedback Form"
+msgstr ""
+
+#: blocks/src/input/variations.js:39
+msgid "First Name"
+msgstr ""
+
+#: blocks/src/input/variations.js:41
+msgid "first name"
+msgstr ""
+
+#: blocks/src/form/edit.js:128
+msgid "Form Name"
+msgstr ""
+
+#: blocks/src/form/edit.js:126
+msgid "Form Settings"
+msgstr ""
+
+#: blocks/src/form/variations.js:95
+msgid "Friend or Family"
+msgstr ""
+
+#: blocks/src/input/variations.js:28
+msgid "Full Name"
+msgstr ""
+
+#: blocks/src/input/variations.js:30
+msgid "full name"
+msgstr ""
+
+#: blocks/src/components/field-controls.js:31
+msgid "General"
+msgstr ""
+
+#. Author of the plugin
+msgid "Hizzle"
+msgstr ""
+
+#. Name of the plugin
+#: src/Plugin.php:112
+msgid "Hizzle Forms"
+msgstr ""
+
+#: blocks/src/form/variations.js:162
+msgid "How could we improve?"
+msgstr ""
+
+#: blocks/src/form/variations.js:88
+msgid "How did you hear about us?"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://hizzle.co"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://hizzle.co/forms"
+msgstr ""
+
+#: blocks/src/input/variations.js:262
+msgid "input"
+msgstr ""
+
+#: blocks/src/validation/rules/required.js:13
+msgid "Is this field required?"
+msgstr ""
+
+#: blocks/src/input/variations.js:50
+msgid "Last Name"
+msgstr ""
+
+#: blocks/src/input/variations.js:52
+msgid "last name"
+msgstr ""
+
+#: blocks/src/validation/rules/maxdate.js:10
+msgid "Maximum date"
+msgstr ""
+
+#: blocks/src/validation/rules/maxitems.js:10
+msgid "Maximum items"
+msgstr ""
+
+#: blocks/src/validation/rules/maxlength.js:10
+msgid "Maximum length"
+msgstr ""
+
+#: blocks/src/validation/rules/maxnumber.js:10
+msgid "Maximum number"
+msgstr ""
+
+#: blocks/src/components/field-controls.js:34
+msgid "Merge Tag"
+msgstr ""
+
+#: blocks/src/form/edit.js:51 blocks/src/form/variations.js:14
+msgid "Message"
+msgstr ""
+
+#: blocks/src/validation/rules/mindate.js:10
+msgid "Minimum date"
+msgstr ""
+
+#: blocks/src/validation/rules/minitems.js:10
+msgid "Minimum items"
+msgstr ""
+
+#: blocks/src/validation/rules/minlength.js:10
+msgid "Minimum length"
+msgstr ""
+
+#: blocks/src/validation/rules/minnumber.js:10
+msgid "Minimum number"
+msgstr ""
+
+#: blocks/src/input/variations.js:204
+msgid "Month"
+msgstr ""
+
+#: blocks/src/input/variations.js:206
+msgid "month"
+msgstr ""
+
+#: blocks/src/form/variations.js:125
+msgid "Morning"
+msgstr ""
+
+#: blocks/src/radio/variations.js:28
+msgid "Multi Checkbox"
+msgstr ""
+
+#: blocks/src/form/edit.js:49 blocks/src/form/variations.js:12
+#: blocks/src/form/variations.js:36 blocks/src/form/variations.js:53
+#: blocks/src/form/variations.js:82 blocks/src/form/variations.js:114
+#: blocks/src/form/variations.js:145
+msgid "Name"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:122
+msgid "New form response"
+msgstr ""
+
+#: blocks/src/form/variations.js:198
+msgid "New Response: Contact Form"
+msgstr ""
+
+#: blocks/src/form/variations.js:25
+msgid "Newsletter Sign-up"
+msgstr ""
+
+#: src/Field.php:207 blocks/src/form/variations.js:63
+msgid "No"
+msgstr ""
+
+#: src/Submission.php:181
+msgid "No data was submitted."
+msgstr ""
+
+#: blocks/src/form/variations.js:130
+msgid "Notes"
+msgstr ""
+
+#: blocks/src/input/variations.js:171
+msgid "Number"
+msgstr ""
+
+#: blocks/src/input/variations.js:173
+msgid "number"
+msgstr ""
+
+#: blocks/src/form/edit.js:86
+msgid "On Submission"
+msgstr ""
+
+#: blocks/src/components/validation-controls.js:150
+msgid "Optional. The error message to display when this rule fails."
+msgstr ""
+
+#: blocks/src/components/field-controls.js:43
+msgid "Options"
+msgstr ""
+
+#: blocks/src/input/variations.js:118
+msgid "organization"
+msgstr ""
+
+#: blocks/src/form/variations.js:67 blocks/src/form/variations.js:99
+msgid "Other Details"
+msgstr ""
+
+#: blocks/src/input/variations.js:127
+msgid "Password"
+msgstr ""
+
+#: blocks/src/input/variations.js:129
+msgid "password"
+msgstr ""
+
+#: blocks/src/form/variations.js:84 blocks/src/form/variations.js:116
+msgid "Phone"
+msgstr ""
+
+#: blocks/src/components/field-controls.js:55
+msgid "Placeholder text"
+msgstr ""
+
+#: blocks/src/form/variations.js:150
+msgid "Please rate our website"
+msgstr ""
+
+#: blocks/src/input/variations.js:107
+msgid "postal code"
+msgstr ""
+
+#: blocks/src/form/variations.js:94 blocks/src/radio/variations.js:16
+msgid "Radio"
+msgstr ""
+
+#: blocks/src/radio/variations.js:18
+msgid "radio"
+msgstr ""
+
+#: blocks/src/radio/radio-option.js:18
+msgid "Radio Option"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:56
+msgid "Recipient"
+msgstr ""
+
+#: blocks/src/form/edit.js:90
+msgid "Redirect the user"
+msgstr ""
+
+#: blocks/src/form/edit.js:106
+msgid "Redirect URL"
+msgstr ""
+
+#: blocks/src/form/variations.js:80
+msgid "register"
+msgstr ""
+
+#: blocks/src/form/variations.js:78
+msgid "Registration Form"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:49
+msgid "Reply-to"
+msgstr ""
+
+#: blocks/src/validation/rules/required.js:10
+msgid "Required"
+msgstr ""
+
+#: blocks/src/form/variations.js:51
+msgid "rsvp"
+msgstr ""
+
+#: blocks/src/form/variations.js:49
+msgid "RSVP Form"
+msgstr ""
+
+#: blocks/src/form/variations.js:89 blocks/src/form/variations.js:91
+msgid "Search Engine"
+msgstr ""
+
+#: blocks/src/radio/variations.js:18 blocks/src/radio/variations.js:30
+msgid "select"
+msgstr ""
+
+#: blocks/src/radio/variations.js:45
+msgid "Select an option"
+msgstr ""
+
+#: blocks/src/radio/radio-option.js:73
+msgid "Selected"
+msgstr ""
+
+#: blocks/src/form/variations.js:103
+msgid "Send"
+msgstr ""
+
+#: blocks/src/form/variations.js:166
+msgid "Send Feedback"
+msgstr ""
+
+#: blocks/src/form/variations.js:71
+msgid "Send RSVP"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:33
+msgid "Send this email"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:42
+msgid "Sender name"
+msgstr ""
+
+#: blocks/src/validation/rules/maxdate.js:13
+msgid "Set a maximum date?"
+msgstr ""
+
+#: blocks/src/validation/rules/maxlength.js:13
+msgid "Set a maximum length?"
+msgstr ""
+
+#: blocks/src/validation/rules/maxitems.js:13
+msgid "Set a maximum number of selectable items?"
+msgstr ""
+
+#: blocks/src/validation/rules/maxnumber.js:13
+msgid "Set a maximum number?"
+msgstr ""
+
+#: blocks/src/validation/rules/mindate.js:13
+msgid "Set a minimum date?"
+msgstr ""
+
+#: blocks/src/validation/rules/minlength.js:13
+msgid "Set a minimum length?"
+msgstr ""
+
+#: blocks/src/validation/rules/minitems.js:13
+msgid "Set a minimum number of selectable items?"
+msgstr ""
+
+#: blocks/src/validation/rules/minnumber.js:13
+msgid "Set a minimum number?"
+msgstr ""
+
+#: blocks/src/form/edit.js:89
+msgid "Show a success message"
+msgstr ""
+
+#: blocks/src/components/field-controls.js:58
+msgid ""
+"Show visitors an example of the type of content expected. Otherwise, leave "
+"blank."
+msgstr ""
+
+#: blocks/src/form/variations.js:33
+msgid "signup"
+msgstr ""
+
+#: blocks/src/form/variations.js:92
+msgid "Social Media"
+msgstr ""
+
+#: blocks/src/input/variations.js:94
+msgid "State"
+msgstr ""
+
+#: blocks/src/input/variations.js:96
+msgid "state"
+msgstr ""
+
+#: blocks/src/form/edit.js:135
+msgid "Submission Settings"
+msgstr ""
+
+#: blocks/src/form/submit-button.js:35 blocks/src/form/submit-button.js:167
+msgid "Submit"
+msgstr ""
+
+#: blocks/src/form/submit-button.js:25
+msgid "Submit Button"
+msgstr ""
+
+#: blocks/src/form/variations.js:42
+msgid "Subscribe"
+msgstr ""
+
+#: blocks/src/form/variations.js:31
+msgid "subscribe"
+msgstr ""
+
+#: blocks/src/form/edit.js:97
+msgid "Success Message"
+msgstr ""
+
+#: blocks/src/input/variations.js:160
+msgid "Telephone"
+msgstr ""
+
+#: blocks/src/input/variations.js:162
+msgid "telephone"
+msgstr ""
+
+#: blocks/src/input/variations.js:17
+msgid "Text"
+msgstr ""
+
+#: blocks/src/input/variations.js:19
+msgid "text"
+msgstr ""
+
+#: blocks/src/form/variations.js:206
+msgid "Thank you for contacting us"
+msgstr ""
+
+#: src/Form.php:86 blocks/src/form/edit.js:99 blocks/src/form/variations.js:215
+msgid "Thank you for contacting us. We will be in touch with you shortly."
+msgstr ""
+
+#: blocks/src/form/variations.js:207
+msgid ""
+"Thank you for contacting us. We will be in touch with you shortly.\n"
+"\n"
+"Here are the details of your message:\n"
+"\n"
+"{response_fields}\n"
+"\n"
+"Thank you,\n"
+"{site_title}\n"
+"\n"
+"<hr>\n"
+"URL: {current_url} \n"
+"IP Address: {user_ip}\n"
+"User Agent: {user_agent}\n"
+"Time: {current_date} at {current_time}"
+msgstr ""
+
+#: src/Merge_Tags.php:69
+msgid "The admin email."
+msgstr ""
+
+#: src/Merge_Tags.php:85
+msgid "The current date."
+msgstr ""
+
+#: src/Merge_Tags.php:89
+msgid "The current time."
+msgstr ""
+
+#: src/Field.php:369 blocks/src/validation/rules/mindate.js:16
+msgid "The earliest date allowed is {threshold}."
+msgstr ""
+
+#: src/Merge_Tags.php:65
+msgid "The email address of the current visitor (if known)."
+msgstr ""
+
+#: src/Merge_Tags.php:77
+msgid "The home URL."
+msgstr ""
+
+#: src/Merge_Tags.php:108
+msgid "The ID of the form."
+msgstr ""
+
+#: src/Merge_Tags.php:113
+msgid "The instance ID of the form."
+msgstr ""
+
+#: src/Field.php:440 blocks/src/validation/rules/maxdate.js:16
+msgid "The latest date allowed is {threshold}."
+msgstr ""
+
+#: src/Merge_Tags.php:118
+msgid "The name of the form."
+msgstr ""
+
+#: src/Merge_Tags.php:73
+msgid "The site title."
+msgstr ""
+
+#: src/Merge_Tags.php:101
+msgid "The submitted form fields."
+msgstr ""
+
+#: src/Merge_Tags.php:81
+msgid "The URL of the page."
+msgstr ""
+
+#: src/Field.php:340 blocks/src/validation/rules/minlength.js:16
+msgid "The value must be at least {threshold} characters long."
+msgstr ""
+
+#: src/Field.php:325 blocks/src/validation/rules/minnumber.js:16
+msgid "The value must be at least {threshold}."
+msgstr ""
+
+#: src/Field.php:411 blocks/src/validation/rules/maxlength.js:16
+msgid "The value must be at most {threshold} characters long."
+msgstr ""
+
+#: src/Field.php:396 blocks/src/validation/rules/maxnumber.js:16
+msgid "The value must be at most {threshold}."
+msgstr ""
+
+#: src/Merge_Tags.php:93
+msgid "The visitor's IP address."
+msgstr ""
+
+#: src/Merge_Tags.php:97
+msgid "The visitor's user agent."
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:34
+msgid "This email will be sent."
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:34
+msgid "This email will not be sent."
+msgstr ""
+
+#: src/Field.php:300 blocks/src/validation/rules/required.js:16
+msgid "This field is required."
+msgstr ""
+
+#: blocks/src/radio/variations.js:47
+msgid "This is a help text."
+msgstr ""
+
+#: blocks/src/form/variations.js:121 blocks/src/input/variations.js:193
+msgid "Time"
+msgstr ""
+
+#: blocks/src/input/variations.js:195
+msgid "time"
+msgstr ""
+
+#: blocks/src/form/variations.js:93
+msgid "TV"
+msgstr ""
+
+#: src/Email.php:249
+msgid "Unknown error"
+msgstr ""
+
+#: blocks/src/input/variations.js:149
+msgid "URL"
+msgstr ""
+
+#: blocks/src/input/variations.js:151
+msgid "url"
+msgstr ""
+
+#: blocks/src/components/field-controls.js:37
+msgid ""
+"Use this merge tag to display this field's value in your emails, response "
+"message and redirect URL."
+msgstr ""
+
+#: blocks/src/input/variations.js:151
+msgid "website"
+msgstr ""
+
+#: blocks/src/input/variations.js:215
+msgid "Week"
+msgstr ""
+
+#: blocks/src/input/variations.js:217
+msgid "week"
+msgstr ""
+
+#: src/Field.php:207 blocks/src/form/variations.js:62
+msgid "Yes"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:60
+msgid "You can enter multiple email addresses separated by commas."
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:123
+msgid ""
+"You have received a new response to your contact form. \n"
+"\n"
+"Here are the details:\n"
+"\n"
+"{response_fields}\n"
+"\n"
+"Thank you,\n"
+"{site_title}\n"
+"\n"
+"<hr>\n"
+"URL: {current_url} \n"
+"IP Address: {user_ip}\n"
+"User Agent: {user_agent}\n"
+"Time: {current_date} at {current_time}"
+msgstr ""
+
+#: blocks/src/form/variations.js:199
+msgid ""
+"You have received a new response to your contact form. \n"
+"\n"
+"Here are the details:\n"
+"\n"
+"{response_fields}\n"
+"\n"
+"Thank you,\n"
+"{site_title}\n"
+"\n"
+"<hr>\n"
+"URL: {current_url} \n"
+"{user_ip}\n"
+"IP Address: {user_ip}\n"
+"User Agent: {user_agent}\n"
+"Time: {current_date} at {current_time}"
+msgstr ""
+
+#: src/Field.php:349 blocks/src/validation/rules/minitems.js:16
+msgid "You must select at least {threshold} items."
+msgstr ""
+
+#: src/Field.php:420 blocks/src/validation/rules/maxitems.js:16
+msgid "You must select at most {threshold} items."
+msgstr ""
+
+#: blocks/src/input/variations.js:107
+msgid "zip"
+msgstr ""
+
+#: blocks/src/input/variations.js:105
+msgid "Zip Code"
+msgstr ""
+
+#: blocks/src/form/email-connection-settings.js:57
+msgid "{admin_email}, {email}, example@gmail.com"
+msgstr ""
