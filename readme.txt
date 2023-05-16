@@ -44,8 +44,11 @@ New form templates will be added soon.
 
 == Screenshots ==
 1. Contact Form
-2. Newsletter Form
+2. Newsletter-Sign-up Form
 3. RSVP Form
+4. Registration Form
+5. Appointment Form
+6. Feedback Form
 
 == Changelog ==
 

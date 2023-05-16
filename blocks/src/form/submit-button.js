@@ -93,17 +93,9 @@ registerHizzleBlockType( 'hizzle-forms/submit', {
 		},
 		__experimentalSelector: '.wp-block-hizzle-forms-submit button'
 	},
-	styles: [
-		{ name: 'hizzle-1-6', 'label': '1/6' },
-		{ name: 'hizzle-2-6', 'label': '2-6' },
-		{ name: 'hizzle-3-6', 'label': '3-6' },
-		{ name: 'hizzle-4-6', 'label': '4-6' },
-		{ name: 'hizzle-5-6', 'label': '5/6' },
-		{ name: 'hizzle-full', 'label': 'Full Width', 'isDefault': true }
-	],
 	edit: ( { attributes, setAttributes } ) => {
 		const { text } = attributes;
-		const blockProps = useBlockProps( { className: 'hizzle-forms-field hizzle-forms__submit-button' } );
+		const blockProps = useBlockProps( { className: 'hizzle-forms__submit-button' } );
 		const borderProps = useBorderProps( attributes );
 		const colorProps = useColorProps( attributes );
 		const spacingProps = useSpacingProps( attributes );
@@ -141,7 +133,7 @@ registerHizzleBlockType( 'hizzle-forms/submit', {
 	},
 	save: ( { attributes } ) => {
 		const { text } = attributes;
-		const blockProps = useBlockProps.save( { className: 'hizzle-forms-field hizzle-forms__submit-button' } );
+		const blockProps = useBlockProps.save( { className: 'hizzle-forms__submit-button' } );
 		const borderProps = getBorderClassesAndStyles( attributes );
 		const colorProps = getColorClassesAndStyles( attributes );
 		const spacingProps = getSpacingClassesAndStyles( attributes );
