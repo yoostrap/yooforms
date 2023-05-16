@@ -45,6 +45,12 @@ registerHizzleBlockType( 'hizzle-forms/radio-option', {
 		},
 		reusable: false,
 	},
+	merge: ( attributes, attributesToMerge ) => {
+		return {
+			...attributes,
+			option: attributes.option + ' ' + attributesToMerge.option,
+		};
+	},
 	edit: ( { clientId, onReplace, onRemove, mergeBlocks, attributes, setAttributes } ) => {
 		const { name, isRadio } = useParentAttributes( clientId );
 		const type = isRadio ? 'radio' : 'checkbox';
@@ -81,26 +87,24 @@ registerHizzleBlockType( 'hizzle-forms/radio-option', {
 					<input type={ type } checked={ attributes.selected } readOnly />
 					<RichText
 						tagName="label"
+						identifier="option"
 						value={ attributes.option }
 						onChange={ ( value ) => setAttributes( { option: value } ) }
 						placeholder={ __( 'Add option…', 'hizzle-forms' ) }
-						onSplit={ ( value, isOriginal ) => {
-							let newAttributes;
-		
-							if ( isOriginal || value ) {
-								newAttributes = {
-									...attributes,
-									option: value,
-									selected: false,
-								};
+						onSplit={ ( option, isOriginal ) => {
+							const newAttributes = { ...attributes, option};
+
+							if ( ! isOriginal ) {
+								newAttributes.selected = false;
 							}
 
-							const block = createBlock( 'hizzle-forms/radio', newAttributes );
+							const block = createBlock( 'hizzle-forms/radio-option', newAttributes );
 		
+							// Preserve the clientId.
 							if ( isOriginal ) {
 								block.clientId = clientId;
 							}
-		
+
 							return block;
 						} }
 						onMerge={ mergeBlocks }
