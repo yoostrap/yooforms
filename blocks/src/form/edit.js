@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import {
-	InnerBlocks,
+	useInnerBlocksProps,
 	InspectorControls,
 	URLInput,
 	useBlockProps
@@ -57,7 +57,7 @@ const template = [
 	],
 ];
 
-export default function HizzleFormEdit( { attributes, setAttributes, className, style, clientId } ) {
+export default function HizzleFormEdit( { attributes, setAttributes, clientId } ) {
 	const {
 		emails,
 		action,
@@ -67,14 +67,21 @@ export default function HizzleFormEdit( { attributes, setAttributes, className, 
 		instanceID,
 	} = attributes;
 
-	const formClassnames = classnames( className, 'hizzle-forms' );
-
 	// Reset instance ID once.
 	useEffect( () => {
 		if ( ! instanceID ) {
 			setAttributes( { instanceID: clientId } );
 		}
 	}, [] );
+
+	// Prepare innner blocks.
+	const blockProps = useInnerBlocksProps(
+		useBlockProps( { className: 'hizzle-forms' } ),
+		{
+			allowedBlocks: ALLOWED_BLOCKS,
+			template,
+		}
+	);
 
 	const renderSubmissionSettings = () => {
 		return (
@@ -120,7 +127,7 @@ export default function HizzleFormEdit( { attributes, setAttributes, className, 
 
 	// Display the form.
 	return (
-		<div {...useBlockProps()}>
+		<>
 			<InspectorControls>
 
 				<PanelBody title={ __( 'Form Settings', 'hizzle-forms' ) }>
@@ -140,9 +147,7 @@ export default function HizzleFormEdit( { attributes, setAttributes, className, 
 
 			</InspectorControls>
 
-			<div className={ formClassnames } style={ style }>
-				<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } template={template} />
-			</div>
-		</div>
+			<div {...blockProps} />
+		</>
 	);
 }

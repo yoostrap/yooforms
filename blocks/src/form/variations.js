@@ -52,18 +52,18 @@ const variations = [
 		innerBlocks: [
 			[ 'hizzle-forms/input', { validation: [{ name: 'required' }], label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
 			[ 'hizzle-forms/input', { validation: [{ name: 'required' }], type: 'email', label: __( 'Email', 'hizzle-forms' ) } ],
-			[
-				'hizzle-forms/radio',
-				{
+			{
+				name: 'hizzle-forms/radio',
+				attributes: {
 					label: __( 'Attending?', 'hizzle-forms' ),
 					validation: [{ name: 'required' }],
 					isRadio: true,
-					innerBlocks: [
-						[ 'hizzle-forms/radio-option', { option: __( 'Yes', 'hizzle-forms' ), selected: true, } ],
-						[ 'hizzle-forms/radio-option', { option: __( 'No', 'hizzle-forms' ) } ],
-					],
 				},
-			],
+				innerBlocks: [
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Yes', 'hizzle-forms' ), selected: true, } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'No', 'hizzle-forms' ) } },
+				],
+			},
 			[ 'hizzle-forms/textarea', { label: __( 'Other Details', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/submit',
@@ -115,18 +115,18 @@ const variations = [
 			[ 'hizzle-forms/input', { validation: [{ name: 'required' }], type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/input', { validation: [{ name: 'required' }], type: 'tel', label: __( 'Phone', 'hizzle-forms' ) } ],
 			[ 'hizzle-forms/input', { type: 'tel', label: __( 'Date', 'hizzle-forms' ), validation: [{ name: 'required' }] } ],
-			[
-				'hizzle-forms/radio',
-				{
+			{
+				name: 'hizzle-forms/radio',
+				attributes: {
 					label: __( 'Time', 'hizzle-forms' ),
 					validation: [{ name: 'required' }],
 					isRadio: true,
-					innerBlocks: [
-						[ 'hizzle-forms/radio-option', { option: __( 'Morning', 'hizzle-forms' ), selected: true, } ],
-						[ 'hizzle-forms/radio-option', { option: __( 'Afternoon', 'hizzle-forms' ) } ],
-					],
 				},
-			],
+				innerBlocks: [
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Morning', 'hizzle-forms' ), selected: true, } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Afternoon', 'hizzle-forms' ) } },
+				],
+			},
 			[ 'hizzle-forms/textarea', { label: __( 'Notes', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/submit',
@@ -144,21 +144,21 @@ const variations = [
 		innerBlocks: [
 			[ 'hizzle-forms/input', { validation: [{ name: 'required' }], label: __( 'Name', 'hizzle-forms' ), type: 'name' } ],
 			[ 'hizzle-forms/input', { validation: [{ name: 'required' }], type: 'tel', label: __( 'Email', 'hizzle-forms' ) } ],
-			[
-				'hizzle-forms/radio',
-				{
+			{
+				name: 'hizzle-forms/radio',
+				attributes: {
 					label: __( 'Please rate our website', 'hizzle-forms' ),
 					validation: [{ name: 'required' }],
 					isRadio: true,
-					innerBlocks: [
-						[ 'hizzle-forms/radio-option', { option: __( '1 - Very Bad', 'hizzle-forms' ), selected: true, } ],
-						[ 'hizzle-forms/radio-option', { option: __( '2 - Poor', 'hizzle-forms' ) } ],
-						[ 'hizzle-forms/radio-option', { option: __( '3 - Average', 'hizzle-forms' ) } ],
-						[ 'hizzle-forms/radio-option', { option: __( '4 - Good', 'hizzle-forms' ) } ],
-						[ 'hizzle-forms/radio-option', { option: __( '5 - Excellent', 'hizzle-forms' ) } ],
-					],
 				},
-			],
+				innerBlocks: [
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( '1 - Very Bad', 'hizzle-forms' ), selected: true, } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( '2 - Poor', 'hizzle-forms' ) } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( '3 - Average', 'hizzle-forms' ) } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( '4 - Good', 'hizzle-forms' ) } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( '5 - Excellent', 'hizzle-forms' ) } },
+				],
+			},
 			[ 'hizzle-forms/textarea', { label: __( 'How could we improve?', 'hizzle-forms' ) } ],
 			[
 				'hizzle-forms/submit',
@@ -173,12 +173,19 @@ const variations = [
 // Converts innerBlocks to example.
 const convertInnerBlocksToExample = ( innerBlocks ) => {
 	return innerBlocks.map( ( block ) => {
-		let [ name, attributes ] = block;
-		attributes = attributes ? {...attributes} : {};
+
+		// If already converted, return.
+		if ( ! Array.isArray( block ) ) {
+			return block;
+		}
+
+		let [ name, attributes, innerBlocks ] = block;
+		attributes  = attributes ? {...attributes} : {};
+		innerBlocks = innerBlocks ? [...innerBlocks] : [];
 		return {
 			name,
 			attributes,
-			innerBlocks: attributes.innerBlocks ? convertInnerBlocksToExample( attributes.innerBlocks ) : [],
+			innerBlocks,
 		};
 	} );
 };

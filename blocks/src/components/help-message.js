@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import './style.scss';
 
 export default ( { children = null, isError = false, ...props } ) => {
 	const classes = classNames( 'help-message', {

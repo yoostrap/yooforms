@@ -127,15 +127,6 @@ class Plugin {
 			return;
 		}
 
-		// Register style.
-		$version = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : HIZZLE_FORMS_VERSION;
-		wp_register_style(
-			'hizzle-forms-blocks',
-			plugins_url( 'blocks/build/form/style-index.css', HIZZLE_FORMS_PLUGIN_FILE ),
-			array(),
-			$version
-		);
-
 		$path   = plugin_dir_path( HIZZLE_FORMS_PLUGIN_FILE ) . 'blocks/build/';
 		$blocks = array(
 			'input',

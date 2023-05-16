@@ -100,6 +100,5 @@
     },
     "editorScript": "file:./index.js",
     "script": "file:./view.js",
-    "editorStyle": "hizzle-forms-blocks",
     "style": "file:./view.css"
 }
