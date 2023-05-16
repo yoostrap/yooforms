@@ -13,6 +13,6 @@ jobs:
       id: deploy
       uses: 10up/action-wordpress-plugin-deploy@stable
       env:
-        SVN_PASSWORD: ${{ secrets.HIZZLE_SVN_PASSWORD }}
-        SVN_USERNAME: ${{ secrets.HIZZLE_SVN_USERNAME }}
+        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
         SLUG: hizzle-forms
