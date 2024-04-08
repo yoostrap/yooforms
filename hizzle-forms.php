@@ -28,8 +28,14 @@ if ( ! defined( 'HIZZLE_FORMS_DB_VERSION' ) ) {
 	define( 'HIZZLE_FORMS_DB_VERSION', 1 );
 }
 
+define( 'HF_PATH', plugin_dir_path( __FILE__ ) );
+define( 'HF_ASSETS_URL', plugin_dir_url( __FILE__ ) . 'assets/' );
 // Include the auto loader.
 require 'vendor/autoload.php';
+
+// Include necessary files.
+require_once HF_PATH . 'includes/includes.php';
+require_once HF_PATH . 'includes/functions.php';
 
 /**
  * Returns the main plugin instance.
