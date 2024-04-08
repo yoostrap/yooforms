@@ -37,6 +37,45 @@ require 'vendor/autoload.php';
 require_once HF_PATH . 'includes/includes.php';
 require_once HF_PATH . 'includes/functions.php';
 
+if ( ! function_exists( 'hf_fs' ) ) {
+    // Create a helper function for easy SDK access.
+    function hf_fs() {
+        global $hf_fs;
+
+        if ( ! isset( $hf_fs ) ) {
+            // Activate multisite network integration.
+            if ( ! defined( 'WP_FS__PRODUCT_15381_MULTISITE' ) ) {
+                define( 'WP_FS__PRODUCT_15381_MULTISITE', true );
+            }
+
+            // Include Freemius SDK.
+            require_once dirname(__FILE__) . '/freemius/start.php';
+
+            $hf_fs = fs_dynamic_init( array(
+                'id'                  => '15381',
+                'slug'                => 'hizzle-forms',
+                'type'                => 'plugin',
+                'public_key'          => 'pk_f965caeb7b47a4d6607381e3b3704',
+                'is_premium'          => false,
+                'has_addons'          => false,
+                'has_paid_plans'      => false,
+                'menu'                => array(
+                    'slug'           => 'hizzle-forms',
+                    'first-path'     => 'admin.php?page=hizzle-forms-help',
+                    'network'        => true,
+                ),
+            ) );
+        }
+
+        return $hf_fs;
+    }
+
+    // Init Freemius.
+    hf_fs();
+    // Signal that SDK was initiated.
+    do_action( 'hf_fs_loaded' );
+}
+
 /**
  * Returns the main plugin instance.
  *
