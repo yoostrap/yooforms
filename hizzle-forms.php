@@ -3,7 +3,7 @@
  * Plugin Name: Hizzle Forms
  * Plugin URI: https://hizzle.co/forms
  * Description: A lightweight forms plugin.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Hizzle
  * Author URI: https://hizzle.co
  * Text Domain: hizzle-forms
@@ -21,7 +21,7 @@ if ( ! defined( 'HIZZLE_FORMS_PLUGIN_FILE' ) ) {
 }
 
 if ( ! defined( 'HIZZLE_FORMS_VERSION' ) ) {
-	define( 'HIZZLE_FORMS_VERSION', '1.0.0' );
+	define( 'HIZZLE_FORMS_VERSION', '1.0.1' );
 }
 
 if ( ! defined( 'HIZZLE_FORMS_DB_VERSION' ) ) {
