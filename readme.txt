@@ -1,9 +1,9 @@
 === Hizzle Forms ===
-Contributors: picocodes, mutendebrian
+Contributors: picocodes, lewisushindi
 Tags: contact, form, appointment, feedback, newsletter
 Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme
 Requires at least: 6.0
-Tested up to: 6.2
+Tested up to: 6.5
 Requires PHP: 7.0
 Stable tag: 1.0.0
 License: GPL-3.0-or-later
