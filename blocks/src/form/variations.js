@@ -168,6 +168,62 @@ const variations = [
 			],
 		],
 	},
+	{
+		name: 'hizzle-poll-form',
+		title: __( 'Poll Form', 'hizzle-forms' ),
+		description: __( 'Add a Poll form to your page', 'hizzle-forms' ),
+		keywords: [ __( 'poll', 'hizzle-forms' ), __( 'survey', 'hizzle-forms' ) ],
+		innerBlocks: [
+			{
+				name: 'hizzle-forms/radio',
+				attributes: {
+					label: __( 'What is your favorite color?', 'hizzle-forms' ),
+					validation: [{ name: 'required' }],
+					isRadio: true,
+				},
+				innerBlocks: [
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Red', 'hizzle-forms' ), selected: true, } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Blue', 'hizzle-forms' ) } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Green', 'hizzle-forms' ) } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Yellow', 'hizzle-forms' ) }, },
+				],
+			},
+			{
+				name: 'hizzle-forms/radio',
+				attributes: {
+					label: __( 'Which type of movie do you prefer?', 'hizzle-forms' ),
+					validation: [{ name: 'required' }],
+					isRadio: true,
+				},
+				innerBlocks: [
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Action', 'hizzle-forms' ), selected: true, } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Comedy', 'hizzle-forms' ) } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Drama', 'hizzle-forms' ) } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Horror', 'hizzle-forms' ) } },
+				],
+			},
+			{
+				name: 'hizzle-forms/radio',
+				attributes: {
+					label: __( 'What is your favorite food?', 'hizzle-forms' ),
+					validation: [{ name: 'required' }],
+					isRadio: true,
+				},
+				innerBlocks: [
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Pizza', 'hizzle-forms' ), selected: true, } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Burger', 'hizzle-forms' ) } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Pasta', 'hizzle-forms' ) } },
+					{ name: 'hizzle-forms/radio-option', attributes: { option: __( 'Salad', 'hizzle-forms' ) } },
+				],
+			},
+			[
+				'hizzle-forms/submit',
+				{
+					text: __( 'Submit Poll', 'hizzle-forms' ),
+				},
+			],
+		],
+	},
 ]
 
 // Converts innerBlocks to example.
