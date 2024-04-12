@@ -93,3 +93,36 @@ function hizzle_forms_add_submenu_page( $menu_title, $capability, $menu_slug, $f
         $function
     );
 }
+
+
+/**
+ * Returns the forms menu slug for the plugin. (Allows the slug to be overridden from extensions or functions.php)
+ * @return string
+ */
+function hizzle_forms_forms_menu_slug() {
+    return apply_filters( 'hizzle_forms_forms_menu_slug', 'hizzle-forms-all-forms' );
+}
+
+/**
+ * Returns the forms menu name for the plugin. (Allows the name to be overridden from extensions or functions.php)
+ * @return string
+ */
+function hizzle_forms_forms_menu_name() {
+    return apply_filters( 'hizzle_forms_forms_menu_name', 'Forms' );
+}
+
+/**
+ * Returns the help menu slug for the plugin. (Allows the slug to be overridden from extensions or functions.php)
+ * @return string
+ */
+function hizzle_forms_help_menu_slug() {
+    return apply_filters( 'hizzle_forms_help_menu_slug', 'hizzle-forms-help' );
+}
+
+/**
+ * Returns the help menu name for the plugin. (Allows the name to be overridden from extensions or functions.php)
+ * @return string
+ */
+function hizzle_forms_help_menu_name() {
+    return apply_filters( 'hizzle_forms_help_menu_name', 'Help' );
+}
