@@ -11,6 +11,10 @@ class ComposerStaticInit9da7fca8115459de93bb2fb69f5f914e
         array (
             'Hizzle\\Forms\\' => 13,
         ),
+        'C' => 
+        array (
+            'Composer\\Installers\\' => 20,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -18,10 +22,23 @@ class ComposerStaticInit9da7fca8115459de93bb2fb69f5f914e
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
+        'Composer\\Installers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Hizzle\\Forms\\Admin\\Admin' => __DIR__ . '/../..' . '/src/admin/class-admin.php',
+        'Hizzle\\Forms\\Email' => __DIR__ . '/../..' . '/src/Email.php',
+        'Hizzle\\Forms\\Field' => __DIR__ . '/../..' . '/src/Field.php',
+        'Hizzle\\Forms\\Form' => __DIR__ . '/../..' . '/src/Form.php',
+        'Hizzle\\Forms\\Merge_Tags' => __DIR__ . '/../..' . '/src/Merge_Tags.php',
+        'Hizzle\\Forms\\Plugin' => __DIR__ . '/../..' . '/src/Plugin.php',
+        'Hizzle\\Forms\\REST_API' => __DIR__ . '/../..' . '/src/REST_API.php',
+        'Hizzle\\Forms\\Spam_Checker' => __DIR__ . '/../..' . '/src/Spam_Checker.php',
+        'Hizzle\\Forms\\Submission' => __DIR__ . '/../..' . '/src/Submission.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -3,7 +3,7 @@
  * Plugin Name: Hizzle Forms
  * Plugin URI: https://hizzle.co/forms
  * Description: A lightweight forms plugin.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Hizzle
  * Author URI: https://hizzle.co
  * Text Domain: hizzle-forms
@@ -21,7 +21,7 @@ if ( ! defined( 'HIZZLE_FORMS_PLUGIN_FILE' ) ) {
 }
 
 if ( ! defined( 'HIZZLE_FORMS_VERSION' ) ) {
-	define( 'HIZZLE_FORMS_VERSION', '1.0.1' );
+	define( 'HIZZLE_FORMS_VERSION', '1.0.2' );
 }
 
 if ( ! defined( 'HIZZLE_FORMS_DB_VERSION' ) ) {
@@ -34,8 +34,8 @@ define( 'HF_ASSETS_URL', plugin_dir_url( __FILE__ ) . 'assets/' );
 require 'vendor/autoload.php';
 
 // Include necessary files.
-require_once HF_PATH . 'includes/includes.php';
-require_once HF_PATH . 'includes/functions.php';
+require_once HF_PATH . 'src/functions.php';
+require_once HF_PATH . 'src/constants.php';
 
 if ( ! function_exists( 'hf_fs' ) ) {
     // Create a helper function for easy SDK access.

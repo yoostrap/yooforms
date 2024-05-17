@@ -2,6 +2,8 @@
 
 namespace Hizzle\Forms;
 
+use Hizzle\Forms\Admin\Admin;
+
 /**
  * Contains the main plugin class.
  *
@@ -94,6 +96,7 @@ class Plugin {
 		$this->submission = new Submission();
 		$this->merge_tags = new Merge_Tags();
 		$this->spam_check = new Spam_Checker();
+		new \Hizzle\Forms\Admin\Admin();
 	}
 
 	/**
