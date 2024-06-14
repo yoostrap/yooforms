@@ -107,6 +107,9 @@ class Field {
 		// Combine options.
 		$this->options = array_combine( $this->options, $this->options );
 
+		// Generate the field name by stripping HTML tags
+        $this->name = hizzle_form_label_to_name( $this->label, $this->name );
+
 		do_action( 'hizzle_forms_field_init', $this );
 	}
 

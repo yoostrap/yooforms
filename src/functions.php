@@ -93,3 +93,35 @@ function hizzle_forms_add_submenu_page( $menu_title, $capability, $menu_slug, $f
         $function
     );
 }
+
+/**
+ * Converts a HTML label to a name attribute.
+ *
+ * @param string $label The label to convert.
+ * @param string $fallback The fallback name.
+ * @return string The name attribute.
+ */
+function hizzle_form_label_to_name( $label, $fallback = '' ) {
+    if ( empty( $label ) ) {
+        return $fallback;
+    }
+
+    // Strip HTML tags.
+    $name = preg_replace( '/(<[^>]+>)/i', '', $label );
+
+    // Replace all non-alphanumeric characters with underscores.
+    $name = preg_replace( '/[^a-z0-9]/i', '_', $name );
+
+    // Remove consecutive underscores.
+    $name = preg_replace( '/_+/', '_', $name );
+
+    // Remove underscores from the start and end.
+    $name = trim( $name, '_' );
+
+    // If the name is empty, use the fallback.
+    if ( empty( $name ) ) {
+        return $fallback;
+    }
+
+    return strtolower( $name );
+}
