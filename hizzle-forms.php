@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Hizzle Forms
- * Plugin URI: https://hizzle.co/forms
+ * Plugin URI: https://yoostrap.com
  * Description: A lightweight forms plugin.
  * Version: 1.0.2
  * Author: Hizzle
- * Author URI: https://hizzle.co
+ * Author URI: https://yoostrap.com
  * Text Domain: hizzle-forms
  * Domain Path: /languages/
  * Requires at least: 5.5
