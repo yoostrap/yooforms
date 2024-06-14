@@ -232,6 +232,28 @@ const variations = compact( [
 			foreground: PRIMARY_COLOR,
 		},
 	},
+	{
+        name: 'hizzle-countries',
+        title: __( 'Countries', 'hizzle-forms' ),
+        description: __( 'Select a country from the list.', 'hizzle-forms' ),
+        keywords: [ __( 'countries', 'hizzle-forms' ) ],
+        attributes: { type: 'countries' },
+        icon: {
+            src: 'location-alt',
+            foreground: PRIMARY_COLOR,
+        },
+    },
+	{
+        name: 'hizzle-us-states',
+        title: __( 'US States', 'hizzle-forms' ),
+        description: __( 'Select a US state from the list.', 'hizzle-forms' ),
+        keywords: [ __( 'us states', 'hizzle-forms' ) ],
+        attributes: { type: 'us-states' },
+        icon: {
+            src: 'flag',
+            foreground: PRIMARY_COLOR,
+        },
+    }
 ] );
 
 /**
