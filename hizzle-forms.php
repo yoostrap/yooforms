@@ -76,6 +76,49 @@ if ( ! function_exists( 'hf_fs' ) ) {
     do_action( 'hf_fs_loaded' );
 }
 
+register_activation_hook(__FILE__, 'hizzle_forms_create_table');
+
+function hizzle_forms_create_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'hizzle_forms_responses';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE $table_name (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        form_id mediumint(9) NOT NULL,
+        submission_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        form_data text NOT NULL,
+        PRIMARY KEY  (id)
+    ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
+
+
+// Add a check to ensure the table exists on every admin page load
+add_action('admin_init', 'hizzle_forms_check_and_create_table');
+
+function hizzle_forms_check_and_create_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'hizzle_forms_responses';
+
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+        $charset_collate = $wpdb->get_charset_collate();
+
+        $sql = "CREATE TABLE $table_name (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            form_id mediumint(9) NOT NULL,
+            submission_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+            form_data text NOT NULL,
+            PRIMARY KEY  (id)
+        ) $charset_collate;";
+
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
+    }
+}
+
 /**
  * Returns the main plugin instance.
  *

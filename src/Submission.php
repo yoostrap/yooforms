@@ -123,10 +123,34 @@ class Submission {
 			return $this->get_response();
 		}
 
+		// Save the submission to the database.
+        $this->save_submission();
+
 		// Send emails.
 		$this->form->send_emails( $this );
 
 		return $this->get_response();
+	}
+
+	/**
+     * Save the form submission to the database.
+     */
+    private function save_submission() {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'hizzle_forms_responses';
+	
+		$result = $wpdb->insert(
+			$table_name,
+			array(
+				'form_id' => $this->form->id,
+				'submission_time' => current_time('mysql'),
+				'form_data' => maybe_serialize($this->data),
+			)
+		);
+	
+		if (false === $result) {
+			error_log('Failed to insert form submission: ' . $wpdb->last_error);
+		}
 	}
 
 	/**
