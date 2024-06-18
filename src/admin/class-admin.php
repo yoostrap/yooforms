@@ -40,10 +40,10 @@ class Admin {
 
 		add_submenu_page(
 			hizzle_forms_top_level_menu_slug(),
-			'Responses',
-			'Responses',
+			'Entries',
+			'Entries',
 			'manage_options',
-			'hizzle-forms-responses',
+			'hizzle-forms-entries',
 			'hizzle_forms_responses_page'
 		);
 		remove_submenu_page( hizzle_forms_top_level_menu_slug(), hizzle_forms_top_level_menu_slug() );
