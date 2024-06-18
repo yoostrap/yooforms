@@ -3,7 +3,7 @@
  * Plugin Name: Hizzle Forms
  * Plugin URI: https://yoostrap.com
  * Description: A lightweight forms plugin.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Hizzle
  * Author URI: https://yoostrap.com
  * Text Domain: hizzle-forms
