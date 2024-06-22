@@ -18,20 +18,22 @@ echo '<div class="wrap">';
 echo '<h1 class="wp-heading-inline">' . esc_html__('Form Entries', 'hizzle-forms') . '</h1>';
 echo '<hr class="wp-header-end">';
 
-if (empty($results)) {
-    echo '<p>' . esc_html__('No form entries found.', 'hizzle-forms') . '</p>';
-} else {
-    echo '<table class="wp-list-table widefat fixed striped table-view-list">
-        <thead>
-            <tr>
-                <th scope="col" class="manage-column column-id">' . esc_html__('ID', 'hizzle-forms') . '</th>
-                <th scope="col" class="manage-column column-form-id">' . esc_html__('Form ID', 'hizzle-forms') . '</th>
-                <th scope="col" class="manage-column column-submission-time">' . esc_html__('Submission Time', 'hizzle-forms') . '</th>
-                <th scope="col" class="manage-column column-form-data">' . esc_html__('Form Data', 'hizzle-forms') . '</th>
-            </tr>
-        </thead>
-        <tbody>';
+echo '<table class="wp-list-table widefat fixed striped table-view-list">
+    <thead>
+        <tr>
+            <th scope="col" class="manage-column column-id">' . esc_html__('ID', 'hizzle-forms') . '</th>
+            <th scope="col" class="manage-column column-form-id">' . esc_html__('Form ID', 'hizzle-forms') . '</th>
+            <th scope="col" class="manage-column column-submission-time">' . esc_html__('Submission Time', 'hizzle-forms') . '</th>
+            <th scope="col" class="manage-column column-form-data">' . esc_html__('Form Data', 'hizzle-forms') . '</th>
+        </tr>
+    </thead>
+    <tbody>';
 
+if (empty($results)) {
+    echo '<tr>';
+    echo '<td colspan="4">' . esc_html__('No form entries found.', 'hizzle-forms') . '</td>';
+    echo '</tr>';
+} else {
     foreach ($results as $response) {
         $form_data = maybe_unserialize($response->form_data);
         echo '<tr>';
@@ -54,11 +56,10 @@ if (empty($results)) {
         echo '</td>';
         echo '</tr>';
     }
-
-    echo '</tbody>
-    </table>';
 }
 
+echo '</tbody>
+</table>';
 echo '</div>';
 
 // Add some CSS to style the inner table
@@ -83,4 +84,3 @@ echo '<style>
         text-align: left;
     }
 </style>';
-?>
