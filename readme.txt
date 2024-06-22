@@ -5,7 +5,7 @@ Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&u
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -75,6 +75,10 @@ Creating a form with Hizzle Forms is as simple as 1-2-3:
 6. Feedback Form
 
 == Changelog ==
+= 1.0.4 =
+* [ENHANCEMENT] Updated the form entries page to use the WP_List_Table class for improved functionality.
+* [ENHANCEMENT] Added bulk actions support for deleting multiple entries at once.
+
 = 1.0.3 =
 * [NEW] Added feature to view form entries directly from the WordPress dashboard.
 
