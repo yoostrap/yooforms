@@ -14,6 +14,7 @@ return array(
     'Hizzle\\Forms\\Merge_Tags' => $baseDir . '/src/Merge_Tags.php',
     'Hizzle\\Forms\\Plugin' => $baseDir . '/src/Plugin.php',
     'Hizzle\\Forms\\REST_API' => $baseDir . '/src/REST_API.php',
+    'Hizzle\\Forms\\Response' => $baseDir . '/src/class-response.php',
     'Hizzle\\Forms\\Spam_Checker' => $baseDir . '/src/Spam_Checker.php',
     'Hizzle\\Forms\\Submission' => $baseDir . '/src/Submission.php',
 );
