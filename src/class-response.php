@@ -1,10 +1,9 @@
 <?php
-
 namespace Hizzle\Forms;
 
 defined( 'ABSPATH' ) || exit;
 
-class Response extends \WP_List_Table {
+class Response extends \WP_List_TABLE {
     public function __construct() {
         parent::__construct([
             'singular' => __('Form Entry', 'hizzle-forms'),
@@ -15,8 +14,14 @@ class Response extends \WP_List_Table {
 
     public static function get_entries($per_page = 10, $page_number = 1) {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'hizzle_forms_responses';
-        $sql = "SELECT * FROM $table_name";
+        $responses_table = $wpdb->prefix . 'hizzle_forms_responses';
+        $posts_table = $wpdb->prefix . 'posts';
+
+        $sql = "SELECT r.*, p.post_title as form_name 
+                FROM $responses_table r 
+                LEFT JOIN $posts_table p 
+                ON r.form_id = p.ID 
+                WHERE p.post_type = 'hizzle_form'";
 
         if (!empty($_REQUEST['orderby'])) {
             $sql .= ' ORDER BY ' . esc_sql($_REQUEST['orderby']);
@@ -47,7 +52,7 @@ class Response extends \WP_List_Table {
 
     public function column_default($item, $column_name) {
         switch ($column_name) {
-            case 'form_id':
+            case 'form_name':
             case 'submission_time':
                 return $item[$column_name];
             case 'form_data':
@@ -70,6 +75,10 @@ class Response extends \WP_List_Table {
         }
     }
 
+    public function column_form_name($item) {
+        return esc_html($item['form_name']);
+    }
+
     public function column_id($item) {
         return $item['id'];
     }
@@ -78,7 +87,7 @@ class Response extends \WP_List_Table {
         $columns = [
             'cb'              => '<input type="checkbox" />',
             'id'              => __('ID', 'hizzle-forms'),
-            'form_id'         => __('Form ID', 'hizzle-forms'),
+            'form_name'       => __('Form Name', 'hizzle-forms'), // Changed from 'form_id'
             'submission_time' => __('Submission Time', 'hizzle-forms'),
             'form_data'       => __('Form Data', 'hizzle-forms'),
         ];
