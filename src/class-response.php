@@ -52,6 +52,7 @@ class Response extends \WP_List_TABLE {
 
     public function column_default($item, $column_name) {
         switch ($column_name) {
+            case 'form_id': // Changed from 'id'
             case 'form_name':
             case 'submission_time':
                 return $item[$column_name];
@@ -75,19 +76,19 @@ class Response extends \WP_List_TABLE {
         }
     }
 
-    public function column_form_name($item) {
-        return esc_html($item['form_name']);
+    public function column_form_id($item) {
+        return $item['form_id'];
     }
 
-    public function column_id($item) {
-        return $item['id'];
+    public function column_form_name($item) {
+        return esc_html($item['form_name']);
     }
 
     public function get_columns() {
         $columns = [
             'cb'              => '<input type="checkbox" />',
-            'id'              => __('ID', 'hizzle-forms'),
-            'form_name'       => __('Form Name', 'hizzle-forms'), // Changed from 'form_id'
+            'form_id'         => __('Form ID', 'hizzle-forms'), // Changed from 'id'
+            'form_name'       => __('Form Name', 'hizzle-forms'),
             'submission_time' => __('Submission Time', 'hizzle-forms'),
             'form_data'       => __('Form Data', 'hizzle-forms'),
         ];
