@@ -42,6 +42,14 @@ Creating a form with Hizzle Forms is as simple as 1-2-3:
 - **Highly Customizable:** Tailor forms to your specific requirements.
 - **Reliable Support:** Get assistance through our support forum whenever you need it.
 
+### **Helpful Resources**
+
+For more tips and detailed guides on using Hizzle Forms, check out our blog posts:
+- [Why a Fast and Lightweight Form Plugin Matters for Your Website](https://yoostrap.com/2024/06/20/why-a-fast-and-lightweight-form-plugin-matters-for-your-website/)
+- [Why Hizzle Forms is the Best New Form Plugin for WordPress](https://yoostrap.com/2024/06/21/why-hizzle-forms-is-the-best-new-form-plugin-for-wordpress/)
+- [How to Add a Contact Form to Your WordPress Site in Minutes](https://yoostrap.com/2024/06/21/how-to-add-a-contact-form-to-your-wordpress-site-in-minutes/)
+- [Customizing Form Confirmations in Hizzle Forms](https://yoostrap.com/2024/07/05/customizing-form-confirmations-in-hizzle-forms/)
+
 == Installation ==
 1. Go to your WordPress Dashboard.
 2. Navigate to Plugins -> Add New.
