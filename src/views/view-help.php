@@ -28,66 +28,51 @@ $logo = apply_filters( 'hizzle_forms_admin_help_logo_url', $logo );
 		
 	<div class="hizzle-forms-help-tabs">
 		<ul class="hizzle-forms-help-tab-links">
-			<li class="hizzle-forms-help-tab-active"><a href="#hizzle-forms-welcome-tab"><?php esc_html_e( 'Welcome', 'hizzle-forms' ); ?></a></li>
-			<li><a href="#hizzle-forms-support-tab"><?php esc_html_e( 'Support', 'hizzle-forms' ); ?></a></li>
+			<li class="hizzle-forms-help-tab-active"><a href="#hizzle-forms-welcome-tab"><?php esc_html_e( 'Getting Started', 'hizzle-forms' ); ?></a></li>
+			<li><a href="#hizzle-forms-support-tab"><?php esc_html_e( 'Community', 'hizzle-forms' ); ?></a></li>
 		</ul>
 
 		<div class="hizzle-forms-help-tab-content">
 			<div id="hizzle-forms-welcome-tab" class="hizzle-forms-help-tab hizzle-forms-help-tab-active">
-				<div style="background-color: #ecf0f1; padding: 20px; margin: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-					<h2 style="color: purple;"><?php esc_html_e( $tagline, 'hizzle-forms' ); ?></h2>
-					<p><?php esc_html_e( $tagline_content, 'hizzle-forms' ); ?></p>
-				</div>
-				
-				<div style="background-color: #ecf0f1; padding: 20px; margin: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-					<h3 style="color: purple;"><?php esc_html_e( 'Creating Your First Form', 'hizzle-forms' ); ?></h3>
-					<div style="background-color: #ecf0f1; padding: 20px; margin: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">						
-						<p>
-							<?php esc_html_e( 'Open any post or page in the new WordPress block editor then add any of the following blocks:', 'hizzle-forms' ); ?>
-						</p>
-						<ul>
-							<li><?php esc_html_e( 'Contact Form', 'hizzle-forms' ); ?></li>
-							<li><?php esc_html_e( 'Newsletter Sign-up', 'hizzle-forms' ); ?></li>
-							<li><?php esc_html_e( 'RSVP Form', 'hizzle-forms' ); ?></li>
-							<li><?php esc_html_e( 'Registration Form', 'hizzle-forms' ); ?></li>
-							<li><?php esc_html_e( 'Appointment Form', 'hizzle-forms' ); ?></li>
-							<li><?php esc_html_e( 'Feedback Form', 'hizzle-forms' ); ?></li>
-						</ul>
-						<p>
-							<?php esc_html_e( '**New form templates will be added soon.', 'hizzle-forms' ); ?>
-						</p>
+				<div class="hizzle-forms-supp">
+					<h3><?php esc_html_e( 'Creating Your First Form', 'hizzle-forms' ); ?></h3>
+					<div class="hizzle-forms-content-wrapper">
+						<div class="hizzle-forms-text">
+							<p><?php esc_html_e( 'To create your first form, open any post or page in the new WordPress block editor. Add any of the following blocks: Contact Form, Newsletter Sign-up, RSVP Form, Registration Form, Appointment Form, or Feedback Form. Customize your form as needed, then publish or update your post/page.', 'hizzle-forms' ); ?></p>
+							<div class="hizzle-forms-info">
+								<p><?php esc_html_e( 'For detailed steps, check out our blog post on creating your first form.', 'hizzle-forms' ); ?></p>
+								<a href="<?php echo esc_url( 'https://yoostrap.com/2024/06/21/how-to-add-a-contact-form-to-your-wordpress-site-in-minutes/' ); ?>" class="hizzle-forms-link"><?php esc_html_e( 'Read the Blog Post', 'hizzle-forms' ); ?></a>
+							</div>
+						</div>
+						<div class="hizzle-forms-video">
+							<div class="hizzle-forms-video-wrapper">
+								<iframe width="560" height="315" src="https://www.youtube.com/embed/sSrUjzSzTEY?si=ag_xsRmxFTJyBDcv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							</div>							
+						</div>
 					</div>
-
 				</div>
 			</div>
 
 			<div id="hizzle-forms-support-tab" class="hizzle-forms-help-tab">
-				<h3 style="color: white; margin: 10px;"><?php esc_html_e( '🚑 Require assistance? Our support team is ready to assist you.', 'hizzle-forms' ); ?></h3>
-				<div class="hizzle-forms-supp">								
-					<p>
-						<a href="https://github.com/Frenziecodes/hizzle-forms/issues">
-							<?php esc_html_e( 'Bug Report => ', 'hizzle-forms' ); ?>
-						</a>
-						<?php esc_html_e( 'Stumbled upon an issue or a bug? We appreciate your help in making our product better. Please take a moment to report it, and we will work diligently to address it.', 'hizzle-forms' ); ?>						
-					</p>
-				</div>
-				<div class="hizzle-forms-supp">								
-					<p>
-						<a href="https://github.com/Frenziecodes/hizzle-forms/issues">
-							<?php esc_html_e( 'Feature Request => ', 'hizzle-forms' ); ?>
-						</a>
-						<?php esc_html_e( 'Have a great idea for a new feature or improvement? We would love to hear your suggestions! Share your thoughts with us, and we will consider implementing it to enhance our product.', 'hizzle-forms' ); ?>						
-					</p>
-				</div>
-				<div class="hizzle-forms-supp">								
-					<p>
-						<a href="https://wordpress.org/support/plugin/hizzle-forms/">
-							<?php esc_html_e( 'WordPress.org Support => ', 'hizzle-forms' ); ?>
-						</a>
-						<?php esc_html_e( 'We actively monitor and answer all questions posted on WordPress.org for Hizzle forms.', 'hizzle-forms' ); ?>						
-					</p>
+				<div class="hizzle-forms-support-grid">
+					<div class="hizzle-forms-support-card">
+						<h3><?php esc_html_e( 'YouTube Channel', 'hizzle-forms' ); ?></h3>
+						<p><?php esc_html_e( 'Find video tutorials and tips on using Hizzle Forms.', 'hizzle-forms' ); ?></p>
+						<a href="https://youtube.com/@yoostrap?si=ucsdO-u7UJc9Acew" target="_blank" class="hizzle-forms-link"><?php esc_html_e( 'Visit Channel', 'hizzle-forms' ); ?></a>
+					</div>
+					<div class="hizzle-forms-support-card">
+						<h3><?php esc_html_e( 'Blog Page', 'hizzle-forms' ); ?></h3>
+						<p><?php esc_html_e( 'Explore articles and guides for optimizing your forms.', 'hizzle-forms' ); ?></p>
+						<a href="https://yoostrap.com/blog/" target="_blank" class="hizzle-forms-link"><?php esc_html_e( 'Read Blog', 'hizzle-forms' ); ?></a>
+					</div>
+					<div class="hizzle-forms-support-card">
+						<h3><?php esc_html_e( 'Facebook Page', 'hizzle-forms' ); ?></h3>
+						<p><?php esc_html_e( 'Join our community discussions and updates.', 'hizzle-forms' ); ?></p>
+						<a href="https://www.facebook.com/profile.php?id=61562619223725" target="_blank" class="hizzle-forms-link"><?php esc_html_e( 'Visit Page', 'hizzle-forms' ); ?></a>
+					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </section>
@@ -123,14 +108,6 @@ $logo = apply_filters( 'hizzle_forms_admin_help_logo_url', $logo );
 	}
 	.hizzle-forms-supp a{
 		text-decoration: none;
-	}
-	.hizzle-forms-supp{
-		color: black;
-		background-color: #ecf0f1;
-		padding: 10px;
-		margin: 10px;
-		border-radius: 5px;
-		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	}
 
 	.hizzle-forms-help-main {
@@ -179,4 +156,113 @@ $logo = apply_filters( 'hizzle_forms_admin_help_logo_url', $logo );
 	.hizzle-forms-help-tab-active {
 		display: block;
 	}
+
+	.hizzle-forms-supp {
+        color: black;
+        background-color: #ecf0f1;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hizzle-forms-supp h3 {
+        color: purple;
+        margin-bottom: 15px;
+    }
+
+    .hizzle-forms-content-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .hizzle-forms-text {
+        background-color: #fff;
+        padding: 20px;
+        margin-right: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        flex: 1;
+    }
+
+    .hizzle-forms-video {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hizzle-forms-video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hizzle-forms-video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .hizzle-forms-info {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hizzle-forms-info p {
+        margin-bottom: 10px;
+    }
+
+    .hizzle-forms-link {
+        text-decoration: none;
+        color: purple;
+        font-weight: bold;
+    }
+
+    .hizzle-forms-link:hover {
+        text-decoration: underline;
+    }
+	.hizzle-forms-support-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .hizzle-forms-support-card {
+        background-color: #ecf0f1;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hizzle-forms-support-card h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: purple;
+    }
+
+    .hizzle-forms-support-card p {
+        margin-bottom: 15px;
+    }
+
+    .hizzle-forms-link {
+        text-decoration: none;
+        color: #3498db;
+        font-weight: bold;
+    }
+
+    .hizzle-forms-link:hover {
+        text-decoration: underline;
+    }
 </style>
