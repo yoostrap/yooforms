@@ -11,6 +11,7 @@
  * Requires at least: 5.5
  * Requires PHP: 7.0
  *
+ * @fs_premium_only /pro/
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -54,11 +55,19 @@ if ( ! function_exists( 'hf_fs' ) ) {
             $hf_fs = fs_dynamic_init( array(
                 'id'                  => '15381',
                 'slug'                => 'hizzle-forms',
+                'premium_slug'        => 'hizzle-forms-pro',
                 'type'                => 'plugin',
                 'public_key'          => 'pk_f965caeb7b47a4d6607381e3b3704',
-                'is_premium'          => false,
+                'is_premium'          => true,
+                'premium_suffix'      => 'Starter',
+                // If your plugin is a serviceware, set this option to false.
+                'has_premium_version' => true,
                 'has_addons'          => false,
-                'has_paid_plans'      => false,
+                'has_paid_plans'      => true,
+                'trial'               => array(
+                    'days'               => 7,
+                    'is_require_payment' => false,
+                ),
                 'menu'                => array(
                     'slug'           => 'hizzle-forms',
                     'first-path'     => 'admin.php?page=hizzle-forms-help',

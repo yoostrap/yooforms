@@ -1,9 +1,9 @@
 <?php
 namespace Hizzle\Forms;
 
-defined('ABSPATH') || exit;
+defined( 'ABSPATH' ) || exit;
 
-class Response extends \WP_List_Table {
+class Response extends \WP_List_TABLE {
     public function __construct() {
         parent::__construct([
             'singular' => __('Form Entry', 'hizzle-forms'),
@@ -17,7 +17,7 @@ class Response extends \WP_List_Table {
         $responses_table = $wpdb->prefix . 'hizzle_forms_responses';
         $posts_table = $wpdb->prefix . 'posts';
 
-        $sql = "SELECT r.id, r.form_id, p.post_title as form_name, r.submission_time, r.form_data 
+        $sql = "SELECT r.*, p.post_title as form_name 
                 FROM $responses_table r 
                 LEFT JOIN $posts_table p 
                 ON r.form_id = p.ID 
@@ -51,25 +51,46 @@ class Response extends \WP_List_Table {
     }
 
     public function column_default($item, $column_name) {
-        $form_data = maybe_unserialize($item['form_data']);
         switch ($column_name) {
-            case 'name':
-                return isset($form_data['name']) ? esc_html($form_data['name']) : '';
-            case 'email':
-                return isset($form_data['email']) ? esc_html($form_data['email']) : '';
+            case 'form_id': // Changed from 'id'
+            case 'form_name':
             case 'submission_time':
-                return esc_html($item['submission_time']);
+                return $item[$column_name];
+            case 'form_data':
+                $form_data = maybe_unserialize($item[$column_name]);
+                if (is_array($form_data) && !empty($form_data)) {
+                    $output = '<table class="form-data-table">';
+                    foreach ($form_data as $key => $value) {
+                        $output .= '<tr>';
+                        $output .= '<th>' . esc_html(ucfirst(str_replace('_', ' ', $key))) . '</th>';
+                        $output .= '<td>' . esc_html($value) . '</td>';
+                        $output .= '</tr>';
+                    }
+                    $output .= '</table>';
+                    return $output;
+                } else {
+                    return '<pre>' . esc_html($form_data) . '</pre>';
+                }
             default:
                 return print_r($item, true);
         }
     }
 
+    public function column_form_id($item) {
+        return $item['form_id'];
+    }
+
+    public function column_form_name($item) {
+        return esc_html($item['form_name']);
+    }
+
     public function get_columns() {
         $columns = [
             'cb'              => '<input type="checkbox" />',
-            'name'            => __('Name', 'hizzle-forms'),
-            'email'           => __('Email', 'hizzle-forms'),
+            'form_id'         => __('Form ID', 'hizzle-forms'), // Changed from 'id'
+            'form_name'       => __('Form Name', 'hizzle-forms'),
             'submission_time' => __('Submission Time', 'hizzle-forms'),
+            'form_data'       => __('Form Data', 'hizzle-forms'),
         ];
 
         return $columns;
@@ -128,4 +149,3 @@ class Response extends \WP_List_Table {
         }
     }
 }
-?>
