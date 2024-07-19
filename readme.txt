@@ -3,9 +3,9 @@ Contributors: hizzlewp, lewisushindi
 Tags: contact, form, appointment, feedback, newsletter
 Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme
 Requires at least: 6.0
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -83,6 +83,11 @@ For more tips and detailed guides on using Hizzle Forms, check out our blog post
 6. Feedback Form
 
 == Changelog ==
+
+= 1.0.5 =
+* [IMPROVEMENT] Redesigned and improved Help Center interface.
+* [IMPROVEMENT] Improved plugin security.
+
 = 1.0.4 =
 * [ENHANCEMENT] Updated the form entries page to use the WP_List_Table class for improved functionality.
 * [ENHANCEMENT] Added bulk actions support for deleting multiple entries at once.
