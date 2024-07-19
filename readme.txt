@@ -11,6 +11,8 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 A fast, lightweight, and GDPR-compliant contact form plugin for WordPress, designed to seamlessly integrate with your website without slowing it down.
 
+== Description ==
+
 ### **Effortless Form Creation for a Faster, More Engaging Website**
 
 Tired of bulky contact form plugins that slow down your website? Introducing Hizzle Forms, the brand new WordPress plugin designed to make creating dynamic forms a breeze! Whether you need a simple contact form, an appointment scheduler, or a sleek newsletter sign-up, Hizzle Forms is your one-stop solution.
@@ -69,8 +71,6 @@ We've compiled some helpful resources to get you started quickly:
 = Can I use Hizzle Forms with a page builder? =
 
 * Yes, Hizzle Forms works well with popular page builders like Elementor, Beaver Builder, and others. Simply add the form block to your page builder layout.
-
-**Ready to take your website to the next level? Download Hizzle Forms now!**
 
 == Screenshots ==
 1. Adding a Hizzle Form Block
