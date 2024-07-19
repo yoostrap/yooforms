@@ -37,7 +37,6 @@ class ComposerStaticInit9da7fca8115459de93bb2fb69f5f914e
         'Hizzle\\Forms\\Merge_Tags' => __DIR__ . '/../..' . '/src/Merge_Tags.php',
         'Hizzle\\Forms\\Plugin' => __DIR__ . '/../..' . '/src/Plugin.php',
         'Hizzle\\Forms\\REST_API' => __DIR__ . '/../..' . '/src/REST_API.php',
-        'Hizzle\\Forms\\Response' => __DIR__ . '/../..' . '/src/class-response.php',
         'Hizzle\\Forms\\Spam_Checker' => __DIR__ . '/../..' . '/src/Spam_Checker.php',
         'Hizzle\\Forms\\Submission' => __DIR__ . '/../..' . '/src/Submission.php',
     );

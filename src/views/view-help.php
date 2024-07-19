@@ -65,11 +65,11 @@ $logo = apply_filters( 'hizzle_forms_admin_help_logo_url', $logo );
 						<p><?php esc_html_e( 'Explore articles and guides for optimizing your forms.', 'hizzle-forms' ); ?></p>
 						<a href="https://yoostrap.com/blog/" target="_blank" class="hizzle-forms-link"><?php esc_html_e( 'Read Blog', 'hizzle-forms' ); ?></a>
 					</div>
-					<div class="hizzle-forms-support-card">
+					<!-- <div class="hizzle-forms-support-card">
 						<h3><?php esc_html_e( 'Facebook Page', 'hizzle-forms' ); ?></h3>
 						<p><?php esc_html_e( 'Join our community discussions and updates.', 'hizzle-forms' ); ?></p>
 						<a href="https://www.facebook.com/profile.php?id=61562619223725" target="_blank" class="hizzle-forms-link"><?php esc_html_e( 'Visit Page', 'hizzle-forms' ); ?></a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 
