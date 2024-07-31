@@ -105,7 +105,6 @@ class Plugin {
 				new Pro\Hizzle_Forms_pro();
 			}
 		}
-		new Pro\Hizzle_Forms_pro();
 	}
 
 	/**
