@@ -21,6 +21,7 @@ class ComposerStaticInit9da7fca8115459de93bb2fb69f5f914e
         'Hizzle\\Forms\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+            1 => __DIR__ . '/../..' . '/pro',
         ),
         'Composer\\Installers\\' => 
         array (
@@ -36,6 +37,9 @@ class ComposerStaticInit9da7fca8115459de93bb2fb69f5f914e
         'Hizzle\\Forms\\Form' => __DIR__ . '/../..' . '/src/Form.php',
         'Hizzle\\Forms\\Merge_Tags' => __DIR__ . '/../..' . '/src/Merge_Tags.php',
         'Hizzle\\Forms\\Plugin' => __DIR__ . '/../..' . '/src/Plugin.php',
+        'Hizzle\\Forms\\Pro\\Admin\\Pro_Admin' => __DIR__ . '/../..' . '/pro/src/admin/class-admin.php',
+        'Hizzle\\Forms\\Pro\\Entries' => __DIR__ . '/../..' . '/pro/src/class-entries.php',
+        'Hizzle\\Forms\\Pro\\Hizzle_Forms_pro' => __DIR__ . '/../..' . '/pro/hizzle-forms-pro.php',
         'Hizzle\\Forms\\REST_API' => __DIR__ . '/../..' . '/src/REST_API.php',
         'Hizzle\\Forms\\Spam_Checker' => __DIR__ . '/../..' . '/src/Spam_Checker.php',
         'Hizzle\\Forms\\Submission' => __DIR__ . '/../..' . '/src/Submission.php',
