@@ -5,7 +5,7 @@ Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&u
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -83,6 +83,10 @@ For more tips and detailed guides on using Hizzle Forms, check out our blog post
 6. Feedback Form
 
 == Changelog ==
+= 1.0.6 =
+* [NEW] Added a dropdown menu to select and view entries from specific forms.
+* [IMPROVEMENT] Updated the form entries table UI for a more professional and consistent look.
+* [ENHANCEMENT] Dynamic columns based on form fields, ensuring relevant data is displayed for each form entry.
 
 = 1.0.5 =
 * [IMPROVEMENT] Redesigned and improved Help Center interface for better usability.
