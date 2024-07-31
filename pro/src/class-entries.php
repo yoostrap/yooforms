@@ -1,9 +1,9 @@
 <?php
-namespace Hizzle\Forms;
+namespace Hizzle\Forms\Pro;
 
 defined( 'ABSPATH' ) || exit;
 
-class Response extends \WP_List_TABLE {
+class Entries extends \WP_List_TABLE {
     public function __construct() {
         parent::__construct([
             'singular' => __('Form Entry', 'hizzle-forms'),

@@ -33,19 +33,6 @@ function hizzle_forms_help_page() {
 }
 
 /**
- * Renders the submenu page for the Hizzle Forms plugin response page.
- *
- * This function is responsible for rendering the submenu page that displays forms responses
- * for the Hizzle Forms plugin.
- *
- * @since 1.0.0
- */
-function hizzle_forms_responses_page() {
-    // Code to render the submenu page
-    require_once HF_PATH . 'src/views/view-responses.php';
-}
-
-/**
  * Returns the name of the plugin. (Allows the name to be overridden from extensions or functions.php)
  * @return string
  */

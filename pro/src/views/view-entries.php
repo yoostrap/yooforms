@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$entriesTable = new \Hizzle\Forms\Response();
+$entriesTable = new \Hizzle\Forms\Pro\Entries();
 $entriesTable->prepare_items();
 ?>
 <div class="wrap">
