@@ -73,19 +73,12 @@ We've compiled some helpful resources to get you started quickly:
 **Ready to take your website to the next level? Download Hizzle Forms now!**
 
 == Screenshots ==
-1. Adding a Hizzle Form Block
-2. Form Settings: Access core form settings and configurations.
-3. Admin Notification Email: Configure email notifications sent to the form administrator  or any specified email address.
-4. Recipient Notification Email: Customize emails sent to form recipients.
-5. Form Styling: Apply custom styles to match your website's design
-6. Live Preview: See how your form will look before publishing.
-7. Submission Settings: Customize the user experience after form submission.
-8. Form Field Settings: Configure individual form fields and their properties.
-9. General Field Settings: Adjust basic field settings like label, placeholder, and description.
-10. Required Fields and Error Messages: Make fields mandatory and provide custom error messages.
-11. Adding More Fields: Expand your form by adding additional Hizzle field blocks.
-12. Contact Form Example: View a sample Contact form created with Hizzle.
-13. Newsletter Sign-up Form Example: View a sample newsletter sign-up form created with Hizzle.
+1. Sample Contact Form
+2. Sample Newsletter Sign-up Form
+3. Sample RSVP Form
+4. Sample Registration Form
+5. Sample Appointment Form.
+6. Sample Feedback Form.
 
 == Changelog ==
 = 1.0.6 =
