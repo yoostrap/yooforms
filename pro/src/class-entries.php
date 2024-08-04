@@ -3,6 +3,11 @@ namespace Hizzle\Forms\Pro;
 
 defined('ABSPATH') || exit;
 
+// Include WP_List_Table class if not already included
+if (!class_exists('WP_List_Table')) {
+    require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+}
+
 class Entries extends \WP_List_Table {
     private $form_id;
 
@@ -157,15 +162,15 @@ class Entries extends \WP_List_Table {
         $this->display_tablenav('bottom');
     }
 
-    protected function display_tablenav( $which ) {
+    protected function display_tablenav($which) {
         ?>
-        <div class="tablenav <?php echo esc_attr( $which ); ?>">
+        <div class="tablenav <?php echo esc_attr($which); ?>">
             <div class="alignleft actions bulkactions">
-                <?php $this->bulk_actions( $which ); ?>
+                <?php $this->bulk_actions($which); ?>
             </div>
             <?php
-            $this->extra_tablenav( $which );
-            $this->pagination( $which );
+            $this->extra_tablenav($which);
+            $this->pagination($which);
             ?>
             <br class="clear" />
         </div>
