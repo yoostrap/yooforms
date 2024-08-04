@@ -3,14 +3,12 @@ namespace Hizzle\Forms\Pro;
 
 defined('ABSPATH') || exit;
 
-// Include required files if not already included
-if (!function_exists('convert_to_screen')) {
-    require_once ABSPATH . 'wp-admin/includes/template.php';
-}
-
-if (!class_exists('WP_List_Table')) {
-    require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-}
+// Include WP_List_Table class if not already included
+add_action('admin_init', function() {
+    if (!class_exists('WP_List_Table')) {
+        require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+    }
+});
 
 class Entries extends \WP_List_Table {
     private $form_id;
