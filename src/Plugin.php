@@ -103,6 +103,10 @@ class Plugin {
 			if ( hf_fs()->can_use_premium_code() ) {
 				// ... premium only logic ...
 				new Pro\Hizzle_Forms_pro();
+				if (is_admin()) {
+					new Pro\Entries();
+				}
+				
 			}
 		}
 	}
