@@ -3,15 +3,6 @@ namespace Hizzle\Forms\Pro;
 
 defined('ABSPATH') || exit;
 
-// Include required files if not already included
-if (!function_exists('convert_to_screen')) {
-    require_once ABSPATH . 'wp-admin/includes/template.php';
-}
-
-if (!class_exists('WP_List_Table')) {
-    require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-}
-
 class Entries extends \WP_List_Table {
     private $form_id;
 
@@ -22,8 +13,8 @@ class Entries extends \WP_List_Table {
             'singular' => __('Form Entry', 'hizzle-forms'),
             'plural'   => __('Form Entries', 'hizzle-forms'),
             'ajax'     => false
-        ]);
-    }
+        ]);        
+    }    
 
     public static function get_entries($form_id = 0, $per_page = 10, $page_number = 1) {
         global $wpdb;
