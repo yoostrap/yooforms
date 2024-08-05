@@ -3,12 +3,14 @@ namespace Hizzle\Forms\Pro;
 
 defined('ABSPATH') || exit;
 
-// Ensure WP_List_Table is loaded only in admin
-add_action('admin_init', function() {
-    if (!class_exists('WP_List_Table')) {
-        require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-    }
-});
+// Include required files if not already included
+if (!function_exists('convert_to_screen')) {
+    require_once ABSPATH . 'wp-admin/includes/template.php';
+}
+
+if (!class_exists('WP_List_Table')) {
+    require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+}
 
 class Entries extends \WP_List_Table {
     private $form_id;
@@ -51,6 +53,7 @@ class Entries extends \WP_List_Table {
 
     public function get_columns() {
         $columns = [
+            // 'cb'              => '<input type="checkbox" />',
             'form_id'         => __('Form ID', 'hizzle-forms'),
             'form_name'       => __('Form Name', 'hizzle-forms'),
             'submission_time' => __('Submission Time', 'hizzle-forms')
