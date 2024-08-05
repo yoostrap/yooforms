@@ -9,19 +9,13 @@ class Hizzle_Forms_pro {
      */
     public function __construct() {
         if (is_admin()) {
+            // Ensure that WP_List_Table is loaded before the Entries class is used
+            if (!class_exists('WP_List_Table')) {
+                require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+            }
+
             new Entries();
             new Admin\Pro_Admin();
-            // Ensure required files are loaded through appropriate hooks
-            add_action('admin_init', [$this, 'load_wp_admin_includes']);
-        }
-    }
-    public function load_wp_admin_includes() {
-        if (!function_exists('convert_to_screen')) {
-            require_once ABSPATH . 'wp-admin/includes/template.php';
-        }
-
-        if (!class_exists('WP_List_Table')) {
-            require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
         }
     }
 }
