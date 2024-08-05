@@ -86,17 +86,21 @@ class Entries {
         echo '</tr></thead>';
 
         echo '<tbody>';
-        foreach ($this->items as $item) {
-            echo '<tr>';
-            foreach ($columns as $column_key => $column_display_name) {
-                if (in_array($column_key, ['form_id', 'form_name', 'submission_time'])) {
-                    echo '<td>' . esc_html($item[$column_key]) . '</td>';
-                } else {
-                    $form_data = maybe_unserialize($item['form_data']);
-                    echo '<td>' . (isset($form_data[$column_key]) ? esc_html($form_data[$column_key]) : '') . '</td>';
+        if (empty($this->items)) {
+            echo '<tr><td colspan="' . count($columns) . '">' . __('No entries found.', 'hizzle-forms') . '</td></tr>';
+        } else {
+            foreach ($this->items as $item) {
+                echo '<tr>';
+                foreach ($columns as $column_key => $column_display_name) {
+                    if (in_array($column_key, ['form_id', 'form_name', 'submission_time'])) {
+                        echo '<td>' . esc_html($item[$column_key]) . '</td>';
+                    } else {
+                        $form_data = maybe_unserialize($item['form_data']);
+                        echo '<td>' . (isset($form_data[$column_key]) ? esc_html($form_data[$column_key]) : '') . '</td>';
+                    }
                 }
+                echo '</tr>';
             }
-            echo '</tr>';
         }
         echo '</tbody>';
 
