@@ -41,4 +41,3 @@ echo '<style>
     .form-data-table th, .form-data-table td { border: 1px solid #ddd; padding: 8px; }
     .form-data-table th { background-color: #f4f4f4; text-align: left; }
 </style>';
-?>
