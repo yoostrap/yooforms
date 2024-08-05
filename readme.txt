@@ -1,13 +1,14 @@
-=== Hizzle Forms ===
-Contributors: hizzlewp, lewisushindi
-Tags: contact, form, appointment, feedback, newsletter
-Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme
-Requires at least: 6.0
-Tested up to: 6.6
-Requires PHP: 7.0
-Stable tag: 1.0.6
-License: GPL-3.0-or-later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
+# Hizzle Forms
+
+Contributors: hizzlewp, lewisushindi  
+Tags: contact, form, appointment, feedback, newsletter  
+Donate link: [https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme](https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme)  
+Requires at least: 6.0  
+Tested up to: 6.6  
+Requires PHP: 7.0  
+Stable tag: 1.0.6  
+License: GPL-3.0-or-later  
+License URI: [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)  
 
 A fast, lightweight, and GDPR-compliant contact form plugin for WordPress, designed to seamlessly integrate with your website without slowing it down.
 
@@ -18,12 +19,12 @@ Tired of bulky contact form plugins that slow down your website? Introducing Hiz
 #### **Here's what sets Hizzle Forms apart:**
 - **Lightning Fast:** Our lightweight design ensures your website stays speedy, keeping visitors happy and engaged.
 - **GDPR-Compliant:** Built with user privacy in mind, Hizzle Forms adheres to strict GDPR regulations.
-- **Effortlessly Customizable** Craft forms that perfectly match your website's style with our intuitive interface and pre-built templates.
-- **Seamless Integration** Works flawlessly with the WordPress block editor and site editor. Widget support coming soon!
+- **Effortlessly Customizable:** Craft forms that perfectly match your website's style with our intuitive interface and pre-built templates.
+- **Seamless Integration:** Works flawlessly with the WordPress block editor and site editor. Widget support coming soon!
 - **Variety of Forms:** Choose from a wide range of form types, including contact forms, appointment scheduling, feedback collection, newsletter sign-ups, and more.
 
 ### **Getting started with Hizzle Forms is as simple as 1-2-3:**
-1. **Add a Hizzle Form Block** Open any post or page in the block editor and add a pre-built form block like:
+1. **Add a Hizzle Form Block:** Open any post or page in the block editor and add a pre-built form block like:
    - Contact Form
    - Newsletter Sign-up
    - RSVP Form
@@ -45,65 +46,61 @@ Tired of bulky contact form plugins that slow down your website? Introducing Hiz
 ### **Helpful Resources**
 
 We've compiled some helpful resources to get you started quickly:
-- [Why a Fast and Lightweight Form Plugin Matters for Your Website](https://yoostrap.com/2024/06/20/why-a-fast-and-lightweight-form-plugin-matters-for-your-website/)
-- [Why Hizzle Forms is the Best New Form Plugin for WordPress](https://yoostrap.com/2024/06/21/why-hizzle-forms-is-the-best-new-form-plugin-for-wordpress/)
-- [How to Add a Contact Form to Your WordPress Site in Minutes](https://yoostrap.com/2024/06/21/how-to-add-a-contact-form-to-your-wordpress-site-in-minutes/)
-- [Customizing Form Confirmations in Hizzle Forms](https://yoostrap.com/2024/07/05/customizing-form-confirmations-in-hizzle-forms/)
+- [How to Add a Contact Form to Your WordPress Site](https://yoostrap.com/how-to-add-a-contact-form-to-your-wordpress-website/)
+- [Creating a High-Converting Contact Form: Best Practices and Tips](https://yoostrap.com/creating-a-high-converting-contact-form-best-practices-and-tips/)
+- [Setting Required Fields & Custom Errors](https://yoostrap.com/setting-required-fields-and-custom-error/)
 
-== Installation ==
+## Installation
 1. Go to your WordPress Dashboard.
 2. Navigate to Plugins -> Add New.
 3. Search for **Hizzle Forms**.
 4. Click on the **Install Now** button.
 5. After installation, click on **Activate Plugin** to activate Hizzle Forms.
 
-== Frequently Asked Questions ==
-= How can I get support? =
-
+## Frequently Asked Questions
+### How can I get support?
 * Use the support forum on this page.
 
-= How do I customize the form fields? =
-
+### How do I customize the form fields?
 * You can customize the form fields directly in the WordPress block editor. Select the form block you want to customize and use the settings panel to modify labels, placeholders, validations, and more.
 
-= Can I use Hizzle Forms with a page builder? =
-
+### Can I use Hizzle Forms with a page builder?
 * Yes, Hizzle Forms works well with popular page builders like Elementor, Beaver Builder, and others. Simply add the form block to your page builder layout.
 
 **Ready to take your website to the next level? Download Hizzle Forms now!**
 
-== Screenshots ==
+## Screenshots
 1. Sample Contact Form
 2. Sample Newsletter Sign-up Form
 3. Sample RSVP Form
 4. Sample Registration Form
-5. Sample Appointment Form.
-6. Sample Feedback Form.
+5. Sample Appointment Form
+6. Sample Feedback Form
 
-== Changelog ==
-= 1.0.6 =
+## Changelog
+### 1.0.6
 * [NEW] Added a dropdown menu to select and view entries from specific forms.
 * [IMPROVEMENT] Updated the form entries table UI for a more professional and consistent look.
 * [ENHANCEMENT] Dynamic columns based on form fields, ensuring relevant data is displayed for each form entry.
 
-= 1.0.5 =
+### 1.0.5
 * [IMPROVEMENT] Redesigned and improved Help Center interface.
 * [IMPROVEMENT] Improved plugin security.
 
-= 1.0.4 =
+### 1.0.4
 * [ENHANCEMENT] Updated the form entries page to use the WP_List_Table class for improved functionality.
 * [ENHANCEMENT] Added bulk actions support for deleting multiple entries at once.
 
-= 1.0.3 =
+### 1.0.3
 * [NEW] Added feature to view form entries directly from the WordPress dashboard.
 
-= 1.0.2 =
+### 1.0.2
 * [FIX] Resolved bugs related to field names.
 * [NEW] Introduced select variations for Countries and US States.
 
-= 1.0.1 =
+### 1.0.1
 * [NEW] Added plugin menu for easier access.
 * [NEW] Freemius integration!
 
-= 1.0.0 =
+### 1.0.0
 * Initial Release
