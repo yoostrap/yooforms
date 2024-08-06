@@ -15,29 +15,29 @@ class Entries {
         global $wpdb;
         $responses_table = $wpdb->prefix . 'hizzle_forms_responses';
         $posts_table = $wpdb->prefix . 'posts';
-
+    
         $sql = "SELECT r.*, p.post_title as form_name 
                 FROM $responses_table r 
                 LEFT JOIN $posts_table p 
                 ON r.form_id = p.ID 
                 WHERE p.post_type = 'hizzle_form' AND r.status = %s";
-
+    
         $sql = $wpdb->prepare($sql, $status);
-
+    
         if ($form_id) {
             $sql .= $wpdb->prepare(' AND r.form_id = %d', $form_id);
         }
-
+    
         if (!empty($_REQUEST['orderby'])) {
             $sql .= ' ORDER BY ' . esc_sql($_REQUEST['orderby']);
             $sql .= !empty($_REQUEST['order']) ? ' ' . esc_sql($_REQUEST['order']) : ' ASC';
         }
-
+    
         $sql .= " LIMIT $per_page";
         $sql .= ' OFFSET ' . ($page_number - 1) * $per_page;
-
+    
         return $wpdb->get_results($sql, 'ARRAY_A');
-    }
+    }    
 
     public function get_columns() {
         $columns = [
@@ -45,21 +45,24 @@ class Entries {
             'form_name'       => __('Form Name', 'hizzle-forms'),
             'submission_time' => __('Submission Time', 'hizzle-forms')
         ];
-
-        if ($this->form_id) {
-            $form_entries = self::get_entries($this->form_id);
-            if (!empty($form_entries)) {
-                $form_data = maybe_unserialize($form_entries[0]['form_data']);
+    
+        $form_entries = self::get_entries($this->form_id);
+    
+        if (!empty($form_entries)) {
+            foreach ($form_entries as $entry) {
+                $form_data = maybe_unserialize($entry['form_data']);
                 if (is_array($form_data)) {
                     foreach ($form_data as $key => $value) {
-                        $columns[$key] = esc_html(ucfirst(str_replace('_', ' ', $key)));
+                        if (!array_key_exists($key, $columns)) {
+                            $columns[$key] = esc_html(ucfirst(str_replace('_', ' ', $key)));
+                        }
                     }
                 }
             }
         }
-
+    
         return $columns;
-    }
+    }    
 
     public function prepare_items() {
         $per_page = 10;
@@ -80,7 +83,7 @@ class Entries {
     public function display() {
         $columns = $this->get_columns();
         $this->prepare_items();
-
+    
         echo '<table class="wp-list-table widefat fixed striped">';
         echo '<thead><tr>';
         foreach ($columns as $column_key => $column_display_name) {
@@ -88,7 +91,7 @@ class Entries {
         }
         echo '<th scope="col">' . __('Actions', 'hizzle-forms') . '</th>';
         echo '</tr></thead>';
-
+    
         echo '<tbody>';
         if (empty($this->items)) {
             echo '<tr><td colspan="' . (count($columns) + 1) . '">' . __('No entries found.', 'hizzle-forms') . '</td></tr>';
@@ -108,7 +111,7 @@ class Entries {
             }
         }
         echo '</tbody>';
-
+    
         echo '<tfoot><tr>';
         foreach ($columns as $column_key => $column_display_name) {
             echo '<th scope="col">' . esc_html($column_display_name) . '</th>';
@@ -116,7 +119,7 @@ class Entries {
         echo '<th scope="col">' . __('Actions', 'hizzle-forms') . '</th>';
         echo '</tr></tfoot>';
         echo '</table>';
-    }
+    }    
 
     public function get_pagenum() {
         $pagenum = isset($_REQUEST['paged']) ? absint($_REQUEST['paged']) : 0;
