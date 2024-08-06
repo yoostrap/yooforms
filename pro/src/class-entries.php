@@ -11,7 +11,7 @@ class Entries {
         $this->form_id = $form_id;
     }
 
-    public static function get_entries($form_id = 0, $per_page = 10, $page_number = 1) {
+    public static function get_entries($form_id = 0, $per_page = 10, $page_number = 1, $status = 'active') {
         global $wpdb;
         $responses_table = $wpdb->prefix . 'hizzle_forms_responses';
         $posts_table = $wpdb->prefix . 'posts';
@@ -20,7 +20,9 @@ class Entries {
                 FROM $responses_table r 
                 LEFT JOIN $posts_table p 
                 ON r.form_id = p.ID 
-                WHERE p.post_type = 'hizzle_form'";
+                WHERE p.post_type = 'hizzle_form' AND r.status = %s";
+
+        $sql = $wpdb->prepare($sql, $status);
 
         if ($form_id) {
             $sql .= $wpdb->prepare(' AND r.form_id = %d', $form_id);
@@ -68,10 +70,11 @@ class Entries {
         $this->set_pagination_args($total_items, $per_page);
     }
 
-    public static function record_count() {
+    public static function record_count($status = 'active') {
         global $wpdb;
         $table_name = $wpdb->prefix . 'hizzle_forms_responses';
-        return $wpdb->get_var("SELECT COUNT(*) FROM $table_name");
+        $sql = $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE status = %s", $status);
+        return $wpdb->get_var($sql);
     }
 
     public function display() {
@@ -83,11 +86,12 @@ class Entries {
         foreach ($columns as $column_key => $column_display_name) {
             echo '<th scope="col">' . esc_html($column_display_name) . '</th>';
         }
+        echo '<th scope="col">' . __('Actions', 'hizzle-forms') . '</th>';
         echo '</tr></thead>';
 
         echo '<tbody>';
         if (empty($this->items)) {
-            echo '<tr><td colspan="' . count($columns) . '">' . __('No entries found.', 'hizzle-forms') . '</td></tr>';
+            echo '<tr><td colspan="' . (count($columns) + 1) . '">' . __('No entries found.', 'hizzle-forms') . '</td></tr>';
         } else {
             foreach ($this->items as $item) {
                 echo '<tr>';
@@ -99,6 +103,7 @@ class Entries {
                         echo '<td>' . (isset($form_data[$column_key]) ? esc_html($form_data[$column_key]) : '') . '</td>';
                     }
                 }
+                echo '<td><a href="' . esc_url(add_query_arg(['action' => 'trash', 'entry' => $item['id'], '_wpnonce' => wp_create_nonce('trash_entry')])) . '" class="trash-entry">' . __('Trash', 'hizzle-forms') . '</a></td>';
                 echo '</tr>';
             }
         }
@@ -108,6 +113,7 @@ class Entries {
         foreach ($columns as $column_key => $column_display_name) {
             echo '<th scope="col">' . esc_html($column_display_name) . '</th>';
         }
+        echo '<th scope="col">' . __('Actions', 'hizzle-forms') . '</th>';
         echo '</tr></tfoot>';
         echo '</table>';
     }
@@ -145,4 +151,11 @@ class Entries {
             'submission_time' => ['submission_time', false]
         ];
     }
+
+    public static function trash_entry($id) {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'hizzle_forms_responses';
+        $wpdb->update($table_name, ['status' => 'trashed'], ['id' => $id], ['%s'], ['%d']);
+    }
 }
+

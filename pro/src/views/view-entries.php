@@ -3,6 +3,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (isset($_GET['action']) && $_GET['action'] === 'trash' && isset($_GET['entry']) && check_admin_referer('trash_entry')) {
+    \Hizzle\Forms\Pro\Entries::trash_entry(intval($_GET['entry']));
+    wp_redirect(remove_query_arg(['action', 'entry', '_wpnonce']));
+    exit;
+}
+
 $forms = get_posts([
     'post_type' => 'hizzle_form',
     'posts_per_page' => -1,
@@ -57,4 +63,6 @@ echo '<style>
     .form-data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
     .form-data-table th, .form-data-table td { border: 1px solid #ddd; padding: 8px; }
     .form-data-table th { background-color: #f4f4f4; text-align: left; }
+    .wp-list-table .trash-entry { color: #a00; text-decoration: none; }
+    .wp-list-table tr:hover .trash-entry { visibility: visible; }
 </style>';

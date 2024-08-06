@@ -133,18 +133,17 @@ function hizzle_forms_create_table_helper() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'hizzle_forms_responses';
 
-    if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name ) {
-        $charset_collate = $wpdb->get_charset_collate();
+    $charset_collate = $wpdb->get_charset_collate();
 
-        $sql = "CREATE TABLE $table_name (
-            id mediumint(9) NOT NULL AUTO_INCREMENT,
-            form_id mediumint(9) NOT NULL,
-            submission_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-            form_data text NOT NULL,
-            PRIMARY KEY  (id)
-        ) $charset_collate;";
+    $sql = "CREATE TABLE $table_name (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        form_id mediumint(9) NOT NULL,
+        submission_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+        form_data text NOT NULL,
+        status VARCHAR(20) DEFAULT 'active' NOT NULL,
+        PRIMARY KEY  (id)
+    ) $charset_collate;";
 
-        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-        dbDelta( $sql );
-    }
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+    dbDelta( $sql );
 }
