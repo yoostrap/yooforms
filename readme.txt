@@ -1,14 +1,13 @@
-# Hizzle Forms
-
-Contributors: hizzlewp, lewisushindi  
-Tags: contact, form, appointment, feedback, newsletter  
-Donate link: [https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme](https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme)  
-Requires at least: 6.0  
-Tested up to: 6.6  
-Requires PHP: 7.0  
-Stable tag: 1.0.6  
-License: GPL-3.0-or-later  
-License URI: [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)  
+=== Hizzle Forms ===
+Contributors: hizzlewp, lewisushindi
+Tags: contact, form, appointment, feedback, newsletter
+Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&utm_campaign=readme
+Requires at least: 6.0
+Tested up to: 6.6
+Requires PHP: 7.0
+Stable tag: 1.0.6
+License: GPL-3.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 A fast, lightweight, and GDPR-compliant contact form plugin for WordPress, designed to seamlessly integrate with your website without slowing it down.
 
@@ -21,8 +20,8 @@ Tired of bulky contact form plugins that slow down your website? Introducing Hiz
 #### **Here's what sets Hizzle Forms apart:**
 - **Lightning Fast:** Our lightweight design ensures your website stays speedy, keeping visitors happy and engaged.
 - **GDPR-Compliant:** Built with user privacy in mind, Hizzle Forms adheres to strict GDPR regulations.
-- **Effortlessly Customizable:** Craft forms that perfectly match your website's style with our intuitive interface and pre-built templates.
-- **Seamless Integration:** Works flawlessly with the WordPress block editor and site editor. Widget support coming soon!
+- **Effortlessly Customizable** Craft forms that perfectly match your website's style with our intuitive interface and pre-built templates.
+- **Seamless Integration** Works flawlessly with the WordPress block editor and site editor. Widget support coming soon!
 - **Variety of Forms:** Choose from a wide range of form types, including contact forms, appointment scheduling, feedback collection, newsletter sign-ups, and more.
 
 ### **Getting started with Hizzle Forms is as simple as 1-2-3:**
@@ -52,26 +51,27 @@ We've compiled some helpful resources to get you started quickly:
 - [Creating a High-Converting Contact Form: Best Practices and Tips](https://yoostrap.com/creating-a-high-converting-contact-form-best-practices-and-tips/)
 - [Setting Required Fields & Custom Errors](https://yoostrap.com/setting-required-fields-and-custom-error/)
 
-## Installation
+== Installation ==
 1. Go to your WordPress Dashboard.
 2. Navigate to Plugins -> Add New.
 3. Search for **Hizzle Forms**.
 4. Click on the **Install Now** button.
 5. After installation, click on **Activate Plugin** to activate Hizzle Forms.
 
-## Frequently Asked Questions
-### How can I get support?
+== Frequently Asked Questions ==
+= How can I get support? =
+
 * Use the support forum on this page.
 
-### How do I customize the form fields?
+= How do I customize the form fields? =
+
 * You can customize the form fields directly in the WordPress block editor. Select the form block you want to customize and use the settings panel to modify labels, placeholders, validations, and more.
 
-### Can I use Hizzle Forms with a page builder?
+= Can I use Hizzle Forms with a page builder? =
+
 * Yes, Hizzle Forms works well with popular page builders like Elementor, Beaver Builder, and others. Simply add the form block to your page builder layout.
 
-**Ready to take your website to the next level? Download Hizzle Forms now!**
-
-## Screenshots
+== Screenshots ==
 1. Sample Contact Form
 2. Sample Newsletter Sign-up Form
 3. Sample RSVP Form
@@ -85,24 +85,24 @@ We've compiled some helpful resources to get you started quickly:
 * [IMPROVEMENT] Updated the form entries table UI for a more professional and consistent look.
 * [ENHANCEMENT] Dynamic columns based on form fields, ensuring relevant data is displayed for each form entry.
 
-### 1.0.5
+= 1.0.5 =
 * [IMPROVEMENT] Redesigned and improved Help Center interface.
 * [IMPROVEMENT] Improved plugin security.
 
-### 1.0.4
+= 1.0.4 =
 * [ENHANCEMENT] Updated the form entries page to use the WP_List_Table class for improved functionality.
 * [ENHANCEMENT] Added bulk actions support for deleting multiple entries at once.
 
-### 1.0.3
+= 1.0.3 =
 * [NEW] Added feature to view form entries directly from the WordPress dashboard.
 
-### 1.0.2
+= 1.0.2 =
 * [FIX] Resolved bugs related to field names.
 * [NEW] Introduced select variations for Countries and US States.
 
-### 1.0.1
+= 1.0.1 =
 * [NEW] Added plugin menu for easier access.
 * [NEW] Freemius integration!
 
-### 1.0.0
+= 1.0.0 =
 * Initial Release
