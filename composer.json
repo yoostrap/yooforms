@@ -15,10 +15,11 @@
     ],
     "autoload": {
         "psr-4": {
-            "Hizzle\\Forms\\": "src/"
+            "Hizzle\\Forms\\": ["src/", "pro/"]
         },
         "classmap": [
-            "src/"
+            "src/",
+            "pro/"
         ]
     },
     "extra": {

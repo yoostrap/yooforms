@@ -5,7 +5,7 @@ if ( ! defined( 'HIZZLE_FORMS_PLUGIN_FILE' ) ) {
 }
 
 if ( ! defined( 'HIZZLE_FORMS_VERSION' ) ) {
-	define( 'HIZZLE_FORMS_VERSION', '1.0.5' );
+	define( 'HIZZLE_FORMS_VERSION', '1.0.6' );
 }
 
 if ( ! defined( 'HIZZLE_FORMS_DB_VERSION' ) ) {

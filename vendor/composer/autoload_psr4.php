@@ -6,6 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Hizzle\\Forms\\' => array($baseDir . '/src'),
+    'Hizzle\\Forms\\' => array($baseDir . '/src', $baseDir . '/pro'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
 );
