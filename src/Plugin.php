@@ -120,7 +120,7 @@ class Plugin {
 			array(
 				array(
 					'slug'  => 'hizzle-forms',
-					'title' => esc_html__( 'Hizzle Forms', 'hizzle-forms' ),
+					'title' => esc_html__( 'YooForms', 'hizzle-forms' ),
 				),
 			),
 			$block_categories

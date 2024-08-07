@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: Hizzle Forms
+ * Plugin Name: YooForms
  * Plugin URI: https://yoostrap.com
  * Description: A lightweight forms plugin.
  * Version: 1.0.6
- * Author: Hizzle
+ * Author: yoostrap
  * Author URI: https://yoostrap.com
  * Text Domain: hizzle-forms
  * Domain Path: /languages/

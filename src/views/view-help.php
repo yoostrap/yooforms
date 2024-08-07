@@ -57,7 +57,7 @@ $logo = apply_filters( 'hizzle_forms_admin_help_logo_url', $logo );
 				<div class="hizzle-forms-support-grid">
 					<div class="hizzle-forms-support-card">
 						<h3><?php esc_html_e( 'YouTube Channel', 'hizzle-forms' ); ?></h3>
-						<p><?php esc_html_e( 'Find video tutorials and tips on using Hizzle Forms.', 'hizzle-forms' ); ?></p>
+						<p><?php esc_html_e( 'Find video tutorials and tips on using YooForms.', 'hizzle-forms' ); ?></p>
 						<a href="https://youtube.com/@yoostrap?si=ucsdO-u7UJc9Acew" target="_blank" class="hizzle-forms-link"><?php esc_html_e( 'Visit Channel', 'hizzle-forms' ); ?></a>
 					</div>
 					<div class="hizzle-forms-support-card">
