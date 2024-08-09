@@ -3,7 +3,7 @@
  * Plugin Name: YooForms
  * Plugin URI: https://yoostrap.com/yooforms/
  * Description: A lightweight forms plugin.
- * Version: 1.0.6
+ * Version: 1.0.7
  * Author: Yoostrap
  * Author URI: https://yoostrap.com
  * Text Domain: hizzle-forms
@@ -22,7 +22,7 @@ if ( ! defined( 'HIZZLE_FORMS_PLUGIN_FILE' ) ) {
 }
 
 if ( ! defined( 'HIZZLE_FORMS_VERSION' ) ) {
-	define( 'HIZZLE_FORMS_VERSION', '1.0.6' );
+	define( 'HIZZLE_FORMS_VERSION', '1.0.7' );
 }
 
 if ( ! defined( 'HIZZLE_FORMS_DB_VERSION' ) ) {
