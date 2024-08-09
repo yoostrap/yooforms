@@ -13,6 +13,8 @@ A fast, lightweight, and GDPR-compliant contact form plugin for WordPress, desig
 
 == Description ==
 
+== Description ==
+
 ### **Effortless Form Creation for a Faster, More Engaging Website**
 
 Tired of bulky contact form plugins that slow down your website? Introducing YooForms, the brand new WordPress plugin designed to make creating dynamic forms a breeze! Whether you need a simple contact form, an appointment scheduler, or a sleek newsletter sign-up, YooForms is your one-stop solution.
