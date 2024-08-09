@@ -5,11 +5,13 @@ Donate link: https://noptin.com/products/?utm_source=wp-repo&utm_medium=donate&u
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 A fast, lightweight, and GDPR-compliant contact form plugin for WordPress, designed to seamlessly integrate with your website without slowing it down.
+
+== Description ==
 
 == Description ==
 
@@ -80,6 +82,10 @@ We've compiled some helpful resources to get you started quickly:
 6. Sample Feedback Form
 
 ## Changelog
+### 1.0.7
+* [IMPROVEMENT] Update freemius sdk.
+* [New] Rename plugin to YooForms.
+
 ### 1.0.6
 * [NEW] Added a dropdown menu to select and view entries from specific forms.
 * [IMPROVEMENT] Updated the form entries table UI for a more professional and consistent look.

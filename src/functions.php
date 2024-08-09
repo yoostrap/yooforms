@@ -7,7 +7,7 @@
  * @author Lewis Ushindi <lewis@zestplugins.com>
  * @link https://hizzle.co/forms
  * @license GPL-3.0-or-later
- * @copyright 2024 Yoostrap LLC
+ * @copyright 2024 YooForms LLC
  */
 
 
