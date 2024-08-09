@@ -36,7 +36,7 @@ $entriesTable = new \Hizzle\Forms\Pro\Entries($selected_form_id, $search_term);
             </tbody>
         </table>
     <?php else : ?>
-        <form method="get">
+        <form method="get" id="entries-search-form">
             <input type="hidden" name="page" value="hizzle-forms-entries">
             <label for="form_id"><?php esc_html_e('Select Form', 'hizzle-forms'); ?>:</label>
             <select name="form_id" id="form_id" onchange="this.form.submit();">
@@ -47,8 +47,7 @@ $entriesTable = new \Hizzle\Forms\Pro\Entries($selected_form_id, $search_term);
                     </option>
                 <?php endforeach; ?>
             </select>
-            <input type="text" name="search" placeholder="<?php esc_attr_e('Search entries...', 'hizzle-forms'); ?>" value="<?php echo esc_attr($_GET['search'] ?? ''); ?>">
-            <input type="submit" value="<?php esc_attr_e('Search', 'hizzle-forms'); ?>">
+            <input type="text" name="search" id="search-input" placeholder="<?php esc_attr_e('Search entries...', 'hizzle-forms'); ?>" value="<?php echo esc_attr($_GET['search'] ?? ''); ?>">
         </form>
 
         <form method="post">
@@ -67,4 +66,12 @@ echo '<style>
     .wp-list-table .trash-entry { color: #a00; text-decoration: none; }
     .wp-list-table tr:hover .trash-entry { visibility: visible; }
 </style>';
+
+echo '<script>
+    jQuery(document).ready(function($) {
+        $("#search-input").on("input", function() {
+            $("#entries-search-form").submit();
+        });
+    });
+</script>';
 ?>
