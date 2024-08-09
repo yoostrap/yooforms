@@ -1,29 +1,29 @@
 <?php
 /**
- * Hizzle Forms global functions.
+ * YooForms global functions.
  * 
- * @package Hizzle Forms
+ * @package YooForms
  * @since 1.0.0
  * @author Lewis Ushindi <lewis@zestplugins.com>
  * @link https://hizzle.co/forms
  * @license GPL-3.0-or-later
- * @copyright 2024 Hizzle Forms LLC
+ * @copyright 2024 YooForms LLC
  */
 
 
 // INACTIVE PAGE FOR NOW. WILL BE USED LATER ON IN THE COURSE FOR THE DASHBOARD PAGE.
 /**
- * Renders the main menu page for the Hizzle Forms plugin.
+ * Renders the main menu page for the YooForms plugin.
  */
 function hizzle_forms_page() {
     // Code to render the main menu page
 }
 
 /**
- * Renders the submenu page for the Hizzle Forms plugin help page.
+ * Renders the submenu page for the YooForms plugin help page.
  *
  * This function is responsible for rendering the submenu page that displays help information
- * for the Hizzle Forms plugin.
+ * for the YooForms plugin.
  *
  * @since 1.0.0
  */
@@ -37,7 +37,7 @@ function hizzle_forms_help_page() {
  * @return string
  */
 function hizzle_forms_plugin_name() {
-	return apply_filters( 'hizzle_forms_plugin_name', 'Hizzle Forms' );
+	return apply_filters( 'hizzle_forms_plugin_name', 'YooForms' );
 }
 
 /**

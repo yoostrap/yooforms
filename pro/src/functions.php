@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Renders the submenu page for the Hizzle Forms plugin response page.
+ * Renders the submenu page for the YooForms plugin response page.
  *
  * This function is responsible for rendering the submenu page that displays forms responses
- * for the Hizzle Forms plugin.
+ * for the YooForms plugin.
  *
  * @since 1.0.0
  */
