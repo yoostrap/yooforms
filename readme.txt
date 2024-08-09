@@ -27,7 +27,7 @@ Tired of bulky contact form plugins that slow down your website? Introducing Yoo
 - **Variety of Forms:** Choose from a wide range of form types, including contact forms, appointment scheduling, feedback collection, newsletter sign-ups, and more.
 
 ### **Getting started with YooForms is as simple as 1-2-3:**
-1. **Add a Hizzle Form Block:** Open any post or page in the block editor and add a pre-built form block like:
+1. **Add a YooForm Block:** Open any post or page in the block editor and add a pre-built form block like:
    - Contact Form
    - Newsletter Sign-up
    - RSVP Form
