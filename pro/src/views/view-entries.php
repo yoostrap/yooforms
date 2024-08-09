@@ -15,6 +15,8 @@ $forms = get_posts([
 ]);
 
 $selected_form_id = isset($_GET['form_id']) ? intval($_GET['form_id']) : 0;
+$search_term = isset($_GET['search']) ? sanitize_text_field($_GET['search']) : '';
+$entriesTable = new \Hizzle\Forms\Pro\Entries($selected_form_id, $search_term);
 ?>
 <div class="wrap">
     <h1 class="wp-heading-inline"><?php esc_html_e('Form Entries', 'hizzle-forms'); ?></h1>
@@ -45,11 +47,10 @@ $selected_form_id = isset($_GET['form_id']) ? intval($_GET['form_id']) : 0;
                     </option>
                 <?php endforeach; ?>
             </select>
+            <input type="text" name="search" placeholder="<?php esc_attr_e('Search entries...', 'hizzle-forms'); ?>" value="<?php echo esc_attr($_GET['search'] ?? ''); ?>">
+            <input type="submit" value="<?php esc_attr_e('Search', 'hizzle-forms'); ?>">
         </form>
 
-        <?php
-        $entriesTable = new \Hizzle\Forms\Pro\Entries($selected_form_id);
-        ?>
         <form method="post">
             <input type="hidden" name="page" value="hizzle-forms-entries">
             <?php $entriesTable->display(); ?>
@@ -66,3 +67,4 @@ echo '<style>
     .wp-list-table .trash-entry { color: #a00; text-decoration: none; }
     .wp-list-table tr:hover .trash-entry { visibility: visible; }
 </style>';
+?>

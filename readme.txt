@@ -85,6 +85,7 @@ We've compiled some helpful resources to get you started quickly:
 ### 1.0.7
 * [IMPROVEMENT] Update freemius sdk.
 * [New] Rename plugin to YooForms.
+* [IMPROVEMENT] Add search functionality to form entries table.
 
 ### 1.0.6
 * [NEW] Added a dropdown menu to select and view entries from specific forms.

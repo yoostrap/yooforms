@@ -6,12 +6,14 @@ defined('ABSPATH') || exit;
 class Entries {
     private $form_id;
     private $items;
+    private $search_term;
 
-    public function __construct($form_id = 0) {
+    public function __construct($form_id = 0, $search_term = '') {
         $this->form_id = $form_id;
-    }
+        $this->search_term = $search_term;
+    }    
 
-    public static function get_entries($form_id = 0, $per_page = 10, $page_number = 1, $status = 'active') {
+    public static function get_entries($form_id = 0, $per_page = 10, $page_number = 1, $status = 'active', $search_term = '') {
         global $wpdb;
         $responses_table = $wpdb->prefix . 'hizzle_forms_responses';
         $posts_table = $wpdb->prefix . 'posts';
@@ -28,6 +30,10 @@ class Entries {
             $sql .= $wpdb->prepare(' AND r.form_id = %d', $form_id);
         }
     
+        if (!empty($search_term)) {
+            $sql .= $wpdb->prepare(" AND (r.form_data LIKE %s)", '%' . $wpdb->esc_like($search_term) . '%');
+        }
+    
         if (!empty($_REQUEST['orderby'])) {
             $sql .= ' ORDER BY ' . esc_sql($_REQUEST['orderby']);
             $sql .= !empty($_REQUEST['order']) ? ' ' . esc_sql($_REQUEST['order']) : ' ASC';
@@ -37,7 +43,7 @@ class Entries {
         $sql .= ' OFFSET ' . ($page_number - 1) * $per_page;
     
         return $wpdb->get_results($sql, 'ARRAY_A');
-    }    
+    }         
 
     public function get_columns() {
         $columns = [
@@ -46,7 +52,7 @@ class Entries {
             'submission_time' => __('Submission Time', 'hizzle-forms')
         ];
     
-        $form_entries = self::get_entries($this->form_id);
+        $form_entries = self::get_entries($this->form_id, 10, 1, 'active', $this->search_term);
     
         if (!empty($form_entries)) {
             foreach ($form_entries as $entry) {
@@ -67,16 +73,21 @@ class Entries {
     public function prepare_items() {
         $per_page = 10;
         $current_page = $this->get_pagenum();
-        $total_items = self::record_count();
-
-        $this->items = self::get_entries($this->form_id, $per_page, $current_page);
+        $total_items = self::record_count('active', $this->search_term);
+    
+        $this->items = self::get_entries($this->form_id, $per_page, $current_page, 'active', $this->search_term);
         $this->set_pagination_args($total_items, $per_page);
-    }
+    }    
 
-    public static function record_count($status = 'active') {
+    public static function record_count($status = 'active', $search_term = '') {
         global $wpdb;
         $table_name = $wpdb->prefix . 'hizzle_forms_responses';
         $sql = $wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE status = %s", $status);
+
+        if (!empty($search_term)) {
+            $sql .= $wpdb->prepare(" AND (form_data LIKE %s)", '%' . $wpdb->esc_like($search_term) . '%');
+        }
+
         return $wpdb->get_var($sql);
     }
 
@@ -161,4 +172,3 @@ class Entries {
         $wpdb->update($table_name, ['status' => 'trashed'], ['id' => $id], ['%s'], ['%d']);
     }
 }
-
