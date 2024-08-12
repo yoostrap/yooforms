@@ -96,15 +96,8 @@ class Plugin {
 		$this->submission = new Submission();
 		$this->merge_tags = new Merge_Tags();
 		$this->spam_check = new Spam_Checker();
-		new Admin();
-		// This IF block will be auto removed from the Free version.
-		if ( hf_fs()->is__premium_only() ) {
-			// This IF will be executed only if the user in a trial mode or have a valid license.
-			if ( hf_fs()->can_use_premium_code() ) {
-				// ... premium only logic ...
-				new Pro\Hizzle_Forms_pro();
-			}
-		}
+		
+		new Pro\Hizzle_Forms_pro();
 	}
 
 	/**

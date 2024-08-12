@@ -10,8 +10,6 @@
  * Domain Path: /languages/
  * Requires at least: 5.5
  * Requires PHP: 7.0
- *
- * @fs_premium_only /pro/
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -38,52 +36,6 @@ require HF_PATH . 'vendor/autoload.php';
 // Include necessary files
 require_once HF_PATH . 'src/functions.php';
 require_once HF_PATH . 'src/constants.php';
-
-// Freemius SDK initialization
-if ( ! function_exists( 'hf_fs' ) ) {
-    // Create a helper function for easy SDK access.
-    function hf_fs() {
-        global $hf_fs;
-
-        if ( ! isset( $hf_fs ) ) {
-            // Activate multisite network integration.
-            if ( ! defined( 'WP_FS__PRODUCT_15381_MULTISITE' ) ) {
-                define( 'WP_FS__PRODUCT_15381_MULTISITE', true );
-            }
-
-            // Include Freemius SDK
-            require_once HF_PATH . 'freemius/start.php';
-
-            $hf_fs = fs_dynamic_init( array(
-                'id'                  => '15381',
-                'slug'                => 'hizzle-forms',
-                'premium_slug'        => 'hizzle-forms-pro',
-                'type'                => 'plugin',
-                'public_key'          => 'pk_f965caeb7b47a4d6607381e3b3704',
-                'is_premium'          => true,
-                'premium_suffix'      => 'Starter',
-                // If your plugin is a serviceware, set this option to false.
-                'has_premium_version' => true,
-                'has_addons'          => false,
-                'has_paid_plans'      => true,
-                'trial'               => array(
-                    'days'               => 7,
-                    'is_require_payment' => false,
-                ),
-                'menu'                => array(
-                    'slug'           => 'hizzle-forms',
-                    'first-path'     => 'admin.php?page=hizzle-forms-help',
-                    'network'        => true,
-                ),
-            ) );
-        }
-
-        return $hf_fs;
-    }
-
-    hf_fs();
-    do_action( 'hf_fs_loaded' );
-}
 
 // Activation hook to create the table
 register_activation_hook( __FILE__, 'hizzle_forms_create_table' );
