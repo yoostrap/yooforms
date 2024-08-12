@@ -98,6 +98,7 @@ class Plugin {
 		$this->spam_check = new Spam_Checker();
 		
 		new Pro\Hizzle_Forms_pro();
+		new Admin();
 	}
 
 	/**
